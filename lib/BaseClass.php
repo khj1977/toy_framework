@@ -23,6 +23,9 @@ class BaseClass {
     return $this;
   }
 
+// debug
+  // add validateExistense() for overriding, though it is not used for anytime.
+  // end of debug
   public function __set($key, $val) {
     if (!$this->isValidForProp($key)) {
       throw new KException("BaseClass::__set(): accessing to setter by this key is not permitted.");
@@ -32,6 +35,9 @@ class BaseClass {
     return $this;
   }
 
+  // debug
+  // add validateExistense()
+  // end of debug
   public function __get($key) {
     if (!$this->isValidForProp($key)) {
       throw new KException("BaseClass::__get(): accessing to getter by this key is not permitted.");
@@ -66,6 +72,13 @@ class BaseClass {
     }
 
     return $err;
+  }
+
+  protected function validateExistence() {
+    // debug
+    // implement this method.
+    throw new Exception("BaseClass::validateExistense(): this method has not been implemented yet.");
+    // end of debug
   }
 
 }

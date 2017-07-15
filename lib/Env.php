@@ -6,7 +6,9 @@
 // This is class is used to access to environment val. Basically, instance of this class
 // may be holded by the instance of TheWorld class.
 
-class Env {
+require_once("lib/BaseClass.php");
+
+class Env extends BaseClass {
 
 }
 
