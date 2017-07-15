@@ -1,0 +1,213 @@
+// @Auther Hwi Jun KIM. euler.bonjour@gmail.com
+// See License.txt for license of this code.
+
+commit 07e09d5fa16c458f044458b4907690da9017db72
+Author: Hwi Jun KIM <euler.bonjour@gmail.com>
+Date:   Mon May 15 20:35:26 2017 +0900
+
+     some minor modification for clean up file and license related text has been updated.
+
+ lib/BaseErrorHandler.php | 2 +-
+ util/clean_up.sh         | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+commit 6d1efdbb9b06b9a2766a8e9f89bfd9c4fcff781a
+Author: Hwi Jun KIM <euler.bonjour@gmail.com>
+Date:   Mon May 15 18:47:17 2017 +0900
+
+    license has been added.
+
+ ChangeLog.txt             | 71 +++++++++++++++++++++++++++++++++++++++++++++++
+ LICENSE.txt               | 26 +++++++++++++++++
+ lib/BaseBatch.php         |  3 ++
+ lib/BaseException.php     |  3 ++
+ lib/BaseOutputHandler.php |  3 ++
+ lib/BaseRSSConverter.php  |  3 ++
+ lib/BaseRSSIterator.php   |  3 ++
+ lib/BaseUnitTest.php      |  3 ++
+ lib/BasicErrorHandler.php |  3 ++
+ lib/Env.php               |  3 ++
+ lib/OldRSSElement.php     |  3 ++
+ lib/RSSConverter.php      |  3 ++
+ lib/RSSElement.php        |  3 ++
+ lib/RSSErrorHandler.php   |  3 ++
+ lib/RSSOutputHandler.php  |  3 ++
+ lib/RSSesConverter.php    |  3 ++
+ lib/UException.php        |  3 ++
+ lib/Util.php              |  3 ++
+ 18 files changed, 145 insertions(+)
+
+commit 188a6f1c7fdbb43c47ed6fde200df5756b73c8e6
+Author: Hwi Jun KIM <euler.bonjour@gmail.com>
+Date:   Mon May 15 18:42:49 2017 +0900
+
+    minor fix to submit
+
+ ReadMe.txt             | 49 +++++++++++++++++++++++++++++--------------------
+ lib/RSSesConverter.php |  3 ++-
+ 2 files changed, 31 insertions(+), 21 deletions(-)
+
+commit 5880f59306f7609494318989a68528ace7003cd3
+Author: Hwi Jun KIM <euler.bonjour@gmail.com>
+Date:   Mon May 15 18:25:25 2017 +0900
+
+    before to submit? Some modification for handling error and output has been implemened. Conversion of text is done by most easy way.
+
+ bin/RSSesConverterBatch.php      |   48 +-
+ (deleted by some reason. just text not program)
+ lib/BaseBatch.php                |   45 +
+ lib/BaseErrorHandler.php         |   12 +-
+ lib/BaseOutputHandler.php        |    7 +-
+ lib/BaseRSSConverter.php         |    5 +-
+ lib/BaseUnitTest.php             |    6 +-
+ lib/Batch.php                    |   43 -
+ lib/Env.php                      |   14 +
+ lib/RSS.php                      |   52 +-
+ lib/RSSConverter.php             |   31 +-
+ lib/RSSElement.php               |    8 +-
+ lib/RSSErrorHandler.php          |    3 +
+ lib/RSSOutputHandler.php         |   18 +
+ lib/RSSesConverter.php           |   55 +-
+ lib/Util.php                     |    4 +-
+ unit_test/TestRSSesConverter.php |   50 +
+ 17 files changed, 3792 insertions(+), 77 deletions(-)
+
+commit a2304a4d67c10b1de7d759dad5ee9858b95a8c59
+Author: Hwi Jun KIM <euler.bonjour@gmail.com>
+Date:   Mon May 15 14:57:13 2017 +0900
+
+     some documents to submit has been added.
+
+ (deleted by some reason not program but just a text)
+ ReadMe.txt                  | 70 ++++++++++++++++++++++++++++++++++++++++++++-
+ bin/RSSesConverterBatch.php |  6 ++++
+ lib/RSSesConverter.php      | 17 +++++++++++
+ play_ground/decode_test.php |  5 ++++
+ 5 files changed, 150 insertions(+), 1 deletion(-)
+
+commit 8cca53f86a39703bb2c39bda674201d39e3dca3e
+Author: Hwi Jun KIM <euler.bonjour@gmail.com>
+Date:   Mon May 15 12:20:17 2017 +0900
+
+     some minor fix
+
+ ReadMe.txt                      |  4 ++++
+ lib/RSS.php                     |  8 ++++++++
+ lib/RSSElement.php              | 21 +++++++++++++++++++--
+ play_ground/dom_text_test.php   | 17 +++++++++++------
+ unit_test/TestNewRSSElement.php | 37 ++++++++++++++++++++++++++++++++++++-
+ 5 files changed, 78 insertions(+), 9 deletions(-)
+
+commit f38da7258afb4123c1f89682a80838dcd83ae702
+Author: Hwi Jun KIM <euler.bonjour@gmail.com>
+Date:   Mon May 15 10:27:58 2017 +0900
+
+    some change with respect to switching internal implementaion of RSSElement and RSS has been made, though it is not completed yet.
+
+ lib/BaseRSSIterator.php         |  4 ++--
+ lib/RSS.php                     | 19 +++++++++++--------
+ lib/RSSElement.php              | 13 +++----------
+ unit_test/TestNewRSSElement.php |  7 +++++--
+ 4 files changed, 21 insertions(+), 22 deletions(-)
+
+commit f2e571417ca178b5b451fa34c350b738a647077e
+Author: Hwi Jun KIM <euler.bonjour@gmail.com>
+Date:   Mon May 15 09:50:26 2017 +0900
+
+    commit before test
+
+ lib/OldRSS.php                  |  84 ++++++++++++++++++++++
+ lib/OldRSSElement.php           | 153 ++++++++++++++++++++++++++++++++++++++++
+ lib/RSS.php                     |   6 +-
+ lib/RSSElement.php              |  59 +++++++++++-----
+ unit_test/TestNewRSSElement.php |  31 ++++++++
+ unit_test/TestRSS.php           |   1 -
+ 6 files changed, 313 insertions(+), 21 deletions(-)
+
+commit 0ac4c8cd6961242ee855671407061ac3137d5f60
+Author: Hwi Jun KIM <euler.bonjour@gmail.com>
+Date:   Mon May 15 08:53:28 2017 +0900
+
+    Some bug has been fixed. It is under procecss of unit test. Internal impl of RSS and RSSElement has not been changed yet.
+
+ lib/BaseUnitTest.php  |  5 +++++
+ lib/RSS.php           |  8 ++++++--
+ lib/RSSElement.php    |  8 ++++----
+ unit_test/TestRSS.php | 21 +++++++++++++++++++--
+ 4 files changed, 34 insertions(+), 8 deletions(-)
+
+commit bcfa2e90a4abeeb40b824098eac439da966f9fb6
+Author: Hwi Jun KIM <euler.bonjour@gmail.com>
+Date:   Mon May 15 08:23:37 2017 +0900
+
+    Altough it has not been completed, some test of RSS::load() was started to run. Some bug fix of lib might be required.
+
+ lib/BaseErrorHandler.php |  2 +-
+ lib/BaseUnitTest.php     | 30 +++++++++++++++++++++++-------
+ lib/Batch.php            |  2 ++
+ lib/Env.php              | 29 +++++++++++++++++++++++++----
+ lib/RSS.php              |  3 ++-
+ lib/RSSElement.php       |  4 +++-
+ lib/UException.php       |  2 +-
+ unit_test/TestRSS.php    | 37 +++++++++++++++++++++++++++++++++++++
+ 8 files changed, 94 insertions(+), 15 deletions(-)
+
+commit ebc2522aaf10d499c551d7e31e4639e6790c1ac2
+Author: Hwi Jun KIM <euler.bonjour@gmail.com>
+Date:   Sun May 14 14:12:07 2017 +0900
+
+     tested some API of DOM and SimpleXMLElement. Internal implementaion of RSSElement and RSS will be switched to DOM_X considering some limitation of SimpleXMLElement for this uses case.
+
+ lib/RSSElement.php                |  5 +++-
+ play_ground/dom_text_test.php     | 51 +++++++++++++++++++++++++++++++++++++++
+ play_ground/rss_tostring_test.php | 17 +++++++++++++
+ 3 files changed, 72 insertions(+), 1 deletion(-)
+
+commit 892b2c677292a5670837d5ee24a12cbbdceb38de
+Author: Hwi Jun KIM <euler.bonjour@gmail.com>
+Date:   Sun May 14 13:06:56 2017 +0900
+
+    refactored some class considering split responsibiity of RSS and RSSElement classes.
+
+ ChangeLog.txt        |   5 ++
+ lib/RSS.php          | 141 +++++++++++++++++-------------------------------
+ lib/RSSConverter.php |  63 +++++++++++++++++++++-
+ lib/RSSElement.php   | 148 +++++++++++++++++++++++++++++++++++++++++++++++++++
+ lib/Util.php         |   5 ++
+ 5 files changed, 268 insertions(+), 94 deletions(-)
+
+commit cb54332c1b45db2695d45ecd1cd7c2239573371d
+Author: Hwi Jun KIM <euler.bonjour@gmail.com>
+Date:   Sun May 14 11:28:31 2017 +0900
+
+    minor fix. some comments
+
+ lib/BaseErrorHandler.php | 3 +++
+ lib/RSS.php              | 7 +++++++
+ 2 files changed, 10 insertions(+)
+
+commit 55f020db5234c5b5facebe110040e34b0e5e8690
+Author: Hwi Jun KIM <euler.bonjour@gmail.com>
+Date:   Sun May 14 10:10:12 2017 +0900
+
+    initial commit
+
+ lib/BaseErrorHandler.php        |   9 ++++
+ lib/BaseException.php           |   7 +++
+ lib/BaseOutputHandler.php       |  11 ++++
+ lib/BaseRSSConverter.php        |   6 +++
+ lib/BaseRSSIterator.php         |  98 ++++++++++++++++++++++++++++++++++
+ lib/BaseUnitTest.php            |  70 ++++++++++++++++++++++++
+ lib/BasicErrorHandler.php       |  28 ++++++++++
+ lib/Batch.php                   |  41 ++++++++++++++
+ lib/Env.php                     |  43 +++++++++++++++
+ lib/RSS.php                     | 115 ++++++++++++++++++++++++++++++++++++++++
+ lib/RSSConverter.php            |  16 ++++++
+ lib/RSSErrorHandler.php         |  18 +++++++
+ lib/UException.php              |   7 +++
+ lib/Util.php                    |  17 ++++++
+ play_ground/decode_test.php     |  15 ++++++
+ play_ground/reflection_test.php |  21 ++++++++
+ play_ground/rss_test.php        |   5 ++
+ util/clean_up.sh                |   4 ++
+ 18 files changed, 531 insertions(+)
