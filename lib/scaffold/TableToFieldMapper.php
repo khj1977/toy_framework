@@ -23,6 +23,11 @@ require_once("lib/scaffold/MySQLTable.php");
 // HTMLField and sub classes
 // HTMLFieldGroupConfig, which is config file and group of HTMLField which is HTMLFieldGroup on above paragraph.
 // HTMLFieldManipulationAlgorithm => just for dynamic change of grouping
+
+// This view part of field is not limited to HTML. But it could be dumb terminal.
+// Question: if XField::render uses REST to communicate with remote service, is it possible to // render or put down data to another application?
+// => may be, generalization of delegate. Or just call service, thoug it is not view.
+
 // Fileter for action and Field
 
 
