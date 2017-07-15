@@ -27,6 +27,8 @@ require_once("lib/scaffold/MySQLTable.php");
 // This view part of field is not limited to HTML. But it could be dumb terminal.
 // Question: if XField::render uses REST to communicate with remote service, is it possible to // render or put down data to another application?
 // => may be, generalization of delegate. Or just call service, thoug it is not view.
+// ToDo: is it possible to call API of google spread sheet from another application via REST
+// and update content of a sheet.
 
 // Fileter for action and Field
 
