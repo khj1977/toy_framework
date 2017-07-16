@@ -44,6 +44,12 @@ class BaseDelegatable extends BaseClass {
     return $result;
   }
 
+  protected function callMethod($methodName, $args) {
+    $result = call_user_method_array($methodName, $this->impl, $args);
+
+    return $result;
+  }
+
 }
 
 ?>
