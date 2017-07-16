@@ -38,6 +38,7 @@ class BaseDelegatable extends BaseClass {
       throw new UException("BaseDelegatable::__call(): the method " . $methodName . " does not exist to tatget of delegate.");
     }
 
+    // This is a point to change when REST API is used?
     $result = call_user_method_array($methodName, $this->impl, $args);
 
     return $result;
