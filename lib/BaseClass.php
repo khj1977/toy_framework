@@ -5,14 +5,23 @@
 
 require_once("lib/TheWorld.php");
 require_once("lib/UException.php");
+require_once("lib/BaseDelegatable.php");
 
 class BaseClass {
 
   // hash
   protected $accessibles;
   protected $retainer;
+  // a user of fw can use both delegatable and delegate on instance val
+  // if only for delegatable, there may be a lot of number of config file.
+  // but it is difficult to make general purpose delegate such as delegate
+  // with REST or Thrift. Therefore, although it is not simple and beautiful, 
+  // for practical purpose, both way of
+  // of delegate is used.
+  protected $delegate;
 
   public function __construct() {
+    
     $this->initialize();
 
     return $this;
@@ -23,8 +32,25 @@ class BaseClass {
     $this->accessibles = array();
     $this->retainer = array();
 
+    // determine delegate by Factory
+    // the following is the default code without factory.
+    $factory = TheWorld::instance()->factory();
+    // Example:
+    // Change context which is second argument of the following method by sub class.
+    // Make NullDelegate for default case.
+    $this->delegate = $factory->make("Delegate", "REST")->setClassName($this->getKlassName());
+
     return $this;
   }
+
+  public function __call($methodName, $args) {
+    if ($this->delegate->isAcceptThisMethodName($methodName)) {
+      return $this->delegate->$methodName($args);
+    }
+
+    throw new UException("BaseClass::__call(): this method does not implemented on this delegate: " . $methodName);
+  }
+
 
   public function setAccessible($key) {
     $this->accessibles[$key] = true;
