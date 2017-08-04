@@ -1,5 +1,8 @@
 <?php
 
+// @Auther Hwi Jun KIM. euler.bonjour@gmail.com
+// See License.txt for license of this code.
+
 require_once("lib/BaseRouter.php");
 require_once("lib/TheWorld.php");
 require_once("lib/KException.php");
@@ -18,7 +21,7 @@ class ApiRouter extends BaseRouter {
 
     try {
       $routingInfo = $this->parseUrl($url);
-
+i
       // API Object
       $api = $routingInfo["api"];
       $model = $routingInfo["model"];
