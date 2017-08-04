@@ -22,6 +22,13 @@ class Util {
     return mb_ereg_replace($s1, $s2, $subject);
   }
 
+  static public function hashToJson($aHash) {
+    // debug
+    // call appropriate json encoder.
+    throw new Exception("Util::hashToJson(): this method has not been implemented yet.");
+    // end of debug
+  }
+
 }
 
 ?>
