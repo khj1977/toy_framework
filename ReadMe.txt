@@ -9,14 +9,15 @@ Email: euler.bonjour@gmail.com
 
 簡単に言ってしまうと、本プログラムは基本的にクイックハックであり、あまり完成度は高くない。しかし、ある程度、アプリケーションをいかにpluggableに作るか、という考えの一旦が見えるのではないか、と思い公開する。
 
-また、そもそも、Scaffoldなど開発効率を高めるための工夫をなぜ入れたかは以下のドキュメントで解説している。
+また、そもそも、Scaffoldなど開発効率を高めるための工夫をなぜ入れたかは以下の3つのドキュメントで解説している。
 
-なぜ、1. 戦略コンサルタント、2. ITコンサルタント、3. SIのプロジェクトマネージャー / アーキテクト、あるいは4. 事業会社のIT部門か？
-https://docs.google.com/document/d/1zWH0Isx0HKe0wD5xfrzrBgrfUrRc8PdMjBlNlsV93kc/edit
+1. 以下のドキュメントの「プログラマ、Systems Architect or Project Manager（コンサル/SI or 事業会社IT部門）」の項目を参照の事：
 
-以下のドキュメントの「プログラマ、Systems Architect or Project Manager（コンサル/SI or 事業会社IT部門）」の項を参照の事：
 経歴書 (Curriculum Vitae)
 https://docs.google.com/document/d/1czBVntPBhOBG9KUvkWADlS716BDI92I_lu2ll0eFWj4/edit
+
+2. なぜ、1. 戦略コンサルタント、2. ITコンサルタント、3. SIのプロジェクトマネージャー / アーキテクト、あるいは4. 事業会社のIT部門か？
+https://docs.google.com/document/d/1zWH0Isx0HKe0wD5xfrzrBgrfUrRc8PdMjBlNlsV93kc/edit
 
 以下、ライセンスについての注釈となる。また、このコードはある企業への採用試験への提出物をベースにしている。しかし、
 
