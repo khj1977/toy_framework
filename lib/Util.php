@@ -29,6 +29,16 @@ class Util {
     // end of debug
   }
 
+  static public function JSONEncode($data) {
+    // debug
+    throw new Exception("Util::JSONEncode(): this method has not been implemented yet.");
+    // end of debug
+  }
+
+  static public function JSONDecode() {
+    throw new Exception("Util::JSONDecode(): this method has not been implemented yet.");
+  }
+
 }
 
 ?>

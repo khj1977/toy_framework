@@ -39,7 +39,8 @@ class BaseDelegatable extends BaseClass {
     }
 
     // This is a point to change when REST API is used?
-    $result = call_user_method_array($methodName, $this->impl, $args);
+    // $result = call_user_method_array($methodName, $this->impl, $args);
+    $result = $this->callMethod($methodName, $args);
 
     return $result;
   }
