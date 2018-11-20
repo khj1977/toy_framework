@@ -31,11 +31,45 @@ class BaseConfig extends BaseDelegatable {
     return $this;
   }
 
+  public function setStage($stage) {
+    $this->stage = $stage;
+  }
+
   protected function loadImpl() {
     // check stage is valid. (by existence of impl file)
     // load impl file with respect to stage.
     // make instance with that file.
     // set impl with a method.
+
+    // debug
+    // include checking existense of file by some function or method.
+    // end of debug
+
+    $configFilePath = $this->getConfigFilePath();
+    require_once($this->configFilePath);
+
+    $this->setImpl($this->getConfigFileName());
+
+    return $this;
+  }
+
+  protected function getConfigFilePath() {
+    $fileName = $this->getConfigFileName($this->stage);
+    $dirPath = $this->getConfigDirPath();
+
+    $result = $dirPath . "/" . $fileName;
+
+    return $result;
+  }
+
+  protected function getConfigFileName() {
+    $configFileName = sprintf("%sConfigImpl.php", $this->stage);
+
+    return $configFileName;
+  }
+
+  protected function getConfigDirPath() {
+    return "lib/config/impl/";
   }
 
 }
