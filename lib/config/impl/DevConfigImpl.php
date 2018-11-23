@@ -30,26 +30,6 @@ class DevConfigImpl extends BaseConfigImpl {
     return $this;
   }
 
-  // X implement hook for getter
-  // define hook required for Config of this stage.
-
-  // For instance, if CSV file is required for config of Factory class, a hook method will load
-  // CSV file within hook method not return val using default getter with retainer of 
-  // BaseClass.
-
-  // example
-  // dummy code
-  public function hook_getter_factory_config() {
-    $path = $this->factory_config_path;
-    // use ordinary while(fgets()) since this is core library
-    $lines = "";
-    while(trim($line = fgets($stdin))) {
-      $lines = $lines . $line;
-    }
-
-    return $lines;
-  }
-
 }
 
 ?>
