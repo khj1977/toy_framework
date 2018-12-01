@@ -4,7 +4,7 @@
 // See License.txt for license of this code.
 
 require_once("lib/TheWorld.php");
-require_once("lib/UException.php");
+require_once("lib/KException.php");
 require_once("lib/BaseDelegatable.php");
 
 class BaseClass {
@@ -34,11 +34,11 @@ class BaseClass {
 
     // determine delegate by Factory
     // the following is the default code without factory.
-    $factory = TheWorld::instance()->factory();
+    // $factory = TheWorld::instance()->factory();
     // Example:
     // Change context which is second argument of the following method by sub class.
     // Make NullDelegate for default case.
-    $this->delegate = $factory->make("Delegate", "REST")->setClassName($this->getKlassName());
+    // $this->delegate = $factory->make("Delegate", "REST")->setClassName($this->getKlassName());
 
     return $this;
   }
@@ -48,7 +48,7 @@ class BaseClass {
       return $this->delegate->$methodName($args);
     }
 
-    throw new UException("BaseClass::__call(): this method does not implemented on this delegate: " . $methodName);
+    throw new KException("BaseClass::__call(): this method does not implemented on this delegate: " . $methodName);
   }
 
 
@@ -92,7 +92,7 @@ class BaseClass {
 
   protected function executeSetterHook($key, $oldVal, $val) {
     if ($this->isSetterHookExist($key)) {
-      throw new UException("BaseClass::executeSetterHook(): a hook method is not exist with key: " . $key);
+      throw new KException("BaseClass::executeSetterHook(): a hook method is not exist with key: " . $key);
     }
 
     $methodName = $this->makeSetterHookMethodName($key);
@@ -136,7 +136,7 @@ class BaseClass {
 
   protected function executeGetterHook($key) {
     if ($this->isGetterHookExist($key)) {
-      throw new UException("BaseClass::executeGetterHook(): a hook method is not exist with key: " . $key);
+      throw new KException("BaseClass::executeGetterHook(): a hook method is not exist with key: " . $key);
     }
 
     $methodName = $this->makeGetterHookMethodName($key);

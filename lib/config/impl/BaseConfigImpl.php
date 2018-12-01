@@ -11,13 +11,16 @@ class BaseConfigImpl extends BaseClass {
   public function __construct() {
     parent::__construct();
 
+    $this->initialize();
+
     return $this;
   }
 
   protected function initialize() {
     parent::initialize();
 
-    $this->baseDir = TheWorld::instance()->env->base_dir();
+    // $this->baseDir = TheWorld::instance()->env->base_dir();
+    $this->baseDir = realpath(dirname(__FILE__) . "/../../../");
 
     return $this;
   }

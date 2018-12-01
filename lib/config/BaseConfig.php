@@ -8,7 +8,7 @@
 
 // require_once("lib/BaseClass.php");
 require_once("lib/BaseDelegatable.php");
-require_once("lib/UException.php");
+require_once("lib/KException.php");
 
 class BaseConfig extends BaseDelegatable {
 
@@ -33,6 +33,9 @@ class BaseConfig extends BaseDelegatable {
 
   public function setStage($stage) {
     $this->stage = $stage;
+    $this->loadImpl();
+
+    return $this;
   }
 
   protected function loadImpl() {
@@ -46,9 +49,12 @@ class BaseConfig extends BaseDelegatable {
     // end of debug
 
     $configFilePath = $this->getConfigFilePath();
-    require_once($this->configFilePath);
+    require_once($configFilePath);
 
-    $this->setImpl($this->getConfigFileName());
+    $configClassName = $this->getConfigClassName();
+    $configImplObject = new $configClassName();
+
+    $this->setImpl($configImplObject);
 
     return $this;
   }
@@ -64,6 +70,12 @@ class BaseConfig extends BaseDelegatable {
 
   protected function getConfigFileName() {
     $configFileName = sprintf("%sConfigImpl.php", $this->stage);
+
+    return $configFileName;
+  }
+
+  protected function getConfigClassName() {
+    $configFileName = sprintf("%sConfigImpl", $this->stage);
 
     return $configFileName;
   }

@@ -18,11 +18,14 @@ abstract class BaseBatch {
   // protected $stderr;
 
   public function __construct() {
-    // construct $args
+    $this->initialize();
+
+    return $this;
   }
 
   protected function initialize() {
-    $this->initialize();
+    // $this->initialize();
+    TheWorld::instance()->initialize();
 
     return $this;
   }

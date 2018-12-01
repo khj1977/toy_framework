@@ -8,23 +8,28 @@ require_once("lib/TheWorld.php");
 
 class MyPdo extends BaseDelegatable {
 
-  protected $conn;
+  protected $pdo;
 
   // Generally, this method object is made by TheWorld and TheWorld know db name.
-  public function __construct($dbProb) {
-    parent::__contruct();
-    $this->conn = new My_Pdo(new PDO("mysql:dbname=" . $dbProb["name"] . 
-      ";host=" . $dbProp["host"], 
-      $dbProp["user"], 
-      $dbProp["pass"]));
+  public function __construct($dbProps) {
+    $this->pdo = new PDO(
+      "mysql:dbname=" . $dbProps["name"] . 
+      ";host=" . $dbProps["host"], 
+      $dbProps["user"], 
+      $dbProps["pass"]
+    );
 
-    $this->setImpl($this->conn);
+    $this->setImpl($this->pdo);
+    parent::__construct();
+
     return $this;
   }
 
   public function prepare($sql) {
-    TheWorld::instance()->getLogger()->log("info", "prepare:¥t" . $sql);
-  
+    // debug
+    // TheWorld::instance()->getLogger()->log("info", "prepare:¥t" . $sql);
+    // end of debug
+
     $rawStatement = $this->pdo->prepare($sql);
     $statement = new MyPdoStatement($rawStatement, $sql);
     
@@ -32,9 +37,18 @@ class MyPdo extends BaseDelegatable {
   }
   
   public function query($sql) {
-    TheWorld::instance()->getLogger()->log("info", "query:¥t" . $sql);
-    
+    // debug
+    // TheWorld::instance()->getLogger()->log("info", "query:¥t" . $sql);
+    // end of debug
+
     $this->pdo->query($sql);
+  }
+
+  public function bulkQuery($sql) {
+    // no logging of query because it is too much
+    $this->pdo->query($sql);
+
+    return $this;
   }
 
 }

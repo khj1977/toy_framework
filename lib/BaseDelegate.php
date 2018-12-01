@@ -4,13 +4,15 @@
 // See License.txt for license of this code.
 
 require_once("lib/BaseClass.php");
-require_once("lib/UException.php");
+require_once("lib/KException.php");
 
 class BaseDelegate extends BaseClass {
 
   protected $target;
 
   public function __construct() {
+    parent::__construct();
+    
     $this->initialize();
 
     return $this;
