@@ -1,8 +1,10 @@
 <?php
 
 require_once(realpath(dirname(__FILE__) . "/../lib/BaseUnitTest.php"));
+require_once("lib/TheWorld.php");
+require_once("lib/DB/MyPdo.php");
 
-class TestRSS extends BaseUnitTest {
+class TestPDO extends BaseUnitTest {
   
     public function __construct() {
       // print("TestRSS has been made.\n");
@@ -10,15 +12,30 @@ class TestRSS extends BaseUnitTest {
       return true;
     }
 
-    public function testConn() {
-      $pdo = new PDO("mysql:dbname=" . "foo" . ";host=" . "127.0.0.1", "", "");
+    public function test_Conn() {
+      $config = TheWorld::instance()->config;
+      $dbProps = $config->getDBProps();
+
+      $pdo = new MyPdo($dbProps);
       $statement = $pdo->prepare("SELECT * FROM bar");
       $statement->execute(array());
       while($rows = $statement->fetch()) {
-        printf("line break¥n");
+        printf("line break conn: ¥n");
+        var_dump($rows);
+      }      
+    }
+
+    public function test_theworld() {
+      $slave = TheWorld::instance()->slave;
+      $statement = $slave->prepare("SELECT * FROM bar");
+      $statement->execute(array());
+      // $statement->execute(array());
+      while($rows = $statement->fetch()) {
+        print("line break. the world: ¥n");
         var_dump($rows);
       }
     }
+
 }
 
 ?>

@@ -6,8 +6,8 @@ require_once(dirname(__FILE__) . "/../lib/TheWorld.php");
 class UnitTestBatch extends BaseBatch {
 
   protected function xmain($args) {
-    $testName = $args[1];
-    $unitTestPhpFileName = "Test" . $testName . ".php";
+    $testName = "Test" . $args[1];
+    $unitTestPhpFileName = $testName . ".php";
 
     $basePath = TheWorld::instance()->getBaseDir();
     $unitTestPath = realpath($basePath . "/unit_test/" . $unitTestPhpFileName);

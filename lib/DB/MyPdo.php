@@ -5,6 +5,7 @@
 
 require_once("lib/BaseDelegatable.php");
 require_once("lib/TheWorld.php");
+require_once("lib/DB/MyPdoStatement.php");
 
 class MyPdo extends BaseDelegatable {
 
