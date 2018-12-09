@@ -19,6 +19,7 @@ class BaseClass {
   // for practical purpose, both way of
   // of delegate is used.
   protected $delegate;
+  protected $magicObject;
 
   public function __construct() {
     
@@ -32,6 +33,8 @@ class BaseClass {
     $this->accessibles = array();
     $this->retainer = array();
 
+    $this->magicObject = $this;
+
     // determine delegate by Factory
     // the following is the default code without factory.
     // $factory = TheWorld::instance()->factory();
@@ -39,6 +42,12 @@ class BaseClass {
     // Change context which is second argument of the following method by sub class.
     // Make NullDelegate for default case.
     // $this->delegate = $factory->make("Delegate", "REST")->setClassName($this->getKlassName());
+
+    return $this;
+  }
+
+  public function setMagicObject($anObject) {
+    $this->magicObject = $anObject;
 
     return $this;
   }
@@ -72,7 +81,7 @@ class BaseClass {
       return $this->executeSetterHook($key, $this->retainer[$key], $val);
     }
 
-    $this->retainer[$key] = $val;
+    $this->$magicObject->retainer[$key] = $val;
     return $this;
   }
 
@@ -120,7 +129,7 @@ class BaseClass {
       return $this->executeGetterHook($key, $this->retainer[$key]);
     }
 
-    return $this->retainer[$key];
+    return $this->magicObject->retainer[$key];
   }
 
   protected function isGetterHookExist($key) {
