@@ -6,6 +6,7 @@
 require_once("lib/RSSErrorHandler.php");
 require_once("lib/config/Config.php");
 require_once("lib/DB/MyPdo.php");
+require_once("lib/stream/DebugStream.php");
 
 class TheWorld {
 
@@ -53,7 +54,9 @@ class TheWorld {
     $this->config = new Config();
     // debug
     // change to set "dev" by env val by apache or something like that.
-    $this->config->setStage("Dev");
+    $this->stage = "Dev";
+    $this->config->setStage($this->stage);
+    $this->debugStream = new DebugStream($this->stage);
     // end of debug
 
     $dbProps = $this->config->getDBProps();

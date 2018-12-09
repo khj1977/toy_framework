@@ -55,6 +55,7 @@ class BaseConfig extends BaseDelegatable {
     $configImplObject = new $configClassName();
 
     $this->setImpl($configImplObject);
+    $this->setMagicObject($configImplObject);
 
     return $this;
   }

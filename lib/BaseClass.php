@@ -173,16 +173,20 @@ class BaseClass {
   protected function isAccessible($key) {
     $err = false;
 
-    if (array_key_exists($key, $this->accessibles)) {
+    if (array_key_exists($key, $this->magicObject->getAccessibles())) {
       $err = true;
     }
 
     return $err;
   }
 
+  protected function getAccessibles() {
+    return $this->accessibles;
+  }
+
   protected function isNoRuleForAccessibles() {
     $err = false;
-    if (count($this->accessibles) == 0) {
+    if (count($this->magicObject->getAccessibles()) == 0) {
       $err = true;
     }
 

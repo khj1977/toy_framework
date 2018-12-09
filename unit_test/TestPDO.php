@@ -3,6 +3,7 @@
 require_once(realpath(dirname(__FILE__) . "/../lib/BaseUnitTest.php"));
 require_once("lib/TheWorld.php");
 require_once("lib/DB/MyPdo.php");
+require_once("lib/stream/DebugStream.php");
 
 class TestPDO extends BaseUnitTest {
   
@@ -34,6 +35,14 @@ class TestPDO extends BaseUnitTest {
         print("line break. the world: ¥n");
         var_dump($rows);
       }
+    }
+
+    public function test_debugStream() {
+      $stream = TheWorld::instance()->debugStream;
+      $stream->setFlag(false);
+      $stream->varDump($stream);
+
+      return true;
     }
 
 }

@@ -20,6 +20,7 @@ class BaseDelegatable extends BaseClass {
 
   protected function initialize() {
     $this->impl = null;
+    $this->setMagicObject($this);
 
     return $this;
   }
@@ -53,7 +54,8 @@ class BaseDelegatable extends BaseClass {
     return $result;
   }
 
-  public function __get($key) {
+  
+  // public function __get($key) {
     /*
     if (!$this->isValidForProp($key)) {
       throw new KException("BaseClass::__get(): accessing to getter by this key is not permitted.");
@@ -64,8 +66,8 @@ class BaseDelegatable extends BaseClass {
     }
     */
 
-    return $this->impl->retainer[$key];
-  }
+    // return $this->impl->retainer[$key];
+  // }
 
 }
 
