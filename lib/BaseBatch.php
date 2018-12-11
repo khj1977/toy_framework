@@ -26,6 +26,7 @@ abstract class BaseBatch {
   protected function initialize() {
     // $this->initialize();
     TheWorld::instance()->initialize();
+    TheWorld::instance()->setIsCli();
 
     return $this;
   }

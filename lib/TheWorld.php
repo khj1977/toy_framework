@@ -17,6 +17,8 @@ class TheWorld {
   // hash
   protected $args;
 
+  protected $isCli;
+
   // Will hold something like the following as instance value.
   // protected $stdin;
   // protected $stderror
@@ -36,6 +38,14 @@ class TheWorld {
     return $this;
   }
 
+  public function isCli() {
+    return $this->isCli;
+  }
+
+  public function setIsCli() {
+    $this->isCli = true;
+  }
+
   public function setArgs($args) {
     // $this->args = $args;
     $this->internalRetainer["args"] = $args;
@@ -44,6 +54,14 @@ class TheWorld {
   }
 
   public function initialize() {
+
+    static $initialized = false;
+    if ($initialized === true) {
+      return $this;
+    }
+
+    $this->isCli = false;
+
     $this->setErrorHandler();
     $this->rssErrorHandler = new RSSErrorHandler();
 
@@ -68,6 +86,8 @@ class TheWorld {
     $this->slave = $pdo;
     // end of debug
 
+    $initialized = true;
+
     return $this;
   }
 
@@ -89,11 +109,17 @@ class TheWorld {
   }
 
   public function __get($key) {
-    if (array_key_exists($key, $this->retainer)) {
+    if (array_key_exists($key, $this->internalRetainer)) {
       return $this->internalRetainer[$key];
     }
 
     return false;
+  }
+
+  public function __set($key, $val) {
+    $this->internalRetainer[$key] = $val;
+    
+    return $this;
   }
 
   public function getSlave() {

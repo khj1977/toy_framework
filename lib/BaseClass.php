@@ -46,6 +46,15 @@ class BaseClass {
     return $this;
   }
 
+  // $this->delegate or child of BaseDelegate is used, but not BaseDelegatable, because
+  // for object composition. It is little bit complex than just inherit BaseDelegatable,
+  // but more usable;i.e. inheritance or object composition.
+  public function setDelegate($aDelegate) {
+    $this->delegate = $aDelegate;
+
+    return $this;
+  }
+
   public function setMagicObject($anObject) {
     $this->magicObject = $anObject;
 
