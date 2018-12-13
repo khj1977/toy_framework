@@ -3,7 +3,7 @@
 require_once("lib/BaseClass.php");
 require_once("lib/WebRouter.php");
 require_once("lib/TheWorld.php");
-require_once("lib/KExcception.php");
+require_once("lib/KException.php");
 require_once("lib/WebArguments.php");
 
 class Dispatcher extends BaseClass {
@@ -37,18 +37,21 @@ class Dispatcher extends BaseClass {
     $this->action = $route["action"];
 
     $basePath = TheWorld::instance()->getBaseDir();
-    $controllerPath = $basePath . sprintf("/app/%s/controllers/%sController",
-                                          $this->module,
-                                          ucwords($this->controller)
+    $controllerPath = $basePath . 
+      sprintf(
+        "/apps/%s/controllers/%sController.php",
+        $this->module,
+        ucwords($this->controller)
       );
+
     $controllerPath = realpath($controllerPath);
     if ($controllerPath === false) {
-      throw new KException("Dispatcher::dispatch(): invalid path: with module and controller" . $this->module . " " . $this->controller);
+      throw new KException("Dispatcher::dispatch(): invalid path: with module and controller: module: " . $this->module . " controller: " . $this->controller);
     }
     require_once($controllerPath);
     $controllerClassName = ucwords($this->controller) . "Controller";
-    // debug
-    // add checking existence of controller class
+    // debug 
+    // add checking existence of controller class. And if not there, throw exception.
     // end of debug
     $controller = new $controllerClassName();
 

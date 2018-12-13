@@ -10,4 +10,5 @@
 
   $dispatcher->dispatch();
 
+  // Do nothing including return since this is web.
 ?>

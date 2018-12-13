@@ -1,6 +1,6 @@
 <?php
 
-require_once("framework/BaseClass.php");
+require_once("lib/BaseClass.php");
 
 class WebArguments extends BaseClass {
 

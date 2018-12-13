@@ -33,6 +33,7 @@ class BaseClass {
     $this->accessibles = array();
     $this->retainer = array();
 
+    $this->delegate = null;
     $this->magicObject = $this;
 
     // determine delegate by Factory
@@ -62,6 +63,9 @@ class BaseClass {
   }
 
   public function __call($methodName, $args) {
+    if ($this->delegate == null) {
+      throw new KException("BaseClass::__call(): method name: " . $methodName . " cannot be resolved.");
+    }
     if ($this->delegate->isAcceptThisMethodName($methodName)) {
       return $this->delegate->$methodName($args);
     }
