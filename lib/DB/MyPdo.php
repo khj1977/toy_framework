@@ -27,9 +27,7 @@ class MyPdo extends BaseDelegatable {
   }
 
   public function prepare($sql) {
-    // debug
-    // TheWorld::instance()->getLogger()->log("info", "prepare:¥t" . $sql);
-    // end of debug
+    TheWorld::instance()->logger->log(KLogger::INFO, "prepare:¥t" . $sql);
 
     $rawStatement = $this->pdo->prepare($sql);
     $statement = new MyPdoStatement($rawStatement, $sql);
@@ -38,11 +36,11 @@ class MyPdo extends BaseDelegatable {
   }
   
   public function query($sql) {
-    // debug
-    // TheWorld::instance()->getLogger()->log("info", "query:¥t" . $sql);
-    // end of debug
+    TheWorld::instance()->logger()->log(KLogger::INFO, "query:¥t" . $sql);
 
-    $this->pdo->query($sql);
+    $result = $this->pdo->query($sql);
+
+    return $result;
   }
 
   public function bulkQuery($sql) {

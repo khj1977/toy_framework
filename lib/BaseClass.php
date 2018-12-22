@@ -21,6 +21,10 @@ class BaseClass {
   protected $delegate;
   protected $magicObject;
 
+  protected $debugStream;
+
+  // protected $varDump;
+
   public function __construct() {
     
     $this->initialize();
@@ -43,6 +47,8 @@ class BaseClass {
     // Change context which is second argument of the following method by sub class.
     // Make NullDelegate for default case.
     // $this->delegate = $factory->make("Delegate", "REST")->setClassName($this->getKlassName());
+
+    $this->debugStream = TheWorld::instance()->debugStream;
 
     return $this;
   }
@@ -84,8 +90,11 @@ class BaseClass {
   // add validateExistense() for overriding, though it is not used for anytime.
   // end of debug
   public function __set($key, $val) {
+    // debug
+    var_dump("__set(): " . $key);
+    // end of debug
     if (!$this->isValidForProp($key)) {
-      throw new KException("BaseClass::__set(): accessing to setter by this key is not permitted.");
+      throw new KException("BaseClass::__set(): accessing to setter by this key is not permitted: " . $key);
     }
 
     // there is no problem to call isSetterHookExist() twice considering a cost of 
@@ -134,8 +143,11 @@ class BaseClass {
   // add validateExistense()
   // end of debug
   public function __get($key) {
+    // debug
+    var_dump("__get(): " . $key);
+    // end of debug
     if (!$this->isValidForProp($key)) {
-      throw new KException("BaseClass::__get(): accessing to getter by this key is not permitted.");
+      throw new KException("BaseClass::__get(): accessing to getter by this key is not permitted: " . $key);
     }
 
     if ($this->isGetterHookExist($key)) {
@@ -198,6 +210,7 @@ class BaseClass {
   }
 
   protected function isNoRuleForAccessibles() {
+  
     $err = false;
     if (count($this->magicObject->getAccessibles()) == 0) {
       $err = true;

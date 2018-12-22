@@ -6,20 +6,28 @@
 set_include_path(get_include_path() . "" . PATH_SEPARATOR . realpath(dirname(__FILE__) . "/../"));
 
 require_once("lib/TheWorld.php");
+require_once("lib/BaseClass.php");
 
 // debug
 // check whether there is exception handler for each test.
 // end of debug
-abstract class BaseUnitTest {
+abstract class BaseUnitTest extends BaseClass {
 
   const testMethodPrefix = "test";
   const testMethodSplitChar = "_";
 
+  protected $theWorld;
+  protected $debugStream;
+
   public function __construct() {
+    parent::__construct();
     // debug
     // initialize TheWorld
-    TheWorld::getInstance()->initialize();
+    TheWorld::instance()->initialize();
     // end of debug
+
+    $this->theWorld = TheWorld::instance();
+    $this->debugStream = $this->theWorld->debugStream;
   }
 
   public function runTests() {

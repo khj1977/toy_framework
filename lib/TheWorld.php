@@ -7,6 +7,7 @@ require_once("lib/RSSErrorHandler.php");
 require_once("lib/config/Config.php");
 require_once("lib/DB/MyPdo.php");
 require_once("lib/stream/DebugStream.php");
+require_once("lib/util/KLogger.php");
 
 class TheWorld {
 
@@ -60,7 +61,12 @@ class TheWorld {
       return $this;
     }
 
+    // debug
+    // refactor the following line.
     $this->isCli = false;
+    // end of debug
+
+    date_default_timezone_set("UTC");
 
     $this->setErrorHandler();
     $this->rssErrorHandler = new RSSErrorHandler();
@@ -85,6 +91,8 @@ class TheWorld {
     // refactor to check master and slave is the same or not and make new object, etc.
     $this->slave = $pdo;
     // end of debug
+
+    $this->logger = new KLogger();
 
     $initialized = true;
 

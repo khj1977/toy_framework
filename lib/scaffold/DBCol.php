@@ -7,40 +7,55 @@ require_once("lib/BaseClass.php");
 
 class DBCol extends BaseClass {
 
-  // debug
-  // refactor the following to use setter/getter of BaseClass not instance val;
-  // protected $colName;
-  // protected $colType;
-  // protected $colVal;
-
-  // protected $isNull;
-  // end of debug
-
   // model not view. view will be HTMLField or something like that.
   // $field will fetch val and other info from instance of this class.
-  protected $field;
+  protected $name;
+  protected $val;
 
   public function __construct() {
     parent::__construct();
-
     $this->initialize();
 
     return $this;
   }
 
   protected function initialize() {
+    parent::initialize();
+
+    // debug
+    // for debug purpose, off now.
+    // no effect to just apply get/set
+    /*
     $this->setAccessible("col_name")->setAccessible("col_type")->setAccessible("col_val")->
       setAccessible("is_null");
+    */
+    // end of debug
 
-    $this->field = null;
+    $this->name = null;
+    $this->val = null;
 
     return $this;    
   }
 
-  public function setField($aField) {
-    $this->field = $aField;
+  public function setNameValPair($name, $val) {
+    $this->name = $name;
+    $this->val = $val;
 
     return $this;
+  }
+
+  public function getName() {
+    return $name;
+  }
+
+  public function getVal() {
+    return $val;
+  }
+
+  public function toString() {
+    $str = $this->name . " " . $this->val;
+
+    return $str;
   }
 
 }

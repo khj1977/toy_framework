@@ -13,9 +13,15 @@ abstract class BaseTable extends BaseClass {
   protected $slave;
 
   public function __construct($tableName) {
+    parent::__construct();
+    parent::initialize();
+
+    $this->debugStream->varDump("bar");
     $this->tableName = $tableName;
 
-    $this->slave = TheWorld::instance()->getSlave();
+    $this->slave = TheWorld::instance()->slave;
+
+    // var_dump($this->slave);
 
     return $this;
   }
