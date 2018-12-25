@@ -4,6 +4,7 @@
 // See License.txt for license of this code.
 
 require_once("lib/BaseClass.php");
+require_once("lib/Util.php");
 
 class DBCol extends BaseClass {
 
@@ -58,7 +59,7 @@ class DBCol extends BaseClass {
   }
 
   public function setTypeNameValTriple($name, $type, $val) {
-    $this->type = $type;
+    $this->type = Util::convertMySQLType($type);
     $this->name = $name;
     $this->val = $val;
 

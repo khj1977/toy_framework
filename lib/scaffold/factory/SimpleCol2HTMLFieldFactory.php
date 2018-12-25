@@ -20,7 +20,8 @@ class SimpleCol2HTMLFieldFactory extends BaseClass {
   }
 
   public function make($tableName, $col) {
-    $type = $this->convertType($col->getType());
+    // $type = $this->convertType($col->getType());
+    $type = $col->getType();
 
     if ($col->getName() === "id" && $type == "int") {
       $html = sprintf("<input type='hidden' name='%s' value='%s'>", $col->getName(), $col->getVal());
@@ -38,6 +39,7 @@ class SimpleCol2HTMLFieldFactory extends BaseClass {
     return $html;
   }
 
+  
   protected function convertType($rawType) {
     if (preg_match("/int.*/", $rawType) == 1) {
       return "int";
@@ -48,7 +50,7 @@ class SimpleCol2HTMLFieldFactory extends BaseClass {
    
     return $rawType;
   }
-
+  
 }
 
 ?>

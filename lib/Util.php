@@ -39,6 +39,17 @@ class Util {
     throw new Exception("Util::JSONDecode(): this method has not been implemented yet.");
   }
 
+  static public function convertMySQLType($rawType) {
+    if (preg_match("/int.*/", $rawType) == 1) {
+      return "int";
+    }
+    else if (preg_match("/varchar.*/", $rawType)) {
+      return "varchar";
+    }
+   
+    return $rawType;
+  }
+
 }
 
 ?>

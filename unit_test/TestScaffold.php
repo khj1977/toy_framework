@@ -4,7 +4,8 @@ require_once(realpath(dirname(__FILE__) . "/../lib/BaseUnitTest.php"));
 require_once("lib/TheWorld.php");
 require_once("lib/stream/DebugStream.php");
 require_once("lib/scaffold/MySQLTable.php");
-require_once("lib/scaffold/factory/SimpleCol2HTMLFactory.php");
+require_once("lib/scaffold/factory/SimpleCol2HTMLFieldFactory.php");
+require_once("lib/scaffold/factory/TableFactory.php");
 
 class TestScaffold extends BaseUnitTest {
 
@@ -62,10 +63,12 @@ class TestScaffold extends BaseUnitTest {
 
   public function test_ColFactory() {
     $tableName = "test_table";
-    $sqlTable = new MySQLTable($tableName);
+    $tableFactory = new TableFactory();
+    $sqlTable = $tableFactory->make("MySQL", $tableName);
+    // $sqlTable = new MySQLTable($tableName);
     $rows = $sqlTable->getDBCols();
 
-    $factory = new SimpleCol2HTMLFactory();
+    $factory = new SimpleCol2HTMLFieldFactory();
 
     $i = 0;
     foreach($rows as $row) {
