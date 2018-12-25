@@ -11,6 +11,10 @@ class DBCol extends BaseClass {
   // $field will fetch val and other info from instance of this class.
   protected $name;
   protected $val;
+  protected $type;
+
+  protected $htmlFactory;
+  protected $tableName;
 
   public function __construct() {
     parent::__construct();
@@ -33,11 +37,28 @@ class DBCol extends BaseClass {
 
     $this->name = null;
     $this->val = null;
+    $this->type = null;
+
+    $this->htmlFactory = null;
+    $this->tableName = null;
 
     return $this;    
   }
 
-  public function setNameValPair($name, $val) {
+  public function setHTMLFactory($aFactory) {
+    $this->htmlFactory = $aFactory;
+
+    return $this;
+  }
+
+  public function setTableName($tableName) {
+    $this->tableName = $tableName;
+
+    return $this;
+  }
+
+  public function setTypeNameValTriple($name, $type, $val) {
+    $this->type = $type;
     $this->name = $name;
     $this->val = $val;
 
@@ -45,17 +66,25 @@ class DBCol extends BaseClass {
   }
 
   public function getName() {
-    return $name;
+    return $this->name;
   }
 
   public function getVal() {
-    return $val;
+    return $this->val;
+  }
+
+  public function getType() {
+    return $this->type;
   }
 
   public function toString() {
-    $str = $this->name . " " . $this->val;
+    $str = $this->name . " " . $this->type ." " . $this->val;
 
     return $str;
+  }
+
+  public function toHTML() {
+    return $this->htmlFactory->make($this->tableName, $this);
   }
 
 }

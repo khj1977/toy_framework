@@ -39,7 +39,11 @@ class MySQLTable extends BaseTable {
 
   // Return collection or array of DBCol object.
   public function getDBCols($limit = null) {
+    // debug
+    //refactor to correlate with type of col and name of col
+    // throw new Exception("MySQLTable::getDBCols(): re-implement this method. see comment");
     $this->colProps = $this->getRawColNames();
+    // end of debug
 
     $rawDatas = $this->getRawDatas($limit);
     // debug
@@ -104,10 +108,12 @@ class MySQLTable extends BaseTable {
           throw new KException("MySQLTable::xgetCols(): this name is not there in colProp: " . $colName);
         }
         $colProp = $this->colProps[$colName];
+        $type = $colProp["type"];
 
         // debug
-        $this->debugStream->varDump("MySQLTable");
+        $this->debugStream->varDump("MySQLTable col_name, type");
         $this->debugStream->varDump($colName);
+        $this->debugStream->varDump($type);
         // end of debug
 
         $dbCol = new DBCol();
@@ -118,7 +124,9 @@ class MySQLTable extends BaseTable {
         $dbCol->col_val = $data;
         $dbCol->is_null = $colProp["is_null"];
         */
-        $dbCol->setNameValPair($colName, $val);
+        $dbCol->setTypeNameValTriple($colName, $type, $val);
+        $dbCol->setTableName($this->tableName);
+
         $dbCols[] = $dbCol;
       }
       // $dbCols == row.

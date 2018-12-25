@@ -52,22 +52,26 @@ class TableToFieldMapper extends BaseClass {
   // It will be recommended to define anon func at one class file for modurarity and to make
   // maintenance of code easy. Note that the number of class will be number of table * number
   // of strategy.
-  public function map($tableName, $rawObtainer, $fieldFactory) {
+  public function map($tableName, $fieldFactory) {
     $table = new MySQLTable($tableName);
 
-    $raw = $rawObtainer($tableName);
-    $cols = $table->getCols($raw);
+    // $raw = $rawObtainer($tableName);
+    $cols = $table->getDBCols();
 
     // assign a field to each cols.
-    $modifiedCols = array();
-    foreach($cols as $col) {
-      $anField = $fieldFactory->make($tableName, $col);
-      $col->setField($anField);
+    $rows = array();
+    foreach($rows as $row) {
+      $modifiedCols = array();
+      foreach($row as $col) {
+        $anField = $fieldFactory->make($col);
+        $col->setField($anField);
 
-      $modifiedCols[] = $col;
+        $modifiedCols[] = $col;
+      }
+      $rows[] = $modifiedCols;
     }
 
-    return $modifiedCols;
+    return $rows;
   }
 
 }
