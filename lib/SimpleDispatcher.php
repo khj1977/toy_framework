@@ -6,13 +6,14 @@ require_once("lib/TheWorld.php");
 require_once("lib/KException.php");
 require_once("lib/WebArguments.php");
 
-class Dispatcher extends BaseClass {
+class SimpleDispatcher extends BaseClass {
 
   protected $module;
   protected $controller;
   protected $action;
 
   public function __construct() {
+    parent::__construct();
   }
 
   public function dispatch() {
@@ -30,7 +31,7 @@ class Dispatcher extends BaseClass {
 
     // $arguments = TheWorld::instance()->arguments->getArguments();
     // assume all vals in $route are urldecoded.
-    $route = $router->getRoute($arguments);
+    $route = $router->setWebArguments($arguments)->getRoute();
 
     $this->module = $route["module"];
     $this->controller = $route["controller"];
@@ -59,25 +60,35 @@ class Dispatcher extends BaseClass {
 
     try {
       $controller->preAction();
-      $result = $controller->$actionName();
+      $subView = $controller->$actionName();
       $controller->postAction();
+
+      $viewVals = $router->getView();
+
+      // debug
+      $this->debugStream->varDump("debug");
+      $this->debugStream->varDump($viewVals);
+      // end of debug
+
+      require_once($viewVals["view_path"]);
     }
     catch(KException $e) {
       $message = "Dispatcher: " . $e->getMessage();
 
+      // debug
+      // implement by appropriate manner the 
+      // following code.
       TheWorld::instance()->logger->log(KLogger::WARN, $message);
       TheWorld::instance()->debugStream->varDump($message);
+      // end of debug
     }
 
-    return $result;
+    return true;
   }
 
+  /*
   public function getViewPath() {
-    $viewPath = $basePath . sprintf("/app/%s/views/%s/%s",
-                                          $this->module,
-                                          $this->controller,
-                                          $this->action
-      );
+    $viewPath = $basePath . sprintf("/app/%s/views/%s/%s", $this->module, $this->controller, $this->action);
 
     $realPath = realpath($viewPath);
     if ($realPath === false) {
@@ -86,6 +97,7 @@ class Dispatcher extends BaseClass {
 
     return $realPath;
   }
+  */
 
 }
 

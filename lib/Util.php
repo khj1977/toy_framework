@@ -50,6 +50,14 @@ class Util {
     return $rawType;
   }
 
+  static public function realpath($path) {
+    return realpath($path);
+  }
+
+  static public function ucwords($str) {
+    return ucwords($str);
+  }
+
 }
 
 ?>

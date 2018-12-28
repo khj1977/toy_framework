@@ -2,31 +2,60 @@
 
 require_once("lib/BaseClass.php");
 require_once("lib/KException.php");
+require_once("lib/Util.php");
 
 class WebRouter extends BaseClass {
+
+  protected $webArguments;
+
+  protected $module;
+  protected $controller;
+  protected $action;
 
   public function __contruct() {
     parent::__construct();
   }
 
-  public function getRoute($webArguments) {
-    $module = urldecode($webArguments->get("m"));
-    if ($module === "") {
+  public function setWebArguments($webArguments) {
+    $this->webArguments = $webArguments;
+
+    return $this;
+  }
+
+  public function getRoute() {
+    $this->module = urldecode($this->webArguments->get("m"));
+    if ($this->module === "") {
       throw new KException("WebRouter::getRoute(): module is not specified.");
     }
-    $controller = urldecode($webArguments->get("c"));
-    if ($controller === "") {
+    $this->controller = urldecode($this->webArguments->get("c"));
+    if ($this->controller === "") {
       throw new KException("WebRouter::getRoute(): controller is not specified.");
     }
-    $action = urldecode($webArguments->get("a"));
-    if ($module === "") {
+    $this->action = urldecode($this->webArguments->get("a"));
+    if ($this->module === "") {
       throw new KException("WebRouter::getRoute(): action is not specified.");
     }
     // view is automatically determined by m, c and a.
 
-    $route = array("module" => $module, "controller" => $controller, "action" => $action);
+    $route = array("module" => $this->module, "controller" => $this->controller, "action" => $this->action);
 
     return $route;
+  }
+
+  // return hash
+  // "view_path" => string: path of view file.
+  // "view_class_name" => string: name of view class.
+  public function getView() {
+    $viewClassName = Util::ucwords($this->controller) . Util::ucwords($this->action) . "View";
+
+    $this->debugStream->varDump($viewClassName);
+
+    $this->debugStream->varDump(sprintf("%s/apps/%s/views/%s.php", TheWorld::instance()->getBaseDir(), $this->module, $viewClassName));
+
+    $viewPath = Util::realpath(sprintf("%s/apps/%s/views/%s.php", TheWorld::instance()->getBaseDir(), $this->module, $viewClassName));
+
+    return array("view_path" => $viewPath, "view_class_
+    name" => $viewClassName);
   }
 
 

@@ -14,6 +14,8 @@ class SampleController extends BaseController {
 
   public function foo() {
     echo "This is action foo of SampleController</br>";
+
+    return null;
   }
 
   public function sca() {
@@ -36,7 +38,9 @@ class SampleController extends BaseController {
       $html = $col->toHTML();
       $formView->pushInput($col);
     }
-    $simpleView->render();
+    // $simpleView->render();
+
+    return $simpleView;
   }
 
 }
