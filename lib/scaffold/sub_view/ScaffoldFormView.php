@@ -51,9 +51,10 @@ class ScaffoldFormView extends BaseScaffoldView {
       if ($input->getName() === "id" && $input->getType() == "int") {
         continue;
       }
-      
+
       $this->output = $this->output . $input->getName() . ": " . $input->toHTML() . "</br>";
     }
+    $this->output = $this->output . '<input type="submit" value="送信">';
     $this->output = $this->output . "</form>";
 
     return $this;
