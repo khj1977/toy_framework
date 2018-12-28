@@ -66,7 +66,7 @@ class TestScaffold extends BaseUnitTest {
     $tableFactory = new TableFactory();
     $sqlTable = $tableFactory->make("MySQL", $tableName);
     // $sqlTable = new MySQLTable($tableName);
-    $rows = $sqlTable->getDBCols();
+    $rows = $sqlTable->getDBCols(1);
 
     $factory = new SimpleCol2HTMLFieldFactory();
 

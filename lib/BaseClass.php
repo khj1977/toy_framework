@@ -91,7 +91,7 @@ class BaseClass {
   // end of debug
   public function __set($key, $val) {
     // debug
-    var_dump("__set(): " . $key);
+    // var_dump("__set(): " . $key);
     // end of debug
     if (!$this->isValidForProp($key)) {
       throw new KException("BaseClass::__set(): accessing to setter by this key is not permitted: " . $key);
@@ -144,7 +144,7 @@ class BaseClass {
   // end of debug
   public function __get($key) {
     // debug
-    var_dump("__get(): " . $key);
+    // var_dump("__get(): " . $key);
     // end of debug
     if (!$this->isValidForProp($key)) {
       throw new KException("BaseClass::__get(): accessing to getter by this key is not permitted: " . $key);

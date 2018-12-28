@@ -57,7 +57,17 @@ class Dispatcher extends BaseClass {
 
     $actionName = $this->action;
 
-    $result = $controller->$actionName();
+    try {
+      $controller->preAction();
+      $result = $controller->$actionName();
+      $controller->postAction();
+    }
+    catch(KException $e) {
+      $message = "Dispatcher: " . $e->getMessage();
+
+      TheWorld::instance()->logger->log(KLogger::WARN, $message);
+      TheWorld::instance()->debugStream->varDump($message);
+    }
 
     return $result;
   }

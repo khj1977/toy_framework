@@ -20,10 +20,14 @@ class TableFactory extends BaseClass {
 
   public function make($type, $tableName) {
     $klassName = sprintf("%sTable", $type);
-    $fileName = realpath(sprintf("%s/lib/scaffold/factory/%s.php", TheWorld::instance()->getBaseDir(), $klassName));
+    $fileName = realpath(sprintf("%s/lib/scaffold/%s.php", 
+    TheWorld::instance()->getBaseDir(), $klassName));
+
     // debug
     // add existence of class file with real path.
     // end of debug
+
+    require_once($fileName);
 
     $object = new $klassName($tableName);
 
