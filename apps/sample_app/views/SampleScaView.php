@@ -7,6 +7,7 @@
 
 </head>
 
+<secction>
 <body>
 <p>
 Hello! <br/>
@@ -20,11 +21,11 @@ $subView->render();
 
 ?>
 
-<br/>
-
 <p>
 This is footer of this view.
 </p>
+</section>
+
 </body>
 
 </html>

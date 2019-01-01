@@ -20,6 +20,10 @@ class SampleController extends BaseController {
 
   public function sca() {
     $tableName = "test_table";
+    
+    $tableFactory = new TableFactory();
+    $sqlTable = $tableFactory->make("MySQL", $tableName);
+    
     $tableFactory = new TableFactory();
     $sqlTable = $tableFactory->make("MySQL", $tableName);
    
