@@ -1,4 +1,17 @@
-p {
-  font-size: 24; 
-  color: #FF7E00
+body {
+  font-family: 'Hiragino Kaku Gothic Pro';
+  font-size: 38px; 
+  color: black
+}
+
+input {
+  width: 360px;
+  font-size: 24px;
+  color: black;
+}
+
+.submit {
+  width: 120px;
+  font-size: 24px;
+  color: black
 }
