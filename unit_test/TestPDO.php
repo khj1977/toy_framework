@@ -33,7 +33,7 @@ class TestPDO extends BaseUnitTest {
       // $statement->execute(array());
       while($rows = $statement->fetch()) {
         print("line break. the world: ¥n");
-        var_dump($rows);
+        $this->debugStream->varDump($rows);
       }
     }
 

@@ -22,6 +22,8 @@ class BaseClass {
   protected $magicObject;
 
   protected $debugStream;
+  // yet another name of $debugStream;
+  protected $ds;
 
   // protected $varDump;
 
@@ -49,6 +51,7 @@ class BaseClass {
     // $this->delegate = $factory->make("Delegate", "REST")->setClassName($this->getKlassName());
 
     $this->debugStream = TheWorld::instance()->debugStream;
+    $this->ds = TheWorld::instance()->debugStream;
 
     return $this;
   }
@@ -91,7 +94,8 @@ class BaseClass {
   // end of debug
   public function __set($key, $val) {
     // debug
-    // var_dump("__set(): " . $key);
+    // var_dump("__set(): " . $key . " " . $val);
+    // var_dump($this->magicObject);
     // end of debug
     if (!$this->isValidForProp($key)) {
       throw new KException("BaseClass::__set(): accessing to setter by this key is not permitted: " . $key);
@@ -103,7 +107,10 @@ class BaseClass {
       return $this->executeSetterHook($key, $this->retainer[$key], $val);
     }
 
-    $this->$magicObject->retainer[$key] = $val;
+    // var_dump("goo");
+    $this->magicObject->retainer[$key] = $val;
+    // var_dump($this->magicObject->retainer);
+
     return $this;
   }
 
@@ -228,6 +235,10 @@ class BaseClass {
 
   protected function getKlassName() {
     return get_class($this);
+  }
+
+  public function getPropsAsHash() {
+    return $this->retainer;
   }
 
 }

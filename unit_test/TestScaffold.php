@@ -6,11 +6,14 @@ require_once("lib/stream/DebugStream.php");
 require_once("lib/scaffold/MySQLTable.php");
 require_once("lib/scaffold/factory/SimpleCol2HTMLFieldFactory.php");
 require_once("lib/scaffold/factory/TableFactory.php");
+require_once("lib/Util.php");
+require_once("lib/util/Assert.php");
+require_once("lib/util/AnonClass.php");
 
 class TestScaffold extends BaseUnitTest {
 
   protected function preRun() {
-    $this->debugStream->setFlag(true);
+    $this->debugStream->setFlag(false);
   }
 
   protected function postRun() {
@@ -39,7 +42,7 @@ class TestScaffold extends BaseUnitTest {
   }
 
   public function test_MySQLTableColProps() {
-    // $this->debugStream->setFlag(false);
+    $this->debugStream->setFlag(false);
 
     $sqlTable = new MySQLTable("test_table");
     $this->debugStream->varDump("test foo");
@@ -51,14 +54,31 @@ class TestScaffold extends BaseUnitTest {
 
     $this->debugStream->varDump("db cols");
     $this->debugStream->varDump($dbCols);
+
+    $anonObject = array();
+    $anonObjects[] =     AnonClass::makeObjectByHash(
+      array(
+        "name" => "bar", 
+        "val" => "2", 
+        "type" => "int"
+        )
+    );
+
     foreach($rows as $row) {
       foreach($row as $col) {
-        $this->debugStream->varDump("db cols 2");;
-        // $this->debugStream->varDump($col);
-        $this->debugStream->varDump($col->toString());
-        // print($col->toString() . ": ¥n");
+        $assert = new Assert();
+
+        $err = $assert->objectEqual($col, $anonObjects[0]);
+        if ($err = false) {
+          return false;
+        }
+
+        $assert->resetNumEqual();
+
       }
     }
+
+    return true;
   }
 
   public function test_ColFactory() {
@@ -72,7 +92,7 @@ class TestScaffold extends BaseUnitTest {
 
     $i = 0;
     foreach($rows as $row) {
-      var_dump("line num: " . $i);
+      // var_dump("line num: " . $i);
       foreach($row as $col) {
         $this->debugStream->varDump("pre-html");
         // $html = $factory->make($tableName, $col);

@@ -16,7 +16,7 @@ class KLogger extends BaseClass {
     }
 
     public function log($level, $rawMessage) {
-        $message = date("Y-m-d H:i:s:u") . " " . $rawMessage;
+        $message = date("Y-m-d H:i:s:u") . " " . $level . " " . $rawMessage . "\n";
 
         $stream = fopen($this->getPath(), "a");
         if ($stream === FALSE) {

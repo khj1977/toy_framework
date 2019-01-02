@@ -40,13 +40,23 @@ abstract class BaseUnitTest extends BaseClass {
       // UnitTest class.
       $testMethodNames = $instance->getTestMethodNames();
 
+      $numSuccess = 0;
+      $numFail = 0;
+      $numTests = 0;
       foreach($testMethodNames as $testMethodName) {
         // debug
         // The following should be printed onto stdout or stderr?
         // not so important.
         printf("UnitTest: start to run test: " . $testMethodName . "\n");
+        ++$numTests;
         // end of debug
-        $instance->$testMethodName();
+        $result = $instance->$testMethodName();
+        if ($result === true) {
+          ++$numSuccess;
+        }
+        else if ($result === false) {
+          ++$numFail;
+        }
       }
       $instance->postRun();
     }
@@ -56,6 +66,8 @@ abstract class BaseUnitTest extends BaseClass {
 
       exit;
     }
+
+    printf("TotalTests %d; Success %d; Fail %d\n", $numTests, $numSuccess, $numFail);
 
     return $this;
   }

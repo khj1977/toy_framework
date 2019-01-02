@@ -37,12 +37,17 @@ class DebugStream {
     return $this;
   }
 
+  // Yet another name of varDump
+  public function vd($anObject) {
+    return $this->varDump($anObject);
+  }
+
   public function println($aString) {
     if ($this->flag === false) {
       return $this;
     }
 
-    $msg = $aString . "¥n";
+    $msg = $aString . "\n";
     print($msg);
 
     return $this;

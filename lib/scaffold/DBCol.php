@@ -87,6 +87,14 @@ class DBCol extends BaseClass {
   public function toHTML() {
     return $this->htmlFactory->make($this->tableName, $this);
   }
+  
+  public function getPropsAsHash() {
+    return array(
+      "name" => $this->name,
+      "type" => $this->type,
+      "val" => $this->val
+    );
+  }
 
 }
 
