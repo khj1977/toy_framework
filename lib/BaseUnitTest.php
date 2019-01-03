@@ -55,6 +55,7 @@ abstract class BaseUnitTest extends BaseClass {
           ++$numSuccess;
         }
         else if ($result === false) {
+          printf("Failed: " . $testMethodName . "\n");
           ++$numFail;
         }
       }
