@@ -53,6 +53,10 @@ class DebugStream {
     return $this;
   }
 
+  public function pl($aString) {
+    return $this->println($aString);
+  }
+
 }
 
 ?>

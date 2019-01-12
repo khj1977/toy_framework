@@ -20,10 +20,12 @@ abstract class BaseUnitTest extends BaseClass {
   protected $debugStream;
 
   public function __construct() {
+    // print("bar29");
     parent::__construct();
     // debug
     // initialize TheWorld
     TheWorld::instance()->initialize();
+    // TheWorld::instance()->debugStream->varDump("goo20");
     // end of debug
 
     $this->theWorld = TheWorld::instance();

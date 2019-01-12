@@ -8,6 +8,7 @@ set_include_path(get_include_path() . "" . PATH_SEPARATOR . realpath(dirname(__F
 // Execution function to set up require_once dir.
 require_once("lib/TheWorld.php");
 require_once("lib/BaseErrorHandler.php");
+// require_once("lib/BaseClass.php");
 
 abstract class BaseBatch {
 
@@ -27,6 +28,8 @@ abstract class BaseBatch {
     // $this->initialize();
     TheWorld::instance()->initialize();
     TheWorld::instance()->setIsCli();
+
+    // TheWorld::instance()->debugStream->varDump("goo10");
 
     return $this;
   }

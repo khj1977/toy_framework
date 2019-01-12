@@ -36,11 +36,13 @@ class MyPdo extends BaseDelegatable {
   }
   
   public function query($sql) {
-    TheWorld::instance()->logger()->log(KLogger::INFO, "query:¥t" . $sql);
+    TheWorld::instance()->logger->log(KLogger::INFO, "query:¥t" . $sql);
 
-    $result = $this->pdo->query($sql);
+    // $result = $this->pdo->query($sql);
+    $statement = new MyPdoStatement($this->pdo->prepare($sql));
+    $statement->execute();
 
-    return $result;
+    return $statement;
   }
 
   public function bulkQuery($sql) {

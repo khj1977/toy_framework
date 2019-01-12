@@ -13,7 +13,7 @@
 
 require_once("lib/BaseClass.php");
 
-class KORM extends BaseClass {
+class KORM {
 
   protected $tableName;
 
@@ -30,9 +30,11 @@ class KORM extends BaseClass {
   protected $defaultFilter;
   protected $filter;
 
-  // protected $container;
+  protected $container;
   
   public function __construct($tableName) {
+    // parent::__construct();
+
     $theWorld = TheWorld::instance();
     $this->slave = $theWorld->slave;
     $this->master = $theWorld->master;
@@ -47,25 +49,70 @@ class KORM extends BaseClass {
     $this->belongWith = null;
 
     $this->container = array();
+
+    $this->autoSetColNames();
+
+    return $this;
   }
 
   protected function setPropNames() {
 
   }
 
+  public function fetchOne($where, $orderBy) {
+    // debug
+    // refactor. Implement this part by CoC
+    // $tableName = "";
+    // end of debug
+    $self = new $klasssName($this->tableName);
 
-  public function fetchOne($where, $orderBy, $limit, $context) {
-    return $this->fetch($where, $orderBy, 1);
+    $object = $self->xfetchOne($where, $orderBy);
+
+    $object->setBelongTo($self->getBelongTo());
+    $object->setBelongWith($self->getBelongWith());
+    $object->setDefaultFilter($self->getDefaultFilter());
+    $object->setFilter($self->getFilter());
+
+    return $object;
   }
 
   public function fetch($where = null, $orderBy = null, $limit = null, $context = null) {
+    // debug
+    // refactor. Implement this part by CoC
+    // $tableName = "";
+    // end of debug
+    $klassName = get_class($this);
+    $self = new $klassName($this->tableName);
+    $objects = $self->xfetch($where, $orderBy, $limit, $context);
+
+    foreach($objects as $object) {
+      $object->setBelongTo($self->getBelongTo());
+      $object->setBelongWith($self->getBelongWith());
+      $object->setDefaultFilter($self->getDefaultFilter());
+      $object->setFilter($self->getFilter());
+    }
+
+    return $objects;
+  }
+
+  public function xfetchOne($where, $orderBy) {
+    return $this->fetch($where, $orderBy, 1);
+  }
+
+  public function xfetch($where = null, $orderBy = null, $limit = null, $context = null) {
+
     $sql = "SELECT ";
     $i = 1;
     $n = count($colNames);
 
+    $sql = $sql . $this->makeColNames($this->tableName);;
     if ($this->belongTo != null) {
-      $sql = $sql . $this->makeColNames($this->tableName);
       $sql = $sql . "," . $this->makeColNames($this->belongTo);
+    }
+
+    $sql = $sql . " FROM " . $this->tableName;
+    if ($this->belongTo != null) {
+      $sql = $sql . ", " . $this->belongTo;
     }
 
     if ($where !== null) {
@@ -101,27 +148,30 @@ class KORM extends BaseClass {
     if ($limit != null) {
       $sql = $sql . " LIMIT " . $limit;
     }
-
-    $result = $this->slave->query($sql);
+    
+    $statement = $this->slave->query($sql);
 
     $result = array();
-    foreach($result as $row) {
-      foreach($rows as $propName => $val) {
-        if ($context === null) {
+    // foreach($rows as $row) {
+    while($row = $statement->fetch()) {
+      foreach($row as $propName => $val) {
+        // if ($context === null) {
           // only for fetchOne
-          $context->$propName = $val;
-          $result = array($context);
-        }
-        else {
+          // $context->$propName = $val;
+          // $result = array($context);
+        // }
+        // else {
           // debug
           // Is it really KORM?
           // Not child class of KORM by
           // get_class()?
-          $object = new KORM();
+          $klassName = $this->getKlassName();
+          // $object = new KORM();
+          $object = new $klassName($this->tableName);
           // end of debug
           $object->$propName = $val;
           $result[] = $object;
-        }
+        // }
       }
     }
 
@@ -136,9 +186,16 @@ class KORM extends BaseClass {
     return $row["cnt"];
   }
 
-  /*
+  
+  // implement __get and __set by this class
+  // not by BaseClass (not inherit BaseClass)
   public function __get($propName) {
-    if (!array_exists($propName, $this->container)) {
+    $hookMethodName = $this->getHookMethodName($propName);
+    if(method_exists($this, $hookMethodName)) {
+      return call_user_method_array($hookMethodName, $this, array());
+    }
+
+    if (!array_key_exists($propName, $this->container)) {
       return false;
     }
 
@@ -146,18 +203,40 @@ class KORM extends BaseClass {
   }
 
   public function __set($propName, $val) {
+    $hookMethodName = $this->getHookMethodName($propName);
+    if(method_exists($this, $hookMethodName)) {
+      return 
+        call_user_method_array(
+          $hookMethodName, 
+          $this, 
+          array($propName => $val)
+        );
+    }
+
     $this->container[$propName] = $val;
+    
 
     return $this;
   }
+
+  protected function getHookMethodName($methodName) {
+    $hookMethodName = "hook_" . $methodName;
+
+    return $hookMethodName;
+  }
+
+  /*
+  public function __call($methodName, $args) {
+  }
   */
+  
 
   public function load() {
     if ($this->id === false) {
       throw new Exception("KORM::load(): id is not specified.");
     }
     
-    $where = array("id" => #this->id);
+    $where = array("id" => $this->id);
     $this->fetch($where, null, null, $this);
 
     return $this;
@@ -167,11 +246,19 @@ class KORM extends BaseClass {
     $this->propNames = array();
 
     $sql = "DESCRIBE " . $this->tableName;
-    $rows = $this->slave->query($sql);
+    $rows = $this->slave->query($sql)->fetchAll();
+    $this->colNames[$this->tableName] = array();
     foreach($rows as $row) {
       $field = $row["Field"];
-      $this->colNames[] = $field;
+      $this->colNames[$this->tableName][] = $field;
 
+      if(
+        !is_array($this->propNames[$this->tableName])
+        )
+      {                 
+        $this->propNames[$this->tableName] = 
+          array();
+      }
       if ($this->belongTo != null) {
         $modifiedField = "pri_" . $field;
         $this->propNames[$this->tableName][$field] = $modifiedField;
@@ -185,21 +272,24 @@ class KORM extends BaseClass {
       return $this;
     }
 
-    $sql = "DESCRIBE " . $this->belongTo;
-    $rows = $this->slave->query($sql);
-    foreach($rows as $row) {
-      $field = $row["Field"];
+    if ($this->belongTo != null) {
+      $this->colNames[$this->belongTo] = array();
+      $sql = "DESCRIBE " . $this->belongTo;
+      $rows = $this->slave->query($sql);
+      foreach($rows as $row) {
+        $field = $row["Field"];
 
-      $modifiedField = "sec_" . $field;
-      $this->colNames[] = $field;
-      $this->secPropNames[$this->tableName][$field] = $modifiedField;
+        $modifiedField = "sec_" . $field;
+        $this->colNames[$this->belongTo][] = $field;
+        $this->secPropNames[$this->tableName][$field] = $modifiedField;
+      }
     }
 
     return $this;
   }
 
   public function save() {
-    if (array_key_exists("id", $this->container)) {
+    if (array_key_exists("id", $this->retainer)) {
       $this->saveUpdate();
     }
     else {
@@ -226,7 +316,7 @@ class KORM extends BaseClass {
         $sql = $sql . ",";
       }
 
-      ++$i
+      ++$i;
     }
 
     $sql = $sql . " WHERE id = " . $this->id;
@@ -269,11 +359,14 @@ class KORM extends BaseClass {
     $this->master->query($sql);
   }
 
-  protected function makeColNames($tableName, $suffix) {
+  protected function makeColNames($tableName, $suffix = null) {
     $sql = "";
     $colNames = $this->colNames[$tableName];
-    foreach($colNames as $colName => $modifiedColName) {
-      $sql = $sql . $tableName . "." . $colName . sprintf(" as %s ", $modifiedField);
+    
+    $i = 1;
+    $n = count($colNames);
+    foreach($colNames as $id => $colName) {
+      $sql = $sql . $tableName . "." . $colName . sprintf(" as %s ", $colName);
       
       if ($i != $n) {
         $sql = $sql . ",";
@@ -283,6 +376,50 @@ class KORM extends BaseClass {
     }
 
     return $sql;
+  }
+
+  protected function getKlassName() {
+    return get_class($this);
+  }
+
+  public function setBelongTo($belongTo) {
+    $this->belongTo = $belongTo;
+
+    return $this;
+  }
+
+  public function getBelongTo() {
+    return $this->belongTo;
+  }
+
+  public function setBelongWith($belongWith) {
+    $this->belongWith = $belongWith;
+
+    return $this;
+  }
+
+  public function getBelongWith() {
+    return $this->belongWith;
+  }
+
+  public function setDefaultFilter($aFilter) {
+    $this->defaultFilter = $aFilter;
+
+    return $this;
+  }
+
+  public function getDefaultFilter() {
+    return $this->defaultFilter;
+  }
+
+  public function setFilter($aFilter) {
+    $this->filter = $aFilter;
+
+    return $this;
+  }
+
+  public function getFilter() {
+    return $this->filter;
   }
 
 }
