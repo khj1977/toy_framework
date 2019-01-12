@@ -48,14 +48,14 @@ class TestKORM extends BaseUnitTest {
 
   public function test_fetch() {
     $korm = new KORM("test_table");
-    $korm->autoSetColNames();
+    // $korm->autoSetColNames();
     $objects = $korm->fetch();
 
     // $this->debugStream->println("KORM OBJECTS: ");
     // $this->debugStream->varDump($objects);
 
     foreach($objects as $object) {
-      $this->ds->pl("krom object: ");
+      $this->ds->pl("korm object: ");
       $this->ds->vd($object->id);
       $this->ds->vd($object->foo);
       $this->ds->vd($object->bar);
