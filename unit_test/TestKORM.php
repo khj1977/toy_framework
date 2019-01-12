@@ -56,9 +56,9 @@ class TestKORM extends BaseUnitTest {
 
     foreach($objects as $object) {
       $this->ds->pl("korm object: ");
-      $this->ds->vd($object->id);
-      $this->ds->vd($object->foo);
-      $this->ds->vd($object->bar);
+      $this->ds->vd($object->id . " " . $object->getType("id"));
+      $this->ds->vd($object->foo . " " . $object->getType("foo"));
+      $this->ds->vd($object->bar . " " . $object->getType("bar"));
     }
 
     // $this->debugStream->varDump($objects);

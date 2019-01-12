@@ -23,9 +23,6 @@ class SampleController extends BaseController {
     
     $tableFactory = new TableFactory();
     $sqlTable = $tableFactory->make("MySQL", $tableName);
-    
-    $tableFactory = new TableFactory();
-    $sqlTable = $tableFactory->make("MySQL", $tableName);
    
     $rows = $sqlTable->getDBCols(1);
 

@@ -13,6 +13,8 @@
 
 require_once("lib/BaseClass.php");
 require_once("lib/filter/DefaultFilter.php");
+require_once("lib/Util.php");
+require_once("lib/KException.php");
 
 class KORM {
 
@@ -27,6 +29,8 @@ class KORM {
   // tableName => array()
   protected $colNames;
   protected $propNames;
+  // colName or propName => type as string
+  protected $types;
 
   protected $defaultFilter;
   protected $filter;
@@ -45,6 +49,8 @@ class KORM {
     $this->defaultFilter = new DefaultFilter();
     $this->filter = $this->defaultFilter;
     $this->tableName = $tableName;
+
+    $this->types = array();
 
     $this->belongTo = null;
     $this->belongWith = null;
@@ -164,6 +170,7 @@ class KORM {
         // else {
           $klassName = $this->getKlassName();
           $object = new $klassName($this->tableName);
+          $object->autoSetColNames();
 
           $object->$propName = $this->filter->apply($val);
           $result[] = $object;
@@ -238,15 +245,34 @@ class KORM {
     return $this;
   }
 
+  public function getType($colName) {
+    if (!array_key_exists(
+      $this->tableName, 
+      $this->types
+      )) {
+      throw new KException("KORM::getType(): type data type does not has tableName: " . $this->tableName . " as key");
+    }
+
+    if (!array_key_exists($colName, $this->types[$this->tableName])) {
+      throw new KException("KORM::getType(): colName: " . $colName . " does not have type");
+    }
+
+    return $this->types[$this->tableName][$colName];
+  }
+
   public function autoSetColNames() {
     $this->propNames = array();
 
     $sql = "DESCRIBE " . $this->tableName;
     $rows = $this->slave->query($sql)->fetchAll();
     $this->colNames[$this->tableName] = array();
+    $this->types[$this->tableName] = array();
+
     foreach($rows as $row) {
       $field = $row["Field"];
+      $type = Util::convertMySQLType($row["Type"]);
       $this->colNames[$this->tableName][] = $field;
+      $this->types[$this->tableName][$field] = $type;
 
       if(
         !is_array($this->propNames[$this->tableName])
