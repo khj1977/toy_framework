@@ -161,6 +161,9 @@ class KORM {
     $result = array();
     // foreach($rows as $row) {
     while($row = $statement->fetch()) {
+      $klassName = $this->getKlassName();
+      $object = new $klassName($this->tableName);
+      $object->autoSetColNames();
       foreach($row as $propName => $val) {
         // if ($context === null) {
           // only for fetchOne
@@ -168,14 +171,10 @@ class KORM {
           // $result = array($context);
         // }
         // else {
-          $klassName = $this->getKlassName();
-          $object = new $klassName($this->tableName);
-          $object->autoSetColNames();
-
           $object->$propName = $this->filter->apply($val);
-          $result[] = $object;
         // }
       }
+      $result[] = $object;
     }
 
     return $result;
@@ -442,6 +441,16 @@ class KORM {
 
   public function getFilter() {
     return $this->filter;
+  }
+
+  public function getPropNames($tableName = null) {
+    // debug
+    if ($tableName === null) {
+      return $this->propNames[$this->tableName];
+    }
+    else {
+      return $this->propNames[$tableName];
+    }
   }
 
 }

@@ -79,7 +79,7 @@ class DBCol extends BaseClass {
   }
 
   public function toString() {
-    $str = $this->name . " " . $this->type ." " . $this->val;
+    $str = $this->name . " : " . $this->type ." : " . $this->val;
 
     return $str;
   }

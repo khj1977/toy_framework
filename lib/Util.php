@@ -58,6 +58,10 @@ class Util {
     return ucwords($str);
   }
 
+  static public function println($str) {
+    print($str . "\n");
+  }
+
 }
 
 ?>
