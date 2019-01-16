@@ -44,6 +44,31 @@ class SampleController extends BaseController {
     return $simpleView;
   }
 
+  public function scaKORM() {
+    $tableName = "test_table";
+    
+    $tableFactory = new TableFactory();
+    $sqlTable = $tableFactory->make("KORM", $tableName);
+   
+    $row = $sqlTable->getDBCols(1, null);
+    
+    $factory = new SimpleCol2HTMLFieldFactory();
+
+    $formView = new ScaffoldFormView();
+    $simpleView = new SimpleView();
+
+    $simpleView->addSubView($formView);
+
+    foreach($row as $col) {
+      $col->setHTMLFactory($factory);
+      // $html = $col->toHTML();
+      $formView->pushInput($col);
+    }
+    // $simpleView->render();
+
+    return $simpleView;
+  }
+
 }
 
 ?>
