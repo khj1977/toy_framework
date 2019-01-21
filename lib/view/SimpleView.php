@@ -1,9 +1,11 @@
 <?php
 
 require_once("lib/view/BaseView.php");
+require_once("lib/Util.php");
 
 class SimpleView extends BaseView {
 
+  protected $title;
   protected $subViews;
 
   public function __construct() {
@@ -20,6 +22,12 @@ class SimpleView extends BaseView {
     return $this;
   }
 
+  public function setTitle($title) {
+    $this->title = $title;
+
+    return $this;
+  }
+
   public function addSubView($aView) {
     $this->subViews[] = $aView;
 
@@ -27,6 +35,9 @@ class SimpleView extends BaseView {
   }
 
   public function render() {
+    if ($this->title != null) {
+      Util::println("<h1>" . $this->title . "</h1>");
+    }
     foreach($this->subViews as $subView) {
       // $subView->render();
       print($subView->render() . "</br>");

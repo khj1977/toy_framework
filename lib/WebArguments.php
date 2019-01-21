@@ -1,6 +1,7 @@
 <?php
 
 require_once("lib/BaseClass.php");
+require_once("lib/KException.php");
 
 class WebArguments extends BaseClass {
 
@@ -33,16 +34,37 @@ class WebArguments extends BaseClass {
   */
 
   public function get($key) {
+    /*
+    if (!array_key_exists($key, $this->merged)) {
+      throw new KException("WebArguments::get(): val is not exist with key: " . $key);
+    }
+    */
+
     return $this->merged[$key];
   }
 
   public function getPost($Key) {
+    /*
+    if (!array_key_exists($key, $this->post)) {
+      throw new KException("WebArguments::get(): val is not exist with key: " . $key);
+    }
+    */
     // return $_POST;
-    return $this->post($key);
+    return $this->post[$key];
   }
 
   public function getGet($key) {
+    /*
+    if (!array_key_exists($key, $this->get)) {
+      throw new KException("WebArguments::get(): val is not exist with key: " . $key);
+    }
+    */
+
     return $this->get[$key];
+  }
+
+  public function getPostData() {
+    return $this->post;
   }
 
 }

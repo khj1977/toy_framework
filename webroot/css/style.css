@@ -7,7 +7,7 @@ body {
 
 input {
   width: 360px;
-  font-size: 24px;
+  font-size: 38px;
   color: black;
 }
 
@@ -26,4 +26,8 @@ section {
   padding: 30px;
   box-shadow: 1px 1px 3px #aaaaaa;
   border-radius: 20px;
+}
+
+h1 {
+  font-size: 38px;
 }
