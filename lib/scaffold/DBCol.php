@@ -78,6 +78,14 @@ class DBCol extends BaseClass {
     return $this->type;
   }
 
+  public function isHidden() {
+    if ($this->name === "id" && $this->type === "int") {
+      return true;
+    }
+
+    return false;
+  }
+
   public function toString() {
     $str = $this->name . " : " . $this->type ." : " . $this->val;
 

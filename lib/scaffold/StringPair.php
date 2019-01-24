@@ -5,6 +5,7 @@ require_once("lib/BaseClass.php");
 class StringPair extends BaseClass {
 
   protected $key;
+  protected $type;
   protected $val;
 
   protected $htmlFactory;
@@ -32,6 +33,14 @@ class StringPair extends BaseClass {
     $this->val = $val;
 
     return $this;
+  }
+
+  public function isHidden() {
+    if ($this->key === "id") {
+      return true;
+    }
+
+    return false;
   }
 
   public function getPair() {

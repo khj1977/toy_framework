@@ -90,7 +90,7 @@ class SampleController extends BaseController {
     $session = TheWorld::instance()->session;
     $controllerName = TheWorld::instance()->controllerName;
     $actionName = TheWorld::instance()->actionName;
-    $session->setSuffix($controllerName . "::" . $actionName);
+    $session->setSuffix($controllerName . "::" . $actionName . "::");
     $this->ds->vd("CTR: " . $controllerName);
     foreach($postData as $key => $val) {
       $pair = new StringPair();
@@ -112,7 +112,7 @@ class SampleController extends BaseController {
   public function update() {
     $session = TheWorld::instance()->session;
 
-    $session->setSuffix(TheWorld::instance()->controllerName. "::confirm");
+    $session->setSuffix(TheWorld::instance()->controllerName. "::confirm::");
 
     $korm = new KORM("test_table");
 
