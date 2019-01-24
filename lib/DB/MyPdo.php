@@ -13,6 +13,8 @@ class MyPdo extends BaseDelegatable {
 
   // Generally, this method object is made by TheWorld and TheWorld know db name.
   public function __construct($dbProps) {
+    parent::__construct();
+
     $this->pdo = new PDO(
       "mysql:dbname=" . $dbProps["name"] . 
       ";host=" . $dbProps["host"], 
@@ -21,7 +23,6 @@ class MyPdo extends BaseDelegatable {
     );
 
     $this->setImpl($this->pdo);
-    parent::__construct();
 
     return $this;
   }

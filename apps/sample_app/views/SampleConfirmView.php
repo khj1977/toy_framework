@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<title>SampleScaKORMView</title>
+<title>SampleConfirmView</title>
 <link rel="stylesheet" href="/~HK/tfw/css/style.css">
 
 </head>

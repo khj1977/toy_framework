@@ -67,6 +67,17 @@ class TestKORM extends BaseUnitTest {
     return true;
   }
 
+  public function test_update() {
+    $korm = new KORM("test_table");
+    $korm->id = "1";
+    $korm->foo = "apple pie foo";
+    $korm->bar = "2";
+
+    $korm->save();
+
+    return true;
+  }
+
 }
 
 ?>

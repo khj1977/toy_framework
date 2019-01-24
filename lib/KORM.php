@@ -5,7 +5,7 @@
 // Copyright (c) 2013, @pcaffeine
 // All rights reserved.
 
-// edistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+// Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
 
 // Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
 // Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
@@ -310,7 +310,7 @@ class KORM {
   }
 
   public function save() {
-    if (array_key_exists("id", $this->retainer)) {
+    if (array_key_exists("id", $this->container)) {
       $this->saveUpdate();
     }
     else {
@@ -328,10 +328,10 @@ class KORM {
     // update tablename set foo = bar where id = ?
     $sql = "UPDATE " . $this->tableName . " SET ";
     $i = 1;
-    $n = count($this->propNames);
-    foreach($this->propNames as $propName) {
-      $val = $this->propName;
-      $sql = $sql . $propName . " = " . $this->$propName . " ";
+    $n = count($this->propNames[$this->tableName]);
+    foreach($this->propNames[$this->tableName] as $propName) {
+      $val = $this->master->quote($this->$propName);
+      $sql = $sql . $propName . " = " . $val . " ";
       
       if ($i != $n) {
         $sql = $sql . ",";

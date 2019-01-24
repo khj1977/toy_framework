@@ -8,6 +8,7 @@ require_once("lib/config/Config.php");
 require_once("lib/DB/MyPdo.php");
 require_once("lib/stream/DebugStream.php");
 require_once("lib/util/KLogger.php");
+require_once("lib/util/SimpleSession.php");
 
 class TheWorld {
 
@@ -93,6 +94,8 @@ class TheWorld {
     // end of debug
 
     $this->logger = new KLogger();
+
+    $this->session = new SimpleSession();
 
     $initialized = true;
 

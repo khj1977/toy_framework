@@ -8,6 +8,7 @@ require_once("lib/view/SimpleView.php");
 require_once("lib/scaffold/sub_view/ScaffoldFormView.php");
 require_once("lib/view/SimpleRowsView.php");
 require_once("lib/scaffold/StringPair.php");
+require_once("lib/KORM.php");
 
 class SampleController extends BaseController {
 
@@ -47,7 +48,7 @@ class SampleController extends BaseController {
     return $simpleView;
   }
 
-  public function scaKORM() {
+  public function edit() {
     $tableName = "test_table";
     
     $tableFactory = new TableFactory();
@@ -62,7 +63,7 @@ class SampleController extends BaseController {
 
     $simpleView->addSubView($formView)->setTitle("Something for Apple Pie");
 
-    $formView->setAction("/~HK/tfw/index.php?m=sample_app&c=sample&a=scaKORMConfirm")->setMethod("POST");
+    $formView->setAction("/~HK/tfw/index.php?m=sample_app&c=sample&a=confirm")->setMethod("POST");
 
     foreach($row as $col) {
       $col->setHTMLFactory($factory);
@@ -74,7 +75,7 @@ class SampleController extends BaseController {
     return $simpleView;
   }
 
-  public function scaKORMConfirm() {
+  public function confirm() {
     $tableName = "test_table";
     
     $factory = new SimpleCol2HTMLConfirmElementFactory();
@@ -86,11 +87,46 @@ class SampleController extends BaseController {
 
     $simpleView->addSubView($rowsView)->setTitle("Confirm Something for Apple Pie");
 
+    $session = TheWorld::instance()->session;
+    $controllerName = TheWorld::instance()->controllerName;
+    $actionName = TheWorld::instance()->actionName;
+    $session->setSuffix($controllerName . "::" . $actionName);
+    $this->ds->vd("CTR: " . $controllerName);
     foreach($postData as $key => $val) {
       $pair = new StringPair();
       $pair->setPair($key, $val)->setHTMLFactory($factory);
       $rowsView->push($pair);
+
+      $session->set($key, $val);
     }
+
+    $formView = new ScaffoldFormView();
+
+    $simpleView->addSubView($formView);
+
+    $formView->setAction("/~HK/tfw/index.php?m=sample_app&c=sample&a=update")->setMethod("POST");
+
+    return $simpleView;
+  }
+
+  public function update() {
+    $session = TheWorld::instance()->session;
+
+    $session->setSuffix(TheWorld::instance()->controllerName. "::confirm");
+
+    $korm = new KORM("test_table");
+
+    $keys = $session->getKeys();
+    foreach($keys as $key) {
+      $val = $session->get($key);
+      $realKey = $val["real_key"];
+      $realVal = $val["real_val"];
+      $korm->$realKey = $realVal;
+    }
+    $korm->save();
+
+    $simpleView = new SimpleView();
+    $simpleView->setTitle("Update has been successfuly done!");
 
     return $simpleView;
   }

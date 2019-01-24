@@ -49,10 +49,11 @@ class ScaffoldFormView extends BaseScaffoldView {
     $this->output = sprintf("<form action='%s' method='%s'>", $this->action, $this->method);
     foreach($this->inputs as $input) {
       if ($input->getName() === "id" && $input->getType() == "int") {
-        continue;
+        $this->output = $this->output . $input->toHTML();
       }
-
-      $this->output = $this->output . $input->getName() . ": " . $input->toHTML() . "</br>";
+      else {
+        $this->output = $this->output . $input->getName() . ": " . $input->toHTML() . "</br>";
+      }
     }
     $this->output = $this->output . '<input type="submit" class="submit" value="送信">';
     $this->output = $this->output . "</form>";

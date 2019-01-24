@@ -29,6 +29,8 @@ class SimpleDispatcher extends BaseClass {
       TheWorld::instance()->router = $router;
     }
 
+    session_start();
+
     // $arguments = TheWorld::instance()->arguments->getArguments();
     // assume all vals in $route are urldecoded.
     $route = $router->setWebArguments($arguments)->getRoute();
@@ -36,6 +38,11 @@ class SimpleDispatcher extends BaseClass {
     $this->module = $route["module"];
     $this->controller = $route["controller"];
     $this->action = $route["action"];
+
+    $theWorld = TheWorld::instance();
+    $theWorld->moduleName = $this->module;
+    $theWorld->controllerName = $this->controller;
+    $theWorld->actionName = $this->action;
 
     $basePath = TheWorld::instance()->getBaseDir();
     $controllerPath = $basePath . 
