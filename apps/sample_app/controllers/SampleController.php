@@ -6,6 +6,7 @@ require_once("lib/scaffold/factory/SimpleCol2HTMLConfirmElementFactory.php");
 require_once("lib/scaffold/factory/TableFactory.php");
 require_once("lib/view/SimpleView.php");
 require_once("lib/scaffold/sub_view/ScaffoldFormView.php");
+require_once("lib/scaffold/sub_view/ScaffoldTableRowView.php");
 require_once("lib/view/SimpleRowsView.php");
 require_once("lib/scaffold/StringPair.php");
 require_once("lib/KORM.php");
@@ -40,7 +41,7 @@ class SampleController extends BaseController {
     $row = $rows[0];
     foreach($row as $col) {
       $col->setHTMLFactory($factory);
-      $html = $col->toHTML();
+      $html = $col->render();
       $formView->pushInput($col);
     }
     // $simpleView->render();
@@ -48,13 +49,37 @@ class SampleController extends BaseController {
     return $simpleView;
   }
 
+    public function klist() {
+      $tableName = "test_table";
+    
+      $tableFactory = new TableFactory();
+      $table = $tableFactory->make("KORM", $tableName);
+    
+      $rows = $table->getDBCols();
+    
+      $rowsView = new SimpleRowsView();
+      foreach($rows as $row) {
+        $rowView = new ScaffoldTableRowView();
+        foreach($row as $dbCol) {
+          $rowView->push($dbCol);
+        }
+        $rowsView->push($rowView);
+      }
+
+      $simpleView = new SimpleView();
+      $simpleView->addSubView($rowsView);
+      $simpleView->setTitle("List of table");
+
+      return $simpleView;
+    }
+
   public function edit() {
     $tableName = "test_table";
     
     $tableFactory = new TableFactory();
     $sqlTable = $tableFactory->make("KORM", $tableName);
    
-    $row = $sqlTable->getDBCols(1, null);
+    $rows = $sqlTable->getDBCols(1, null);
     
     $factory = new SimpleCol2HTMLFieldFactory();
 
@@ -65,9 +90,10 @@ class SampleController extends BaseController {
 
     $formView->setAction("/~HK/tfw/index.php?m=sample_app&c=sample&a=confirm")->setMethod("POST");
 
+    $row = $rows[0];
     foreach($row as $col) {
       $col->setHTMLFactory($factory);
-      // $html = $col->toHTML();
+      // $html = $col->render();
       $formView->pushInput($col);
     }
     // $simpleView->render();

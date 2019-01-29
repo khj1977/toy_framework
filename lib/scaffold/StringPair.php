@@ -47,7 +47,11 @@ class StringPair extends BaseClass {
     return array($key => $val);
   }
 
-  public function toHTML() {
+  public function renderHeader() {
+    return "";
+  }
+
+  public function render() {
     return $this->htmlFactory->make($tableName, $this->key, $this->val);
   }
 

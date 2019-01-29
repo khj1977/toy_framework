@@ -26,12 +26,14 @@ class SimpleRowsView extends BaseView {
 
   public function render() {
     $html = "<table>";
+    $htmlRow = $this->htmlRows[0];
+    $html = $html . $htmlRow->renderHeader();
     foreach($this->htmlRows as $htmlRow) {
       if ($htmlRow->isHidden()) {
          continue;
       }
       
-      $html = $html . $htmlRow->toHTML() . "</br>";
+      $html = $html . $htmlRow->render();
     }
     $html = $html . "</table>";
 

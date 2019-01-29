@@ -18,7 +18,7 @@ class KORMTable extends BaseTable {
   }
 
   // where = array(arrray("col" => $col, "cond" => $cond)). where cond = num
-  public function getDBCols($limit, $where = null) {
+  public function getDBCols($limit = null, $where = null) {
     $baseOrm = new KORM($this->tableName);
     $orms = $baseOrm->fetch($where, null, $limit);
 
@@ -26,8 +26,9 @@ class KORMTable extends BaseTable {
     // obtain col names and types
     // obtain val from col name and orm.
     // then assign to db cols.
-    $dbCols = array();
+    $rows = array();
     foreach($orms as $orm) {
+      $dbCols = array();
       $props = $orm->getPropNames();
       foreach($props as $prop) {
         $type = $orm->getType($prop);
@@ -38,9 +39,11 @@ class KORMTable extends BaseTable {
 
         $dbCols[] = $dbCol;
       }
+
+      $rows[] = $dbCols;
     }
 
-    return $dbCols;
+    return $rows;
   }
 
   protected function getRawColNames() {

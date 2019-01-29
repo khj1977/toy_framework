@@ -92,7 +92,7 @@ class DBCol extends BaseClass {
     return $str;
   }
 
-  public function toHTML() {
+  public function render() {
     return $this->htmlFactory->make($this->tableName, $this);
   }
   

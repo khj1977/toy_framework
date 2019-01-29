@@ -97,7 +97,7 @@ class TestScaffold extends BaseUnitTest {
         $this->debugStream->varDump("pre-html");
         // $html = $factory->make($tableName, $col);
         $col->setHTMLFactory($factory);
-        $html = $col->toHTML();
+        $html = $col->render();
 
         $this->debugStream->varDump("html");
         $this->debugStream->varDump($html);
