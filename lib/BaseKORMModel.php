@@ -13,6 +13,10 @@ class BaseKORMModel extends KORM {
     parent::__construct($tableName);
   }
 
+  public function getTableName() {
+    return $this->tableName;
+  }
+
 }
 
 ?>
