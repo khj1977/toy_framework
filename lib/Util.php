@@ -62,6 +62,64 @@ class Util {
     print($str . "\n");
   }
 
-}
+  static public function upperCamelToLowerCase($str) {
+    $result = "";
+    $len = strlen($str);
+    for($i = 0; $i < $len; ++$i) {
+      $chr = $str[$i];
+      if (preg_match("/[A-Z]/", $chr) != 0) {
+        $chr = lcfirst($chr);
+        if ($i != 0) {
+          $result = $result . "_" . $chr;
+        }
+        else {
+          $result = $result . $chr;
+        }
+      }
+      else {
+        $result = $result . $chr;
+      }
+    }
+
+
+    return $result;
+  }
+
+    static public function omitSuffix($str, $suffix) {
+      // $str = "model_test_foo_model";
+      // $subStr = "_model";
+      
+      $subStrIndex = 0;
+      $subChar = $suffix[$subStrIndex];
+      $len = strlen($str);
+      
+      for($i = 0; $i < $len; ++$i) {
+        // printf("%d %d %d %d\n", $i, $len, $subStrIndex, $subStrStartIndex);
+        $chr = $str[$i];
+        // printf("%s %s\n", $chr, $subChar);
+        if (strcmp($chr, $subChar) == 0) {
+          if ($subStrIndex == 0) {
+            $subStrIndex = $i;
+            $subStrStartIndex = $i;
+          }
+          if ($i == ($len - 1)) {
+            /*
+            echo substr($str, 0, $len - $subStrStartIndex + 1);
+            exit;
+            */
+          }
+          ++$subStrIndex;
+          $subChar = $suffix[$subStrIndex];
+        }
+        else {
+          $subStrIndex = 0;
+          $subChar = $suffix[$subStrIndex];
+        }
+      }
+      
+      return substr($str, 0, $subStrStartIndex);
+    }
+
+  }
 
 ?>
