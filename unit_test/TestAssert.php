@@ -1,5 +1,8 @@
 <?php
 
+// @Auther Hwi Jun KIM. euler.bonjour@gmail.com
+// See License.txt for license of this code.
+
 // ugry. Refactor this.
 require_once(realpath(dirname(__FILE__) . "/../lib/BaseUnitTest.php"));
 require_once("lib/util/Assert.php");

@@ -1,5 +1,8 @@
 <?php
 
+// @Auther Hwi Jun KIM. euler.bonjour@gmail.com
+// See License.txt for license of this code.
+
 require_once("lib/BaseController.php");
 require_once("lib/scaffold/factory/SimpleCol2HTMLFieldFactory.php");
 require_once("lib/scaffold/factory/SimpleCol2HTMLConfirmElementFactory.php");

@@ -1,5 +1,8 @@
 <?php
 
+// @Auther Hwi Jun KIM. euler.bonjour@gmail.com
+// See License.txt for license of this code.
+
 $str = "model_test_foo_model";
 $subStr = "_model";
 

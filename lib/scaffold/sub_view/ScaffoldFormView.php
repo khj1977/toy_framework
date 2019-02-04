@@ -1,5 +1,8 @@
 <?php
 
+// @Auther Hwi Jun KIM. euler.bonjour@gmail.com
+// See License.txt for license of this code.
+
 require_once("lib/scaffold/sub_view/BaseScaffoldView.php");
 
 class ScaffoldFormView extends BaseScaffoldView {
