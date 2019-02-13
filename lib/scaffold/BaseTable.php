@@ -16,7 +16,6 @@ abstract class BaseTable extends BaseClass {
     parent::__construct();
     parent::initialize();
 
-    $this->debugStream->varDump("bar");
     $this->tableName = $tableName;
 
     $this->slave = TheWorld::instance()->slave;

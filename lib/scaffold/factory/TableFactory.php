@@ -25,7 +25,7 @@ class TableFactory extends BaseClass {
   // new ModelName should be implemtend.
   // otherwise, just table name with KORM.
   // end of debug
-  public function make($type, $tableName) {
+  public function make($type, $modelName) {
     $klassName = sprintf("%sTable", $type);
     $fileName = realpath(sprintf("%s/lib/scaffold/%s.php", 
     TheWorld::instance()->getBaseDir(), $klassName));
@@ -36,7 +36,7 @@ class TableFactory extends BaseClass {
 
     require_once($fileName);
 
-    $object = new $klassName($tableName);
+    $object = new $klassName($modelName);
 
     return $object;
   }

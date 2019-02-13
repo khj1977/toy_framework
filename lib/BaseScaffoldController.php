@@ -39,7 +39,7 @@ class BaseScaffoldController extends BaseAuthController {
     $tableName = Util::omitSuffix(Util::upperCamelToLowerCase($this->modelName), "_model");
 
     $tableFactory = new TableFactory();
-    $table = $tableFactory->make("KORM", $tableName);
+    $table = $tableFactory->make("KORM", $this->modelName);
     
     $rows = $table->getDBCols();
     
@@ -63,7 +63,7 @@ class BaseScaffoldController extends BaseAuthController {
     $tableName = Util::omitSuffix(Util::upperCamelToLowerCase($this->modelName), "_model");
     
     $tableFactory = new TableFactory();
-    $sqlTable = $tableFactory->make("KORM", $tableName);
+    $sqlTable = $tableFactory->make("KORM", $this->modelName);
    
     $args = TheWorld::instance()->arguments;
     $id = $args->get("id");
