@@ -3,6 +3,9 @@
 // @Auther Hwi Jun KIM. euler.bonjour@gmail.com
 // See License.txt for license of this code.
 
+require_once("lib/TheWorld.php");
+require_once("lib/scaffold/sub_view/BaseScaffoldView.php");
+
 class ScaffoldTableRowView extends BaseScaffoldView {
 
   protected $cols;
@@ -43,11 +46,16 @@ class ScaffoldTableRowView extends BaseScaffoldView {
   }
 
   public function render() {
+    $router = TheWorld::instance()->router;
     $html = "<tr>";
     $i = 0;
     foreach($this->cols as $col) {
       if ($i == 0) {
-        $html = $html . "<td>" . sprintf("<a href='/~HK/tfw/index.php?m=sample_app&c=sample&a=edit'&id=%s>", $col->getVal()) . $col->getVal() . "</a>" . "</td>";
+        // debug
+        // critical for scaffold.
+        // not appropriate view of edit
+        $html = $html . "<td>" . sprintf("<a href='/~HK/tfw/index.php?m=%s&c=%s&a=edit&id=%s'>", $router->getModule(), $router->getController(), $col->getVal()) . $col->getVal() . "</a>" . "</td>";
+        // end of debug
       }
       else {
         $html = $html . "<td>" . $col->getVal() . "</td>";

@@ -27,6 +27,10 @@ class BaseController extends BaseClass {
     // Do nothing. Not abstract.
   }
 
+  public function isScaffold() {
+    return false;
+  }
+
 }
 
 ?>

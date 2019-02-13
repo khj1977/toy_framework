@@ -21,6 +21,10 @@ class TableFactory extends BaseClass {
     return $this;
   }
 
+  // debug
+  // new ModelName should be implemtend.
+  // otherwise, just table name with KORM.
+  // end of debug
   public function make($type, $tableName) {
     $klassName = sprintf("%sTable", $type);
     $fileName = realpath(sprintf("%s/lib/scaffold/%s.php", 

@@ -45,10 +45,29 @@ class WebRouter extends BaseClass {
     return $route;
   }
 
+  public function getScaffoldView() {
+    // not changed with respect to action but
+    // only by controller. Note that this can
+    // be changed by other controller or
+    // strategy if required (not implemented).
+    $viewClassName = sprintf("%sScaffoldView",  ucwords($this->controller));
+
+    $viewPath = Util::realpath(sprintf("%s/apps/%s/views/%s.php", TheWorld::instance()->getBaseDir(), $this->module, $viewClassName));
+
+    return array(
+      "view_path" => $viewPath, 
+      "view_class_name" => $viewClassName
+    );
+  }
+
   // return hash
   // "view_path" => string: path of view file.
   // "view_class_name" => string: name of view class.
-  public function getView() {
+  public function getView($controller) {
+    if ($controller->isScaffold()) {
+      return $this->getScaffoldView();
+    }
+
     $viewClassName = Util::ucwords($this->controller) . Util::ucwords($this->action) . "View";
 
     $this->debugStream->varDump($viewClassName);
@@ -57,10 +76,20 @@ class WebRouter extends BaseClass {
 
     $viewPath = Util::realpath(sprintf("%s/apps/%s/views/%s.php", TheWorld::instance()->getBaseDir(), $this->module, $viewClassName));
 
-    return array("view_path" => $viewPath, "view_class_
-    name" => $viewClassName);
+    return array("view_path" => $viewPath, "view_class_name" => $viewClassName);
   }
 
+  public function getModule() {
+    return $this->module;
+  }
+
+  public function getController() {
+    return $this->controller;
+  }
+
+  public function getAction() {
+    return $this->action;
+  }
 
 }
 

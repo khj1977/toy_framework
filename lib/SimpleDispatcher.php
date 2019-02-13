@@ -73,10 +73,16 @@ class SimpleDispatcher extends BaseClass {
       $subView = $controller->$actionName();
       $controller->postAction();
 
-      $viewVals = $router->getView();
+      if (!$controller->isScaffold()) {
+        // array("view_path" => foo, 
+        // "view_class_name" => bar);
+        $viewVals = $router->getView($controller);
+      }
+      else {
+        $viewVals = $router->getView($controller);
+      }
 
       // debug
-      $this->debugStream->varDump("debug");
       $this->debugStream->varDump($viewVals);
       // end of debug
 
@@ -89,7 +95,6 @@ class SimpleDispatcher extends BaseClass {
       // implement by appropriate manner the 
       // following code.
       TheWorld::instance()->logger->log(KLogger::WARN, $message);
-      TheWorld::instance()->debugStream->varDump($message);
       // end of debug
     }
 

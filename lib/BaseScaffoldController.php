@@ -18,6 +18,8 @@ require_once("lib/BaseAuthController.php");
 class BaseScaffoldController extends BaseAuthController {
 
   // specify by src code of child controller.
+  // $isScaffold is not used actually,
+  // but for feature extention, it is retained.
   protected $isScaffold;
   protected $modelName;
 
@@ -28,14 +30,14 @@ class BaseScaffoldController extends BaseAuthController {
     parent::__construct();
   }
 
-  public function preAction() {
-    $this->debugStream->setFlag(false);
+  public function isScaffold() {
+    return true;
   }
 
   public function klist() {
     // $tableName = "test_table";
     $tableName = Util::omitSuffix(Util::upperCamelToLowerCase($this->modelName), "_model");
-    
+
     $tableFactory = new TableFactory();
     $table = $tableFactory->make("KORM", $tableName);
     
@@ -63,7 +65,10 @@ class BaseScaffoldController extends BaseAuthController {
     $tableFactory = new TableFactory();
     $sqlTable = $tableFactory->make("KORM", $tableName);
    
-    $rows = $sqlTable->getDBCols(1, null);
+    $args = TheWorld::instance()->arguments;
+    $id = $args->get("id");
+
+    $rows = $sqlTable->getDBCols(1, array("id" => $id));
     
     $factory = new SimpleCol2HTMLFieldFactory();
 
@@ -72,7 +77,10 @@ class BaseScaffoldController extends BaseAuthController {
 
     $simpleView->addSubView($formView)->setTitle("Something for Apple Pie");
 
-    $formView->setAction("/~HK/tfw/index.php?m=sample_app&c=sample&a=confirm")->setMethod("POST");
+    // debug
+    $router = TheWorld::instance()->router;
+    $formView->setAction(sprintf("/~HK/tfw/index.php?m=%s&c=%s&a=confirm", $router->getModule(), $router->getController()))->setMethod("POST");
+    // end of debug
 
     $row = $rows[0];
     foreach($row as $col) {
@@ -114,7 +122,10 @@ class BaseScaffoldController extends BaseAuthController {
 
     $simpleView->addSubView($formView);
 
-    $formView->setAction("/~HK/tfw/index.php?m=sample_app&c=sample&a=update")->setMethod("POST");
+    // debug
+    $router = TheWorld::instance()->router;
+    $formView->setAction(sprintf("/~HK/tfw/index.php?m=%s&c=%s&a=update", $router->getModule(), $router->getController()))->setMethod("POST");
+    // end of debug
 
     return $simpleView;
   }
