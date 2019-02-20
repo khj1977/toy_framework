@@ -9,7 +9,7 @@ require_once("lib/util/AnonClass.php");
 require_once("lib/KORM.php");
 require_once("lib/TheWorld.php");
 require_once("lib/scaffold/KORMTable.php");
-require_once("lib/Util.php");
+require_once("lib/util/Util.php");;
 
 class TestKORMTable extends BaseUnitTest {
 

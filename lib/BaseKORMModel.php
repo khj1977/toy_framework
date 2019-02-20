@@ -4,7 +4,7 @@
 // See License.txt for license of this code.
 
 require_once("lib/KORM.php");
-require_once("Util.php");
+require_once("lib/util/Util.php");
 
 class BaseKORMModel extends KORM {
 

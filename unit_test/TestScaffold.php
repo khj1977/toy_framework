@@ -9,7 +9,7 @@ require_once("lib/stream/DebugStream.php");
 require_once("lib/scaffold/MySQLTable.php");
 require_once("lib/scaffold/factory/SimpleCol2HTMLFieldFactory.php");
 require_once("lib/scaffold/factory/TableFactory.php");
-require_once("lib/Util.php");
+require_once("lib/util/Util.php");;
 require_once("lib/util/Assert.php");
 require_once("lib/util/AnonClass.php");
 

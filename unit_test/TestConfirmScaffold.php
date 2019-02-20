@@ -9,7 +9,7 @@ require_once("lib/scaffold/StringPair.php");
 require_once("lib/scaffold/factory/SimpleCol2HTMLConfirmElementFactory.php");
 require_once("lib/KORM.php");
 require_once("lib/TheWorld.php");
-require_once("lib/Util.php");
+require_once("lib/util/Util.php");;
 
 class TestConfirmScaffold extends BaseUnitTest {
 

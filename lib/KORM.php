@@ -13,7 +13,7 @@
 
 require_once("lib/BaseClass.php");
 require_once("lib/filter/DefaultFilter.php");
-require_once("lib/Util.php");
+require_once("lib/util/Util.php");;
 require_once("lib/KException.php");
 
 class KORM {

@@ -4,7 +4,7 @@
 // See License.txt for license of this code.
 
 require_once("lib/RSS.php");
-require_once("lib/Util.php");
+require_once("lib/util/Util.php");;
 
 // Assume that an internal data of rss will not be changed during iteration
 // operation. Lock mechanism for target of iteration, in this case, $rss, 

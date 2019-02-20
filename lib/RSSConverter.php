@@ -6,7 +6,7 @@
 require_once("lib/RSS.php");
 // require_once("lib/BaseRSSIterator.php");
 require_once("lib/BaseRSSConverter.php");
-require_once("lib/Util.php");
+require_once("lib/util/Util.php");;
 
 class RSSConverter extends BaseRSSConverter {
 
