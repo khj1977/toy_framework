@@ -3,7 +3,7 @@
 // @Auther Hwi Jun KIM. euler.bonjour@gmail.com
 // See License.txt for license of this code.
 
-require_once(realpath(dirname(__FILE__) . "/../lib/BaseUnitTest.php"));
+require_once(Util::realpath(dirname(__FILE__) . "/../lib/BaseUnitTest.php"));
 require_once("lib/RSS.php");
 
 class TestNewRSSElement extends BaseUnitTest {
@@ -14,7 +14,7 @@ class TestNewRSSElement extends BaseUnitTest {
   public function test_load() {
     return false;
 
-    $path = realpath(dirname(__FILE__) . "/../input_files/dummy_rss.xml");
+    $path = Util::realpath(dirname(__FILE__) . "/../input_files/dummy_rss.xml");
     $rss = new RSS();
     $rss->load($path);
 
@@ -32,7 +32,7 @@ class TestNewRSSElement extends BaseUnitTest {
   }
 
   public function test_mod() {
-    $path = realpath(dirname(__FILE__) . "/../input_files/dummy_rss.xml");
+    $path = Util::realpath(dirname(__FILE__) . "/../input_files/dummy_rss.xml");
     $rss = new RSS();
     $rss->load($path);
 

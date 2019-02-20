@@ -27,7 +27,7 @@ class TableFactory extends BaseClass {
   // end of debug
   public function make($type, $modelName) {
     $klassName = sprintf("%sTable", $type);
-    $fileName = realpath(sprintf("%s/lib/scaffold/%s.php", 
+    $fileName = Util::realpath(sprintf("%s/lib/scaffold/%s.php", 
     TheWorld::instance()->getBaseDir(), $klassName));
 
     // debug

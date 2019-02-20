@@ -28,7 +28,7 @@ class TestRSSesConverter extends BaseUnitTest {
       } );
     // end of debug
 
-    $path = realpath(dirname(__FILE__) . "/../input_files/foo.xml");
+    $path = Util::realpath(dirname(__FILE__) . "/../input_files/foo.xml");
     $rss = new RSS();
     $rss->load($path);
 

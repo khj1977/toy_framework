@@ -19,12 +19,13 @@ class KORMTable extends BaseTable {
     $baseDir = TheWorld::instance()->getBaseDir();
     $moduleName = TheWorld::instance()->router->getModule();
 
-    $modelPath = realpath(sprintf(
+    $modelPath = Util::realpath(sprintf(
       "%s/apps/%s/models/%s.php", 
       $baseDir, 
       $moduleName, 
       $this->modelName
     ));
+    
     // debug
     // check whether exist file and anti-directory traversal
     // end of debug

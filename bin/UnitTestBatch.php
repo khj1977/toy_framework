@@ -24,7 +24,7 @@ class UnitTestBatch extends BaseBatch {
     $unitTestPhpFileName = $testName . ".php";
 
     $basePath = TheWorld::instance()->getBaseDir();
-    $unitTestPath = realpath($basePath . "/unit_test/" . $unitTestPhpFileName);
+    $unitTestPath = Util::realpath($basePath . "/unit_test/" . $unitTestPhpFileName);
     // debug
     // add checking file existense of unit test php file.
     // end of debug

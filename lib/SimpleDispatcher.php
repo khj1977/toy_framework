@@ -55,7 +55,7 @@ class SimpleDispatcher extends BaseClass {
         ucwords($this->controller)
       );
 
-    $controllerPath = realpath($controllerPath);
+    $controllerPath = Util::realpath($controllerPath);
     if ($controllerPath === false) {
       throw new KException("Dispatcher::dispatch(): invalid path: with module and controller: module: " . $this->module . " controller: " . $this->controller);
     }
@@ -105,7 +105,7 @@ class SimpleDispatcher extends BaseClass {
   public function getViewPath() {
     $viewPath = $basePath . sprintf("/app/%s/views/%s/%s", $this->module, $this->controller, $this->action);
 
-    $realPath = realpath($viewPath);
+    $realPath = Util::realpath($viewPath);
     if ($realPath === false) {
       throw new Exception("Dispatcher::getViewPath(): invalid path to include view: " . $viewPath);
     }

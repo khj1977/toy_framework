@@ -20,7 +20,7 @@ class BaseConfigImpl extends BaseClass {
     parent::initialize();
 
     // $this->baseDir = TheWorld::instance()->env->base_dir();
-    $this->baseDir = realpath(dirname(__FILE__) . "/../../../");
+    $this->baseDir = Util::realpath(dirname(__FILE__) . "/../../../");
 
     return $this;
   }

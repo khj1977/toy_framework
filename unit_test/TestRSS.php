@@ -15,7 +15,7 @@ class TestRSS extends BaseUnitTest {
   }
 
   public function test_rssLoad() {
-    $path = realpath(dirname(__FILE__) . "/../input_files/dummy_rss.xml");
+    $path = Util::realpath(dirname(__FILE__) . "/../input_files/dummy_rss.xml");
     $rss = new RSS();
     $rss->load($path);
 
@@ -26,7 +26,7 @@ class TestRSS extends BaseUnitTest {
   }
 
   public function test_child_depth() {
-    $path = realpath(dirname(__FILE__) . "/../input_files/dummy_rss.xml");
+    $path = Util::realpath(dirname(__FILE__) . "/../input_files/dummy_rss.xml");
     $rss = new RSS();
     $rss->load($path);
 

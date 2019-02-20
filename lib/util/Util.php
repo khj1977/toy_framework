@@ -3,6 +3,8 @@
 // @Auther Hwi Jun KIM. euler.bonjour@gmail.com
 // See License.txt for license of this code.
 
+require_once("lib/KException.php");
+
 class Util {
 
   static public function copyArray($anArray) {
@@ -51,7 +53,20 @@ class Util {
   }
 
   static public function realpath($path) {
-    return realpath($path);
+    $result =  realpath($path);
+    if ($result === false) {
+      throw new KException("Util::realpath(): no such file or directory: " . $path);
+    }
+
+    $baseDir = TheWorld::instance()->getBaseDir();
+   
+    $baseDir = str_replace("/", "\/", $baseDir);
+    $pattern = "/" . $baseDir . "/";
+    if (preg_match($pattern, $result) == 0) {
+      throw new KException("Util::realpath(): possibility of directory traversal attack.");
+    }
+
+    return $result;
   }
 
   static public function ucwords($str) {
