@@ -48,9 +48,9 @@ class MyPdo extends BaseDelegatable {
 
   public function bulkQuery($sql) {
     // no logging of query because it is too much
-    $this->pdo->query($sql);
+    $statement = new MyPdoStatement($this->pdo->query($sql));
 
-    return $this;
+    return $statement;
   }
 
 }
