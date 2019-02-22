@@ -135,6 +135,22 @@ class Util {
       return substr($str, 0, $subStrStartIndex);
     }
 
+    static public function upperCamelToUnderScore($str) {
+      $splitter = "_";
+      $splitted = explode($splitter, $str);
+      
+      $result = "";
+      $n = count($splitted);
+      for($i = 0; $i < $n; ++$i) {
+        $subStr = $splitted[$i];
+        $subStr = ucwords($subStr);
+
+        $result = $result . $subStr;
+      }
+
+      return $result;
+    }
+
   }
 
 ?>

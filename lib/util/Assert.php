@@ -47,6 +47,15 @@ class Assert extends BaseClass {
     return false;
   }
 
+  public function stringEqual($str1, $str2) {
+    $err = strcmp($str1, $str2);
+    if ($err === 0) {
+      return true;
+    }
+
+    return false;
+  }
+
   public function objectEqual($object1, $object2) {
     $props1 = $object1->getPropsAsHash();
     $props2 = $object2->getPropsAsHash();
