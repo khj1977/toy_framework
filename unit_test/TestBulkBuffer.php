@@ -1,7 +1,7 @@
 <?php
 
 require_once(realpath(dirname(__FILE__) . "/../lib/BaseUnitTest.php"));
-require_once("lib/util/BulkBuffer.php");
+require_once("lib/DB/BulkBuffer.php");
 
 class TestBulkBuffer extends BaseUnitTest {
 
