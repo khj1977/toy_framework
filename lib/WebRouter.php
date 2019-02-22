@@ -30,11 +30,11 @@ class WebRouter extends BaseClass {
     if ($this->module === "") {
       throw new KException("WebRouter::getRoute(): module is not specified.");
     }
-    $this->controller = urldecode($this->webArguments->get("c"));
+    $this->controller = Util::upperCamelToUnderScore(urldecode($this->webArguments->get("c")));
     if ($this->controller === "") {
       throw new KException("WebRouter::getRoute(): controller is not specified.");
     }
-    $this->action = urldecode($this->webArguments->get("a"));
+    $this->action = Util::upperCamelToUnderScore(urldecode($this->webArguments->get("a")));
     if ($this->module === "") {
       throw new KException("WebRouter::getRoute(): action is not specified.");
     }
