@@ -13,10 +13,15 @@ class BulkBuffer extends BaseClass {
   protected $propsAsArray;
   protected $valsAsArrayOfArray;
 
-  public function __construct($tableName) {
+  protected $th;
+  protected $itr;
+
+  public function __construct($tableName, $th) {
     parent::__construct();
 
     $this->tableName = $tableName;
+    $this->th = $th;
+    $this->itr = 0;
 
     return $this;
   }
@@ -50,6 +55,12 @@ class BulkBuffer extends BaseClass {
 
     $this->valsAsArrayOfArray[] = $valsAsArray;
 
+    $this->itr = $this->itr + 1;
+    if ($this->itr === $this->th) {
+      $this->exec();
+      $this->itr = 0;
+    }
+    
     return $this;
   }
 
@@ -97,7 +108,7 @@ class BulkBuffer extends BaseClass {
     }
 
     // debug
-    $this->debugStream->varDump($sql);
+    // $this->debugStream->varDump($sql);
     // end of debug
 
     return $sql;
