@@ -30,23 +30,7 @@ class BaseDelegate extends BaseClass {
     return $this;
   }
 
-  public function __call($methodName, $args) {
-    if ($this->target === null) {
-      throw new UException("BaseDelegatable::__call(): target has not been set.");
-    }
-
-    $err = method_exists($this->target, $methodName);
-    if (!$err) {
-      throw new UException("BaseDelegatable::__call(): the method " . $methodName . " does not exist to tatget of delegate.");
-    }
-
-    // This is a point to change when REST API is used?
-    $result = call_user_method_array($methodName, $this->target, $args);
-
-    return $result;
-  }
-
-  protected function isAcceptThisMethodName() {
+  protected function isAcceptThisMethodName($methodName) {
     $err = method_exists($this->target, $methodName);
     if (!$err) {
       return false;

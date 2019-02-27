@@ -76,10 +76,16 @@ class BaseClass {
       throw new KException("BaseClass::__call(): method name: " . $methodName . " cannot be resolved.");
     }
     if ($this->delegate->isAcceptThisMethodName($methodName)) {
-      return $this->delegate->$methodName($args);
+      return $this->delegate->callMethod($methodName, $args);
     }
 
     throw new KException("BaseClass::__call(): this method does not implemented on this delegate: " . $methodName);
+
+    // $result = call_uesr_method_array($methodName, $this->delegate, $args);
+
+    $result = $this->delegate->callMethod($medhoName, $args);
+
+    return $result;
   }
 
 
