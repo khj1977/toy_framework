@@ -8,9 +8,9 @@ require_once("lib/TheWorld.php");
 
 class KLogger extends BaseClass {
 
-    const INFO = "info";
-    const WARN = "warn";
-    const ERROR = "error";
+    const INFO = "INFO";
+    const WARN = "WARN";
+    const ERROR = "ERROR";
 
     public function __construct() {
       parent::__construct();

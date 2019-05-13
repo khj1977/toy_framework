@@ -8,6 +8,8 @@ class DataLoader extends BaseClass {
   public function __construct() {
     parent::__construct();
 
+    TheWorld::instance()->debugStream->setFlag(true);
+
     return $this;
   }
 
@@ -34,6 +36,9 @@ class DataLoader extends BaseClass {
     while($line = chop(fgets($stream))) {
       if ($i == 0) {
         $colNames = $this->getColNames($line);
+
+        ++$i;
+        continue;
       }
 
       $datas = explode(",", $line);
@@ -43,6 +48,7 @@ class DataLoader extends BaseClass {
       // Assume not so large data set.
       // If suffer to large data set, change to
       // user bulk insert.
+
       TheWorld::instance()->master->query($sql);
 
       ++$i;
@@ -50,7 +56,11 @@ class DataLoader extends BaseClass {
   }
 
   protected function fileNameToTableName($fileName) {
-    return $fileName;
+    $realFileName = basename($fileName);
+    $splitted = explode(".", $realFileName);
+    $tableName = $splitted[0];
+
+    return $tableName;
   }
 
   protected function getColNames($line) {
@@ -59,7 +69,7 @@ class DataLoader extends BaseClass {
     return $splitted;
   }
 
-  protected function makeSQL($tableName, $colnames, $datas) {
+  protected function makeSQL($tableName, $colNames, $datas) {
     $sql = "INSERT INTO " . $tableName . " (";
     $i = 0;
     $n = count($colNames);

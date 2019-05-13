@@ -9,11 +9,8 @@ class TestDataLoader extends BaseUnitTest {
 
   public function test_load() {
     $loader = new DataLoader(); 
-    // debug
-    // add file name
-    throw new KException("file name should be assigned");
-    $fileName = "";
-    // end of debug
+    
+    $fileName = "../data/test_load.dat";
 
     $loader->load($fileName);
 
