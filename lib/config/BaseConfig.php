@@ -82,7 +82,8 @@ class BaseConfig extends BaseDelegatable {
   }
 
   protected function getConfigDirPath() {
-    return "lib/config/impl/";
+    // return "lib/config/impl/";
+    return "config/";
   }
 
 }
