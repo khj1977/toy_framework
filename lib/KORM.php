@@ -1,15 +1,7 @@
 <?php
 
-// The author of this code is Hwi Jun KIM, euler.bonjour@gmail.com a.k.a pcaffeine
-
-// Copyright (c) 2013, @pcaffeine
-// All rights reserved.
-
-// Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
-
-// Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
-// Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
-// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+// @Auther Hwi Jun KIM. euler.bonjour@gmail.com
+// See License.txt for license of this code.
 
 require_once("lib/BaseClass.php");
 require_once("lib/filter/DefaultFilter.php");
@@ -17,20 +9,23 @@ require_once("lib/util/Util.php");;
 require_once("lib/KException.php");
 
 class KORM {
+  static protected $tableName;
 
-  protected $tableName;
+  static protected $initialized = false;
 
-  protected $belongTo;
-  protected $belongWith;
+  static protected $belongTo;
+  static protected $belongWith;
+
+  // tableName => array()
+  // protected $colNames;
+  // protected $propNames;
+  static protected $colNames;
+  static protected $propNames;
+  // colName or propName => type as string
+  static protected $types;
 
   protected $slave;
   protected $master;
-
-  // tableName => array()
-  protected $colNames;
-  protected $propNames;
-  // colName or propName => type as string
-  protected $types;
 
   protected $defaultFilter;
   protected $filter;
@@ -48,78 +43,119 @@ class KORM {
 
     $this->defaultFilter = new DefaultFilter();
     $this->filter = $this->defaultFilter;
-    $this->tableName = $tableName;
-
-    $this->types = array();
-
-    $this->belongTo = null;
-    $this->belongWith = null;
 
     $this->container = array();
 
-    $this->autoSetColNames();
-
     return $this;
+  }
+
+  static public function initialize() {
+    $klassName = get_called_class();
+    if ($klassName::$initialized === true) {
+      return;
+    }
+
+    // $klassName::$initialized = true;
+    
+    $klassName::$types = array();
+    
+    $klassName::$belongTo = null;
+    $klassName::$belongWith = null;
+
+    $klassName::autoSetColNames();
+
+    $klassName::$initialized = true;
+  }
+
+  static public function setTableName($tableName) {
+    
+        $klassName = get_called_class();
+        
+        $klassName::$tableName = $tableName;
+  }
+
+  static public function getStateInitialized() {
+    $klassName = get_called_class();
+
+    return $klassName::$initialized;
   }
 
   protected function setPropNames() {
 
   }
 
-  public function fetchOne($where, $orderBy) {
+  static public function fetchOne($where, $orderBy) {
     // debug
     // refactor. Implement this part by CoC
     // $tableName = "";
     // end of debug
-    $self = new $klasssName($this->tableName);
+    // $self = new $klasssName($this->tableName);
 
-    $object = $self->xfetchOne($where, $orderBy);
+    $klassName = get_called_class();
+
+    $object = $klassName::xfetchOne($where, $orderBy);
 
     $object->setBelongTo($self->getBelongTo());
     $object->setBelongWith($self->getBelongWith());
-    $object->setDefaultFilter($self->getDefaultFilter());
+    // debug
+    // refactor.
+    // $object->setDefaultFilter($self->getDefaultFilter());
+    // end of debug
     $object->setFilter($self->getFilter());
 
     return $object;
   }
 
-  public function fetch($where = null, $orderBy = null, $limit = null, $context = null) {
+  static public function fetch($where = null, $orderBy = null, $limit = null, $context = null) {
     // debug
     // refactor. Implement this part by CoC
     // $tableName = "";
     // end of debug
-    $klassName = get_class($this);
-    $self = new $klassName($this->tableName);
-    $objects = $self->xfetch($where, $orderBy, $limit, $context);
+    // $klassName = get_class($this);
+    $klassName = get_called_class();
+
+    if ($klassName::$initialized !== true) {
+      $klassName::initialize();
+    }
+
+    // $self = new $klassName($this->tableName);
+    
+    $objects = $klassName::xfetch($where, $orderBy, $limit, $context);
 
     foreach($objects as $object) {
-      $object->setBelongTo($self->getBelongTo());
-      $object->setBelongWith($self->getBelongWith());
-      $object->setDefaultFilter($self->getDefaultFilter());
-      $object->setFilter($self->getFilter());
+      /*
+      $object->setBelongTo($klassName::getBelongTo());
+      $object->setBelongWith($klassName::getBelongWith());
+      */
+      // $object->setDefaultFilter($klassName::getDefaultFilter());
+      // $object->setFilter($self->getFilter());
     }
 
     return $objects;
   }
 
-  public function xfetchOne($where, $orderBy) {
-    return $this->fetch($where, $orderBy, 1);
+  static public function xfetchOne($where, $orderBy) {
+    $kalssName = get_called_class();
+
+    return $klassName::fetch($where, $orderBy, 1);
   }
 
-  public function xfetch($where = null, $orderBy = null, $limit = null, $context = null) {
+  static public function xfetch($where = null, $orderBy = null, $limit = null, $context = null) {
+    $klassName = get_called_class();
+
 
     $sql = "SELECT ";
     $i = 1;
-    $n = count($colNames);
+    $n = count($klassName::$colNames);
 
-    $sql = $sql . $this->makeColNames($this->tableName);;
-    if ($this->belongTo != null) {
-      $sql = $sql . "," . $this->makeColNames($this->belongTo);
+    $sql = $sql . $klassName::makeColNames($klassName::$tableName);;
+    if ($klassName::$belongTo != null) {
+      $sql = $sql . "," . $klassName::makeColNames($klassName::$belongTo);
     }
 
-    $sql = $sql . " FROM " . $this->tableName;
-    if ($this->belongTo != null) {
-      $sql = $sql . ", " . $this->belongTo;
+    $sql = $sql . " FROM " . $klassName::$tableName;
+    if ($klassName::$belongTo != null) {
+      $sql = $sql . ", " . $klassName::belongTo;
     }
 
     if ($where !== null) {
@@ -128,7 +164,7 @@ class KORM {
       $i = 1;
       $n = count($where);
       foreach($where as $col => $cond) {
-        $sql = $sql . $col . " = " . $this->slave->quote($cond);
+        $sql = $sql . $col . " = " . TheWorld::instance()->slave->quote($cond);
 
         if ($i != $n) {
           $sql = $sql . " AND ";
@@ -139,11 +175,11 @@ class KORM {
     }
 
     // join
-    if ($this->belongTo !== null) {
+    if ($klassName::$belongTo !== null) {
       if ($where === null) {
         $sql = $sql . " WHERE ";
       }
-      $sql = $sql . $tableName . "." . $this->belongWith . " = " . $this->belongTo . "id";
+      $sql = $sql . $tableName . "." . $klassName::$belongWith . " = " . $klassName::$belongTo . "id";
     }
 
 
@@ -156,22 +192,25 @@ class KORM {
       $sql = $sql . " LIMIT " . $limit;
     }
     
-    $statement = $this->slave->query($sql);
+    $statement = TheWorld::instance()->slave->query($sql);
 
     $result = array();
     // foreach($rows as $row) {
     while($row = $statement->fetch()) {
-      $klassName = $this->getKlassName();
-      $object = new $klassName($this->tableName);
-      $object->autoSetColNames();
+      // $klassName = $this->getKlassName();
+      $klassName = get_called_class();
+      $object = new $klassName($klassName::$tableName);
+      // $object->autoSetColNames();
       foreach($row as $propName => $val) {
+        $object->$propName = $val;
         // if ($context === null) {
           // only for fetchOne
           // $context->$propName = $val;
           // $result = array($context);
         // }
         // else {
-          $object->$propName = $this->filter->apply($val);
+          // instead, apply fileter when get prop
+          // $object->$propName = $this->filter->apply($val);
         // }
       }
       $result[] = $object;
@@ -201,7 +240,8 @@ class KORM {
       return false;
     }
 
-    return $this->container[$propName];
+    $val = $this->container[$propName];
+    return $this->filter->apply($val);
   }
 
   public function __set($propName, $val) {
@@ -245,64 +285,74 @@ class KORM {
   }
 
   public function getType($colName) {
+    $klassName = get_called_class();
     if (!array_key_exists(
-      $this->tableName, 
-      $this->types
+      $klassName::$tableName, 
+      $klassName::$types
       )) {
-      throw new KException("KORM::getType(): type data type does not has tableName: " . $this->tableName . " as key");
+      throw new KException("KORM::getType(): type data type does not has tableName: " . $klassName::$tableName . " as key");
     }
 
-    if (!array_key_exists($colName, $this->types[$this->tableName])) {
+    if (!array_key_exists($colName, $klassName::$types[$klassName::$tableName])) {
       throw new KException("KORM::getType(): colName: " . $colName . " does not have type");
     }
 
-    return $this->types[$this->tableName][$colName];
+    return $klassName::$types[$klassName::$tableName][$colName];
   }
 
-  public function autoSetColNames() {
-    $this->propNames = array();
+  static public function autoSetColNames() {
+    $klassName = get_called_class();
+    $klassName::$propNames = array();
 
-    $sql = "DESCRIBE " . $this->tableName;
-    $rows = $this->slave->query($sql)->fetchAll();
-    $this->colNames[$this->tableName] = array();
-    $this->types[$this->tableName] = array();
+    // sub class of KORM defines tableName.
+    $sql = "DESCRIBE " . $klassName::$tableName;
+
+    $rows = TheWorld::instance()->slave->query($sql)->fetchAll();
+
+    $klassName::$colNames = array();
+    $klassName::$types = array();
+
+    $klassName::$colNames[$klassName::$tableName] = array();
+    $klassName::$types[$klassName::$tableName] = array();
 
     foreach($rows as $row) {
       $field = $row["Field"];
       $type = Util::convertMySQLType($row["Type"]);
-      $this->colNames[$this->tableName][] = $field;
-      $this->types[$this->tableName][$field] = $type;
+      $klassName::$colNames[$klassName::$tableName][] = $field;
+      $klassName::$types[$klassName::$tableName][$field] = $type;
 
       if(
-        !is_array($this->propNames[$this->tableName])
+        !is_array($klassName::$propNames[$klassName::$tableName])
         )
       {                 
-        $this->propNames[$this->tableName] = 
+        $klassName::$propNames[$klassName::$tableName] = 
           array();
       }
-      if ($this->belongTo != null) {
+
+      if ($klassName::$belongTo != null) {
         $modifiedField = "pri_" . $field;
-        $this->propNames[$this->tableName][$field] = $modifiedField;
+        $klassName::$propNames[$klassName::$tableName][$field] = $modifiedField;
       }
       else {
-        $this->propNames[$this->tableName][$field] = $field;
+        $klassName::$propNames[$klassName::$tableName][$field] = $field;
       }
+      
     }
 
-    if ($this->belongTo == null) {
+    if ($klassName::$belongTo == null) {
       return $this;
     }
 
-    if ($this->belongTo != null) {
-      $this->colNames[$this->belongTo] = array();
-      $sql = "DESCRIBE " . $this->belongTo;
-      $rows = $this->slave->query($sql);
+    if ($klassName::$belongTo != null) {
+      $klassName::$colNames[$klassName::$belongTo] = array();
+      $sql = "DESCRIBE " . $klassName::$belongTo;
+      $rows = TheWorld::instance()->slave->query($sql);
       foreach($rows as $row) {
         $field = $row["Field"];
 
         $modifiedField = "sec_" . $field;
-        $this->colNames[$this->belongTo][] = $field;
-        $this->secPropNames[$this->tableName][$field] = $modifiedField;
+        $klassName::$colNames[$klassName::$belongTo][] = $field;
+        $this->secPropNames[$klassName::$tableName][$field] = $modifiedField;
       }
     }
 
@@ -380,10 +430,12 @@ class KORM {
     $this->master->query($sql);
   }
 
-  protected function makeColNames($tableName, $suffix = null) {
+  static protected function makeColNames($tableName, $suffix = null) {
+    $klassName = get_called_class();
+
     $sql = "";
-    $colNames = $this->colNames[$tableName];
-    
+    $colNames = $klassName::$colNames[$klassName::$tableName];
+
     $i = 1;
     $n = count($colNames);
     foreach($colNames as $id => $colName) {
@@ -404,23 +456,31 @@ class KORM {
   }
 
   public function setBelongTo($belongTo) {
-    $this->belongTo = $belongTo;
+    $klassName = get_called_class();
+
+    $klassName::$belongTo = $belongTo;
 
     return $this;
   }
 
   public function getBelongTo() {
-    return $this->belongTo;
+    $klassName = get_called_class();
+
+    return $klassName::$belongTo;
   }
 
   public function setBelongWith($belongWith) {
-    $this->belongWith = $belongWith;
+    $klassName = get_called_class();
+
+    $klassName::$belongWith = $belongWith;
 
     return $this;
   }
 
   public function getBelongWith() {
-    return $this->belongWith;
+    $klassName = get_called_class();
+
+    return $klassName::$belongWith;
   }
 
   public function setDefaultFilter($aFilter) {
@@ -443,13 +503,14 @@ class KORM {
     return $this->filter;
   }
 
-  public function getPropNames($tableName = null) {
+  static public function getPropNames($tableName = null) {
+    $klassName = get_called_class();
     // debug
     if ($tableName === null) {
-      return $this->propNames[$this->tableName];
+      return $klassName::$propNames[$klassName::$tableName];
     }
     else {
-      return $this->propNames[$tableName];
+      return $klassName::$propNames[$tableName];
     }
   }
 

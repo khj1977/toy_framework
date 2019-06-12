@@ -8,16 +8,26 @@ require_once("lib/util/Util.php");
 
 class BaseKORMModel extends KORM {
 
-  public function __construct() {
-    $klassName = $this->getKlassName();
+  static public function initialize() {
+    // $klassName = $this->getKlassName();
+    $klassName = get_called_class();
     $tableName = Util::omitSuffix(Util::upperCamelToLowerCase($klassName), "_model");
-
+    
     // initialize parent later than above table related settings.
-    parent::__construct($tableName);
+    // parent::__construct($tableName);
+    $klassName::setTableName($tableName);
+
+    if ($klassName::$initialized === true) {
+      return;
+    }
+
+    parent::initialize();
   }
 
   public function getTableName() {
-    return $this->tableName;
+    $klassName = get_called_class();
+
+    return $klassName::$tableName;
   }
 
 }

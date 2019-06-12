@@ -48,8 +48,9 @@ class KORMTable extends BaseTable {
   public function getDBCols($limit = null, $where = null) {
     // $baseOrm = new KORM($this->tableName);
     $modelName = $this->modelName;
-    $baseOrm = new $modelName();
-    $orms = $baseOrm->fetch($where, null, $limit);
+    // $baseOrm = new $modelName();
+    // $orms = $baseOrm->fetch($where, null, $limit);
+    $orms = $modelName::fetch($where, null, $limit);
 
     $this->ds->vd($orms);
     // obtain col names and types
