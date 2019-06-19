@@ -116,6 +116,12 @@ class BaseScaffoldController extends BaseAuthController {
       $rowsView->push($pair);
 
       $session->set($key, $val);
+
+      // debug
+      // $this->debugStream->setFlag(true);
+      // $this->debugStream->varDump($_SESSION);
+      // exit;
+      // end of debug
     }
 
     $formView = new ScaffoldFormView();
@@ -131,20 +137,53 @@ class BaseScaffoldController extends BaseAuthController {
   }
 
   public function update() {
+    // debug
+    /*
+    $this->debugStream->setFlag(true);
+    $this->debugStream->varDump("update");
+    $this->debugStream->varDump($_SESSION);
+    */
+    // end of debug
     $tableName = Util::omitSuffix(Util::upperCamelToLowerCase($this->modelName), "_model");
 
     $session = TheWorld::instance()->session;
 
     $session->setSuffix(TheWorld::instance()->controllerName. "::confirm::");
 
-    $korm = new KORM($tableName);
+    $modelName = $this->modelName;
 
-    $keys = $session->getKeys();
+    $moduleName = TheWorld::instance()->router->getModule();
+    $modelFilePath = TheWorld::instance()->getBaseDir() . "/apps/" . $moduleName . "/models/" . $modelName . ".php";
+    $realModelFilePath = Util::realPath($modelFilePath);
+    if ($realModelFilePath === false) {
+      throw new KException("BaseScaffoldController::upadte(): file " . $modelFilePath . " is not found.");
+    }
+    require_once($realModelFilePath);
+
+    $korm = new $modelName($tableName);
+
+    $keys = $session->getKeys(false);
+    // debug
+    /*
+    $this->debugStream->setFlag(true);
+    $this->debugStream->varDump("keys: ");
+    $this->debugStream->varDump($keys);
+    $this->debugStream->varDump($_SESSION);
+    */
+    // end of debug
+    // debug
+    // $this->debugStream->varDump("keys: ");
+    // $this->debugStream->varDump($keys);
+    // end of debug
     foreach($keys as $key) {
       $val = $session->get($key);
       $realKey = $val["real_key"];
       $realVal = $val["real_val"];
       $korm->$realKey = $realVal;
+
+      // debug
+      // $this->debugStream->varDump($realKey . "::" . $realVal);
+      // end of debug
     }
     $korm->save();
 

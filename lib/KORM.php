@@ -33,6 +33,8 @@ class KORM {
   protected $container;
   
   public function __construct($tableName) {
+    $klassName = get_called_class();
+
     // parent::__construct();
 
     $theWorld = TheWorld::instance();
@@ -40,6 +42,13 @@ class KORM {
     $this->master = $theWorld->master;
 
     // $this->setPropNames();
+
+    // var_dump($klassName::$propNames);
+    if ($klassName::$initialized === false) {
+      $klassName::initialize();
+      $klassName::$initialized = true;
+    }
+    // var_dump($klassName::$propNames);
 
     $this->defaultFilter = new DefaultFilter();
     $this->filter = $this->defaultFilter;
@@ -51,9 +60,16 @@ class KORM {
 
   static public function initialize() {
     $klassName = get_called_class();
+     // debug
+     // var_dump("bar");
+     // end of debug
     if ($klassName::$initialized === true) {
       return;
     }
+
+    // debug
+    // var_dump("foo");
+    // end of debug
 
     // $klassName::$initialized = true;
     
@@ -84,7 +100,7 @@ class KORM {
 
   }
 
-  static public function fetchOne($where, $orderBy) {
+  static public function fetchOne($where = null, $orderBy = null) {
     // debug
     // refactor. Implement this part by CoC
     // $tableName = "";
@@ -95,13 +111,13 @@ class KORM {
 
     $object = $klassName::xfetchOne($where, $orderBy);
 
-    $object->setBelongTo($self->getBelongTo());
-    $object->setBelongWith($self->getBelongWith());
+    // $object->setBelongTo($self->getBelongTo());
+    // $object->setBelongWith($self->getBelongWith());
     // debug
     // refactor.
     // $object->setDefaultFilter($self->getDefaultFilter());
     // end of debug
-    $object->setFilter($self->getFilter());
+    // $object->setFilter($self->getFilter());
 
     return $object;
   }
@@ -135,7 +151,7 @@ class KORM {
   }
 
   static public function xfetchOne($where, $orderBy) {
-    $kalssName = get_called_class();
+    $klassName = get_called_class();
 
     return $klassName::fetch($where, $orderBy, 1);
   }
@@ -360,6 +376,10 @@ class KORM {
   }
 
   public function save() {
+    // debug
+    // var_dump("container: ");
+    // var_dump($this->container);
+    // end of debug
     if (array_key_exists("id", $this->container)) {
       $this->saveUpdate();
     }
@@ -371,15 +391,20 @@ class KORM {
   }
 
   protected function saveUpdate() {
-    if ($this->belongTo !== null) {
+    $klassName = get_called_class();
+
+    if ($klassName::$belongTo !== null) {
       throw new Exception("KORM::saveUpdate(): saveUpdate() cannot be invoked when there is join.");
     }
 
     // update tablename set foo = bar where id = ?
-    $sql = "UPDATE " . $this->tableName . " SET ";
+    $sql = "UPDATE " . $klassName::$tableName . " SET ";
     $i = 1;
-    $n = count($this->propNames[$this->tableName]);
-    foreach($this->propNames[$this->tableName] as $propName) {
+    $n = count($klassName::$propNames[$klassName::$tableName]);
+    // debug
+    // var_dump($klassName::$propNames);
+    // end of debug
+    foreach($klassName::$propNames[$klassName::$tableName] as $propName) {
       $val = $this->master->quote($this->$propName);
       $sql = $sql . $propName . " = " . $val . " ";
       
@@ -397,14 +422,16 @@ class KORM {
 
   // only invoked when there is no join.
   protected function saveNew() {
-    if ($this->belongTo !== null) {
+    $klassName = get_called_class();
+
+    if ($klassName::$belongTo !== null) {
       throw new Exception("KORM::saveNew(): saveNew() cannot be invoked when there is join.");
     }
 
-    $sql = "INSERT INTO " . $this->tableName . " (";
+    $sql = "INSERT INTO " . $klassName::$tableName . " (";
     $i = 1;
-    $n = count($this->propNames);
-    foreach($this->propNames as $colName) {
+    $n = count($klassName::$propNames);
+    foreach($klassName::$propNames as $colName) {
       $sql = $sql . $colName;
       if ($i != $n) {
         $sql = $sql . ",";
@@ -415,9 +442,9 @@ class KORM {
 
     $sql = $sql . ") VALUES(";
     $i = 1;
-    $n = count($propNames);
-    foreach($this->propNames as $propName) {
-      $val = $this->$propName;
+    $n = count($klassName::$propNames);
+    foreach($klassName::$propNames as $propName) {
+      $val = $this->propName;
       
       if ($i != $n) {
         $sql = $sql . ",";
