@@ -1,2 +1,5 @@
 lib/config/impl/DevConfigImpl.php
 log/
+config/DevConfigImpl.php
+config/StagingConfigImpl.php
+config/ProductionConfigImpl.php

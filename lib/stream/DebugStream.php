@@ -27,6 +27,18 @@ class DebugStream {
     return $this;
   }
 
+  public function enable() {
+    $this->flag = true;
+
+    return $this;
+  }
+
+  public function disable() {
+    $this->flag = false;
+
+    return $this;
+  }
+
   public function varDump($anObject) {
     if ($this->flag === false) {
       return $this;

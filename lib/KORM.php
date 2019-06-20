@@ -27,6 +27,7 @@ class KORM {
   protected $slave;
   protected $master;
 
+  // null filter. return the same val as ORM have.
   protected $defaultFilter;
   protected $filter;
 
@@ -101,50 +102,25 @@ class KORM {
   }
 
   static public function fetchOne($where = null, $orderBy = null) {
-    // debug
-    // refactor. Implement this part by CoC
-    // $tableName = "";
-    // end of debug
-    // $self = new $klasssName($this->tableName);
-
     $klassName = get_called_class();
 
     $object = $klassName::xfetchOne($where, $orderBy);
-
-    // $object->setBelongTo($self->getBelongTo());
-    // $object->setBelongWith($self->getBelongWith());
-    // debug
-    // refactor.
-    // $object->setDefaultFilter($self->getDefaultFilter());
-    // end of debug
-    // $object->setFilter($self->getFilter());
 
     return $object;
   }
 
   static public function fetch($where = null, $orderBy = null, $limit = null, $context = null) {
-    // debug
-    // refactor. Implement this part by CoC
-    // $tableName = "";
-    // end of debug
-    // $klassName = get_class($this);
     $klassName = get_called_class();
 
     if ($klassName::$initialized !== true) {
       $klassName::initialize();
     }
-
-    // $self = new $klassName($this->tableName);
     
     $objects = $klassName::xfetch($where, $orderBy, $limit, $context);
 
     foreach($objects as $object) {
-      /*
-      $object->setBelongTo($klassName::getBelongTo());
-      $object->setBelongWith($klassName::getBelongWith());
-      */
-      // $object->setDefaultFilter($klassName::getDefaultFilter());
-      // $object->setFilter($self->getFilter());
+      $object->setDefaultFilter(new DefaultFilter());
+      $object->setFilter($object->getFilter());
     }
 
     return $objects;
@@ -215,19 +191,13 @@ class KORM {
     while($row = $statement->fetch()) {
       // $klassName = $this->getKlassName();
       $klassName = get_called_class();
+      // filter is assigned to object.
+      // in that time, filter is assigned object by object;i.e. by instance val not class val.
       $object = new $klassName($klassName::$tableName);
-      // $object->autoSetColNames();
       foreach($row as $propName => $val) {
         $object->$propName = $val;
-        // if ($context === null) {
-          // only for fetchOne
-          // $context->$propName = $val;
-          // $result = array($context);
-        // }
-        // else {
-          // instead, apply fileter when get prop
-          // $object->$propName = $this->filter->apply($val);
-        // }
+        // do not modify a prop but apply filter when __get() is called.
+        // $object->$propName = $this->filter->apply($val);
       }
       $result[] = $object;
     }

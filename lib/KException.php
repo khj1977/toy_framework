@@ -11,9 +11,6 @@ class KException extends Exception {
   public function __construct($message) {
     parent::__construct($message);
     $this->doLogging($message);
-    // debug
-    // do debugStream->varDump() ?
-    // end of debug
 
     return $this;
   }

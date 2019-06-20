@@ -35,12 +35,12 @@ class BaseScaffoldController extends BaseAuthController {
   }
 
   public function klist() {
-    // $tableName = "test_table";
     $tableName = Util::omitSuffix(Util::upperCamelToLowerCase($this->modelName), "_model");
 
     $tableFactory = new TableFactory();
     $table = $tableFactory->make("KORM", $this->modelName);
     
+    // note that filter for KORM can be applied inside getDBCols() because __get() is called.
     $rows = $table->getDBCols();
     
     $rowsView = new SimpleRowsView();
@@ -78,6 +78,7 @@ class BaseScaffoldController extends BaseAuthController {
     $simpleView->addSubView($formView)->setTitle("Something for Apple Pie");
 
     // debug
+    // use Virtual Host instead of specify actual path.
     $router = TheWorld::instance()->router;
     $formView->setAction(sprintf("/~HK/tfw/index.php?m=%s&c=%s&a=confirm", $router->getModule(), $router->getController()))->setMethod("POST");
     // end of debug
@@ -116,12 +117,6 @@ class BaseScaffoldController extends BaseAuthController {
       $rowsView->push($pair);
 
       $session->set($key, $val);
-
-      // debug
-      // $this->debugStream->setFlag(true);
-      // $this->debugStream->varDump($_SESSION);
-      // exit;
-      // end of debug
     }
 
     $formView = new ScaffoldFormView();
@@ -129,6 +124,7 @@ class BaseScaffoldController extends BaseAuthController {
     $simpleView->addSubView($formView);
 
     // debug
+    // use Virtual Host instead of specify actual path.
     $router = TheWorld::instance()->router;
     $formView->setAction(sprintf("/~HK/tfw/index.php?m=%s&c=%s&a=update", $router->getModule(), $router->getController()))->setMethod("POST");
     // end of debug
@@ -137,13 +133,6 @@ class BaseScaffoldController extends BaseAuthController {
   }
 
   public function update() {
-    // debug
-    /*
-    $this->debugStream->setFlag(true);
-    $this->debugStream->varDump("update");
-    $this->debugStream->varDump($_SESSION);
-    */
-    // end of debug
     $tableName = Util::omitSuffix(Util::upperCamelToLowerCase($this->modelName), "_model");
 
     $session = TheWorld::instance()->session;
