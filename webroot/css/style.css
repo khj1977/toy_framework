@@ -1,13 +1,13 @@
 body {
   font-family: 'Hiragino Kaku Gothic Pro';
-  font-size: 38px; 
+  font-size: 16px; 
   color: black;
-  background-color: beige
+  background-color: rgba(43, 49, 127, 0.29)
 }
 
 input {
   width: 360px;
-  font-size: 38px;
+  font-size: 16px;
   color: black;
 }
 
@@ -25,11 +25,11 @@ section {
   border: solid 1px #aaaaaa;
   padding: 30px;
   box-shadow: 1px 1px 3px #aaaaaa;
-  border-radius: 20px;
+  border-radius: 15px;
 }
 
 h1 {
-  font-size: 38px;
+  font-size: 24px;
   padding: 0px;
   margin-top: 0px;
   margin-bottom: 0px;
