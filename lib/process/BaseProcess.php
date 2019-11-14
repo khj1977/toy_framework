@@ -5,8 +5,10 @@
 
 require_once("BaseClass.php");
 
-class BaseProcess extends BaseClass {
+abstract class BaseProcess extends BaseClass {
   
+  abstract public function exec();
+
 }
 
 ?>
