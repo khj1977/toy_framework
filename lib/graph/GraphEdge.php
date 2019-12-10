@@ -2,7 +2,7 @@
 
 require_once("lib/BaseClass.php");
 
-class GraphEdge extends BaseClass{
+class GraphEdge extends BaseClass {
 
   protected $prevNode;
   protected $nextNode;
@@ -15,6 +15,27 @@ class GraphEdge extends BaseClass{
 
     return $this;
   }
+
+  public function getPrevNode() {
+    return $this->prevNode;
+  }
+
+  public function getNextNode() {
+    return $this->nextNode;
+  }
+
+  public function setPrevNode($anNode) {
+    $this->prevNode = $anNode;
+
+    return $this;
+  }
+
+  public function setNextNode($anNode) {
+    $this->nextNode = $anNode;
+
+    return $this;
+  }
+
 }
 
 ?>

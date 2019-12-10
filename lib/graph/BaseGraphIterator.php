@@ -2,7 +2,7 @@
 
 require_once("lib/BaseClass.php");
 
-class GraphIterator extends BaseClass{
+abstract class BaseGraphIterator extends BaseClass {
 
   protected $currentNode;
 
@@ -13,6 +13,9 @@ class GraphIterator extends BaseClass{
 
     return $this;
   }
+
+  abstract public function getNextNode();
+  
 }
 
 ?>

@@ -13,6 +13,17 @@ class GraphProcessFacade extends BaseFacade {
 
     return $this;
   }
+
+  public function exec() {
+    $iterator = $this->rootNode->getIterator();
+    while($node = $iterator->getNextNode()) {
+      $process = $node->getContent();
+      $process->exec();
+    }
+
+    return $this;
+  }
+
 }
 
 ?>
