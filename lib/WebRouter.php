@@ -50,9 +50,11 @@ class WebRouter extends BaseClass {
     // only by controller. Note that this can
     // be changed by other controller or
     // strategy if required (not implemented).
-    $viewClassName = sprintf("%sScaffoldView",  ucwords($this->controller));
+    // $viewClassName = sprintf("%sScaffoldView",  ucwords($this->controller));
 
-    $viewPath = Util::realpath(sprintf("%s/apps/%s/views/%s.php", TheWorld::instance()->getBaseDir(), $this->module, $viewClassName));
+    $viewClassName = sprintf("ScaffoldDefaultViewTemplate",  ucwords($this->controller));
+
+    $viewPath = Util::realpath(sprintf("/lib/scaffold/view_templates/%s.php", TheWorld::instance()->getBaseDir(), $viewClassName));
 
     return array(
       "view_path" => $viewPath, 
