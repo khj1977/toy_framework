@@ -54,11 +54,15 @@ class WebRouter extends BaseClass {
 
     $viewClassName = sprintf("ScaffoldDefaultViewTemplate",  ucwords($this->controller));
 
-    $viewPath = Util::realpath(sprintf("/lib/scaffold/view_templates/%s.php", TheWorld::instance()->getBaseDir(), $viewClassName));
+    $viewPath = Util::realpath(sprintf("%s/lib/scaffold/view_template/%s.php", TheWorld::instance()->getBaseDir(), $viewClassName));
 
     return array(
       "view_path" => $viewPath, 
-      "view_class_name" => $viewClassName
+      "view_class_name" => $viewClassName,
+      // debug
+      // refactor the following css specification.
+      "default_css_path" => "/~HK/tfw/css/style.css"
+      // end of debug
     );
   }
 

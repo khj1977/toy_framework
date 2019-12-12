@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>SampleKListView</title>
-<link rel="stylesheet" href="<?php echo $subView["default_css_path"] ?>">
+<link rel="stylesheet" href="<?php echo $viewVals["default_css_path"] ?>">
 
 <section>
 <body>

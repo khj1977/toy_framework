@@ -83,6 +83,7 @@ class SimpleDispatcher extends BaseClass {
       }
 
       // debug
+      // $this->debugStream->setFlag(true);
       $this->debugStream->varDump($viewVals);
       // end of debug
 
