@@ -97,6 +97,16 @@ class TheWorld {
 
     $this->session = new SimpleSession();
 
+    /*
+    set_error_handler(function($errorNo, $errorStr) {
+      $message = sprintf("TheWorld::initialize(): %d\t%s", $errorNo, $errorStr);
+
+      // not to use KException to avoid diverted call of Excetpion and framework component since this is initialization stage of the framework.
+      // throw new Exception($message);
+      // print("foo<br>");
+    } );
+    */
+
     $initialized = true;
 
     return $this;
