@@ -62,7 +62,7 @@ i
   // considering how to construct URL event for & for modern /xxx/yyy URL structure.
   protected function parseUrl($url) {
     // debug
-    throw new Exception("ApiROuter::parseUrl(): this method has not been implemented yet.");
+    throw new KException("ApiROuter::parseUrl(): this method has not been implemented yet.");
     // end of debug
   }
 

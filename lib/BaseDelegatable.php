@@ -38,7 +38,7 @@ class BaseDelegatable extends BaseClass {
 
     $err = method_exists($this->impl, $methodName);
     if (!$err) {
-      throw new Exception("BaseDelegatable::__call(): the method " . $methodName . " does not exist to tatget of delegate.");
+      throw new KException("BaseDelegatable::__call(): the method " . $methodName . " does not exist to tatget of delegate.");
     }
 
     // This is a point to change when REST API is used?

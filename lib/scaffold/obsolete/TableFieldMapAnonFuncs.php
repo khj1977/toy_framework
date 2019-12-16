@@ -4,6 +4,7 @@
 // See License.txt for license of this code.
 
 require_once("lib/BaseClass.php");
+require_once("lib/KException.php");
 
 // Obtain anon-funcs using getter of this class.
 class TableFieldMapAnonFuncs extends BaseClass {
@@ -15,7 +16,7 @@ class TableFieldMapAnonFuncs extends BaseClass {
   public function __construct($tableName) {
     // debug
     // implement this method;
-    throw new Exception("TableFieldMapAnonFuncs::__construct(): this method has not been implemented yet.");
+    throw new KException("TableFieldMapAnonFuncs::__construct(): this method has not been implemented yet.");
     // end of debug
 
     $this->initialize($tableName);

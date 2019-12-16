@@ -27,18 +27,18 @@ class Util {
   static public function hashToJson($aHash) {
     // debug
     // call appropriate json encoder.
-    throw new Exception("Util::hashToJson(): this method has not been implemented yet.");
+    throw new KException("Util::hashToJson(): this method has not been implemented yet.");
     // end of debug
   }
 
   static public function JSONEncode($data) {
     // debug
-    throw new Exception("Util::JSONEncode(): this method has not been implemented yet.");
+    throw new KException("Util::JSONEncode(): this method has not been implemented yet.");
     // end of debug
   }
 
   static public function JSONDecode() {
-    throw new Exception("Util::JSONDecode(): this method has not been implemented yet.");
+    throw new KException("Util::JSONDecode(): this method has not been implemented yet.");
   }
 
   static public function convertMySQLType($rawType) {

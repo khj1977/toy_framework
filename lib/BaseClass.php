@@ -235,7 +235,7 @@ class BaseClass {
   protected function validateExistence() {
     // debug
     // implement this method.
-    throw new Exception("BaseClass::validateExistense(): this method has not been implemented yet.");
+    throw new KException("BaseClass::validateExistense(): this method has not been implemented yet.");
     // end of debug
   }
 
