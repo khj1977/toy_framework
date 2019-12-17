@@ -70,7 +70,34 @@ class SimpleDispatcher extends BaseClass {
 
     try {
       $controller->preAction();
+      // debug
+      // refacot the following to accept controller output handler which is object and instance of ControllerOutputHandler.
+      // Expected kind of output handlers are html or view handler, JSON output handler, and XML output handler.
+      // To specify output handler would be done by GET URL. It is litte bit risky to think about secutiry. However, since this framework is used for intra net, it would be acceptable.
+      // The better implementation considering about secutiry would be implemented later on. Since this code is just a prototype, it is OK.
+      
+      if ($router->hasOutputHandler()) {
+        $outputHandlerPath = $basePath . 
+        sprintf(
+          "/apps/%s/output_handlers/%sOutputHandler.php",
+          $this->module,
+          Util::upperCamelToUnderScore($this->outputHandler)
+        );
+
+        $outputHandlerPath = Util::realpath($outputHandlerPath);
+        if ($outputHandlerPath === false) {
+          throw new KException("Dispatcher::dispatch(): invalid path: with module and outputHandler: module: " . $this->module . " output handler: " . $this->outputHandler);
+        }
+        require_once($outputHandlerPath);
+        $outputHandlerClassName = Util::underscoreToUpperCamel($this->outputHandler) . "OutputHandler";
+
+        $outputHandler = new $outputHandlerClassName();
+        $controller->setOutputHandler($outputHandler);
+      }
+
       $subView = $controller->$actionName();
+      // end of debug
+
       $controller->postAction();
 
       if (!$controller->isScaffold()) {

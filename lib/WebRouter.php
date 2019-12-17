@@ -35,14 +35,27 @@ class WebRouter extends BaseClass {
       throw new KException("WebRouter::getRoute(): controller is not specified.");
     }
     $this->action = Util::upperCamelToUnderScore(urldecode($this->webArguments->get("a")));
-    if ($this->module === "") {
+    if ($this->action === "") {
       throw new KException("WebRouter::getRoute(): action is not specified.");
+    }
+    $this->outputHandler = Util::upperCamelToUnderScore(urldecode($this->webArguments->get("o")));
+    if ($this->outputHandler === "") {
+      // throw new KException("WebRouter::getRoute(): action is not specified.");
+      $this->outputHandler = null;
     }
     // view is automatically determined by m, c and a.
 
     $route = array("module" => $this->module, "controller" => $this->controller, "action" => $this->action);
 
     return $route;
+  }
+
+  public function hasOutputHandler() {
+    if ($this->outputHalder === null) {
+      return false;
+    }
+
+    return true;
   }
 
   public function getScaffoldView() {

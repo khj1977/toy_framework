@@ -135,6 +135,9 @@ class Util {
       return substr($str, 0, $subStrStartIndex);
     }
 
+    // debug
+    // The method name of the following method is incorrect underscore to upper camel is correct. By another method, alias class method is provided.
+    // end of debug
     static public function upperCamelToUnderScore($str) {
       $splitter = "_";
       $splitted = explode($splitter, $str);
@@ -149,6 +152,10 @@ class Util {
       }
 
       return $result;
+    }
+
+    static public function underscoreToUpperCamel($str) {
+      return Util::upperCamelToUnderScore($str);
     }
 
   }
