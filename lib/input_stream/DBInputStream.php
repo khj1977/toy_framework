@@ -12,6 +12,9 @@ class DBInputStream extends ABSInputStream {
   public function __construct() {
     parent::__construct();
 
+    $this->statement = null;
+    $this->row = null;
+
     return $this;
   }
 
@@ -23,6 +26,9 @@ class DBInputStream extends ABSInputStream {
 
   public function next() {
     $this->row = $this->statement->fetch();
+    if (!$this->row) {
+      return false;
+    }
 
     return $this;
   }
