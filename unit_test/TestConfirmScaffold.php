@@ -15,7 +15,10 @@ class TestConfirmScaffold extends BaseUnitTest {
 
   public function test_StringPair() {
     $baseKORM = new KORM("test_table");
+    // debug
+    // of call fetchOne()?
     $korms = $baseKORM->fetch(null, null, 1);
+    // end of debug
 
     $stringPairs = array();
     $propNames = $korms[0]->getPropNames();

@@ -26,15 +26,15 @@ class TestAssert extends BaseUnitTest {
       array("prop1" => 1, "prop2" => 2)
     );
 
-      $bar = AnonClass::makeObjectByHash(
-        array(
-          "prop1" => 1,
-          "prop2" => 2
-        )
-      );
+    $bar = AnonClass::makeObjectByHash(
+      array(
+        "prop1" => 1,
+        "prop2" => 2
+      )
+    );
 
-      $assert = new Assert();
-      return $assert->objectEqual($foo, $bar);
+    $assert = new Assert();
+    return $assert->objectEqual($foo, $bar);
   }
 
 }

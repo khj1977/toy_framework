@@ -71,7 +71,14 @@ abstract class BaseUnitTest extends BaseClass {
         $instance->incNumTests();
         $this->currentTestMethodName = $testMethodName;
         // end of debug
-        $result = $instance->$testMethodName();
+        // debug
+        try {
+          $result = $instance->$testMethodName();
+        }
+        catch(Exception $e) {
+          $result = false;
+        }
+        // end of debug
         if ($result === true) {
           printf("Succeeded: " . $testMethodName . "\n");
           // var_dump("loop1: " . $this->numTests . " " . $this->numSuccess);
@@ -92,6 +99,14 @@ abstract class BaseUnitTest extends BaseClass {
     catch(Exception $ex) {
       print("BaseUnitTest error: " . $ex->getMessage() . "\n");
       print("BaseUnitTest error" . $ex->getTraceAsString());
+
+      // debug
+      // Is it valid considering scope of val?
+      // Not sure that there is scope of val in a method.
+      $instance->incNumFail();
+      // end of debug
+
+
 
       exit;
     }
@@ -147,7 +162,7 @@ abstract class BaseUnitTest extends BaseClass {
     return $this;
   }
 
-  public function incNumGetSuccess() {
+  public function incNumSuccess() {
     $this->numSuccess = $this->numSuccess + 1;
 
     return $this;

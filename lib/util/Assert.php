@@ -61,9 +61,11 @@ class Assert extends BaseClass {
     $props2 = $object2->getPropsAsHash();
 
     // debug
+    /*
     $this->ds->vd("object equal");
     $this->ds->vd($props1);
     $this->ds->vd($props2);
+    */
     // end of debug
 
     foreach($props1 as $key => $val) {

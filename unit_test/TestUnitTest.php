@@ -43,6 +43,11 @@ class TestUnitTest extends BaseUnitTest {
     // end of debug
   }
 
+  public function test_exception3() {
+    // The following will cause fail.
+    throw new Exception("This is exception.");
+  }
+
 }
 
 ?>

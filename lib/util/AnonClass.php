@@ -10,7 +10,7 @@ class AnonClass extends BaseClass {
 
   public function __construct() {
     parent::__construct();
-    // $this->initialize();
+    $this->initialize();
 
     return $this;
   }
@@ -24,11 +24,14 @@ class AnonClass extends BaseClass {
   static public function makeObjectByHash($aHash) {
     $object = new AnonClass();
     foreach($aHash as $key => $val) {
+      // The folloing property access is implemented by BaseClass.
       $object->$key = $val;
     }
 
+    /*
     TheWorld::instance()->debugStream->varDump("anon");
     TheWorld::instance()->debugStream->varDump($object);
+    */
 
     return $object;
   }
