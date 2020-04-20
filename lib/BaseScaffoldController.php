@@ -118,7 +118,7 @@ class BaseScaffoldController extends BaseAuthController {
     // debug
     // use Virtual Host instead of specify actual path.
     $router = TheWorld::instance()->router;
-    $formView->setAction(sprintf("/~HK/tfw/index.php?m=%s&c=%s&a=confirm", $router->getModule(), $router->getController()))->setMethod("POST");
+    $formView->setAction(sprintf("/index.php?m=%s&c=%s&a=confirm", $router->getModule(), $router->getController()))->setMethod("POST");
     // end of debug
 
     $row = $rows[0];
@@ -168,7 +168,7 @@ class BaseScaffoldController extends BaseAuthController {
     // debug
     // use Virtual Host instead of specify actual path.
     $router = TheWorld::instance()->router;
-    $formView->setAction(sprintf("/~HK/tfw/index.php?m=%s&c=%s&a=update", $router->getModule(), $router->getController()))->setMethod("POST");
+    $formView->setAction(sprintf("/index.php?m=%s&c=%s&a=update", $router->getModule(), $router->getController()))->setMethod("POST");
     // end of debug
 
     $this->postConfirmExecute();

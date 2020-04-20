@@ -91,7 +91,7 @@ class SampleController extends BaseController {
 
     $simpleView->addSubView($formView)->setTitle("Something for Apple Pie");
 
-    $formView->setAction("/~HK/tfw/index.php?m=sample_app&c=sample&a=confirm")->setMethod("POST");
+    $formView->setAction("/index.php?m=sample_app&c=sample&a=confirm")->setMethod("POST");
 
     $row = $rows[0];
     foreach($row as $col) {
@@ -133,7 +133,7 @@ class SampleController extends BaseController {
 
     $simpleView->addSubView($formView);
 
-    $formView->setAction("/~HK/tfw/index.php?m=sample_app&c=sample&a=update")->setMethod("POST");
+    $formView->setAction("/index.php?m=sample_app&c=sample&a=update")->setMethod("POST");
 
     return $simpleView;
   }

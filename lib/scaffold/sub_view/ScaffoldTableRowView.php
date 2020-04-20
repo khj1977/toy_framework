@@ -54,7 +54,7 @@ class ScaffoldTableRowView extends BaseScaffoldView {
         // debug
         // critical for scaffold.
         // not appropriate view of edit
-        $html = $html . "<td>" . sprintf("<a href='/~HK/tfw/index.php?m=%s&c=%s&a=edit&id=%s'>", $router->getModule(), $router->getController(), $col->getVal()) . $col->getVal() . "</a>" . "</td>";
+        $html = $html . "<td>" . sprintf("<a href='/index.php?m=%s&c=%s&a=edit&id=%s'>", $router->getModule(), $router->getController(), $col->getVal()) . $col->getVal() . "</a>" . "</td>";
         // end of debug
       }
       else {

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>SampleConfirmView</title>
-<link rel="stylesheet" href="/~HK/tfw/css/style.css">
+<link rel="stylesheet" href="/css/style.css">
 
 </head>
 
