@@ -74,7 +74,7 @@ class WebRouter extends BaseClass {
       "view_class_name" => $viewClassName,
       // debug
       // refactor the following css specification.
-      "default_css_path" => "/~HK/tfw/css/style.css"
+      "default_css_path" => "/css/style.css"
       // end of debug
     );
   }
