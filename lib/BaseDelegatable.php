@@ -49,7 +49,11 @@ class BaseDelegatable extends BaseClass {
   }
 
   protected function callMethod($methodName, $args) {
-    $result = call_user_method_array($methodName, $this->impl, $args);
+    // From php.net
+    // $foo = new foo;
+    // call_user_func_array(array($foo, "bar"), array("three", "four"));
+
+    $result = call_user_func_array(array($this->impl, $methodName), $args);
 
     return $result;
   }

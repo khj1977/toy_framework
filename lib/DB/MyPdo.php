@@ -27,6 +27,9 @@ class MyPdo extends BaseDelegatable {
     return $this;
   }
 
+  // debug
+  // Refactered the following tO handle query error.
+  // end of debug
   public function prepare($sql) {
     TheWorld::instance()->logger->log(KLogger::INFO, "prepare:\t" . $sql);
 
@@ -36,12 +39,17 @@ class MyPdo extends BaseDelegatable {
     return $statement;
   }
   
+  // debug
+  // Refactered the following tO handle query error.
+  // end of debug
   public function query($sql) {
     TheWorld::instance()->logger->log(KLogger::INFO, "query:\t" . $sql);
 
     // $result = $this->pdo->query($sql);
-    $statement = new MyPdoStatement($this->pdo->prepare($sql));
+    $statement = $this->prepare($sql);
     $statement->execute();
+
+    // var_dump($statement);
 
     return $statement;
   }

@@ -11,13 +11,17 @@ require_once("lib/KORM.php");
 require_once("lib/TheWorld.php");
 
 class TestTableModel extends BaseKORMModel {
+    public function __construct($tableName) {
+      parent::__construct($tableName);
 
+      return $this;
+    }
 }
 
 class TestKORMBasedModel extends BaseUnitTest {
 
   public function test_select() {
-    $baseORM = new TestTableModel();
+    $baseORM = new TestTableModel("test_table");
     $baseORMs = $baseORM->fetch();
     $propNames = $baseORM->getPropNames();
     foreach($baseORMs as $baseORM) {

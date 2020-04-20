@@ -8,8 +8,8 @@ require_once("lib/util/Util.php");
 
 class TestRealPath extends BaseUnitTest {
 
-  public function test_utilUtil::realpath() {
-    $path = Util::Util::realpath(__FILE__ . "/../../../../foo.php" );
+  public function test_util_realpath() {
+    $path = Util::realpath(__FILE__ . "/../../../../foo.php");
     $this->debugStream->varDump($path);
 
     return true;

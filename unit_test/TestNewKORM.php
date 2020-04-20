@@ -17,7 +17,7 @@ class TestNewKORM extends BaseUnitTest {
 
   public function test_fetch() {
     $modelName = "TestTableModel";
-    $orms = $modelName::fetch($where, null, $limit);
+    $orms = $modelName::fetch(null, null, null);
     // KORM::setTableName("test_table");
     // $orms = KORM::fetch();
     // var_dump($orms);
@@ -29,7 +29,7 @@ class TestNewKORM extends BaseUnitTest {
     return true;
   }
 
-  public function test_insert() {
+  public function test_fetch_one() {
     $modelName = "TestTableModel";
     $orm = $modelName::fetchOne();
     $this->debugStream->varDump($orm->foo);

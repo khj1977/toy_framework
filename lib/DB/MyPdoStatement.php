@@ -16,6 +16,12 @@ class MyPdoStatement extends BaseDelegatable {
     return $this;
   }
 
+  /*
+  public function execute($param = null) {
+    return $this->statement->execute($param);
+  }
+  */
+
   public function fetch($mode = null) {
     if ($mode == null) {
       $raw = $this->statement->fetch();

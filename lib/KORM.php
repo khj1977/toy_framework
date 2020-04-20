@@ -326,7 +326,10 @@ class KORM {
     }
 
     if ($klassName::$belongTo == null) {
-      return $this;
+      // debug
+      // return $this;
+      return;
+      // end of debug
     }
 
     if ($klassName::$belongTo != null) {
@@ -342,7 +345,10 @@ class KORM {
       }
     }
 
-    return $this;
+    // debug
+    // return $this;
+    return;
+    // end of debug
   }
 
   public function save() {

@@ -9,7 +9,7 @@ class TestMyPDO extends BaseUnitTest {
     $sql = "INSERT INTO test_table (foo, bar, product_id) values('cinamon', 1, 2)";
     $err = TheWorld::instance()->master->bulkQuery($sql);
 
-    $this->debugStream->varDump($err);
+    // $this->debugStream->varDump($err);
 
     return true;
   }

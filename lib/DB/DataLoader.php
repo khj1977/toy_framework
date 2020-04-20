@@ -34,6 +34,7 @@ class DataLoader extends BaseClass {
     }
     $i = 0;
     while($line = chop(fgets($stream))) {
+      // The first line of dat faile is definition of col.
       if ($i == 0) {
         $colNames = $this->getColNames($line);
 
