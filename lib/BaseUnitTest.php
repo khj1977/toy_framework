@@ -58,7 +58,7 @@ abstract class BaseUnitTest extends BaseClass {
       /*
       $this->numSuccess = 0;
       // debug
-      var_dump("foo");
+      // var_dump("foo");
       // end of debug
       $this->numFail = 0;
       $this->numTests = 0;

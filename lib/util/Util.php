@@ -103,19 +103,18 @@ class Util {
     static public function omitSuffix($str, $suffix) {
       // $str = "model_test_foo_model";
       // $subStr = "_model";
-      
+
       $subStrIndex = 0;
       $subChar = $suffix[$subStrIndex];
       $len = strlen($str);
-      
       for($i = 0; $i < $len; ++$i) {
         // printf("%d %d %d %d\n", $i, $len, $subStrIndex, $subStrStartIndex);
         $chr = $str[$i];
         // printf("%s %s\n", $chr, $subChar);
         if (strcmp($chr, $subChar) == 0) {
           if ($subStrIndex == 0) {
-            $subStrIndex = $i;
             $subStrStartIndex = $i;
+            $subStrIndex = $i;
           }
           if ($i == ($len - 1)) {
             /*
@@ -123,8 +122,9 @@ class Util {
             exit;
             */
           }
+          
+          $subChar = $str[$subStrIndex];
           ++$subStrIndex;
-          $subChar = $suffix[$subStrIndex];
         }
         else {
           $subStrIndex = 0;
@@ -132,7 +132,9 @@ class Util {
         }
       }
       
-      return substr($str, 0, $subStrStartIndex);
+      $result = substr($str, 0, $subStrStartIndex);
+
+      return $result;
     }
 
     // debug

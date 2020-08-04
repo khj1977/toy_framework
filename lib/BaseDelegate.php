@@ -40,7 +40,10 @@ class BaseDelegate extends BaseClass {
   }
 
   protected function callMethod($methodName, $args) {
+    // debug
+    // replace by call_user_func_array
     $result = call_user_method_array($methodName, $this->target, $args);
+    // end of debug
 
     return $result;
   }

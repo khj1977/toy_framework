@@ -141,7 +141,10 @@ class BaseClass {
 
     $methodName = $this->makeSetterHookMethodName($key);
 
+    // debug
+    // replace by call_user_func_array
     $result = call_user_method_array($methodName, $this->getKlassName(), array($key, $oldVal, $val));
+    // end of debug
 
     return $result;
   }
@@ -188,7 +191,10 @@ class BaseClass {
 
     $methodName = $this->makeGetterHookMethodName($key);
 
+    // debug
+    // replace by call_user_func_array
     $result = call_user_method_array($methodName, $this->getKlassName(), array($key));
+    // end of debug
 
     return $result;
   }

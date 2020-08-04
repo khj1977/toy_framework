@@ -8,6 +8,19 @@ require_once("lib/util/Assert.php");
 require_once("lib/util/AnonClass.php");
 require_once("lib/KORM.php");
 require_once("lib/TheWorld.php");
+require_once("lib/BaseKORMModel.php");
+
+class TestTableModel extends BaseKORMModel {
+
+  public function hook_getter_foo() {
+    return "foo12";
+  }
+
+  public function hook_setter_bar($arg) {
+    TheWorld::instance()->debugStream->varDump("arg: " . $arg);
+  }
+
+}
 
 class TestKORM extends BaseUnitTest {
 
@@ -29,6 +42,7 @@ class TestKORM extends BaseUnitTest {
     $this->debugStream->setFlag(true);
   }
 
+  /*
   public function test_init() {
     $korm = new KORM("test_table");
     $korm->autoSetColNames();
@@ -69,14 +83,30 @@ class TestKORM extends BaseUnitTest {
 
     return true;
   }
+  */
 
+  /*
   public function test_update() {
     $korm = new KORM("test_table");
+    // debug
+    // $this->ds->vd($korm);
+    // end of debug
     $korm->id = "1";
     $korm->foo = "apple pie foo";
     $korm->bar = "2";
+    $korm->product_id = "11";
 
     $korm->save();
+
+    return true;
+  }
+  */
+
+  public function test_getter_hook() {
+    $testTableModel = TestTableModel::fetchOne();
+    // $this->ds->vd($testTableModel);
+    $this->ds->vd($testTableModel->foo);
+    $result = $testTableModel->bar = "goo";
 
     return true;
   }

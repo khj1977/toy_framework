@@ -33,8 +33,10 @@ class KORM {
 
   protected $container;
   
-  public function __construct($tableName) {
+  public function __construct() {
     $klassName = get_called_class();
+
+    // $klassName::setTableName($tableName);
 
     // parent::__construct();
 
@@ -74,6 +76,7 @@ class KORM {
 
     // $klassName::$initialized = true;
     
+    // $klassName::setTableName($tableName);
     $klassName::$types = array();
     
     $klassName::$belongTo = null;
@@ -104,9 +107,9 @@ class KORM {
   static public function fetchOne($where = null, $orderBy = null) {
     $klassName = get_called_class();
 
-    $object = $klassName::xfetchOne($where, $orderBy);
+    $objects = $klassName::xfetchOne($where, $orderBy);
 
-    return $object;
+    return $objects[0];
   }
 
   static public function fetch($where = null, $orderBy = null, $limit = null, $context = null) {
@@ -217,9 +220,17 @@ class KORM {
   // implement __get and __set by this class
   // not by BaseClass (not inherit BaseClass)
   public function __get($propName) {
-    $hookMethodName = $this->getHookMethodName($propName);
+    $hookMethodName = $this->getGetterHookMethodName($propName);
     if(method_exists($this, $hookMethodName)) {
-      return call_user_method_array($hookMethodName, $this, array());
+      // debug
+      // replace by call_user_func_array
+      // call_user_func_array(array($this->impl, $methodName), $args);
+      // From php.net
+      // $foo = new foo;
+      // call_user_func_array(array($foo, "bar"), array("three", "four"));
+      // return call_user_method_array($hookMethodName, $this, array());
+      return call_user_func_array(array($this, $hookMethodName), array());
+      // end of debug
     }
 
     if (!array_key_exists($propName, $this->container)) {
@@ -231,14 +242,20 @@ class KORM {
   }
 
   public function __set($propName, $val) {
-    $hookMethodName = $this->getHookMethodName($propName);
+    $hookMethodName = $this->getSetterHookMethodName($propName);
     if(method_exists($this, $hookMethodName)) {
+      // debug
+      // replace the following obsolete function
+      /*
       return 
         call_user_method_array(
           $hookMethodName, 
           $this, 
           array($propName => $val)
         );
+      */
+      return call_user_func_array(array($this, $hookMethodName), array($propName => $val));
+      // end of debug
     }
 
     $this->container[$propName] = $val;
@@ -247,8 +264,14 @@ class KORM {
     return $this;
   }
 
-  protected function getHookMethodName($methodName) {
-    $hookMethodName = "hook_" . $methodName;
+  protected function getGetterHookMethodName($methodName) {
+    $hookMethodName = "hook_getter_" . $methodName;
+
+    return $hookMethodName;
+  }
+
+  protected function getSetterHookMethodName($methodName) {
+    $hookMethodName = "hook_setter_" . $methodName;
 
     return $hookMethodName;
   }
