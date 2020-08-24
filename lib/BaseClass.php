@@ -143,7 +143,9 @@ class BaseClass {
 
     // debug
     // replace by call_user_func_array
-    $result = call_user_method_array($methodName, $this->getKlassName(), array($key, $oldVal, $val));
+    // return call_user_func_array(array($this, $hookMethodName), array($propName => $val));
+    // $result = call_user_method_array($methodName, $this->getKlassName(), array($key, $oldVal, $val));
+    $result = call_user_func_array(array($this, $methodName), array($key, $oldVal, $val));
     // end of debug
 
     return $result;
@@ -193,7 +195,8 @@ class BaseClass {
 
     // debug
     // replace by call_user_func_array
-    $result = call_user_method_array($methodName, $this->getKlassName(), array($key));
+    // $result = call_user_method_array($methodName, $this->getKlassName(), array($key));
+    $result = call_user_func_array(array($this, $methodName), array($key));
     // end of debug
 
     return $result;
