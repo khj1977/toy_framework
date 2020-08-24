@@ -3,6 +3,7 @@
 require_once("lib/process/BaseFacade.php");
 require_once("lib/graph/GraphNode.php");
 
+// The basic idea of GraphProcessFacade is come from the Apache nifi.
 class GraphProcessFacade extends BaseFacade {
   protected $rootNode;
 
