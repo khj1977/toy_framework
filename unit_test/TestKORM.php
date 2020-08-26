@@ -3,7 +3,8 @@
 // @Auther Hwi Jun KIM. euler.bonjour@gmail.com
 // See License.txt for license of this code.
 
-require_once(realpath(dirname(__FILE__) . "/../lib/BaseUnitTest.php"));
+// require_once(realpath(dirname(__FILE__) . "/../lib/BaseUnitTest.php"));
+require_once("lib/BaseUnitTest.php");
 require_once("lib/util/Assert.php");
 require_once("lib/util/AnonClass.php");
 require_once("lib/KORM.php");

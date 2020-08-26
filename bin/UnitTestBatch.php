@@ -1,7 +1,11 @@
 <?php
 
+set_include_path(get_include_path() . "" . PATH_SEPARATOR . realpath(dirname(__FILE__) . "/../"));
+// require_once(dirname(__FILE__) . "/../lib/BaseBatch.php");
+// require_once(dirname(__FILE__) . "/../lib/TheWorld.php");
 require_once(dirname(__FILE__) . "/../lib/BaseBatch.php");
 require_once(dirname(__FILE__) . "/../lib/TheWorld.php");
+
 
 class UnitTestBatch extends BaseBatch {
 
