@@ -169,14 +169,23 @@ class BaseClass {
     }
 
     if ($this->isGetterHookExist($key)) {
-      return $this->executeGetterHook($key, $this->retainer[$key]);
+      return $this->executeGetterHook($this->makeGetterHookMethodName($key),
+       $this->retainer[$key]);
     }
 
     return $this->magicObject->retainer[$key];
   }
 
   protected function isGetterHookExist($key) {
-    $methodName = $this->makeSetterHookMethodName($key);
+    // $methodName = $this->makeSetterHookMethodName($key);
+    $methodName = $this->makeGetterHookMethodName($key);
+
+    // debug
+    var_dump("header");
+    var_dump($this->getKlassName());
+    var_dump("content");
+    var_dump($methodName);
+    // end of debug
 
     $err = method_exists($this->getKlassName(), $methodName);
     if (!$err) {
@@ -191,7 +200,8 @@ class BaseClass {
       throw new KException("BaseClass::executeGetterHook(): a hook method is not exist with key: " . $key);
     }
 
-    $methodName = $this->makeGetterHookMethodName($key);
+    $methodName = $key;
+    // $methodName = $this->makeGetterHookMethodName($key);
 
     // debug
     // replace by call_user_func_array
