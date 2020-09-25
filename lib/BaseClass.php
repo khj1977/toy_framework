@@ -110,7 +110,8 @@ class BaseClass {
     // there is no problem to call isSetterHookExist() twice considering a cost of 
     // calling method.
     if ($this->isSetterHookExist($key)) {
-      return $this->executeSetterHook($key, $this->retainer[$key], $val);
+      return $this->executeSetterHook($this->makeSetterHookMethodName($key),
+      $this->retainer[$key], $val);
     }
 
     // var_dump("goo");
@@ -139,7 +140,8 @@ class BaseClass {
       throw new KException("BaseClass::executeSetterHook(): a hook method is not exist with key: " . $key);
     }
 
-    $methodName = $this->makeSetterHookMethodName($key);
+    // $methodName = $this->makeSetterHookMethodName($key);
+    $methodName = $key;
 
     // debug
     // replace by call_user_func_array
@@ -179,13 +181,6 @@ class BaseClass {
   protected function isGetterHookExist($key) {
     // $methodName = $this->makeSetterHookMethodName($key);
     $methodName = $this->makeGetterHookMethodName($key);
-
-    // debug
-    var_dump("header");
-    var_dump($this->getKlassName());
-    var_dump("content");
-    var_dump($methodName);
-    // end of debug
 
     $err = method_exists($this->getKlassName(), $methodName);
     if (!$err) {
