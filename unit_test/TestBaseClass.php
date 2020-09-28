@@ -54,7 +54,9 @@ class TestBaseClass extends BaseUnitTest {
     $model = new FooModel();
     try {
       $model->barMethod = "apple";
+      // debug
       print($result);
+      // end of debug
     }
     catch(Exception $ex) {
       TheWorld::instance()->debugStream->varDump(var_dump($ex));
