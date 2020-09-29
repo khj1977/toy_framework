@@ -2,8 +2,11 @@
 
 require_once("lib/BaseClass.php");
 
-class Stack extends BaseClass {
+class KStack extends BaseClass {
   protected $internalArray;
+  // Should implement exec($element)
+  // Which is child class of BaseAnonFunction
+  // Note that BaseAnonFuntion itself is abstract.
   protected $anonFunction;
 
   public function __construct() {
