@@ -17,24 +17,13 @@ class KArray extends BaseClass {
   }
 
   public function get($index) {
-
+    return $this->internalArray[$index];
   }
 
-  public function append($string) {
+  public function append($element) {
+    $this->internalArray[] = $element;
 
-  }
-
-  public function split($delimiter) {
-
-  }
-
-  public function regex($pattern) {
-
-  }
-
-  // return first index of first matched substring with string given.
-  public function find($string) {
-
+    return $this;
   }
 
 }
