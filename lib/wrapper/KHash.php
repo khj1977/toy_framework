@@ -23,8 +23,10 @@ class KHash extends BaseClass {
 
   public function get($key) {
     if (!$this->check($key)) {
-      throw new KException("Hash::get(): there is no value for " . $key);
+      throw new KException("Hash::get(): there is no value for key: " . $key);
     }
+
+    return $this->internalArray[$key];
   }
 
   public function check($key) {
@@ -32,7 +34,9 @@ class KHash extends BaseClass {
   }
 
   public function set($key, $val) {
+    $this->internalArray[$key] = $val;
 
+    return $this;
   }
 
   // debug

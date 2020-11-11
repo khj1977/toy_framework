@@ -83,7 +83,7 @@ class BaseClass {
 
     // $result = call_uesr_method_array($methodName, $this->delegate, $args);
 
-    $result = $this->delegate->callMethod($medhoName, $args);
+    $result = $this->delegate->callMethod($methodName, $args);
 
     return $result;
   }
@@ -114,9 +114,7 @@ class BaseClass {
       $this->retainer[$key], $val);
     }
 
-    // var_dump("goo");
     $this->magicObject->retainer[$key] = $val;
-    // var_dump($this->magicObject->retainer);
 
     return $this;
   }

@@ -1,36 +1,46 @@
 <?php
 
 require_once("lib/BaseClass.php");
+require_once("lib/wrapper/KDoubleLinkedList.php");
+require_once("lib/wrapper/KDoubleLinkedListNode.php");
 
 // FIFO queue.
 class KQueue extends BaseClass {
+  protected $internalList;
+
 
   public function __construct() {
     parent::__construct();
+
+    return $this;
+  }
+
+  public function initialize() {
+    $this->internalList = new KDoubleLinkedList();
+
+    return $this;
+  }
+
+  // Length is fixed
+  public function setLength($len) {
+    $currentLen = $this->internalList->getLength();
+    if ($len < $currentLen) {
       return $this;
     }
 
-    public function setLength($len) {
-
+    for($i = $currentLen; $i < $len; ++$i) {
+      $this->internalList->addNode(new KDoubleLinkedListNode());
     }
 
-    public function makeObsoleteLength() {
-      
-    }
+    return $this;
+  }
 
-    public function isFixedLenght() {
+  // push an element and pop first element if necessary.
+  public function push($element) {
+    $firstNode = $this->internalList->removeFirstNode();
+    $this->internalList->add($element);
 
-    }
-
-    // push an element and pop first element if necessary.
-    public function push($element) {
-
-    }
-
-    public function pop() {
-
-    }
-
+    return $firstNode->getContent();
   }
 
 }

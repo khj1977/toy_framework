@@ -28,14 +28,29 @@ class KString extends BaseClass {
     return $splitted;
   }
 
+  // pattern is pattern used for preg_match().
   public function regex($pattern, $matches = null) {
-    if ($matches = null) {
-      return preg_match($pattern, $this->internalString);
+    if ($matches == null) {
+      $result = preg_match($pattern, $this->internalString);
+      if ($result == 1) {
+        return true;
+      }
+
+      return false;
     }
 
     $matches = array();
-    return preg_match($pattern, $this->internalString, $matches);
+    preg_match($pattern, $this->internalString, $matches);
+    if (count($matches) == 1) {
+      throw new KException("KString::regex(): no matches: " . $pattern . " : " . $this->internalString);
+    }
+
+    return $matches;
   }
+
+  // debug
+  // implement other methods corresponding to demand of other code.
+  // end of debug
 
 }
 

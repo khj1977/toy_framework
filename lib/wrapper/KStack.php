@@ -4,9 +4,11 @@ require_once("lib/BaseClass.php");
 
 class KStack extends BaseClass {
   protected $internalArray;
+  // debug
   // Should implement exec($element)
   // Which is child class of BaseAnonFunction
   // Note that BaseAnonFuntion itself is abstract.
+  // end of debug
   protected $anonFunction;
 
   public function __construct() {
