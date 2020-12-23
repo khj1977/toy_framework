@@ -40,6 +40,12 @@ class TheWorld {
     return $this;
   }
 
+  public function destruct() {
+    $this->logger->close();
+
+    return $this;
+  }
+
   public function isCli() {
     return $this->isCli;
   }

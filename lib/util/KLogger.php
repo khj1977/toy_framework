@@ -12,6 +12,8 @@ class KLogger extends BaseClass {
     const WARN = "WARN";
     const ERROR = "ERROR";
 
+    protected $stream;
+
     public function __construct() {
       parent::__construct();
 
@@ -21,12 +23,19 @@ class KLogger extends BaseClass {
     public function log($level, $rawMessage) {
         $message = date("Y-m-d H:i:s:u") . " " . $level . " " . $rawMessage . "\n";
 
-        $stream = fopen($this->getPath(), "a");
-        if ($stream === FALSE) {
+        $this->stream = fopen($this->getPath(), "a");
+        if ($this->stream === FALSE) {
             throw new Exception();
         }
-        fwrite($stream, $message);
-        fclose($stream);
+        fwrite($this->stream, $message);
+
+        return $this;
+    }
+
+    public function close() {
+      fclose($this->stream);
+
+      return $this;
     }
 
     protected function getPath() {

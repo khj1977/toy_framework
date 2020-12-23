@@ -10,5 +10,7 @@
 
   $dispatcher->dispatch();
 
+  TheWorld::instance()->destruct();
+
   // Do nothing including return since this is web.
 ?>
