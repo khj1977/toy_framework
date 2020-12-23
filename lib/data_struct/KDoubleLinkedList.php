@@ -1,7 +1,7 @@
 <?php
 
 require_once("lib/BaseClass.php");
-require_once("lib/wrapper/KDoubleLinkedListNode.php");
+require_once("lib/data_struct/KDoubleLinkedListNode.php");
 
 class KDoubleLinkedList extends BaseClass { 
   protected $firstNode;

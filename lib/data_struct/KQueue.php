@@ -1,8 +1,8 @@
 <?php
 
 require_once("lib/BaseClass.php");
-require_once("lib/wrapper/KDoubleLinkedList.php");
-require_once("lib/wrapper/KDoubleLinkedListNode.php");
+require_once("lib/data_struct/KDoubleLinkedList.php");
+require_once("lib/data_struct/KDoubleLinkedListNode.php");
 
 // FIFO queue.
 class KQueue extends BaseClass {
