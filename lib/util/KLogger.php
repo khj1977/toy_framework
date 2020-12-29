@@ -20,16 +20,25 @@ class KLogger extends BaseClass {
       parent::initialize();
     }
 
+    protected function initialize() {
+      $path = $this->getPath();
+      $this->stream = fopen($path, "a");
+      if ($this->stream === false) {
+        throw new Exception("KLogger::initialize(): file cannot be opened: " . $path);
+      }
+
+      return $this;
+    }
+
     public function log($level, $rawMessage) {
-        $message = date("Y-m-d H:i:s:u") . " " . $level . " " . $rawMessage . "\n";
+      $message = date("Y-m-d H:i:s:u") . " " . $level . " " . $rawMessage . "\n";
+        
+      if ($this->stream === FALSE) {
+          throw new Exception();
+      }
+      fwrite($this->stream, $message);
 
-        $this->stream = fopen($this->getPath(), "a");
-        if ($this->stream === FALSE) {
-            throw new Exception();
-        }
-        fwrite($this->stream, $message);
-
-        return $this;
+      return $this;
     }
 
     public function close() {
