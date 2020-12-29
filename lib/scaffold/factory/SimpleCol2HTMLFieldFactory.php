@@ -27,13 +27,13 @@ class SimpleCol2HTMLFieldFactory extends BaseClass {
     $type = $col->getType();
 
     if ($col->getName() === "id" && $type == "int") {
-      $html = sprintf("<input type='hidden' name='%s' value='%s'>", $col->getName(), $col->getVal());
+      $html = sprintf("<input class='form-control' type='hidden' name='%s' value='%s'>", $col->getName(), $col->getVal());
     }
     else if ($type === "int") {
-        $html = sprintf("<input type='numeric' name='%s' value='%s'>", $col->getName(), $col->getVal());
+        $html = sprintf("<input class='form-control' type='numeric' name='%s' value='%s'>", $col->getName(), $col->getVal());
     }
     else if ($type === "varchar") {
-        $html = sprintf("<input type='text' name='%s' value='%s'>", $col->getName(), $col->getVal());
+        $html = sprintf("<input class='form-control' type='text' name='%s' value='%s'>", $col->getName(), $col->getVal());
     }
     else {
       throw new KException("Col2HTMLFactory::make(): no match of type to make HTML: " . $type);

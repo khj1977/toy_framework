@@ -55,10 +55,10 @@ class ScaffoldFormView extends BaseScaffoldView {
         $this->output = $this->output . $input->render();
       }
       else {
-        $this->output = $this->output . $input->getName() . ": " . $input->render() . "</br>";
+        $this->output = $this->output . "<label>" . $input->getName() . "</label>" . $input->render() . "</br>";
       }
     }
-    $this->output = $this->output . '<input type="submit" class="submit" value="送信">';
+    $this->output = $this->output . '<input type="submit" class="submit btn btn-primary" value="送信">';
     $this->output = $this->output . "</form>";
 
     return $this;

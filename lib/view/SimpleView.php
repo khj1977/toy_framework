@@ -39,7 +39,7 @@ class SimpleView extends BaseView {
 
   public function render() {
     if ($this->title != null) {
-      Util::println("<h1>" . $this->title . "</h1>");
+      Util::println("<h3>" . $this->title . "</h3>");
     }
     foreach($this->subViews as $subView) {
       // $subView->render();

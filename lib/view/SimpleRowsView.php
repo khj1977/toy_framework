@@ -28,7 +28,8 @@ class SimpleRowsView extends BaseView {
   }
 
   public function render() {
-    $html = "<table>";
+    // $html = "<table>";
+    $html = '<table class="table table-striped">';
     $htmlRow = $this->htmlRows[0];
     $html = $html . $htmlRow->renderHeader();
     foreach($this->htmlRows as $htmlRow) {
