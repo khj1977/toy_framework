@@ -44,7 +44,11 @@ class KLogger extends BaseClass {
       }
       fwrite($this->stream, $message);
 
+      // debug
+      // really, all kind is ordinary?
+      // use level?
       $this->htmlStream->log(HTMLDebugStream::KIND_ORDINARY, $message);
+      // end of debug
 
       return $this;
     }
