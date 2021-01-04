@@ -8,6 +8,7 @@ require_once("lib/WebRouter.php");
 require_once("lib/TheWorld.php");
 require_once("lib/KException.php");
 require_once("lib/WebArguments.php");
+require_once("lib/stream/HTMLDebugStream.php");
 
 class SimpleDispatcher extends BaseClass {
 
@@ -109,10 +110,7 @@ class SimpleDispatcher extends BaseClass {
         $viewVals = $router->getView($controller);
       }
 
-      // debug
-      // $this->debugStream->setFlag(true);
-      $this->debugStream->varDump($viewVals);
-      // end of debug
+      TheWorld::instance()->htmlDebugStream->render();
 
       require_once($viewVals["view_path"]);
     }

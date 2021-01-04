@@ -7,6 +7,7 @@ require_once("lib/RSSErrorHandler.php");
 require_once("lib/config/Config.php");
 require_once("lib/DB/MyPdo.php");
 require_once("lib/stream/DebugStream.php");
+require_once("lib/stream/HTMLDebugStream.php");
 require_once("lib/util/KLogger.php");
 require_once("lib/util/SimpleSession.php");
 
@@ -88,6 +89,7 @@ class TheWorld {
     $this->stage = "Dev";
     $this->config->setStage($this->stage);
     $this->debugStream = new DebugStream($this->stage);
+    $this->htmlDebugStream = new HTMLDebugStream($this->stage);
     // end of debug
 
     $dbProps = $this->config->getDBProps();

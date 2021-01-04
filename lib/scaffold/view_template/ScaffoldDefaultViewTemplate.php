@@ -7,7 +7,6 @@
 <link rel="stylesheet" href="./bootstrap/css/bootstrap.min.css"> 
 
 <title>SampleKListView</title>
-<!-- <link rel="stylesheet" href="<?php echo $viewVals["default_css_path"] ?>"> -->
 
 <body>
 <section>

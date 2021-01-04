@@ -160,6 +160,10 @@ class Util {
       return Util::upperCamelToUnderScore($str);
     }
 
+    static public function htmlspecialchars($str) {
+      return htmlspecialchars($str);
+    }
+
   }
 
 ?>
