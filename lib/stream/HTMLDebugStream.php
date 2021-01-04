@@ -5,7 +5,7 @@ require_once("lib/data_struct/KArray.php");
 require_once("lib/data_struct/KHash.php");
 require_once("lib/util/Util.php");
 
-class HTMLDebugStream extends BaseClass {
+class HTMLDebugStream {
 
   const KIND_ORDINARY = "ORDINARY";
   const KIND_SQL = "SQL";
@@ -15,14 +15,18 @@ class HTMLDebugStream extends BaseClass {
   protected $stage;
 
   public function __construct($stage) {
-    parent::__construct();
+    // parent::__construct();
 
-    $this->stage = $stage;
+    $this->initialize($stage);
 
     return $this;
   }
 
-  protected function initialize() {
+  protected function initialize($stage) {
+    $this->stage = $stage;
+
+    $this->buffers = new KHash();
+
     $this->buffers->set(HTMLDebugStream::KIND_ORDINARY, new KArray());
     $this->buffers->set(HTMLDebugStream::KIND_SQL, new KArray());
 
@@ -33,7 +37,7 @@ class HTMLDebugStream extends BaseClass {
     if ($this->buffers->check($kind) === false){
       throw new Exception("HTMLDebugStream::log::there is kind: " . $kind);
     }
-    $this->buffers->get($kind)->push($rawMessage);
+    $this->buffers->get($kind)->append($rawMessage);
 
     return $this;
   }
@@ -48,15 +52,20 @@ class HTMLDebugStream extends BaseClass {
   }
 
   public function render() {
+
     // Only dev stage, debug log is displayed on web browser.
     if ($this->stage != "Dev") {
       return $this;
     }
+
     // <div class="alert alert-primary" role="alert">
     // A simple primary alert—check it out!
     // </div>
-    foreach($this->buffers as $kind => $buffer) {
-      foreach($buffer as $rawMessage) {
+
+    $generator = $this->buffers->generator();
+    foreach($generator as $kind => $buffer) {
+      $bufferGenerator = $buffer->generator();
+      foreach($bufferGenerator as $rawMessage) {
         $element = sprintf('<div class="alert alert-primary" role="alert">%s</div>', Util::htmlspecialchars($rawMessage));
 
         print($element);

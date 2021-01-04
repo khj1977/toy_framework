@@ -51,7 +51,7 @@ class WebRouter extends BaseClass {
   }
 
   public function hasOutputHandler() {
-    if ($this->outputHalder === null) {
+    if ($this->outputHandler === null) {
       return false;
     }
 

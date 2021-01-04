@@ -101,7 +101,7 @@ class TheWorld {
     $this->slave = $pdo;
     // end of debug
 
-    $this->logger = new KLogger();
+    $this->logger = new KLogger($this->htmlDebugStream);
 
     $this->session = new SimpleSession();
 

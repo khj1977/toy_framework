@@ -39,9 +39,13 @@ class KHash extends BaseClass {
     return $this;
   }
 
-  // debug
-  // implement iterator which would be generator.
-  // end of debug
+  public function generator() {
+    foreach($this->internalArray as $key => $val) {
+      yield $key => $val;
+    }
+
+    return $this;
+  }
 
 }
 

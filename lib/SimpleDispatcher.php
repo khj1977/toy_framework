@@ -109,7 +109,7 @@ class SimpleDispatcher extends BaseClass {
       else {
         $viewVals = $router->getView($controller);
       }
-
+      
       TheWorld::instance()->htmlDebugStream->render();
 
       require_once($viewVals["view_path"]);

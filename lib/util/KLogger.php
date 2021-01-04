@@ -5,6 +5,7 @@
 
 require_once("lib/BaseClass.php");
 require_once("lib/TheWorld.php");
+require_once("lib/stream/HTMLDebugStream.php");
 
 class KLogger extends BaseClass {
 
@@ -13,14 +14,19 @@ class KLogger extends BaseClass {
     const ERROR = "ERROR";
 
     protected $stream;
+    protected $htmlStream;
 
-    public function __construct() {
+    public function __construct($htmlStream) {
       parent::__construct();
+
+      $this->htmlStream = $htmlStream;
 
       parent::initialize();
     }
 
     protected function initialize() {
+      // parent::initialize();
+
       $path = $this->getPath();
       $this->stream = fopen($path, "a");
       if ($this->stream === false) {
@@ -37,6 +43,8 @@ class KLogger extends BaseClass {
           throw new Exception();
       }
       fwrite($this->stream, $message);
+
+      $this->htmlStream->log(HTMLDebugStream::KIND_ORDINARY, $message);
 
       return $this;
     }
