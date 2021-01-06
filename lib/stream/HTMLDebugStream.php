@@ -4,6 +4,7 @@ require_once("lib/BaseClass.php");
 require_once("lib/data_struct/KArray.php");
 require_once("lib/data_struct/KHash.php");
 require_once("lib/util/Util.php");
+require_once("lib/view/AccordionVIew.php");
 
 class HTMLDebugStream {
 
@@ -62,15 +63,21 @@ class HTMLDebugStream {
     // A simple primary alert—check it out!
     // </div>
 
+    $html = "";
     $generator = $this->buffers->generator();
     foreach($generator as $kind => $buffer) {
       $bufferGenerator = $buffer->generator();
       foreach($bufferGenerator as $rawMessage) {
         $element = sprintf('<div class="alert alert-primary" role="alert">%s</div>', Util::htmlspecialchars($rawMessage));
 
-        print($element);
+        $html = $html . $element;
       }
     }
+
+    $accordion = new AccordionView();
+    $accordion->setBodyData($html)->setID("html_debug_stream")->setButtonTitle("debugArea");
+
+    $accordion->render();
 
     return $this;
   }

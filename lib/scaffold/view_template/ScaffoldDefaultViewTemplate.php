@@ -12,9 +12,11 @@
 <section>
 
 <?php
+  TheWorld::instance()->htmlDebugStream->render();
+?>
 
-$subView->render();
-
+<?php
+  $subView->render();
 ?>
 
 </section>

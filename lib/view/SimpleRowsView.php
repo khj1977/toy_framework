@@ -3,6 +3,8 @@
 // @Auther Hwi Jun KIM. euler.bonjour@gmail.com
 // See License.txt for license of this code.
 
+require_once("lib/view/BaseView.php");
+
 class SimpleRowsView extends BaseView {
 
   protected $htmlRows;
@@ -31,7 +33,9 @@ class SimpleRowsView extends BaseView {
     // $html = "<table>";
     $html = '<table class="table table-striped">';
     $htmlRow = $this->htmlRows[0];
-    $html = $html . $htmlRow->renderHeader();
+    if ($htmlRow->hasHeader()) {
+      $html = $html . $htmlRow->renderHeader();
+    }
     foreach($this->htmlRows as $htmlRow) {
       if ($htmlRow->isHidden()) {
          continue;

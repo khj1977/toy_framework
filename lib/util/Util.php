@@ -164,6 +164,10 @@ class Util {
       return htmlspecialchars($str);
     }
 
+    static public function outHTML($html) {
+      print($html);
+    }
+
   }
 
 ?>
