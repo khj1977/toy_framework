@@ -54,6 +54,10 @@ class StringPair extends BaseClass {
     return "";
   }
 
+  public function hasHeader() {
+    return false;
+  }
+
   public function render() {
     return $this->htmlFactory->make($tableName, $this->key, $this->val);
   }

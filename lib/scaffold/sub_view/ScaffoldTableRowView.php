@@ -45,6 +45,10 @@ class ScaffoldTableRowView extends BaseScaffoldView {
     return $html;
   }
 
+  public function hasHeader() {
+    return true;
+  }
+
   public function render() {
     $router = TheWorld::instance()->router;
     $html = "<tr>";
