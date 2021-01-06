@@ -40,6 +40,10 @@ class KArray extends BaseClass {
     return $this;
   }
 
+  public function push($element) {
+    return $this->append($element);
+  }
+
   public function generator() {
     foreach($this->internalArray as $element) {
       yield $element;

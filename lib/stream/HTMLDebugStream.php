@@ -46,7 +46,7 @@ class HTMLDebugStream {
     if ($this->buffers->check($kind) === false){
       throw new Exception("HTMLDebugStream::log::there is kind: " . $kind);
     }
-    $this->buffers->get($kind)->push(var_export($obj, true));
+    $this->buffers->get($kind)->push("varDump: " . var_export($obj, true));
 
     return $this;
   }
