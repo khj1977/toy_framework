@@ -6,6 +6,8 @@
 require_once("lib/BaseClass.php");
 require_once("lib/TheWorld.php");
 require_once("lib/stream/HTMLDebugStream.php");
+require_once("lib/stream/KFileStream.php");
+require_once("lib/util/KFile.php");
 
 class KLogger extends BaseClass {
 
@@ -25,13 +27,17 @@ class KLogger extends BaseClass {
     }
 
     protected function initialize() {
-      // parent::initialize();
+      parent::initialize();
 
       $path = $this->getPath();
-      $this->stream = fopen($path, "a");
-      if ($this->stream === false) {
-        throw new Exception("KLogger::initialize(): file cannot be opened: " . $path);
-      }
+
+      // deubg
+      // Is there better way? I think chmod every time is non-sense.
+      $file = new KFile();
+      $file->setPath($path);
+      $this->stream = $file->open("a");
+      $file->chmod(0777);
+      // end of debug
 
       return $this;
     }
@@ -39,10 +45,7 @@ class KLogger extends BaseClass {
     public function log($level, $rawMessage) {
       $message = date("Y-m-d H:i:s:u") . " " . $level . " " . $rawMessage . "\n";
         
-      if ($this->stream === FALSE) {
-          throw new Exception();
-      }
-      fwrite($this->stream, $message);
+      $this->stream->puts($message);
 
       // debug
       // really, all kind is ordinary?
@@ -54,7 +57,7 @@ class KLogger extends BaseClass {
     }
 
     public function close() {
-      fclose($this->stream);
+      $this->stream->close();
 
       return $this;
     }
