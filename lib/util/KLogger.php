@@ -34,8 +34,7 @@ class KLogger extends BaseClass {
       // deubg
       // Is there better way? I think chmod every time is non-sense.
       $file = new KFile();
-      $file->setPath($path);
-      $this->stream = $file->open("a");
+      $this->stream = $file->setPath($path)->open("a");
       $file->chmod(0777);
       // end of debug
 
