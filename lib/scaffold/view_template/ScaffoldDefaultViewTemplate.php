@@ -9,7 +9,9 @@
 <title>SampleKListView</title>
 
 <body>
-<section>
+
+<div class="container">
+<!-- <section> -->
 
 <?php
   TheWorld::instance()->htmlDebugStream->render();
@@ -19,7 +21,8 @@
   $subView->render();
 ?>
 
-</section>
+<!-- </section> -->
+</div>
 
 <script src="./jquery/jquery.js"></script>
 <script src="./bootstrap/js/bootstrap.bundle.min.js"></script>

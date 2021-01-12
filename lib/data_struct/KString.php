@@ -48,6 +48,14 @@ class KString extends BaseClass {
     return $matches;
   }
 
+  static public function isEqual($str1, $str2) {
+    if (strcmp($str1, $str2) === 0) {
+      return true;
+    }
+
+    return false;
+  }
+
   // debug
   // implement other methods corresponding to demand of other code.
   // end of debug

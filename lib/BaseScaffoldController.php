@@ -15,6 +15,9 @@ require_once("lib/scaffold/StringPair.php");
 require_once("lib/KORM.php");
 require_once("lib/BaseAuthController.php");
 require_once("lib/util/ModelLoader.php");
+require_once("lib/view/BreadCrumbView.php");
+require_once("lib/data_struct/KArray.php");
+require_once("lib/data_struct/KString.php");
 
 class BaseScaffoldController extends BaseAuthController {
 
@@ -23,12 +26,28 @@ class BaseScaffoldController extends BaseAuthController {
   // but for feature extention, it is retained.
   protected $isScaffold;
   protected $modelName;
+  protected $actionList;
+  protected $breadCrumbView;
 
   public function __construct() {
     $this->modelName = null;
     $this->isScaffold = true;
 
     parent::__construct();
+  }
+
+  protected function initialize() {
+    parent::initialize();
+
+    $this->actionList = new KArray();
+    $this->actionList->push("list")->push("edit")->push("confirm")->push("finish");
+
+    $this->breadCrumbView = new BreadCrumbView();
+    foreach($this->actionList->generator() as $crumb) {
+      $this->breadCrumbView->push($crumb);
+    }
+
+    return $this;
   }
 
   public function isScaffold() {
@@ -87,6 +106,10 @@ class BaseScaffoldController extends BaseAuthController {
     }
 
     $simpleView = new SimpleView();
+
+    $this->breadCrumbView->setIsActive("list");
+    $simpleView->addSubView($this->breadCrumbView);
+
     $simpleView->addSubView($rowsView);
     $simpleView->setTitle("List of table");
 
@@ -112,6 +135,9 @@ class BaseScaffoldController extends BaseAuthController {
 
     $formView = new ScaffoldFormView();
     $simpleView = new SimpleView();
+
+    $this->breadCrumbView->setIsActive("edit");
+    $simpleView->addSubView($this->breadCrumbView);
 
     $simpleView->addSubView($formView)->setTitle("Something for Apple Pie");
 
@@ -143,6 +169,9 @@ class BaseScaffoldController extends BaseAuthController {
 
     $rowsView = new SimpleRowsView();
     $simpleView = new SimpleView();
+
+    $this->breadCrumbView->setIsActive("confirm");
+    $simpleView->addSubView($this->breadCrumbView);
 
     $postData = TheWorld::instance()->arguments->getPostData();
 
@@ -204,6 +233,9 @@ class BaseScaffoldController extends BaseAuthController {
 
     $simpleView = new SimpleView();
     $simpleView->setTitle("Update has been successfuly done!");
+
+    $this->breadCrumbView->setIsActive("finish");
+    $simpleView->addSubView($this->breadCrumbView);
 
     $this->postUpdateExecute();
 
