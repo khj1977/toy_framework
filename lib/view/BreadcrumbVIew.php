@@ -25,8 +25,10 @@ class BreadCrumbView extends BaseClass {
 
   public function push($crumbName, $isActive = false) {
     $hash = new KHash();
+    $actionName = $crumbName;
     $hash->set("crumb", $crumbName);
     $hash->set("is_active", $isActive);
+    $hash->set("url", Util::generateURLFromActionName($actionName));
     $this->crumbs->push($hash);
 
     if ($isActive === true) {
@@ -62,11 +64,12 @@ class BreadCrumbView extends BaseClass {
     $generator = $this->crumbs->generator();
     foreach($generator as $aHash) {
       $crumb = $aHash->get("crumb");
+      $crumbUrl = $aHash->get("url");
       if ($this->isActive($crumb)) {
         $html = $html . sprintf('<li class="breadcrumb-item active" aria-current="page">%s</li>', $crumb);
       }
       else {
-        $html = $html . sprintf('<li class="breadcrumb-item"><a href="#">%s</a></li>', $crumb);
+        $html = $html . sprintf('<li class="breadcrumb-item"><a href="%s">%s</a></li>', $crumbUrl, $crumb);
       }
     }
     $html = $html . '</ol>';

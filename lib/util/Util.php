@@ -4,6 +4,7 @@
 // See License.txt for license of this code.
 
 require_once("lib/KException.php");
+require_once("lib/TheWorld.php");
 
 class Util {
 
@@ -166,6 +167,16 @@ class Util {
 
     static public function outHTML($html) {
       print($html);
+    }
+
+    static public function generateURLFromActionName($actionName) {
+      $theWorld = TheWorld::instance();
+      $url = sprintf("/index.php?m=%s&c=%s&a=%s",
+        $theWorld->moduleName,
+        $theWorld->controllerName,
+        $actionName);
+
+      return $url;
     }
 
   }

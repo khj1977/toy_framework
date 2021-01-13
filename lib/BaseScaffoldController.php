@@ -18,6 +18,7 @@ require_once("lib/util/ModelLoader.php");
 require_once("lib/view/BreadCrumbView.php");
 require_once("lib/data_struct/KArray.php");
 require_once("lib/data_struct/KString.php");
+require_once("lib/util/Util.php");
 
 class BaseScaffoldController extends BaseAuthController {
 
@@ -34,13 +35,18 @@ class BaseScaffoldController extends BaseAuthController {
     $this->isScaffold = true;
 
     parent::__construct();
+
+    return $this;
   }
 
   protected function initialize() {
     parent::initialize();
 
     $this->actionList = new KArray();
-    $this->actionList->push("list")->push("edit")->push("confirm")->push("finish");
+    // debug
+    // use reflection?
+    // $this->actionList->push("klist")->push("edit")->push("confirm")->push("update");
+    // end of debug
 
     $this->breadCrumbView = new BreadCrumbView();
     foreach($this->actionList->generator() as $crumb) {
@@ -88,6 +94,11 @@ class BaseScaffoldController extends BaseAuthController {
 
   public function klist() {
     $this->preKListExecute();
+    // debug
+    // use reflection?
+    $this->actionList->push("klist");
+    $this->setupBreadCrumb("klist");
+    // end of debug
     $tableName = Util::omitSuffix(Util::upperCamelToLowerCase($this->modelName), "_model");
 
     $tableFactory = new TableFactory();
@@ -107,7 +118,7 @@ class BaseScaffoldController extends BaseAuthController {
 
     $simpleView = new SimpleView();
 
-    $this->breadCrumbView->setIsActive("list");
+    $this->breadCrumbView->setIsActive("klist");
     $simpleView->addSubView($this->breadCrumbView);
 
     $simpleView->addSubView($rowsView);
@@ -121,6 +132,8 @@ class BaseScaffoldController extends BaseAuthController {
   public function edit() {
     $this->preEditExecute();
 
+    $this->actionList->push("klist")->push("edit");
+    $this->setupBreadCrumb();
     $tableName = Util::omitSuffix(Util::upperCamelToLowerCase($this->modelName), "_model");
     
     $tableFactory = new TableFactory();
@@ -163,6 +176,8 @@ class BaseScaffoldController extends BaseAuthController {
   public function confirm() {
     $this->preConfirmExecute();
 
+    $this->actionList->push("klist")->push("edit")->push("confirm");
+    $this->setupBreadCrumb();
     $tableName = Util::omitSuffix(Util::upperCamelToLowerCase($this->modelName), "_model");
     
     $factory = new SimpleCol2HTMLConfirmElementFactory();
@@ -208,6 +223,8 @@ class BaseScaffoldController extends BaseAuthController {
   public function update() {
     $this->preUpdateExecute();
 
+    $this->actionList->push("klist")->push("edit")->push("confirm")->push("update");
+    $this->setupBreadCrumb();
     $tableName = Util::omitSuffix(Util::upperCamelToLowerCase($this->modelName), "_model");
 
     $session = TheWorld::instance()->session;
@@ -234,12 +251,20 @@ class BaseScaffoldController extends BaseAuthController {
     $simpleView = new SimpleView();
     $simpleView->setTitle("Update has been successfuly done!");
 
-    $this->breadCrumbView->setIsActive("finish");
+    $this->breadCrumbView->setIsActive("update");
     $simpleView->addSubView($this->breadCrumbView);
 
     $this->postUpdateExecute();
 
     return $simpleView;
+  }
+
+  protected function setupBreadCrumb() {
+    $this->breadCrumbView = new BreadCrumbView();
+    foreach($this->actionList->generator() as $crumb) {
+      $this->breadCrumbView->push($crumb);
+    }
+
   }
 
 }
