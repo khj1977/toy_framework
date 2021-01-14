@@ -12,7 +12,6 @@
 
 <div class="container">
 <!-- <section> -->
-
 <?php
   TheWorld::instance()->htmlDebugStream->render();
 ?>

@@ -19,6 +19,8 @@ require_once("lib/view/BreadCrumbView.php");
 require_once("lib/data_struct/KArray.php");
 require_once("lib/data_struct/KString.php");
 require_once("lib/util/Util.php");
+require_once("lib/view/HeaderView.php");
+require_once("lib/view/MessageAlertVIew.php");
 
 class BaseScaffoldController extends BaseAuthController {
 
@@ -118,6 +120,14 @@ class BaseScaffoldController extends BaseAuthController {
 
     $simpleView = new SimpleView();
 
+    // debug
+    // Is there better way not to repeat the following block over actions?
+    // refactor the following.
+    $headerView = new HeaderView();
+    $headerView->setTitle("Scaffold Sample");
+    $simpleView->addSubView($headerView);
+    // end of debug
+
     $this->breadCrumbView->setIsActive("klist");
     $simpleView->addSubView($this->breadCrumbView);
 
@@ -149,6 +159,10 @@ class BaseScaffoldController extends BaseAuthController {
     $formView = new ScaffoldFormView();
     $simpleView = new SimpleView();
 
+    $headerView = new HeaderView();
+    $headerView->setTitle("Scaffold Sample");
+    $simpleView->addSubView($headerView);
+  
     $this->breadCrumbView->setIsActive("edit");
     $simpleView->addSubView($this->breadCrumbView);
 
@@ -184,6 +198,10 @@ class BaseScaffoldController extends BaseAuthController {
 
     $rowsView = new SimpleRowsView();
     $simpleView = new SimpleView();
+
+    $headerView = new HeaderView();
+    $headerView->setTitle("Scaffold Sample");
+    $simpleView->addSubView($headerView);
 
     $this->breadCrumbView->setIsActive("confirm");
     $simpleView->addSubView($this->breadCrumbView);
@@ -251,8 +269,16 @@ class BaseScaffoldController extends BaseAuthController {
     $simpleView = new SimpleView();
     $simpleView->setTitle("Update has been successfuly done!");
 
+    $headerView = new HeaderView();
+    $headerView->setTitle("Scaffold Sample");
+    $simpleView->addSubView($headerView);
+
     $this->breadCrumbView->setIsActive("update");
     $simpleView->addSubView($this->breadCrumbView);
+
+    $messageAlertView = new MessageAlertView();
+    $messageAlertView->setMessage("Update has successfully been done.")->setJumpToURL(Util::generateURLFromActionName("klist"))->setButtonLabel("戻る");
+    $simpleView->addSubView($messageAlertView);
 
     $this->postUpdateExecute();
 
