@@ -2,7 +2,7 @@
 
 require_once("lib/widget/BaseWidget.php");
 require_once("lib/data_struct/KArray.php");
-require_once("lib/view/BreadcumbView.php");
+require_once("lib/view/BreadCrumbView.php");
 
 abstract class BaseScaffoldWidget extends BaseWidget {
 
@@ -16,10 +16,11 @@ abstract class BaseScaffoldWidget extends BaseWidget {
   }
 
   protected function initialize() {
-    parent::_initilize();
+    parent::initialize();
 
     $this->actionList = new KArray();
     $this->breadCrumbView = new BreadCrumbView();
+
     return $this;
   }
 

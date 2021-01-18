@@ -21,6 +21,16 @@ abstract class BaseWidget extends BaseView {
     return $this;
   }
 
+  public function run() {
+    $this->preExecute();
+    $result = $this->xrun();
+    $this->postExecute();
+
+    return $this;
+  }
+
+  abstract public function xrun();
+
   public function setView($view) {
     $this->internalView = $view;
 
