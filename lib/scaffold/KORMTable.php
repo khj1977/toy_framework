@@ -52,7 +52,8 @@ class KORMTable extends BaseTable {
     // $orms = $baseOrm->fetch($where, null, $limit);
     $orms = $modelName::fetch($where, null, $limit);
 
-    $this->ds->vd($orms);
+    // $this->ds->vd($orms);
+    
     // obtain col names and types
     // obtain val from col name and orm.
     // then assign to db cols.

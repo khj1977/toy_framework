@@ -21,6 +21,7 @@ require_once("lib/data_struct/KString.php");
 require_once("lib/util/Util.php");
 require_once("lib/view/HeaderView.php");
 require_once("lib/view/MessageAlertVIew.php");
+require_once("lib/widget/ScaffoldListWidget.php");
 
 class BaseScaffoldController extends BaseAuthController {
 
@@ -95,48 +96,8 @@ class BaseScaffoldController extends BaseAuthController {
   }
 
   public function klist() {
-    $this->preKListExecute();
-    // debug
-    // use reflection?
-    $this->actionList->push("klist");
-    $this->setupBreadCrumb("klist");
-    // end of debug
-    $tableName = Util::omitSuffix(Util::upperCamelToLowerCase($this->modelName), "_model");
-
-    $tableFactory = new TableFactory();
-    $table = $tableFactory->make("KORM", $this->modelName);
-    
-    // note that filter for KORM can be applied inside getDBCols() because __get() is called.
-    $rows = $table->getDBCols();
-    
-    $rowsView = new SimpleRowsView();
-    foreach($rows as $row) {
-      $rowView = new ScaffoldTableRowView();
-      foreach($row as $dbCol) {
-       $rowView->push($dbCol);
-      }
-      $rowsView->push($rowView);
-    }
-
-    $simpleView = new SimpleView();
-
-    // debug
-    // Is there better way not to repeat the following block over actions?
-    // refactor the following.
-    $headerView = new HeaderView();
-    $headerView->setTitle("Scaffold Sample");
-    $simpleView->addSubView($headerView);
-    // end of debug
-
-    $this->breadCrumbView->setIsActive("klist");
-    $simpleView->addSubView($this->breadCrumbView);
-
-    $simpleView->addSubView($rowsView);
-    $simpleView->setTitle("List of table");
-
-    $this->postKListExecute();
-
-    return $simpleView;
+    $widget = new ScaffoldListWidget();
+    return $widget->setModelName($this->modelName)->run();
   }
 
   public function edit() {
@@ -168,11 +129,8 @@ class BaseScaffoldController extends BaseAuthController {
 
     $simpleView->addSubView($formView)->setTitle("Something for Apple Pie");
 
-    // debug
-    // use Virtual Host instead of specify actual path.
     $router = TheWorld::instance()->router;
     $formView->setAction(sprintf("/index.php?m=%s&c=%s&a=confirm", $router->getModule(), $router->getController()))->setMethod("POST");
-    // end of debug
 
     $row = $rows[0];
     foreach($row as $col) {
@@ -214,7 +172,7 @@ class BaseScaffoldController extends BaseAuthController {
     $controllerName = TheWorld::instance()->controllerName;
     $actionName = TheWorld::instance()->actionName;
     $session->setSuffix($controllerName . "::" . $actionName . "::");
-    $this->ds->vd("CTR: " . $controllerName);
+    // $this->ds->vd("CTR: " . $controllerName);
     foreach($postData as $key => $val) {
       $pair = new StringPair();
       $pair->setPair($key, $val)->setHTMLFactory($factory);
