@@ -115,7 +115,10 @@ class BaseScaffoldController extends BaseAuthController {
       foreach($row as $dbCol) {
        $rowView->push($dbCol);
       }
+      // notice
+      // row's' not row
       $rowsView->push($rowView);
+      // end of notice
     }
 
     $simpleView = new SimpleView();
@@ -168,11 +171,8 @@ class BaseScaffoldController extends BaseAuthController {
 
     $simpleView->addSubView($formView)->setTitle("Something for Apple Pie");
 
-    // debug
-    // use Virtual Host instead of specify actual path.
     $router = TheWorld::instance()->router;
     $formView->setAction(sprintf("/index.php?m=%s&c=%s&a=confirm", $router->getModule(), $router->getController()))->setMethod("POST");
-    // end of debug
 
     $row = $rows[0];
     foreach($row as $col) {
@@ -214,7 +214,7 @@ class BaseScaffoldController extends BaseAuthController {
     $controllerName = TheWorld::instance()->controllerName;
     $actionName = TheWorld::instance()->actionName;
     $session->setSuffix($controllerName . "::" . $actionName . "::");
-    $this->ds->vd("CTR: " . $controllerName);
+    // $this->ds->vd("CTR: " . $controllerName);
     foreach($postData as $key => $val) {
       $pair = new StringPair();
       $pair->setPair($key, $val)->setHTMLFactory($factory);
