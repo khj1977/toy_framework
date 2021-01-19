@@ -22,6 +22,9 @@ require_once("lib/util/Util.php");
 require_once("lib/view/HeaderView.php");
 require_once("lib/view/MessageAlertVIew.php");
 require_once("lib/widget/ScaffoldListWidget.php");
+require_once("lib/widget/ScaffoldEditWidget.php");
+require_once("lib/widget/ScaffoldConfirmWidget.php");
+require_once("lib/widget/ScaffoldFinishWodget.php");
 
 class BaseScaffoldController extends BaseAuthController {
 
@@ -32,6 +35,7 @@ class BaseScaffoldController extends BaseAuthController {
   protected $modelName;
   protected $actionList;
   protected $breadCrumbView;
+  protected $simpleView;
 
   public function __construct() {
     $this->modelName = null;
@@ -51,10 +55,17 @@ class BaseScaffoldController extends BaseAuthController {
     // $this->actionList->push("klist")->push("edit")->push("confirm")->push("update");
     // end of debug
 
+    $this->simpleView = new SimpleView();
+    $headerView = new HeaderView();
+    $headerView->setTitle("Scaffold Sample");
+    $this->simpleView->addSubView($headerView);
+
+    /*
     $this->breadCrumbView = new BreadCrumbView();
     foreach($this->actionList->generator() as $crumb) {
       $this->breadCrumbView->push($crumb);
     }
+    */
 
     return $this;
   }
@@ -63,184 +74,24 @@ class BaseScaffoldController extends BaseAuthController {
     return true;
   }
 
-  protected function preKListExecute() {
-
-  }
-
-  protected function postKListExecute() {
-
-  }
-
-  protected function preEditExecute() {
-
-  }
-
-  protected function postEditExecute() {
-    
-  }  
-
-  protected function preConfirmExecute() {
-
-  }
-
-  protected function postConfirmExecute() {
-    
-  }
-
-  protected function preUpdateExecute() {
-
-  }
-
-  protected function postUpdateExecute() {
-    
-  }
-
   public function klist() {
     $widget = new ScaffoldListWidget();
-    return $widget->setModelName($this->modelName)->run();
+    return $widget->setModelName($this->modelName)->setParentView($this->simpleView)->run();
   }
 
   public function edit() {
-    $this->preEditExecute();
-
-    $this->actionList->push("klist")->push("edit");
-    $this->setupBreadCrumb();
-    $tableName = Util::omitSuffix(Util::upperCamelToLowerCase($this->modelName), "_model");
-    
-    $tableFactory = new TableFactory();
-    $sqlTable = $tableFactory->make("KORM", $this->modelName);
-   
-    $args = TheWorld::instance()->arguments;
-    $id = $args->get("id");
-
-    $rows = $sqlTable->getDBCols(1, array("id" => $id));
-    
-    $factory = new SimpleCol2HTMLFieldFactory();
-
-    $formView = new ScaffoldFormView();
-    $simpleView = new SimpleView();
-
-    $headerView = new HeaderView();
-    $headerView->setTitle("Scaffold Sample");
-    $simpleView->addSubView($headerView);
-  
-    $this->breadCrumbView->setIsActive("edit");
-    $simpleView->addSubView($this->breadCrumbView);
-
-    $simpleView->addSubView($formView)->setTitle("Something for Apple Pie");
-
-    $router = TheWorld::instance()->router;
-    $formView->setAction(sprintf("/index.php?m=%s&c=%s&a=confirm", $router->getModule(), $router->getController()))->setMethod("POST");
-
-    $row = $rows[0];
-    foreach($row as $col) {
-      $col->setHTMLFactory($factory);
-      // $html = $col->render();
-      $formView->pushInput($col);
-    }
-    // $simpleView->render();
-
-    $this->postEditExecute();
-
-    return $simpleView;
+    $widget = new ScaffoldEditWidget();
+    return $widget->setModelName($this->modelName)->setParentView($this->simpleView)->run();
   }
 
   public function confirm() {
-    $this->preConfirmExecute();
-
-    $this->actionList->push("klist")->push("edit")->push("confirm");
-    $this->setupBreadCrumb();
-    $tableName = Util::omitSuffix(Util::upperCamelToLowerCase($this->modelName), "_model");
-    
-    $factory = new SimpleCol2HTMLConfirmElementFactory();
-
-    $rowsView = new SimpleRowsView();
-    $simpleView = new SimpleView();
-
-    $headerView = new HeaderView();
-    $headerView->setTitle("Scaffold Sample");
-    $simpleView->addSubView($headerView);
-
-    $this->breadCrumbView->setIsActive("confirm");
-    $simpleView->addSubView($this->breadCrumbView);
-
-    $postData = TheWorld::instance()->arguments->getPostData();
-
-    $simpleView->addSubView($rowsView)->setTitle("Confirm Something for Apple Pie");
-
-    $session = TheWorld::instance()->session;
-    $controllerName = TheWorld::instance()->controllerName;
-    $actionName = TheWorld::instance()->actionName;
-    $session->setSuffix($controllerName . "::" . $actionName . "::");
-    // $this->ds->vd("CTR: " . $controllerName);
-    foreach($postData as $key => $val) {
-      $pair = new StringPair();
-      $pair->setPair($key, $val)->setHTMLFactory($factory);
-      $rowsView->push($pair);
-
-      $session->set($key, $val);
-    }
-
-    $formView = new ScaffoldFormView();
-
-    $simpleView->addSubView($formView);
-
-    // debug
-    // use Virtual Host instead of specify actual path.
-    $router = TheWorld::instance()->router;
-    $formView->setAction(sprintf("/index.php?m=%s&c=%s&a=update", $router->getModule(), $router->getController()))->setMethod("POST");
-    // end of debug
-
-    $this->postConfirmExecute();
-
-    return $simpleView;
+    $widget = new ScaffoldConfirmWidget();
+    return $widget->setModelName($this->modelName)->setParentView($this->simpleView)->run();
   }
 
   public function update() {
-    $this->preUpdateExecute();
-
-    $this->actionList->push("klist")->push("edit")->push("confirm")->push("update");
-    $this->setupBreadCrumb();
-    $tableName = Util::omitSuffix(Util::upperCamelToLowerCase($this->modelName), "_model");
-
-    $session = TheWorld::instance()->session;
-
-    $session->setSuffix(TheWorld::instance()->controllerName. "::confirm::");
-
-    $modelName = $this->modelName;
-
-    $modelLoader = new ModelLoader();
-    $modelLoader->load($modelName);
-    $korm = new $modelName($tableName);
-
-    $keys = $session->getKeys(false);
-   
-    foreach($keys as $key) {
-      $val = $session->get($key);
-      $realKey = $val["real_key"];
-      $realVal = $val["real_val"];
-      // set props for ORM
-      $korm->$realKey = $realVal;
-    }
-    $korm->save();
-
-    $simpleView = new SimpleView();
-    $simpleView->setTitle("Update has been successfuly done!");
-
-    $headerView = new HeaderView();
-    $headerView->setTitle("Scaffold Sample");
-    $simpleView->addSubView($headerView);
-
-    $this->breadCrumbView->setIsActive("update");
-    $simpleView->addSubView($this->breadCrumbView);
-
-    $messageAlertView = new MessageAlertView();
-    $messageAlertView->setMessage("Update has successfully been done.")->setJumpToURL(Util::generateURLFromActionName("klist"))->setButtonLabel("戻る");
-    $simpleView->addSubView($messageAlertView);
-
-    $this->postUpdateExecute();
-
-    return $simpleView;
+    $widget = new ScaffoldFinishWidget();
+    return $widget->setModelName($this->modelName)->setParentView($this->simpleView)->run();
   }
 
   protected function setupBreadCrumb() {

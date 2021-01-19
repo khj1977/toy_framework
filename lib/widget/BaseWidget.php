@@ -7,10 +7,12 @@ abstract class BaseWidget extends BaseView {
 
   protected $modelName;
   protected $internalView;
+  protected $parentView;
 
   protected function initialize() {
     $this->modelName = null;
     $this->internalView = null;
+    $this->parentView = null;
 
     return $this;
   }
@@ -21,10 +23,16 @@ abstract class BaseWidget extends BaseView {
     return $this;
   }
 
+  public function setParentView($parentView) {
+    $this->parentView = $parentView;
+
+    return $this;
+  }
+
   public function run() {
-    $this->preExecute();
+    $this->preRun();
     $result = $this->xrun();
-    $this->postExecute();
+    $this->postRun();
 
     return $this;
   }
@@ -41,11 +49,11 @@ abstract class BaseWidget extends BaseView {
     return $this->internalView->render();
   }
 
-  protected function preExecute() {
+  protected function preRun() {
     return $this;
   }
 
-  protected function postExecute() {
+  protected function postRun() {
     return $this;
   }
 

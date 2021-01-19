@@ -38,23 +38,15 @@ class ScaffoldListWidget extends BaseScaffoldWidget {
       // end of notice
     }
 
-    $simpleView = new SimpleView();
-
-    // debug
-    // Is there better way not to repeat the following block over actions?
-    // refactor the following.
-    $headerView = new HeaderView();
-    $headerView->setTitle("Scaffold Sample");
-    $simpleView->addSubView($headerView);
-    // end of debug
+    // $simpleView = new SimpleView();
 
     $this->breadCrumbView->setIsActive("klist");
-    $simpleView->addSubView($this->breadCrumbView);
+    $this->parentView->addSubView($this->breadCrumbView);
 
-    $simpleView->addSubView($rowsView);
-    $simpleView->setTitle("List of table");
+    $this->parentView->addSubView($rowsView);
+    $this->parentView->setTitle("List of table");
 
-    $this->setView($simpleView);
+    $this->setView($this->parentView);
 
     // return $simpleView;
 
