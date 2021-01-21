@@ -16,6 +16,14 @@
   TheWorld::instance()->htmlDebugStream->render();
 ?>
 
+<center>
+  <div class="card w-75">
+    <div class="card-body">
+      <p class="card-text">エラーが発生しました</p>
+    </div>
+  </div>
+</center>'
+
 <!-- </section> -->
 </div>
 

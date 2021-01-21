@@ -75,7 +75,7 @@ class HTMLDebugStream {
     }
 
     $accordion = new AccordionView();
-    $accordion->setBodyData($html)->setID("html_debug_stream")->setButtonTitle("debugArea");
+    $accordion->setBodyData($html)->setID("html_debug_stream")->setButtonTitle("Debug Info");
 
     $accordion->render();
 

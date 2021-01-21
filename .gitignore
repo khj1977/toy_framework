@@ -4,3 +4,4 @@ config/DevConfigImpl.php
 config/StagingConfigImpl.php
 config/ProductionConfigImpl.php
 .DS_Store
+.vscode
