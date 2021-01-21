@@ -10,6 +10,7 @@ require_once("lib/stream/DebugStream.php");
 require_once("lib/stream/HTMLDebugStream.php");
 require_once("lib/util/KLogger.php");
 require_once("lib/util/SimpleSession.php");
+require_once("lib/util/ServerEnv.php");
 
 class TheWorld {
 
@@ -86,7 +87,8 @@ class TheWorld {
     $this->config = new Config();
     // debug
     // change to set "dev" by env val by apache or something like that.
-    $this->stage = "Dev";
+    $this->serverEnv = new ServerEnv();
+    $this->stage = $this->serverEnv->get("K_STAGE");
     $this->config->setStage($this->stage);
     $this->debugStream = new DebugStream($this->stage);
     $this->htmlDebugStream = new HTMLDebugStream($this->stage);
