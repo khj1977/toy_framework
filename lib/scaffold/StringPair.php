@@ -11,6 +11,8 @@ class StringPair extends BaseClass {
   protected $type;
   protected $val;
 
+  protected $tableName;
+
   protected $htmlFactory;
 
   public function __construct() {
@@ -31,6 +33,12 @@ class StringPair extends BaseClass {
     return $this;
   }
 
+  public function setTableName($tableName) {
+    $this->tableName = $tableName;
+
+    return $this;
+  }
+
   public function setPair($key, $val) {
     $this->key = $key;
     $this->val = $val;
@@ -47,7 +55,7 @@ class StringPair extends BaseClass {
   }
 
   public function getPair() {
-    return array($key => $val);
+    return array($this->key => $this->val);
   }
 
   public function renderHeader() {
@@ -59,7 +67,7 @@ class StringPair extends BaseClass {
   }
 
   public function render() {
-    return $this->htmlFactory->make($tableName, $this->key, $this->val);
+    return $this->htmlFactory->make($this->tableName, $this->key, $this->val);
   }
 
   public function toString() {

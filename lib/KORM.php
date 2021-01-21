@@ -331,7 +331,8 @@ class KORM {
       $klassName::$types[$klassName::$tableName][$field] = $type;
 
       if(
-        !is_array($klassName::$propNames[$klassName::$tableName])
+        // !is_array($klassName::$propNames[$klassName::$tableName])
+        !array_key_exists($klassName::$tableName, $klassName::$propNames)
         )
       {                 
         $klassName::$propNames[$klassName::$tableName] = 

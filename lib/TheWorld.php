@@ -85,14 +85,12 @@ class TheWorld {
     $this->initializeInternalRetainer();
 
     $this->config = new Config();
-    // debug
-    // change to set "dev" by env val by apache or something like that.
+
     $this->serverEnv = new ServerEnv();
     $this->stage = $this->serverEnv->get("K_STAGE");
     $this->config->setStage($this->stage);
     $this->debugStream = new DebugStream($this->stage);
     $this->htmlDebugStream = new HTMLDebugStream($this->stage);
-    // end of debug
 
     $dbProps = $this->config->getDBProps();
 
@@ -106,6 +104,12 @@ class TheWorld {
     $this->logger = new KLogger($this->htmlDebugStream);
 
     $this->session = new SimpleSession();
+
+    $this->setErrorHandler();
+
+    // debug
+    // $this->bar();
+    // end of debug
 
     /*
     set_error_handler(function($errorNo, $errorStr) {
@@ -129,12 +133,10 @@ class TheWorld {
   }
 
   public function setErrorHandler() {
-    /*
     set_error_handler(function($errorNo, $errorStr) {
         $message = sprintf("TheWorld::setErrorHandler(): %d\t%s", $errorNo, $errorStr);
         throw new Exception($message);
       } );
-    */
 
     return $this;
   }

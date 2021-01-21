@@ -42,6 +42,11 @@ class KLogger extends BaseClass {
     }
 
     public function log($level, $rawMessage) {
+      $type = gettype($rawMessage);
+      if ($type == "array" || $type == "object") {
+        $rawMessage = var_export($rawMessage, true);
+      }
+      
       $message = date("Y-m-d H:i:s:u") . " " . $level . " " . $rawMessage . "\n";
         
       $this->stream->puts($message);

@@ -40,7 +40,7 @@ class ScaffoldConfirmWidget extends BaseScaffoldWidget {
     // $this->ds->vd("CTR: " . $controllerName);
     foreach($postData as $key => $val) {
       $pair = new StringPair();
-      $pair->setPair($key, $val)->setHTMLFactory($factory);
+      $pair->setTableName($tableName)->setPair($key, $val)->setHTMLFactory($factory);
       $rowsView->push($pair);
 
       $session->set($key, $val);

@@ -43,6 +43,10 @@ class WebArguments extends BaseClass {
     }
     */
 
+    if (!array_key_exists($key, $this->merged)) {
+      return false;
+    }
+
     return $this->merged[$key];
   }
 

@@ -72,7 +72,7 @@ class SimpleDispatcher extends BaseClass {
     try {
       $controller->preAction();
       // debug
-      // refacot the following to accept controller output handler which is object and instance of ControllerOutputHandler.
+      // refacor the following to accept controller output handler which is object and instance of ControllerOutputHandler.
       // Expected kind of output handlers are html or view handler, JSON output handler, and XML output handler.
       // To specify output handler would be done by GET URL. It is litte bit risky to think about secutiry. However, since this framework is used for intra net, it would be acceptable.
       // The better implementation considering about secutiry would be implemented later on. Since this code is just a prototype, it is OK.
@@ -111,17 +111,16 @@ class SimpleDispatcher extends BaseClass {
       }
       
       // TheWorld::instance()->htmlDebugStream->render();
-
       require_once($viewVals["view_path"]);
     }
-    catch(KException $e) {
+    catch(Exception $e) {
       $message = "Dispatcher: " . $e->getMessage();
 
-      // debug
-      // implement by appropriate manner the 
-      // following code.
-      TheWorld::instance()->logger->log(KLogger::WARN, $message);
-      // end of debug
+      TheWorld::instance()->logger->log(KLogger::ERROR, $message);
+      TheWorld::instance()->logger->log(KLogger::ERROR, $e->getTraceAsString());
+
+      require_once("lib/view_template/ErrorViewTemplate.php");
+      exit;
     }
 
     return true;

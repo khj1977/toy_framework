@@ -38,11 +38,16 @@ class WebRouter extends BaseClass {
     if ($this->action === "") {
       throw new KException("WebRouter::getRoute(): action is not specified.");
     }
-    $this->outputHandler = Util::upperCamelToUnderScore(urldecode($this->webArguments->get("o")));
-    if ($this->outputHandler === "") {
+
+    $outputHandlerName = $this->webArguments->get("o");
+    if ($outputHandlerName === false) {
       // throw new KException("WebRouter::getRoute(): action is not specified.");
       $this->outputHandler = null;
     }
+    else {
+      $this->outputHandler = Util::upperCamelToUnderScore(urldecode($outputHandlerName));
+    }
+ 
     // view is automatically determined by m, c and a.
 
     $route = array("module" => $this->module, "controller" => $this->controller, "action" => $this->action);
