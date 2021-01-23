@@ -1,9 +1,9 @@
 <?php
 
-require_once("lib/BaseClass.php");
 require_once("lib/KException.php");
+require_once("lib/data_struct/KSequential.php");
 
-class KArray extends BaseClass {
+class KArray extends KSequential {
 
   protected $internalArray;
 

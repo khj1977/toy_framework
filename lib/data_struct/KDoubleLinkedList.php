@@ -1,9 +1,9 @@
 <?php
 
-require_once("lib/BaseClass.php");
 require_once("lib/data_struct/KDoubleLinkedListNode.php");
+require_once("lib/data_struct/KSequential.php");
 
-class KDoubleLinkedList extends BaseClass { 
+class KDoubleLinkedList extends KSequential { 
   protected $firstNode;
   protected $lastNode;
   protected $len;

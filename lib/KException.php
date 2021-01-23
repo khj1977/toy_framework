@@ -10,7 +10,7 @@ class KException extends Exception {
 
   public function __construct($message) {
     parent::__construct($message);
-    $this->doLogging($message);
+    // $this->doLogging($message);
 
     return $this;
   }

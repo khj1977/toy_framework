@@ -18,11 +18,13 @@ class ServerEnv extends BaseClass {
   }
 
   public function get($key) {
-    return $this->internalHash[$key];
+    // return $this->internalHash[$key];
+    return getenv($key);
   }
 
   public function check($key) {
-    return array_key_exists($key, $this->internalHash);
+    // return array_key_exists($key, $this->internalHash);
+    throw new Exception("ServerEnv::check(): this method has not been implemented yet: " . $key);
   }
 
 }
