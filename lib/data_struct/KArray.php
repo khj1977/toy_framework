@@ -40,7 +40,7 @@ class KArray extends KSequential {
     return $this;
   }
 
-  public function bulkSet($rawArray) {
+  public function bulkAppend($rawArray) {
     foreach($rawArray as $element) {
       $this->append($element);
     }
