@@ -30,6 +30,7 @@ class ScaffoldConfirmWidget extends BaseScaffoldWidget {
     $this->parentView->addSubView($this->breadCrumbView);
 
     $postData = TheWorld::instance()->arguments->getPostData();
+    TheWorld::instance()->session->set("scaffold::confirm::widget::xrun::post_data", $postData);
 
     $this->parentView->addSubView($rowsView)->setTitle("Confirm Something for Apple Pie");
 

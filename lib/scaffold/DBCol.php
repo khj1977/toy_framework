@@ -78,6 +78,24 @@ class DBCol extends BaseClass {
     return $this->type;
   }
 
+  public function setName($name) {
+    $this->name = $name;
+
+    return $this;
+  }
+
+  public function setVal($val) {
+    $this->val = $val;
+
+    return $this;
+  }
+
+  public function setType($type) {
+    $this->type = $type;
+
+    return $this;
+  }
+
   public function isHidden() {
     if ($this->name === "id" && $this->type === "int") {
       return true;

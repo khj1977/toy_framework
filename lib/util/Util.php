@@ -179,6 +179,10 @@ class Util {
       return $url;
     }
 
+    static public function serialize($obj) {
+      return serialize($obj);  
+    }
+
   }
 
 ?>
