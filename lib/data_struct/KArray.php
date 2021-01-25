@@ -53,7 +53,7 @@ class KArray extends KSequential {
   }
 
   public function bulkPush($rawArray) {
-    return $this->bulkSet($rawArray);
+    return $this->bulkAppend($rawArray);
   }
 
   public function generator() {
