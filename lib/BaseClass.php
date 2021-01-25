@@ -34,6 +34,14 @@ class BaseClass {
     return $this;
   }
 
+  static public function new() {
+    $klassName = get_called_class();
+
+    $that = new $klassName();
+
+    return $that;
+  }
+
   protected function initialize() {
     // In practice, the following hash will be overriden by sub class.
     $this->accessibles = array();

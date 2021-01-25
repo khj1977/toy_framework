@@ -39,6 +39,14 @@ class KHash extends BaseClass {
     return $this;
   }
 
+  public function bulkSet($rawHash) {
+    foreach($rawHash as $key => $val) {
+      $this->set($key, $val);
+    }
+
+    return $this;
+  }
+
   public function generator() {
     foreach($this->internalArray as $key => $val) {
       yield $key => $val;

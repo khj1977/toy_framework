@@ -59,5 +59,29 @@ class TestSequential extends BaseUnitTest {
     return true;
   }
 
+  public function test_bulk() {
+    $anArray = KArray::new()->bulkPush(array(5, 4, 3, 2, 1))->map(
+      function($element) {return $element + 100;}
+    );
+
+    $anArray->do(function($element){
+      Util::println("bulk: " . $element);
+    });
+
+    return true;
+  }
+
+  public function test_mapReduce() {
+    $aVal = KArray::new()->bulkPush(array(5, 4, 3, 2, 1))->map(
+      function($element) {return $element + 100;}
+    )->reduce(function($ret, $val) {
+      return $ret + $val;
+    });
+
+    Util::println("mapReduce: " . $aVal);
+
+    return true;
+  }
+
 }
 ?>
