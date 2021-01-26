@@ -16,8 +16,9 @@ class ScaffoldAddWidget extends BaseScaffoldWidget {
 
     $formView = new ScaffoldFormView();
   
-    $this->actionList->push("klist")->push("add");
-    $this->setupBreadCrumb();
+    // $this->actionList->push("klist")->push("add");
+    // $this->setupBreadCrumb();
+    $this->initializeBreadCrumb("add");
     $this->breadCrumbView->setIsActive("add");
     $this->parentView->addSubView($this->breadCrumbView);
 

@@ -19,13 +19,19 @@ class SimpleSession extends KSession {
     return $this;
   }
 
+  public function start() {
+    session_start();
+
+    return $this;
+  }
+
   public function set($key, $val) {
     $oldKey = $key;
     if ($this->suffix != "") {
       $key = $this->suffix . $key;
     }
 
-    $_SESSION[$key] = array("real_val" => $val,"real_key" => $oldKey);
+    $_SESSION[$key] = array("real_val" => Util::serialize($val),"real_key" => $oldKey);
 
     return $this;
   }
@@ -35,11 +41,25 @@ class SimpleSession extends KSession {
       return false;
     }
 
-    return $_SESSION[$key];
+    $val = $_SESSION[$key];
+
+    return array("real_key" => $val["real_key"], "real_val" => Util::unserialize($val["real_val"]));
   }
 
   public function hasKey($key) {
-    return array_key_exists($key, $_SESSION);
+    if (array_key_exists($key, $_SESSION)) {
+      $val = $_SESSION[$key];
+      $val = $val["real_val"];
+      $val = Util::unserialize($val);
+      if ($val === false || $val === null || $val === "") {
+        return false;
+      }
+      else {
+        return true;
+      }
+    }
+    
+    return false;
   }
 
   public function getKeys($withSuffix = true) {

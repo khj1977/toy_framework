@@ -9,6 +9,7 @@ require_once("lib/TheWorld.php");
 require_once("lib/KException.php");
 require_once("lib/WebArguments.php");
 require_once("lib/stream/HTMLDebugStream.php");
+require_once("lib/util/SimpleSession.php");
 
 class SimpleDispatcher extends BaseClass {
 
@@ -33,7 +34,9 @@ class SimpleDispatcher extends BaseClass {
       TheWorld::instance()->router = $router;
     }
 
-    session_start();
+    // session_start();
+    $session = new SimpleSession();
+    $session->start();
 
     // $arguments = TheWorld::instance()->arguments->getArguments();
     // assume all vals in $route are urldecoded.

@@ -11,8 +11,9 @@ require_once("lib/scaffold/sub_view/ScaffoldFormView.php");
 class ScaffoldConfirmWidget extends BaseScaffoldWidget {
 
   public function xrun() {
-    $this->actionList->push("klist")->push("edit")->push("confirm");
-    $this->setupBreadCrumb();
+    // $this->actionList->push("klist")->push("edit")->push("confirm");
+    // $this->setupBreadCrumb();
+    $this->initializeBreadCrumb("confirm");
     $tableName = Util::omitSuffix(Util::upperCamelToLowerCase($this->modelName), "_model");
     
     $factory = new SimpleCol2HTMLConfirmElementFactory();

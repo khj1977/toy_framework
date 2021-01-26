@@ -183,6 +183,10 @@ class Util {
       return serialize($obj);  
     }
 
+    static public function unserialize($objAsString) {
+      return unserialize($objAsString);  
+    }
+
     static public function isEmpty($val) {
       if ($val === "" || $val === null || $val === false) {
         return true;

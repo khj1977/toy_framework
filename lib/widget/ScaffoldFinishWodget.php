@@ -9,8 +9,9 @@ require_once("lib/view/MessageAlertVIew.php");
 class ScaffoldFinishWidget extends BaseScaffoldWidget {
 
   public function xrun() {
-    $this->actionList->push("klist")->push("edit")->push("confirm")->push("update");
-    $this->setupBreadCrumb();
+    // $this->actionList->push("klist")->push("edit")->push("confirm")->push("update");
+    // $this->setupBreadCrumb();
+    $this->initializeBreadCrumb("update");
     $tableName = Util::omitSuffix(Util::upperCamelToLowerCase($this->modelName), "_model");
 
     $session = TheWorld::instance()->session;

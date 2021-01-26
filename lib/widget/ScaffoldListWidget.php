@@ -16,8 +16,9 @@ class ScaffoldListWidget extends BaseScaffoldWidget {
 
   // Return view object
   public function xrun() {
-    $this->actionList->push("klist");
-    $this->setupBreadCrumb("klist");
+    // $this->actionList->push("klist");
+    // $this->setupBreadCrumb("klist");
+    $this->initializeBreadCrumb("list");
 
     $tableName = Util::omitSuffix(Util::upperCamelToLowerCase($this->modelName), "_model");
 

@@ -12,8 +12,10 @@ require_once("lib/data_struct/KString.php");
 class ScaffoldEditWidget extends BaseScaffoldWidget {
 
   public function xrun() {
-    $this->actionList->push("klist")->push("edit");
-    $this->setupBreadCrumb();
+    // $this->actionList->push("klist")->push("edit");
+    // $this->setupBreadCrumb();
+    $this->initializeBreadCrumb("edit");
+
     $tableName = Util::omitSuffix(Util::upperCamelToLowerCase($this->modelName), "_model");
     
     $tableFactory = new TableFactory();
