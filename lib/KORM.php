@@ -376,10 +376,14 @@ class KORM {
   }
 
   public function save() {
-    // debug
-    // var_dump("container: ");
-    // var_dump($this->container);
-    // end of debug
+    if (array_key_exists("id", $this->container)) {
+      if (Util::isEmpty($this->container["id"])) {
+        $this->saveNew();
+
+        return $this;
+      }
+    }
+
     if (array_key_exists("id", $this->container)) {
       $this->saveUpdate();
     }
@@ -401,9 +405,7 @@ class KORM {
     $sql = "UPDATE " . $klassName::$tableName . " SET ";
     $i = 1;
     $n = count($klassName::$propNames[$klassName::$tableName]);
-    // debug
-    // var_dump($klassName::$propNames);
-    // end of debug
+
     foreach($klassName::$propNames[$klassName::$tableName] as $propName) {
       $val = $this->master->quote($this->$propName);
       $sql = $sql . $propName . " = " . $val . " ";
@@ -430,8 +432,13 @@ class KORM {
 
     $sql = "INSERT INTO " . $klassName::$tableName . " (";
     $i = 1;
-    $n = count($klassName::$propNames);
-    foreach($klassName::$propNames as $colName) {
+    $n = count($klassName::$propNames[$klassName::$tableName]);
+    foreach($klassName::$propNames[$klassName::$tableName] as $colName) {
+      if (Util::isEmpty($this->$colName)) {
+        ++$i;
+        continue;
+      }
+
       $sql = $sql . $colName;
       if ($i != $n) {
         $sql = $sql . ",";
@@ -442,10 +449,17 @@ class KORM {
 
     $sql = $sql . ") VALUES(";
     $i = 1;
-    $n = count($klassName::$propNames);
-    foreach($klassName::$propNames as $propName) {
-      $val = $this->propName;
-      
+    $n = count($klassName::$propNames[$klassName::$tableName]);
+
+    foreach($klassName::$propNames[$klassName::$tableName] as $propName) {
+      $val = $this->$propName;
+
+      if (Util::isEmpty($val)) {
+        ++$i;
+        continue;
+      }
+
+      $sql = $sql . TheWorld::instance()->master->quote($val);
       if ($i != $n) {
         $sql = $sql . ",";
       }

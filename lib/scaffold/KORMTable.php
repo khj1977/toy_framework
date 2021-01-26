@@ -77,6 +77,32 @@ class KORMTable extends BaseTable {
     return $rows;
   }
 
+  public function getDBPropsWithEmptyData() {
+    $modelName = $this->modelName;
+    // $baseOrm = new $modelName();
+    // $orms = $baseOrm->fetch($where, null, $limit);
+    $orm = new $modelName();
+
+    $props = $orm->getPropNames();
+
+    $rows = array();
+
+    $dbCols = array();
+    $props = $orm->getPropNames();
+    foreach($props as $prop) {
+      $type = $orm->getType($prop);
+      // $val = $orm->$prop;
+      $val = "";
+
+      $dbCol = new DBCol();
+      $dbCol->setTypeNameValTriple($prop, $type, $val);
+
+      $dbCols[] = $dbCol;
+    }
+
+    return $dbCols;
+  }
+
   protected function getRawColNames() {
     throw new KException("KORMTable::getRawColNames(): this method has not been implemented yet.");
   }

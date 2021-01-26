@@ -183,6 +183,14 @@ class Util {
       return serialize($obj);  
     }
 
+    static public function isEmpty($val) {
+      if ($val === "" || $val === null || $val === false) {
+        return true;
+      }
+
+      return false;
+    }
+
   }
 
 ?>

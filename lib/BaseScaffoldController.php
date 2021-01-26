@@ -25,6 +25,7 @@ require_once("lib/widget/ScaffoldListWidget.php");
 require_once("lib/widget/ScaffoldEditWidget.php");
 require_once("lib/widget/ScaffoldConfirmWidget.php");
 require_once("lib/widget/ScaffoldFinishWodget.php");
+require_once("lib/widget/ScaffoldAddWidget.php");
 
 class BaseScaffoldController extends BaseAuthController {
 
@@ -81,6 +82,11 @@ class BaseScaffoldController extends BaseAuthController {
 
   public function edit() {
     $widget = new ScaffoldEditWidget();
+    return $widget->setModelName($this->modelName)->setParentView($this->simpleView)->run();
+  }
+
+  public function add() {
+    $widget = new ScaffoldAddWidget();
     return $widget->setModelName($this->modelName)->setParentView($this->simpleView)->run();
   }
 

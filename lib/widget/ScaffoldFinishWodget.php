@@ -30,7 +30,9 @@ class ScaffoldFinishWidget extends BaseScaffoldWidget {
       $realKey = $val["real_key"];
       $realVal = $val["real_val"];
       // set props for ORM
-      $korm->$realKey = $realVal;
+      if (!Util::isEmpty($realVal)) {
+        $korm->$realKey = $realVal;
+      }
     }
     $korm->save();
 
