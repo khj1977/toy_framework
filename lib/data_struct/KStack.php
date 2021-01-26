@@ -64,10 +64,6 @@ class KStack extends BaseClass {
       }
     }
 
-        // debug
-        var_dump("foo4");
-        // end of debug
-
     return false;
   }
 

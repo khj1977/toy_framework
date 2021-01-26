@@ -4,6 +4,7 @@
 // See License.txt for license of this code.
 
 require_once("lib/Util/KSession.php");
+require_once("lib/util/Util.php");
 
 class SimpleSession extends KSession {
 
@@ -38,6 +39,10 @@ class SimpleSession extends KSession {
 
   public function get($key) {
     if (!array_key_exists($key, $_SESSION)) {
+      return false;
+    }
+
+    if (Util::isEmpty($_SESSION[$key])) {
       return false;
     }
 

@@ -64,7 +64,7 @@ abstract class BaseScaffoldWidget extends BaseWidget {
     $this->setupBreadCrumb($stage);
 
     $this->session->set(KConst::SESS_BREAD_CRUMB_KEY, $this->actionList);
-
+    
     return $this;
   }
 

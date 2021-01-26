@@ -11,6 +11,7 @@ require_once("lib/data_struct/KArray.php");
 require_once("lib/scaffold/factory/TableFactory.php");
 require_once("lib/view/BreadCrumbView.php");
 require_once("lib/view/LinkButtonView.php");
+require_once("lib/util/SimpleSession.php");
 
 class ScaffoldListWidget extends BaseScaffoldWidget {
 
@@ -18,7 +19,10 @@ class ScaffoldListWidget extends BaseScaffoldWidget {
   public function xrun() {
     // $this->actionList->push("klist");
     // $this->setupBreadCrumb("klist");
-    $this->initializeBreadCrumb("list");
+    $this->initializeBreadCrumb("klist");
+
+    $session = new SimpleSession();
+    $session->set(KConst::SCAFFOLD_EDIT_IS_POSTED_KEY, false);
 
     $tableName = Util::omitSuffix(Util::upperCamelToLowerCase($this->modelName), "_model");
 

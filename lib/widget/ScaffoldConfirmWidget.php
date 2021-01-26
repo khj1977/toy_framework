@@ -7,6 +7,7 @@ require_once("lib/scaffold/factory/SimpleCol2HTMLConfirmElementFactory.php");
 require_once("lib/view/SimpleView.php");
 require_once("lib/scaffold/StringPair.php");
 require_once("lib/scaffold/sub_view/ScaffoldFormView.php");
+require_once("lib/util/KConst.php");
 
 class ScaffoldConfirmWidget extends BaseScaffoldWidget {
 
@@ -31,7 +32,7 @@ class ScaffoldConfirmWidget extends BaseScaffoldWidget {
     $this->parentView->addSubView($this->breadCrumbView);
 
     $postData = TheWorld::instance()->arguments->getPostData();
-    TheWorld::instance()->session->set("scaffold::confirm::widget::xrun::post_data", $postData);
+    TheWorld::instance()->session->set(KConst::SCAFFOLD_CONFIRM_POST_KEY, $postData);
 
     $this->parentView->addSubView($rowsView)->setTitle("Confirm Something for Apple Pie");
 
@@ -58,6 +59,9 @@ class ScaffoldConfirmWidget extends BaseScaffoldWidget {
     $router = TheWorld::instance()->router;
     $formView->setAction(sprintf("/index.php?m=%s&c=%s&a=update", $router->getModule(), $router->getController()))->setMethod("POST");
     // end of debug
+
+    $session = new SimpleSession();
+    $isPosted = $session->set(KConst::SCAFFOLD_EDIT_IS_POSTED_KEY, true);
 
     return $this;
   }

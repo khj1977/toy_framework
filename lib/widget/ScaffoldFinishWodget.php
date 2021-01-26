@@ -37,6 +37,8 @@ class ScaffoldFinishWidget extends BaseScaffoldWidget {
     }
     $korm->save();
 
+    $session->set(KConst::SCAFFOLD_EDIT_IS_POSTED_KEY, false);
+
     // $simpleView = new SimpleView();
     $this->parentView->setTitle("Update has been successfuly done!");
     $this->setView($this->parentView);
