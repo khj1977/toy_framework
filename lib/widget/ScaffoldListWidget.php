@@ -19,10 +19,10 @@ class ScaffoldListWidget extends BaseScaffoldWidget {
   public function xrun() {
     // $this->actionList->push("klist");
     // $this->setupBreadCrumb("klist");
-    $this->initializeBreadCrumb("klist");
-
     $session = new SimpleSession();
     $session->set(KConst::SCAFFOLD_EDIT_IS_POSTED_KEY, false);
+    $session->clear();
+    $this->initializeBreadCrumb("klist");
 
     $tableName = Util::omitSuffix(Util::upperCamelToLowerCase($this->modelName), "_model");
 
@@ -47,14 +47,16 @@ class ScaffoldListWidget extends BaseScaffoldWidget {
     // $simpleView = new SimpleView();
 
     $this->breadCrumbView->setIsActive("klist");
-    $this->parentView->addSubView($this->breadCrumbView);
+    // $this->parentView->addSubView($this->breadCrumbView);
 
     $buttonView = new LinkButtonView();
     $buttonView->setKind("btn-primary")->setText("Add data")->setLinkTo(Util::generateURLFromActionName("add"));
     $this->parentView->addSubView($buttonView);
 
     $this->parentView->addSubView($rowsView);
-    $this->parentView->setTitle("List of table");
+    // debug
+    // $this->parentView->setTitle("List of table");
+    // end of debug
 
     $this->setView($this->parentView);
 

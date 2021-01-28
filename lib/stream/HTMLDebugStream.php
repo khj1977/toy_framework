@@ -10,6 +10,7 @@ class HTMLDebugStream {
 
   const KIND_ORDINARY = "ORDINARY";
   const KIND_SQL = "SQL";
+  const KIND_SIMPLE = "SIMPLE";
 
   // buffer to retain content of log
   protected $buffers;
@@ -30,6 +31,7 @@ class HTMLDebugStream {
 
     $this->buffers->set(HTMLDebugStream::KIND_ORDINARY, new KArray());
     $this->buffers->set(HTMLDebugStream::KIND_SQL, new KArray());
+    $this->buffers->set(HTMLDebugStream::KIND_SIMPLE, new KArray());
 
     return $this;
   }
@@ -50,6 +52,18 @@ class HTMLDebugStream {
     $this->buffers->get($kind)->push("varDump: " . var_export($obj, true));
 
     return $this;
+  }
+
+  public function simpleVarDump($obj) {
+    return $this->varDump(HTMLDebugStream::KIND_SIMPLE, $obj);
+  }
+
+  public function svd($obj) {
+    return $this->simpleVarDump($obj);
+  }
+
+  public function vd($obj) {
+    return $this->svd($obj);
   }
 
   public function render() {

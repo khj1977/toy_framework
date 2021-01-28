@@ -44,7 +44,7 @@ class ScaffoldFinishWidget extends BaseScaffoldWidget {
     $this->setView($this->parentView);
 
     $this->breadCrumbView->setIsActive("update");
-    $this->parentView->addSubView($this->breadCrumbView);
+    // $this->parentView->addSubView($this->breadCrumbView);
 
     $messageAlertView = new MessageAlertView();
     $messageAlertView->setMessage("Update has successfully been done.")->setJumpToURL(Util::generateURLFromActionName("klist"))->setButtonLabel("戻る");

@@ -41,12 +41,21 @@ class SimpleView extends BaseView {
     if ($this->title != null) {
       // Util::outHTML("<h3>" . $this->title . "</h3>");
     }
+
+    $html = "";
     foreach($this->subViews as $subView) {
       // $subView->render();
-      Util::outHTML($subView->render() . "</br>");
-    }
+      // debug
+      // Util::outHTML($subView->render() . "</br>");
+      $html = $html . $subView->render() . "</br>";
+      // end of debug
 
-    return $this;
+      // debug
+      $this->hds->svd($html);
+      // end debug
+
+    }
+    return $html;
   }
 
 }

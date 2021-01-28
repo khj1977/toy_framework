@@ -45,7 +45,7 @@ class ScaffoldFormView extends BaseScaffoldView {
   public function render() {
     $this->construct();
 
-    print($this->output);
+    return $this->output;
   }
 
   public function construct() {

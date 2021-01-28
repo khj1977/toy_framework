@@ -24,6 +24,7 @@ class BaseClass {
   protected $debugStream;
   // yet another name of $debugStream;
   protected $ds;
+  protected $hds;
 
   // protected $varDump;
 
@@ -60,6 +61,7 @@ class BaseClass {
 
     $this->debugStream = TheWorld::instance()->debugStream;
     $this->ds = TheWorld::instance()->debugStream;
+    $this->hds = TheWorld::instance()->htmlDebugStream;
 
     return $this;
   }

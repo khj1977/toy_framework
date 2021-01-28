@@ -39,7 +39,7 @@ class ScaffoldEditWidget extends BaseScaffoldWidget {
     $formView = new ScaffoldFormView();
   
     $this->breadCrumbView->setIsActive("edit");
-    $this->parentView->addSubView($this->breadCrumbView);
+    // $this->parentView->addSubView($this->breadCrumbView);
 
     $this->parentView->addSubView($formView)->setTitle("Something for Apple Pie");
     $this->setView($this->parentView);

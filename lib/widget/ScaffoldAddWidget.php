@@ -32,7 +32,7 @@ class ScaffoldAddWidget extends BaseScaffoldWidget {
     // $this->setupBreadCrumb();
     $this->initializeBreadCrumb("add");
     $this->breadCrumbView->setIsActive("add");
-    $this->parentView->addSubView($this->breadCrumbView);
+    // $this->parentView->addSubView($this->breadCrumbView);
 
     $this->parentView->addSubView($formView)->setTitle("Something for Apple Pie");
     $this->setView($this->parentView);

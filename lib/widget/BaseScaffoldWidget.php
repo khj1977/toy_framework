@@ -23,7 +23,7 @@ abstract class BaseScaffoldWidget extends BaseWidget {
     parent::initialize();
 
     // $this->actionList = new KArray();
-    $this->breadCrumbView = new BreadCrumbView();
+    // $this->breadCrumbView = new BreadCrumbView();
 
     $this->session = new SimpleSession();
     if (!$this->session->hasKey(KConst::SESS_BREAD_CRUMB_KEY)) {
@@ -38,8 +38,14 @@ abstract class BaseScaffoldWidget extends BaseWidget {
     return $this;
   }
 
+  public function setBreadCrumbView($aView) {
+    $this->breadCrumbView = $aView;
+
+    return $this;
+  }
+
   protected function setupBreadCrumb($stage) {
-    $this->breadCrumbView = new BreadCrumbView();
+    // $this->breadCrumbView = new BreadCrumbView();
     foreach($this->actionList->generator() as $crumb) {
       if (KString::isEqual($crumb, $stage)) {
         $isActive = true;

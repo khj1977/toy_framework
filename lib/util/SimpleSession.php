@@ -67,6 +67,14 @@ class SimpleSession extends KSession {
     return false;
   }
 
+  public function clear() {
+    foreach($_SESSION as $key => $val) {
+      unset($_SESSION[$key]);
+    }
+
+    return $this;
+  }
+
   public function getKeys($withSuffix = true) {
     $keys = array();
     foreach($_SESSION as $key => $val) {

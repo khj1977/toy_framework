@@ -17,7 +17,8 @@
 ?>
 
 <?php
-  $subView->render();
+  require_once("lib/util/Util.php");
+  Util::outHTML($subView->render());
 ?>
 
 <!-- </section> -->

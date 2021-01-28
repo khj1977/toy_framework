@@ -27,6 +27,8 @@ abstract class KSession extends BaseClass {
 
   abstract public function get($key);
 
+  abstract public function clear();
+
   abstract public function getKeys($withSuffix = true);
 
   public function setWithSuffix($key, $val) {

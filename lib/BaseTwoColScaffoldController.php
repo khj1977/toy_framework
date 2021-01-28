@@ -26,8 +26,10 @@ require_once("lib/widget/ScaffoldEditWidget.php");
 require_once("lib/widget/ScaffoldConfirmWidget.php");
 require_once("lib/widget/ScaffoldFinishWodget.php");
 require_once("lib/widget/ScaffoldAddWidget.php");
+require_once("lib/view/TwoColView.php");
+require_once("lib/view/VNavView.php");
 
-class BaseScaffoldController extends BaseAuthController {
+class BaseTwoCOlScaffoldController extends BaseAuthController {
 
   // specify by src code of child controller.
   // $isScaffold is not used actually,
@@ -37,6 +39,9 @@ class BaseScaffoldController extends BaseAuthController {
   protected $actionList;
   protected $breadCrumbView;
   protected $simpleView;
+  // debug
+  protected $twoColView;
+  // end of debug
 
   public function __construct() {
     $this->modelName = null;
@@ -51,7 +56,6 @@ class BaseScaffoldController extends BaseAuthController {
     parent::initialize();
 
     $this->actionList = new KArray();
-    $this->breadCrumbView = new BreadCrumbView();
     // debug
     // use reflection?
     // $this->actionList->push("klist")->push("edit")->push("confirm")->push("update");
@@ -59,8 +63,19 @@ class BaseScaffoldController extends BaseAuthController {
 
     $this->simpleView = new SimpleView();
     $headerView = new HeaderView();
+    $this->breadCrumbView = new BreadCrumbView();
     $headerView->setTitle("Scaffold Sample");
     $this->simpleView->addSubView($headerView)->addSubView($this->breadCrumbView);
+
+    // debug
+    $this->twoColView = new TwoColView();
+    $this->simpleView->addSubView($this->twoColView);
+
+    $this->twoColView->setRightColView(new SimpleView());
+    $this->twoColView->setLeftColView(new SimpleView());
+
+    $this->twoColView->getLeftColView()->addSubView(new VNavView());
+    // end of debug
 
     /*
     $this->breadCrumbView = new BreadCrumbView();
@@ -78,29 +93,39 @@ class BaseScaffoldController extends BaseAuthController {
 
   public function klist() {
     $widget = new ScaffoldListWidget();
-    return $widget->setModelName($this->modelName)->setParentView($this->simpleView)->setBreadCrumbView($this->breadCrumbView)->run();
+    // return $widget->setModelName($this->modelName)->setParentView($this->simpleView)->run();
+
+    $widget->setModelName($this->modelName)->setParentView($this->twoColView->getRightColView())->setBreadCrumbView($this->breadCrumbView)->run();
+
+    return $this->simpleView;
   }
 
   public function edit() {
     $widget = new ScaffoldEditWidget();
-    return $widget->setModelName($this->modelName)->setParentView($this->simpleView)->setBreadCrumbView($this->breadCrumbView)->run();
+    $widget->setModelName($this->modelName)->setParentView($this->twoColView->getRightColView())->setBreadCrumbView($this->breadCrumbView)->run();
+
+    return $this->simpleView;
   }
 
   public function add() {
     $widget = new ScaffoldAddWidget();
-    $widget->setModelName($this->modelName)->setParentView($this->simpleView)->setBreadCrumbView($this->breadCrumbView)->run();
+    $widget->setModelName($this->modelName)->setParentView($this->twoColView->getRightColView())->setBreadCrumbView($this->breadCrumbView)->run();
 
     return $this->simpleView;
   }
 
   public function confirm() {
     $widget = new ScaffoldConfirmWidget();
-    return $widget->setModelName($this->modelName)->setParentView($this->simpleView)->setBreadCrumbView($this->breadCrumbView)->run();
+    $widget->setModelName($this->modelName)->setParentView($this->twoColView->getRightColView())->setBreadCrumbView($this->breadCrumbView)->run();
+
+    return $this->simpleView;
   }
 
   public function update() {
     $widget = new ScaffoldFinishWidget();
-    return $widget->setModelName($this->modelName)->setParentView($this->simpleView)->setBreadCrumbView($this->breadCrumbView)->run();
+    $widget->setModelName($this->modelName)->setParentView($this->twoColView->getRightColView())->setBreadCrumbView($this->breadCrumbView)->run();
+
+    return $this->simpleView;
   }
 
   protected function setupBreadCrumb() {

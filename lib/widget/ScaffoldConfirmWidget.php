@@ -29,7 +29,7 @@ class ScaffoldConfirmWidget extends BaseScaffoldWidget {
     */
 
     $this->breadCrumbView->setIsActive("confirm");
-    $this->parentView->addSubView($this->breadCrumbView);
+    // $this->parentView->addSubView($this->breadCrumbView);
 
     $postData = TheWorld::instance()->arguments->getPostData();
     TheWorld::instance()->session->set(KConst::SCAFFOLD_CONFIRM_POST_KEY, $postData);
