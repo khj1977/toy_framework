@@ -1,6 +1,8 @@
 <?php
 
-class KString extends BaseClass {
+require_once("lib/data_struct/KSequential.php");
+
+class KString extends KSequential {
 
   protected $internalString;
 
@@ -17,9 +19,13 @@ class KString extends BaseClass {
   }
 
   public function append($element) {
-    $this->internalString . $element;
+    $this->internalString = $this->internalString . $element;
 
     return $this;
+  }
+
+  public function push($element) {
+    return $this->append($element);
   }
 
   public function split($delimiter) {
@@ -46,6 +52,15 @@ class KString extends BaseClass {
     }
 
     return $matches;
+  }
+
+  public function generator() {
+    $len = strlen($this->internalString);
+    for($i = 0; $i < $len; ++$i) {
+      yield $this->internalString[$i];
+    }
+
+    return $this;
   }
 
   static public function isEqual($str1, $str2) {

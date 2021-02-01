@@ -35,6 +35,24 @@ abstract class KSequential extends BaseClass {
     return $result;
   }
 
+  public function filter($f) {
+    $klassName = $this->getKlassName();
+    $that = new $klassName();
+
+    foreach($this->generator() as $element) {
+      if ($f($element) === true) {
+        $that->push($element);
+      }
+    }
+
+    return $that;
+  }
+
+  // The name of where is inspired by LINQ of .NET.
+  public function where($f) {
+    return $this->filter($f);
+  }
+
   abstract public function generator();
 
 }

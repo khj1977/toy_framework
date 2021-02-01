@@ -4,6 +4,7 @@ require_once("lib/BaseUnitTest.php");
 require_once("lib/TheWorld.php");
 require_once("lib/BaseClass.php");
 require_once("lib/data_struct/KArray.php");
+require_once("lib/data_struct/KString.php");
 require_once("lib/util/Util.php");
 
 class TestSequential extends BaseUnitTest {
@@ -71,6 +72,44 @@ class TestSequential extends BaseUnitTest {
     return true;
   }
 
+  public function test_filter() {
+    $anArray = KArray::new()->bulkPush(array(5, 4, 3, 2, 1))->filter(
+      function($element) {
+        if ($element > 2) {
+          return true;
+        }
+        else {
+          return false;
+        }
+      }
+    );
+
+    $anArray->do(function($element){
+      Util::println("filter: " . $element);
+    });
+
+    return true;
+  }
+
+  public function test_where() {
+    $anArray = KArray::new()->bulkPush(array(6, 7, 4, 3, 2, 1))->where(
+      function($element) {
+        if ($element > 2) {
+          return true;
+        }
+        else {
+          return false;
+        }
+      }
+    );
+
+    $anArray->do(function($element){
+      Util::println("where: " . $element);
+    });
+
+    return true;
+  }
+
   public function test_mapReduce() {
     $aVal = KArray::new()->bulkPush(array(5, 4, 3, 2, 1))->map(
       function($element) {return $element + 100;}
@@ -81,6 +120,24 @@ class TestSequential extends BaseUnitTest {
     Util::println("mapReduce: " . $aVal);
 
     return true;
+  }
+
+  public function test_kstring() {
+    $str = new KString();
+    $str->push("orange");
+    foreach($str->generator() as $chr) {
+      Util::println($chr);
+    }
+
+    return true;
+  }
+
+  public function test_kstringKSeq() {
+    KString::new()->push("apple")->do(
+      function($chr) {
+        Util::println("do: " . $chr);
+      }
+    );
   }
 
 }
