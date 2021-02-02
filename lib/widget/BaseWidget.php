@@ -9,10 +9,17 @@ abstract class BaseWidget extends BaseView {
   protected $internalView;
   protected $parentView;
 
+  protected $preRunFunc;
+  protected $postRunFunc;
+
   protected function initialize() {
     $this->modelName = null;
     $this->internalView = null;
     $this->parentView = null;
+
+    // args of the following anon func is instance of this class or widget.
+    $this->preRunFunc = null;
+    $this->postRunFunc = null;
 
     return $this;
   }
@@ -25,6 +32,18 @@ abstract class BaseWidget extends BaseView {
 
   public function setParentView($parentView) {
     $this->parentView = $parentView;
+
+    return $this;
+  }
+
+  public function setPreRunFunc($f) {
+    $this->preRunFunc = $f;
+
+    return $this;
+  }
+
+  public function setPostRunFunc($f) {
+    $this->postRunFunc = $f;
 
     return $this;
   }
@@ -50,10 +69,20 @@ abstract class BaseWidget extends BaseView {
   }
 
   protected function preRun() {
+    if ($this->preRunFunc == null) {
+      return $this;
+    }
+    $this->preRunFunc($this);
+
     return $this;
   }
 
   protected function postRun() {
+    if ($this->postRunFunc == null) {
+      return $this;
+    }
+    $this->postRunFunc($this);
+
     return $this;
   }
 
