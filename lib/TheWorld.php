@@ -11,6 +11,7 @@ require_once("lib/stream/HTMLDebugStream.php");
 require_once("lib/util/KLogger.php");
 require_once("lib/util/SimpleSession.php");
 require_once("lib/util/ServerEnv.php");
+require_once("lib/view/RenderingArea.php");
 
 class TheWorld {
 
@@ -104,6 +105,8 @@ class TheWorld {
     $this->logger = new KLogger($this->htmlDebugStream);
 
     $this->session = new SimpleSession();
+
+    $this->renderingArea = new RenderingArea();
 
     $this->setErrorHandler();
 

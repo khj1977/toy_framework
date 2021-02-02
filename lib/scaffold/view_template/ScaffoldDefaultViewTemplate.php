@@ -17,8 +17,7 @@
 ?>
 
 <?php
-  require_once("lib/util/Util.php");
-  Util::outHTML($subView->render());
+  TheWorld::instance()->renderingArea->renderOn($subView->render());
 ?>
 
 <!-- </section> -->

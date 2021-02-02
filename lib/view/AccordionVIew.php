@@ -2,6 +2,7 @@
 
 require_once("lib/view/BaseView.php");
 require_once("lib/util/Util.php");
+require_once("lib/TheWorld.php");
 
 class AccordionView extends BaseView {
 
@@ -49,7 +50,7 @@ class AccordionView extends BaseView {
 
     $html = sprintf($body, $this->id, $this->id, $this->buttonTitle, $this->id, $this->bodyHTMLData);
 
-    Util::outHTML($html);
+    TheWorld::instance()->renderingArea->renderOn($html);
 
     return $this;
   }
