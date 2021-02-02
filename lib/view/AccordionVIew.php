@@ -42,7 +42,10 @@ class AccordionView extends BaseView {
   }
 
   public function render() {
-    $body = '<p> <a class="btn btn-primary" data-toggle="collapse" href="#%s" role="button" aria-expanded="false" aria-controls="%s"> %s </a> </p> <div class="collapse" id="%s"> <div class="card card-body">%s</div> </div>';
+    // debug
+    // mt-1 is quickhack make method to set that.
+    $body = '<p> <a class="btn btn-primary mt-1" data-toggle="collapse" href="#%s" role="button" aria-expanded="false" aria-controls="%s"> %s </a> </p> <div class="collapse" id="%s"> <div class="card card-body">%s</div> </div>';
+    // end of debug
 
     $html = sprintf($body, $this->id, $this->id, $this->buttonTitle, $this->id, $this->bodyHTMLData);
 

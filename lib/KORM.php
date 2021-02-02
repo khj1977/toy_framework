@@ -188,7 +188,6 @@ class KORM {
     }
     
     $statement = TheWorld::instance()->slave->query($sql);
-
     $result = array();
     // foreach($rows as $row) {
     while($row = $statement->fetch()) {
