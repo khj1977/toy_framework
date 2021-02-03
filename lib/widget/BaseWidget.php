@@ -18,8 +18,8 @@ abstract class BaseWidget extends BaseView {
     $this->parentView = null;
 
     // args of the following anon func is instance of this class or widget.
-    $this->preRunFunc = null;
-    $this->postRunFunc = null;
+    $this->preRunFunc = function($f){return $f;};
+    $this->postRunFunc = function($f){return $f;};
 
     return $this;
   }
@@ -72,7 +72,8 @@ abstract class BaseWidget extends BaseView {
     if ($this->preRunFunc == null) {
       return $this;
     }
-    $this->preRunFunc($this);
+    $f = $this->preRunFunc;
+    $f($this);
 
     return $this;
   }
@@ -81,7 +82,8 @@ abstract class BaseWidget extends BaseView {
     if ($this->postRunFunc == null) {
       return $this;
     }
-    $this->postRunFunc($this);
+    $f = $this->postRunFunc;
+    $f($this);
 
     return $this;
   }
