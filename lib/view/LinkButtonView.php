@@ -42,7 +42,7 @@ class LinkButtonView extends BaseView {
     }
 
     // kind: btn-primary
-    $html = sprintf('<a class="btn %s mb-1" href="%s" role="button">%s</a>',
+    $html = sprintf('<a class="btn %s mb-2" href="%s" role="button">%s</a>',
       $this->kind, $this->linkTo, $this->text
     );
 
