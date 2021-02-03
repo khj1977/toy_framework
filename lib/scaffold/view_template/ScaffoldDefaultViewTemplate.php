@@ -13,7 +13,7 @@
 <div class="container">
 <!-- <section> -->
 <?php
-  TheWorld::instance()->htmlDebugStream->render();
+  TheWorld::instance()->renderingArea->renderOn(TheWorld::instance()->htmlDebugStream->render());
 ?>
 
 <?php

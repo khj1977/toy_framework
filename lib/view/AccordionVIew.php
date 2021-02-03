@@ -50,9 +50,11 @@ class AccordionView extends BaseView {
 
     $html = sprintf($body, $this->id, $this->id, $this->buttonTitle, $this->id, $this->bodyHTMLData);
 
-    TheWorld::instance()->renderingArea->renderOn($html);
+    // TheWorld::instance()->renderingArea->renderOn($html);
 
-    return $this;
+    // return $this;
+
+    return $html;
   }
 
 }
