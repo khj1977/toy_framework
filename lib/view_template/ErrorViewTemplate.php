@@ -13,13 +13,13 @@
 <div class="container">
 <!-- <section> -->
 <?php
-  TheWorld::instance()->htmlDebugStream->render();
+  TheWorld::instance()->renderingArea->renderOn(TheWorld::instance()->htmlDebugStream->render());
 ?>
 
 <center>
   <div class="card w-75">
     <div class="card-body">
-      <p class="card-text">エラーが発生しました</p>
+      <p class="card-text">An error has been occurred</p>
     </div>
   </div>
 </center>'
