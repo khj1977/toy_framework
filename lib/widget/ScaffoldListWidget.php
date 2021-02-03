@@ -12,6 +12,7 @@ require_once("lib/scaffold/factory/TableFactory.php");
 require_once("lib/view/BreadCrumbView.php");
 require_once("lib/view/LinkButtonView.php");
 require_once("lib/util/SimpleSession.php");
+require_once("lib/view/HtmlHeaderView.php");
 
 class ScaffoldListWidget extends BaseScaffoldWidget {
 
@@ -31,8 +32,15 @@ class ScaffoldListWidget extends BaseScaffoldWidget {
 
     // note that filter for KORM can be applied inside getDBCols() because __get() is called.
     $rows = $table->getDBCols();
-    
+    $props = $table->getDBPropsWithEmptyData();
+
+    $headerView = new HtmlHeaderView();
+    foreach($props as $prop) {
+      $headerView->push($prop);
+    }
+
     $rowsView = new SimpleRowsView();
+    $rowsView->pushHtmlHeader($headerView);
     foreach($rows as $row) {
       $rowView = new ScaffoldTableRowView();
       foreach($row as $dbCol) {

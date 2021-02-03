@@ -12,7 +12,8 @@ class ScaffoldTwoColTestController extends BaseTwoColScaffoldController {
     // rest of work is how to specify view.
     $this->isScaffold = true;
     // $this->modelName = "TestTableModel";
-    $this->modelName = "AddressModel";
+    // $this->modelName = "AddressModel";
+    $this->modelName = "EmployeeListModel";
   }
 
   public function preAction() {
