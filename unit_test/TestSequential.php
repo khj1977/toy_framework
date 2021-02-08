@@ -6,6 +6,8 @@ require_once("lib/BaseClass.php");
 require_once("lib/data_struct/KArray.php");
 require_once("lib/data_struct/KString.php");
 require_once("lib/util/Util.php");
+require_once("lib/util/KSeqRange.php");
+require_once("lib/util/KRange.php");
 
 class TestSequential extends BaseUnitTest {
 
@@ -138,6 +140,39 @@ class TestSequential extends BaseUnitTest {
         Util::println("do: " . $chr);
       }
     );
+
+    return true;
+  }
+
+  public function test_kseqRange() {
+    try {
+      $result = KSeqRange::new()->set(0, 10, 1)->map(function($i) {
+        return $i + 100;
+      })->filter(function($i) {
+        if ($i > 103) {
+         return true;
+        }
+
+        return false;
+      })->reduce(
+        function($ret, $ele) {
+          return $ret + $ele;
+      });
+
+      Util::println("kreduce: " . $result);
+   }
+   catch(Exception $e) {
+      var_dump($e->getMessage());
+      var_dump($e->getTraceAsString());
+    }
+
+    return true;
+  }
+
+  public function test_krange() {
+    KRange::new()->set(10, 20, 1)->each(function($i) {Util::println("range: " . $i);});
+
+    return true;
   }
 
 }

@@ -64,6 +64,10 @@ class KArray extends KSequential {
     return true;
   }
 
+  public function len() {
+    return count($this->internalArray);
+  }
+
 }
 
 ?>
