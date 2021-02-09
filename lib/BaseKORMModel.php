@@ -24,11 +24,13 @@ class BaseKORMModel extends KORM {
     parent::initialize();
   }
 
-  public function getTableName() {
+  /*
+  static public function getTableName() {
     $klassName = get_called_class();
 
     return $klassName::$tableName;
   }
+  */
 
 }
 

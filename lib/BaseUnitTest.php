@@ -76,6 +76,8 @@ abstract class BaseUnitTest extends BaseClass {
           $result = $instance->$testMethodName();
         }
         catch(Exception $e) {
+          var_dump($e->getMessage());
+          var_dump($e->getTraceAsString());
           $result = false;
         }
         // end of debug
