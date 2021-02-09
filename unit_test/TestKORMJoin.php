@@ -42,7 +42,7 @@ class TestKORMJoin extends BaseUnitTest {
 
     $orms = KORM::fetch();
     foreach($orms as $orm) {
-      Util::println("cname: " . $orm->company_name . " pname: " . $orm->prefecture_name);
+      Util::println("cname: " . $orm->name . " pname: " . $orm->joined->name);
     }
 
     return true;

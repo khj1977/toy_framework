@@ -216,22 +216,36 @@ class KORM {
       $joinedObject = null;
       $object = new $klassName($klassName::$tableName);
       if (static::$belongTo != null) {
-        // Do join recursively.
+        // Do join recursively?
         $joinedObject = new $belongTo($joinedTableName);
       }
       foreach($row as $propName => $val) {
         if (static::$belongTo != null) {
+          
+          $joined = false;
           if (preg_match($joinedPropPattern, $propName) == 1) {
+            $joined = true;
+          }
+
+          $splitted = explode("_", $propName);
+          $propName = $splitted[1];
+          if ($joined === true) {
             $joinedObject->$propName = $val;
           }
+          else {
+            $object->propName = $val;
+          }
         }
-        $object->$propName = $val;
+        else {
+          $object->$propName = $val;
+        }
         // do not modify a prop but apply filter when __get() is called.
         // $object->$propName = $this->filter->apply($val);
       }
       if ($joinedObject != null) {
         $object->joined = $joinedObject;
       }
+
       $result[] = $object;
     }
 
