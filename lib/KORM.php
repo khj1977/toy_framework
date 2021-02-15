@@ -61,9 +61,9 @@ class KORM {
     // $this->setPropNames();
 
     // var_dump(static::$propNames);
-    if (static::$initialized === false) {
+    if (static::$initialized->get($klassName) === false) {
       static::initialize();
-      static::$initialized = true;
+      static::$initialized->set($klassName, true);
     }
     // var_dump(static::$propNames);
 
@@ -80,51 +80,68 @@ class KORM {
 
     if (static::$superInitialized === false) {
       static::$initialized = new KHash();
-      static::$tableName = new KHash();;
-    
+
+      static::$tableName = new KHash();
       static::$belongTo = new KHash();
       static::$belongWith = new KHash();
       static::$belongToTableName = new KHash();
-
       static::$colNames = new KHash();
       static::$propNames = new KHash();
       static::$secPropNames = new KHash();
       static::$types = new KHash();
+
+      static::$superInitialized = true;
     }
 
-    $klassName = get_called_class();
     if (static::$initialized->get($klassName) !== false) {
       return true;
     }
     else {
+      static::$tableName->set($klassName, new kHash());
+
+      static::$belongTo->set($klassName, new kHash());
+      static::$belongWith->set($klassName, new kHash());
+      static::$belongToTableName->set($klassName, new kHash());
+      static::$colNames->set($klassName, new kHash());
+      static::$propNames->set($klassName, new kHash());
+      static::$secPropNames->set($klassName, new kHash());
+      static::$types->set($klassName, new kHash());
+
+      static::$types->set($klassName, new KHash());
+
       static::$initialized->set($klassName, true);
-
-      static::$tableName->set($klassName, null);
-      static::$belongTo->set($klassName, null);
-      static::$belongWith->set($klassName, null);
-      static::$belongToTableName->set($klassName, null);
-
-      static::$colNames->set($klassName, null);
-      static::$propNames->set($klassName, null);
-      static::$secPropNames->set($klassName, null);
-
-      static::$types->set($klassName, null);
     }
+      
+      // static::$tableName->get($klassName)->set($klassName, new KHash());
 
-    static::$types->set($klassName, array());
+      // static::$belongTo->get($klassName)->set($klassName, new KHash());
+      // static::$belongWith->get($klassName)->set($klassName, new KHash());
+      // static::$belongToTableName->get($klassName)->set($klassName, new KHash());
 
-    static::autoSetColNames($klassName, static::$tableName);
+      // static::$colNames->get($klassName)->set($klassName, null);
+      // static::$propNames->get($klassName)->set($klassName, null);
+      // static::$secPropNames->get($klassName)->set($klassName, null);
 
-    static::$superInitialized = true;
+      // static::$types->get($klassName)->set($klassName, null);
+
+      
+
+    // debug
+    // Is the following required?
+    
+    // end of debug
+
+    // static::autoSetColNames($klassName, static::$tableName->get($klassName));
 
     return true;
   }
 
   static public function setTableName($tableName) {
-    
         $klassName = get_called_class();
         
-        static::$tableName->set($klassName, $tableName);
+        static::$tableName->get($klassName)->set($klassName, $tableName);
+
+        static::autoSetColNames($klassName, static::$tableName->get($klassName)->get($klassName));
   }
 
   static public function getTableName() {
@@ -154,7 +171,8 @@ class KORM {
   static public function fetch($where = null, $orderBy = null, $limit = null, $context = null) {
     $klassName = get_called_class();
 
-    if (static::$initialized->get($klassName) !== true) {
+    // if (static::$initialized->get($klassName) !== true) {
+    if (static::$superInitialized !== true) {
       static::initialize();
     }
     
@@ -176,23 +194,23 @@ class KORM {
 
   static public function xfetch($where = null, $orderBy = null, $limit = null, $context = null) {
     $klassName = get_called_class();
-
+    $tableName = static::$tableName->get($klassName)->get($klassName);
+    $belongToTableName = static::$belongToTableName->get($klassName)->get($klassName);
 
     $sql = "SELECT ";
     $i = 1;
-    $n = count(static::$colNames);
+    $n = static::$colNames->get($klassName)->len();
 
-    $sql = $sql . static::makeColNames(static::$tableName);
+    $sql = $sql . static::makeColNames($tableName);
 
-    if (static::$belongTo->get($klassName) != null) {
-      $belongTo = static::$belongTo->get($klassName);
-      $sql = $sql . "," . $belongTo::makeColNames(static::$belongToTableName);
-      $foo = $belongTo::makeColNames(static::$belongToTableName);
+    if ($belongToTableName != null) {
+      $belongTo = static::$belongTo->get($klassName)->get($klassName);
+      $sql = $sql . "," . $belongTo::makeColNames($belongToTableName, $tableName);
     }
 
-    $sql = $sql . " FROM " . static::$tableName;
-    if (static::$belongToTableName->get($klassName) != null) {
-      $sql = $sql . ", " . static::$belongToTableName->get($klassName);
+    $sql = $sql . " FROM " . $tableName;
+    if ($belongToTableName != null) {
+      $sql = $sql . ", " . $belongToTableName;
     }
 
     if ($where !== null) {
@@ -212,14 +230,14 @@ class KORM {
     }
 
     // join
-    if (static::$belongTo->get($klassName) !== null) {
+    if ($belongToTableName !== false) {
       if ($where === null) {
         $sql = $sql . " WHERE ";
       }
       $belongWith = static::$belongWith->get($klassName);
       $fromKey = $belongWith["from_key"];
       $toKey = $belongWith["to_key"];
-      $sql = $sql . static::$tableName->get($klassName) . "." . $fromKey . " = " .static::$belongToTableName->get($klassName) . "." . $toKey;
+      $sql = $sql . static::$tableName->get($klassName)->get($klassName) . "." . $fromKey . " = " . $belongToTableName . "." . $toKey;
     }
 
 
@@ -236,8 +254,8 @@ class KORM {
     $result = array();
     $klassName = get_called_class();
 
-    if (static::$belongTo->get($klassName) != null) {
-      $joinedTableName = Util::omitSuffix(Util::upperCamelToLowerCase(static::$belongTo->get($klassName)), "_model");
+    if (static::$belongTo->get($klassName)->get($klassName) != null) {
+      $joinedTableName = Util::omitSuffix(Util::upperCamelToLowerCase(static::$belongTo->get($klassName)->get($klassName)), "_model");
       $joinedPropPattern = sprintf("/%s/", $joinedTableName);
     }
     // foreach($rows as $row) {
@@ -246,13 +264,13 @@ class KORM {
       // filter is assigned to object.
       // in that time, filter is assigned object by object;i.e. by instance val not class val.
       $joinedObject = null;
-      $object = new $klassName(static::$tableName);
-      if (static::$belongTo->get($klassName) != null) {
+      $object = new $klassName($tableName);
+      if (static::$belongTo->get($klassName)->get($klassName) != null) {
         // Do join recursively?
         $joinedObject = new $belongTo($joinedTableName);
       }
       foreach($row as $propName => $val) {
-        if (static::$belongTo->get($klassName) != null) {
+        if (static::$belongTo->get($klassName)->get($klassName) != null) {
           
           $joined = false;
           if (preg_match($joinedPropPattern, $propName) == 1) {
@@ -260,12 +278,12 @@ class KORM {
           }
 
           $splitted = explode("_", $propName);
-          $propName = $splitted[1];
           if ($joined === true) {
+            $propName = $splitted[1];
             $joinedObject->$propName = $val;
           }
           else {
-            $object->propName = $val;
+            $object->$propName = $val;
           }
         }
         else {
@@ -371,21 +389,28 @@ class KORM {
 
   public function getType($colName) {
     $klassName = get_called_class();
+    $tableName = static::$tableName->get($klassName)->get($klassName);
+
+
     if (
-      static::$types->get($klassName)->check(static::$tableName)->get(static::$tableName)) {
+      // static::$types->get($klassName)->check(static::$tableName)->get(static::$tableName)) {
+      // static::$types->get($klassName)->get($tableName)->set($field, $type);
+        !static::$types->get($klassName)->check($tableName)) {
       throw new KException("KORM::getType(): type data type does not has tableName: " . static::$tableName . " as key");
     }
 
-    if (!static::$types->get($klassName)->check(static::$tableName->get($klassName))) {
+    if (!static::$types->get($klassName)->check($tableName)) {
       throw new KException("KORM::getType(): colName: " . $colName . " does not have type");
     }
 
-    return static::$types->get($klassName)->get(static::$tableName)->get($colName);
+    return static::$types->get($klassName)->get($tableName)->get($colName);
   }
 
   static public function autoSetColNames($klassName, $tableName) {
+    // $tableName = static::$tableName->get($klassName)->get($klassName);
+    // $belongToTableName = static::$belongToTableName->get($klassName)->get($klassName);
     // $klassName = get_called_class();
-    static::$propNames->set($klassName, new KHash());
+    $klassName::$propNames->set($klassName, new KHash());
 
     // sub class of KORM defines tableName.
     // $sql = "DESCRIBE " . static::$tableName;
@@ -393,11 +418,11 @@ class KORM {
 
     $rows = TheWorld::instance()->slave->query($sql)->fetchAll();
 
-    static::$colNames->set($klassName, new KHash());
-    static::$types->set($klassName, new KHash());
+    // static::$colNames->set($klassName, new KHash());
+    // static::$types->set($klassName, new KHash());
 
-    static::$colNames->get($klassName)->set(static::$tableName, new KArray());
-    static::$types->get($klassName)->set(static::$tableName, new KHash());
+    $klassName::$colNames->get($klassName)->set($tableName, new KArray());
+    $klassName::$types->get($klassName)->set($tableName, new KHash());
 
     foreach($rows as $row) {
       $field = $row["Field"];
@@ -405,32 +430,36 @@ class KORM {
 
       if(
         // !is_array(static::$propNames[static::$tableName])
-        !static::$propNames->get($klassName)->check(static::$tableName)
+        !$klassName::$propNames->get($klassName)->check($tableName)
         )
       {                 
-        !static::$propNames->get($klassName)->set(static::$tableName, new KHash())
+        $klassName::$propNames->get($klassName)->set($tableName, new KHash());
       }
 
-      if (static::$belongToTableName != null) {
-        $modifiedField = "pri_" . $field;
-        static::$propNames->get($klassName)->get(static::$tableName)->set($field, $modifiedField);
-        static::$colNames->get($klassName)->set[static::$tableName, $field);
-        static::$types->get($klassName)->get(static::$tableName)->set($field, $type);
-      }
-      else {
-        static::$propNames->get($klassName)->get(static::$tableName)->set($field, $field);
-        static::$colNames->get($klassName)->get(static::$tableName)->push($field);
-        static::$types->get($klassName)->get(static::$tableName)->set($field, $type);
-      }
+      // if ($belongToTableName != null) {
+      //   $modifiedField = "pri_" . $field;
+      //   static::$propNames->get($klassName)->get($tableName)->set($field, $modifiedField);
+      //   static::$colNames->get($klassName)->set($tableName, $field);
+      //   static::$types->get($klassName)->get($tableName)->set($field, $type);
+      // }
+      // else {
+      $klassName::$propNames->get($klassName)->get($tableName)->set($field, $field);
+      $klassName::$colNames->get($klassName)->get($tableName)->push($field);
+      $klassName::$types->get($klassName)->get($tableName)->set($field, $type);
+      // }
       
     }
     
-    if (static::getTableName() != null) {
-      static::$colNames->get($klassName)->set(static::$belongToTableName->get($klassName), new KArray());
+    // if (static::getTableName() != null) {
+      /*
+    if ($belongToTableName != null) {
+      static::$colNames->get($klassName)->set($belongToTableName, new KArray());
       // refactor
-      static::$secPropNames->get($klassName) = new KHash();
-      static::$secPropNames->get($klassName)->set(static::$belongToTableName, array());
-      $sql = "DESCRIBE " . static::$belongToTableName;
+      static::$secPropNames->set($klassName, new KHash());
+      // debug array
+      static::$secPropNames->get($klassName)->set($belongToTableName, new KHash());
+      // end of debug
+      $sql = "DESCRIBE " . $belongToTableName;
       $srows = TheWorld::instance()->slave->query($sql)->fetchAll();
       // var_dump($srows);
       foreach($srows as $srow) {
@@ -438,11 +467,12 @@ class KORM {
         $smodifiedField = "sec_" . $sfield;
         $stype = Util::convertMySQLType($srow["Type"]);
         static::$propNames->get($klassName)->get(static::$belongToTableName)->set($sfield, $smodifiedField);
-        static::$colNames->get($klassName)->get(static::$belongToTableName)->push($sfield);
-        static::$types->get($klassName)->get(static::$belongToTableName)->set($field, $stype);
+        static::$colNames->get($klassName)->get($belongToTableName)->push($sfield);
+        static::$types->get($klassName)->get($belongToTableName)->set($field, $stype);
         
       }
     }
+    */
 
     // debug
     // return $this;
@@ -471,17 +501,19 @@ class KORM {
 
   protected function saveUpdate() {
     $klassName = get_called_class();
+    $tableName = static::$tableName->get($klassName)->get($klassName);
 
-    if (static::$belongTo->get($klassName) !== null) {
+    if (static::$belongTo->get($klassName)->get($klassName) !== false) {
       throw new Exception("KORM::saveUpdate(): saveUpdate() cannot be invoked when there is join.");
     }
 
     // update tablename set foo = bar where id = ?
-    $sql = "UPDATE " . static::$tableName->get($klassName) . " SET ";
+    $sql = "UPDATE " . static::$tableName->get($klassName)->get($klassName) . " SET ";
     $i = 1;
-    $n = count(static::$propNames[static::$tableName]);
+    $n = static::$propNames->get($klassName)->get($tableName)->len();
 
-    foreach(static::$propNames->get($klassName)->get(static::$tableName->get($klassName))->generator() as $propName) {
+    // foreach(static::$propNames->get($klassName)->get($tableName)->get($klassName)->generator() as $propName) {
+    foreach(static::$propNames->get($klassName)->get($tableName)->generator() as $propName) {
       $val = $this->master->quote($this->$propName);
       $sql = $sql . $propName . " = " . $val . " ";
       
@@ -500,15 +532,17 @@ class KORM {
   // only invoked when there is no join.
   protected function saveNew() {
     $klassName = get_called_class();
+    $tableName = static::$tableName->get($klassName)->get($klassName);
 
-    if (static::$belongTo->get($klassName) !== null) {
+    if (static::$belongTo->get($klassName)->get($klassName) !== false) {
       throw new Exception("KORM::saveNew(): saveNew() cannot be invoked when there is join.");
     }
 
-    $sql = "INSERT INTO " . static::$tableName . " (";
+    $sql = "INSERT INTO " . $tableName . " (";
     $i = 1;
-    $n = count(static::$propNames->get($klassName)->get(static::$tableName);
-    foreach(static::$propNames->get(static::$tableName)->generator() as $colName) {
+    // $n = count(static::$propNames->get($klassName)->get(static::$tableName));
+    $n = static::$propNames->get($klassName)->get($tableName)->len();
+    foreach(static::$propNames->get($klassName)->get($tableName)->generator() as $colName) {
       if (Util::isEmpty($this->$colName)) {
         ++$i;
         continue;
@@ -524,9 +558,9 @@ class KORM {
 
     $sql = $sql . ") VALUES(";
     $i = 1;
-    $n = count(static::$propNames->get($klassName)->get(static::$tableName->get($klassName)));
+    $n = static::$propNames->get($klassName)->get($tableName)->len();
 
-    foreach(static::$propNames->get($klassName)->get(static::$tableName)->generator() as $propName) {
+    foreach(static::$propNames->get($klassName)->get($tableName)->generator() as $propName) {
       $val = $this->$propName;
 
       if (Util::isEmpty($val)) {
@@ -546,25 +580,32 @@ class KORM {
     $this->master->query($sql);
   }
 
-  static protected function makeColNames($tableName, $suffix = null) {
+  static protected function makeColNames($tableName, $parentTableName = null) {
     $klassName = get_called_class();
+    $belongTo = static::$belongTo->get($klassName)->get($klassName);
+    $belongToTableName = static::$belongToTableName->get($klassName)->get($klassName);
+    if (static::$belongToTableName->get($klassName)->check($klassName) === false) {
+      $belongToTableName = null;
+    }
+    // $tableName = static::$tableName->get($klassName)->get($klassName);
 
     $sql = "";
-    // $colNames = static::$colNames[static::$tableName];
+
     $colNames = static::$colNames->get($klassName)->get($tableName);
 
     $i = 1;
-    $n = count($colNames);
-    foreach($colNames as $id => $colName) {
-      if (static::$belongToTableName->get($klassName) == null) {
+    $n = $colNames->len();
+
+    foreach($colNames->generator() as $id => $colName) {
+      if ($parentTableName == null) {
         $sql = $sql . $tableName . "." . $colName . sprintf(" as %s", $colName);
       }
       else {
-        if (strcmp($tableName, static::$belongToTableName->get($klassName)) == 0) {
-          $sql = $sql . $tableName . "." . $colName . sprintf(" as %s_%s ", static::$belongToTableName->get($klassName), $colName);
+        if (strcmp($tableName, $parentTableName) != 0) {
+          $sql = $sql . $tableName . "." . $colName . sprintf(" as %s_%s ", $tableName, $colName);
         }
         else {
-          $sql = $sql . $tableName . "." . $colName . sprintf(" as %s_%s ", $tableName, $colName);
+          $sql = $sql . $tableName . "." . $colName . sprintf(" as %s ", $colName);
         }
     }
       
@@ -584,14 +625,17 @@ class KORM {
 
   static public function setBelongTo($belongTo) {
     $klassName = get_called_class();
-
-    static::$belongTo->set($klassName, $belongTo);
-
     $tableName = Util::omitSuffix(Util::upperCamelToLowerCase($belongTo), "_model");
-    static::$belongToTableName->set($klassName, $tableName);
+
+    $belongTo::initialize();
+
+    static::$belongTo->get($klassName)->set($klassName, $belongTo);
+    
+    static::$belongToTableName->get($klassName)->set($klassName, $tableName);
+    $belongToTableName = static::$belongToTableName->get($klassName)->get($klassName);
 
     // debug
-    // $belongTo::autoSetColNames($belongTo, static::$belongToTableName);
+    $belongTo::autoSetColNames($belongTo, $belongToTableName);
     // end of debug
 
     return true;
@@ -600,7 +644,7 @@ class KORM {
   static public function getBelongTo() {
     $klassName = get_called_class();
 
-    return static::$belongTo->get($klassName);
+    return static::$belongTo->get($klassName)->get($klassName);
   }
 
   // The format of belongWith is as follows:
@@ -642,9 +686,10 @@ class KORM {
 
   static public function getPropNames($tableName = null) {
     $klassName = get_called_class();
+    $tableName = static::$tableName->get($klassName)->get($klassName);
     // debug
     if ($tableName === null) {
-      return static::$propNames->get($klassName)->get(static::$tableName);
+      return static::$propNames->get($klassName)->get($tableName);
     }
     else {
       return static::$propNames->get($klassName)->get($tableName);

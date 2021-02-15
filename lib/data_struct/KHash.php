@@ -56,6 +56,10 @@ class KHash extends BaseClass {
     return $this;
   }
 
+  public function len() {
+    return count($this->internalArray);
+  }
+
 }
 
 ?>

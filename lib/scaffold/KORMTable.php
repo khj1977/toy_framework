@@ -61,7 +61,7 @@ class KORMTable extends BaseTable {
     foreach($orms as $orm) {
       $dbCols = array();
       $props = $orm->getPropNames();
-      foreach($props as $prop) {
+      foreach($props->generator() as $prop) {
         $type = $orm->getType($prop);
         $val = $orm->$prop;
 
@@ -81,6 +81,7 @@ class KORMTable extends BaseTable {
     $modelName = $this->modelName;
     // $baseOrm = new $modelName();
     // $orms = $baseOrm->fetch($where, null, $limit);
+    $modelName::initialize();
     $orm = new $modelName();
 
     $props = $orm->getPropNames();
@@ -89,7 +90,7 @@ class KORMTable extends BaseTable {
 
     $dbCols = array();
     $props = $orm->getPropNames();
-    foreach($props as $prop) {
+    foreach($props->generator() as $prop) {
       $type = $orm->getType($prop);
       // $val = $orm->$prop;
       $val = "";

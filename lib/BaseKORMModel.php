@@ -15,6 +15,7 @@ class BaseKORMModel extends KORM {
     
     // initialize parent later than above table related settings.
     // parent::__construct($tableName);
+    parent::initialize();
     $klassName::setTableName($tableName);
 
     if ($klassName::$initialized === true) {

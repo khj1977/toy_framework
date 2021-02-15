@@ -22,6 +22,7 @@ class ScaffoldFinishWidget extends BaseScaffoldWidget {
 
     $modelLoader = new ModelLoader();
     $modelLoader->load($modelName);
+    $modelName::initialize();
     $korm = new $modelName($tableName);
 
     $keys = $session->getKeys(false);
