@@ -24,7 +24,7 @@ class TestKORMBasedModel extends BaseUnitTest {
     $baseORM = new TestTableModel("test_table");
     $baseORMs = $baseORM->fetch();
     $propNames = $baseORM->getPropNames();
-    foreach($baseORMs as $baseORM) {
+    foreach($baseORMs->generator() as $baseORM) {
       foreach($propNames as $propName) {
         Util::println(sprintf("%s: %s", $propName, $baseORM->$propName));
       }

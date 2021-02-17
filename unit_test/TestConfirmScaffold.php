@@ -22,7 +22,7 @@ class TestConfirmScaffold extends BaseUnitTest {
 
     $stringPairs = array();
     $propNames = $korms[0]->getPropNames();
-    foreach($korms as $korm) {
+    foreach($korms->generator() as $korm) {
       foreach($propNames as $propName) {
         $stringPair = new StringPair();
         $stringPair->setPair($propName, $korm->$propName);

@@ -26,6 +26,10 @@ abstract class KSequential extends BaseClass {
     return $this->map($f);
   }
 
+  public function each($f) {
+    return $this->map($f);
+  }
+
   public function reduce($f) {
     $result = null;
     foreach($this->generator() as $element) {

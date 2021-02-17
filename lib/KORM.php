@@ -165,7 +165,8 @@ class KORM {
 
     $objects = static::xfetchOne($where, $orderBy);
 
-    return $objects[0];
+    // return $objects[0];
+    return $objects->get(0);
   }
 
   static public function fetch($where = null, $orderBy = null, $limit = null, $context = null) {
@@ -251,7 +252,8 @@ class KORM {
     }
     
     $statement = TheWorld::instance()->slave->query($sql);
-    $result = array();
+    // $result = array();
+    $result = new KArray();
     $klassName = get_called_class();
 
     if (static::$belongTo->get($klassName)->get($klassName) != null) {
@@ -296,7 +298,7 @@ class KORM {
         $object->joined = $joinedObject;
       }
 
-      $result[] = $object;
+      $result->push($object);
     }
 
     return $result;

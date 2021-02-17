@@ -25,7 +25,7 @@ class TestKORMJoin extends BaseUnitTest {
     // KORM::initialize();
 
     $orms = EmployeeListModel::fetch();
-    foreach($orms as $orm) {
+    foreach($orms->generator() as $orm) {
       Util::println("id: " . $orm->id . " : " . $orm->first_name);
     }
 
@@ -40,11 +40,11 @@ class TestKORMJoin extends BaseUnitTest {
     KORM::setBelongWith(array("from_key" => "prefecture_id", "to_key" => "id"));
 
     $orms = KORM::fetch();
-    foreach($orms as $orm) {
+    $orms->each(function($orm) {
       Util::println("cname: " . $orm->name . " pname: " . $orm->joined->name);
       // Util::println("cname: " . $orm->name);
-    }
-
+    });
+    
     return true;
   }
 

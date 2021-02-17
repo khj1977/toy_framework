@@ -58,7 +58,7 @@ class KORMTable extends BaseTable {
     // obtain val from col name and orm.
     // then assign to db cols.
     $rows = array();
-    foreach($orms as $orm) {
+    foreach($orms->generator() as $orm) {
       $dbCols = array();
       $props = $orm->getPropNames();
       foreach($props->generator() as $prop) {
