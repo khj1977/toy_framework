@@ -19,7 +19,6 @@ class PrefectureModel extends BaseKORMModel {
 
 class TestKORMJoin extends BaseUnitTest {
 
-
   public function test_simpleFetch() {
     // KORM::setTableName("employee_list");
     // KORM::initialize();
@@ -36,16 +35,18 @@ class TestKORMJoin extends BaseUnitTest {
     KORM::initialize();
     KORM::setTableName("company");
     
-    KORM::setBelongTo("PrefectureModel");
-    KORM::setBelongWith(array("from_key" => "prefecture_id", "to_key" => "id"));
+    // KORM::setBelongTo("PrefectureModel");
+    KORM::setBelongWith(array("belong_to" => "PrefectureModel", "from_key" => "prefecture_id", "to_key" => "id"));
 
     $orms = KORM::fetch();
+
     $orms->each(function($orm) {
-      Util::println("cname: " . $orm->name . " pname: " . $orm->joined->name);
+      Util::println("cname: " . $orm->name . " pname: " . $orm->PrefectureModel->name);
       // Util::println("cname: " . $orm->name);
     });
     
     return true;
   }
+  
 
 }

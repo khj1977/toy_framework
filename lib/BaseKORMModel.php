@@ -22,7 +22,9 @@ class BaseKORMModel extends KORM {
       return;
     }
 
+    // debug
     parent::initialize();
+    // end of debug
   }
 
   /*
