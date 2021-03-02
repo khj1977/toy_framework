@@ -138,6 +138,33 @@ class Util {
       return $result;
     }
 
+    static public function omitPrefix($str, $prefix) {
+      $strLen = strlen($str);
+      $prefixLen = strlen($prefix);
+
+      $i = 0;
+      for($j = 0; $j < $prefixLen; ++$j) {
+        if ($i >= $strLen) {
+          return false;
+        }
+
+        $s = $str[$i];
+        $p = $prefix[$j];
+        if (strcmp($p, $s) != 0) {
+          return false;
+        }
+
+        ++$i;
+      }
+
+      $result = "";
+      for($k = $prefixLen; $k < $strLen; ++$k) {
+        $result = $result . $str[$k];
+      }
+
+      return $result;
+    }
+
     // debug
     // The method name of the following method is incorrect underscore to upper camel is correct. By another method, alias class method is provided.
     // end of debug

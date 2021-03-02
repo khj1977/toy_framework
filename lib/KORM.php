@@ -248,10 +248,12 @@ class KORM {
       }
 
       $i = 1;
+      $j = 0;
       // static::$belongWiths->each(function($belongWith) {
       $n = static::$belongWiths->get($klassName)->get($klassName)->len();
       foreach(static::$belongWiths->get($klassName)->get($klassName)->generator() as $belongWith) {
         // $belongWith = static::$belongWiths->get($klassName);
+        $belongToTableName = $belongToTableNames->get($j);
         $fromKey = $belongWith["from_key"];
         $toKey = $belongWith["to_key"];
         $sql = $sql . static::$tableName->get($klassName)->get($klassName) . "." . $fromKey . " = " . $belongToTableName . "." . $toKey;
@@ -261,6 +263,7 @@ class KORM {
         }
 
         ++$i;
+        ++$j;
       }
     }
 
@@ -290,56 +293,69 @@ class KORM {
       }
     }
     else {
+      $joinedPropPatterns = array();
+      $joinedTableNames = array();
+      $belongTos = array();
+
       foreach(static::$belongWiths->get($klassName)->get($klassName)->generator() as $belongWith) {
         $belongTo = $belongWith["belong_to"];
-        // if (static::$belongTo->get($klassName)->get($klassName) != null) {
         $joinedTableName = Util::omitSuffix(Util::upperCamelToLowerCase($belongTo), "_model");
         $joinedPropPattern = sprintf("/%s/", $joinedTableName);
 
-        while($row = $statement->fetch()) {
-          // filter is assigned to object.
-          // in that time, filter is assigned object by object;i.e. by instance val not class val.
-          $joinedObject = null;
-          $object = new $klassName($tableName);
-          if (static::$belongWiths->get($klassName)->get($klassName)->len() != 0) {
-            // Do join recursively?
-            $joinedObject = new $belongTo($joinedTableName);
-          }
-          foreach($row as $propName => $val) {
-            if (static::$belongWiths->get($klassName)->get($klassName)->len() != 0) {
-          
-              $joined = false;
-              if (preg_match($joinedPropPattern, $propName) == 1) {
-                $joined = true;
-              }
-
-              $splitted = explode("_", $propName);
-              if ($joined === true) {
-                $propName = $splitted[1];
-                $joinedObject->$propName = $val;
-              }
-              else {
-                $object->$propName = $val;
-              }
+        $joinedPropPatterns[] = $joinedPropPattern;
+        $joinedTableNames[] = $joinedTableName;
+        $belongTos[] = $belongTo;
+        // debug
+        // end of debug
+      }
+        
+      while($row = $statement->fetch()) {
+            // filter is assigned to object.
+            // in that time, filter is assigned object by object;i.e. by instance val not class val.
+            $joinedObject = null;
+            $object = new $klassName($tableName);
+            $joinedObjects = array();
+            foreach($belongTos as $xBelongTo) {
+              $joinedTableName = Util::omitSuffix(Util::upperCamelToLowerCase($xBelongTo), "_model");
+              $joinedObjects[$xBelongTo] = new $belongTo($joinedTableName);
             }
-            else {
-              $object->$propName = $val;
-            }
-            // do not modify a prop but apply filter when __get() is called.
-            // $object->$propName = $this->filter->apply($val);
-          }
-          if ($joinedObject != null) {
-            // $object->joined = $joinedObject;
-            $object->$belongTo = $joinedObject;
-          }
 
-          $result->push($object);
-        }
-      } // foreach
-    } // else
+            foreach($row as $propName => $val) {
+                $joined = false;
+                $ii = 0;
+                foreach($joinedPropPatterns as $joinedPropPattern) {
+                  if (preg_match($joinedPropPattern, $propName) == 1) {
+                    $realJoinedTableName = $joinedTableNames[$ii];
+                    $belongTo = $belongTos[$ii];
+                    $joined = true;
+                    $joinedObject = $joinedObjects[$belongTo];
+                    if (!isset($object->$belongTo)) {
+                      $object->$belongTo = $joinedObject;
+                    }
+                  }
 
-    return $result;
+                  ++$ii;
+                }
+
+                $splitted = explode("_", $propName);
+                if ($joined === true) {
+                  $propName = Util::omitPrefix($propName, $realJoinedTableName . "_");
+                  $joinedObject->$propName = $val;
+                }
+                else {
+                  $object->$propName = $val;
+                }
+              }
+              // do not modify a prop but apply filter when __get() is called.
+              // $object->$propName = $this->filter->apply($val);
+              // $object->$belongTo = $joinedObject;
+
+              $result->push($object);
+      } 
+      
   }
+  return $result;
+} 
 
   public function getCount() {
     $sql = "SELECT count(id) as cnt FROM " . $this->tableName . " LIMIT 1";
@@ -694,6 +710,10 @@ class KORM {
     // static::$belongWiths->get($klassName)->get($klassName)->push($belongWith);
 
     return true;
+  }
+
+  static public function addBelongWith($belongWith) {
+    return static::setBelongWith($belongWith);
   }
 
   /*
