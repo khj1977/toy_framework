@@ -39,6 +39,7 @@ class KORM {
   static protected $secPropNames;
   // colName or propName => type as string
   static protected $types;
+  static protected $keys;
 
   protected $slave;
   protected $master;
@@ -91,6 +92,7 @@ class KORM {
       static::$propNames = new KHash();
       static::$secPropNames = new KHash();
       static::$types = new KHash();
+      static::$keys = new KHash();
 
       static::$superInitialized = true;
     }
@@ -109,7 +111,11 @@ class KORM {
       static::$secPropNames->set($klassName, new kHash());
       static::$types->set($klassName, new kHash());
 
-      static::$types->set($klassName, new KHash());
+      // debug
+      // static::$types->set($klassName, new KHash());
+      // end of debug
+
+      static::$keys->set($klassName, new kHash());
 
       static::$belongToTableNames->get($klassName)->set($klassName, new KArray());
       static::$belongWiths->get($klassName)->set($klassName, new KArray());
@@ -446,7 +452,6 @@ class KORM {
     $klassName = get_called_class();
     $tableName = static::$tableName->get($klassName)->get($klassName);
 
-
     if (
       // static::$types->get($klassName)->check(static::$tableName)->get(static::$tableName)) {
       // static::$types->get($klassName)->get($tableName)->set($field, $type);
@@ -459,6 +464,22 @@ class KORM {
     }
 
     return static::$types->get($klassName)->get($tableName)->get($colName);
+  }
+
+  public function getKey($colName) {
+    $klassName = get_called_class();
+    $tableName = static::$tableName->get($klassName)->get($klassName);
+
+    if (
+        !static::$keys->get($klassName)->check($tableName)) {
+      throw new KException("KORM::getType(): type data type does not has tableName: " . static::$tableName . " as key");
+    }
+
+    if (!static::$keys->get($klassName)->check($tableName)) {
+      throw new KException("KORM::getType(): colName: " . $colName . " does not have type");
+    }
+
+    return static::$keys->get($klassName)->get($tableName)->get($colName);
   }
 
   static public function autoSetColNames($klassName, $tableName) {
@@ -478,10 +499,12 @@ class KORM {
 
     $klassName::$colNames->get($klassName)->set($tableName, new KArray());
     $klassName::$types->get($klassName)->set($tableName, new KHash());
+    $klassName::$keys->get($klassName)->set($tableName, new KHash());
 
     foreach($rows as $row) {
       $field = $row["Field"];
       $type = Util::convertMySQLType($row["Type"]);
+      $key = $row["Key"];
 
       if(
         // !is_array(static::$propNames[static::$tableName])
@@ -501,6 +524,7 @@ class KORM {
       $klassName::$propNames->get($klassName)->get($tableName)->set($field, $field);
       $klassName::$colNames->get($klassName)->get($tableName)->push($field);
       $klassName::$types->get($klassName)->get($tableName)->set($field, $type);
+      $klassName::$keys->get($klassName)->get($tableName)->set($field, $key);
       // }
       
     }

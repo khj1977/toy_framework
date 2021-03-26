@@ -12,6 +12,7 @@ require_once("lib/TheWorld.php");
 class KORMTable extends BaseTable {
 
   protected $modelName;
+  protected $orm;
 
   public function __construct($modelName) {
     $this->modelName = $modelName;
@@ -63,10 +64,11 @@ class KORMTable extends BaseTable {
       $props = $orm->getPropNames();
       foreach($props->generator() as $prop) {
         $type = $orm->getType($prop);
+        $key = $orm->getKey($prop);
         $val = $orm->$prop;
 
         $dbCol = new DBCol();
-        $dbCol->setTypeNameValTriple($prop, $type, $val);
+        $dbCol->setTypeNameValTriple($prop, $type, $val)->setKey($key);
 
         $dbCols[] = $dbCol;
       }
@@ -82,26 +84,59 @@ class KORMTable extends BaseTable {
     // $baseOrm = new $modelName();
     // $orms = $baseOrm->fetch($where, null, $limit);
     $modelName::initialize();
-    $orm = new $modelName();
+    $this->orm = new $modelName();
+
+    $props = $this->orm->getPropNames();
+
+    $rows = array();
+
+    $dbCols = array();
+    $props = $this->orm->getPropNames();
+    foreach($props->generator() as $prop) {
+      $type = $this->orm->getType($prop);
+      $key = $this->orm->getKey($prop);
+      // $val = $orm->$prop;
+      $val = "";
+
+      $dbCol = new DBCol();
+      $dbCol->setTypeNameValTriple($prop, $type, $val)->setKey($key);
+
+      $dbCols[] = $dbCol;
+    }
+
+    return $dbCols;
+  }
+
+  public function getDBPropsWithWithEmptyDataByHash() {
+    $modelName = $this->modelName;
+    // $baseOrm = new $modelName();
+    // $orms = $baseOrm->fetch($where, null, $limit);
+    $modelName::initialize();
+    $this->orm = new $modelName();
 
     $props = $orm->getPropNames();
 
     $rows = array();
 
     $dbCols = array();
-    $props = $orm->getPropNames();
+    $props = $this->orm->getPropNames();
     foreach($props->generator() as $prop) {
-      $type = $orm->getType($prop);
+      $type = $this->orm->getType($prop);
+      $key = $this->orm->getKey($prop);
       // $val = $orm->$prop;
       $val = "";
 
       $dbCol = new DBCol();
-      $dbCol->setTypeNameValTriple($prop, $type, $val);
+      $dbCol->setTypeNameValTriple($prop, $type, $val)->setKey($key);
 
-      $dbCols[] = $dbCol;
+      $dbCols[$prop] = $dbCol;
     }
 
     return $dbCols;
+  }
+
+  public function getORM() {
+    return $this->orm;
   }
 
   protected function getRawColNames() {

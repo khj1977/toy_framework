@@ -13,6 +13,7 @@ class DBCol extends BaseClass {
   protected $name;
   protected $val;
   protected $type;
+  protected $key;
 
   protected $htmlFactory;
   protected $tableName;
@@ -38,6 +39,7 @@ class DBCol extends BaseClass {
 
     $this->name = null;
     $this->val = null;
+    $this->type = null;
     $this->type = null;
 
     $this->htmlFactory = null;
@@ -78,6 +80,10 @@ class DBCol extends BaseClass {
     return $this->type;
   }
 
+  public function getKey() {
+    return $this->key;
+  }
+
   public function setName($name) {
     $this->name = $name;
 
@@ -91,7 +97,16 @@ class DBCol extends BaseClass {
   }
 
   public function setType($type) {
-    $this->type = $type;
+    // debug
+    // $this->type = $type;
+    $this->type = Util::convertMySQLType($type);
+    // end of debug
+
+    return $this;
+  }
+
+  public function setKey($key) {
+    $this->key = $key;
 
     return $this;
   }
@@ -100,6 +115,12 @@ class DBCol extends BaseClass {
     if ($this->name === "id" && $this->type === "int") {
       return true;
     }
+    // select menu not hidden.
+    /*
+    else if (preg_match("/.*_id/", $this->name) === 1) {
+      return true;
+    }
+    */
 
     return false;
   }

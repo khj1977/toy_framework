@@ -8,6 +8,8 @@ require_once("lib/KException.php");
 
 class SimpleCol2HTMLFieldFactory extends BaseClass {
 
+  protected $orms;
+
   public function __construct() {
     parent::__construct();
 
@@ -22,12 +24,42 @@ class SimpleCol2HTMLFieldFactory extends BaseClass {
     return $this;
   }
 
+  public function setORM($orm) {
+    $this->orm = $orm;
+
+    return $this;
+  }
+
   public function make($tableName, $col) {
     // $type = $this->convertType($col->getType());
     $type = $col->getType();
 
+    // debug
+    // handle key
+    // if key is mul, which is fk, load master data, and make select button with default value.
+    // end of debug
+
+    $matched = array();
     if ($col->getName() === "id" && $type == "int") {
       $html = sprintf("<input class='form-control' type='hidden' name='%s' value='%s'>", $col->getName(), $col->getVal());
+    }
+    else if (preg_match("/(.*)_id/", $col->getName(), $matched) === 1 && $type == "int") {
+      // debug
+      // impl select menu
+      // from col name, such as company_kind_id generate class name like 
+      // CompanyKindModel ,and then, access to ORM, and then, make select menu by
+      // that joined data.
+      // <option value="foo" selected>foo</option>
+      $joinedKlassName = $matched[1];
+      $joinedModelName = Util::underscoreToUpperCamel($joinedKlassName . "Model");
+      $joinedModels = $joinedModelName::fetch();
+      $html = sprintf("<select name='%s'>", $this->orm->getKlassName());
+      foreach($joinedModels->generator() as $model) {
+        // id and name prop is ConC.
+        $html = $html . " " . sprintf("<option value='%s' class='form-control' type='text' name='%s' value='%s' selected>%s</option>", $model->id, $model->name, $model->name, $model->name);
+      }
+      $html = $html . " " . "</select>";
+      // end of debug
     }
     else if ($type === "int") {
         $html = sprintf("<input class='form-control' type='numeric' name='%s' value='%s'>", $col->getName(), $col->getVal());
