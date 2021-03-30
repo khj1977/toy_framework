@@ -114,7 +114,7 @@ class KORMTable extends BaseTable {
     $modelName::initialize();
     $this->orm = new $modelName();
 
-    $props = $orm->getPropNames();
+    $props = $this->orm->getPropNames();
 
     $rows = array();
 

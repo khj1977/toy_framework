@@ -33,6 +33,7 @@ class SimpleCol2HTMLFieldFactory extends BaseClass {
   public function make($tableName, $col) {
     // $type = $this->convertType($col->getType());
     $type = $col->getType();
+    $key = $col->getKey();
 
     // debug
     // handle key
@@ -43,7 +44,7 @@ class SimpleCol2HTMLFieldFactory extends BaseClass {
     if ($col->getName() === "id" && $type == "int") {
       $html = sprintf("<input class='form-control' type='hidden' name='%s' value='%s'>", $col->getName(), $col->getVal());
     }
-    else if (preg_match("/(.*)_id/", $col->getName(), $matched) === 1 && $type == "int") {
+    else if (KString::sregex($col->getName(), "/(.*)_id/", $matched) === true && KString::isEqual($key, "mul") === true && $type === "int") {
       // debug
       // impl select menu
       // from col name, such as company_kind_id generate class name like 
@@ -55,8 +56,12 @@ class SimpleCol2HTMLFieldFactory extends BaseClass {
       $joinedModels = $joinedModelName::fetch();
       $html = sprintf("<select name='%s'>", $this->orm->getKlassName());
       foreach($joinedModels->generator() as $model) {
-        // id and name prop is ConC.
-        $html = $html . " " . sprintf("<option value='%s' class='form-control' type='text' name='%s' value='%s' selected>%s</option>", $model->id, $model->name, $model->name, $model->name);
+        // id and name prop are ConC.
+        // $html = $html . " " . sprintf("<option value='%s' class='form-control' type='text' name='%s' value='%s' selected>%s</option>", $model->id, $model->name, $model->name, $model->name);
+        // debug
+        // How to control selected?
+        $html = $html . " " . sprintf("<option value='%s' class='form-control' type='text' name='%s' value='%s'>%s</option>", $model->id, $model->name, $model->name, $model->name);
+        // end of debug
       }
       $html = $html . " " . "</select>";
       // end of debug

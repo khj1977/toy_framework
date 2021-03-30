@@ -31,8 +31,11 @@ class NewScaffoldListWidget extends BaseScaffoldWidget {
     $table = $tableFactory->make("KORM", $this->modelName);
 
     // note that filter for KORM can be applied inside getDBCols() because __get() is called.
+    // debug
+    // make join inside of method?
     $rows = $table->getDBCols();
     $props = $table->getDBPropsWithEmptyData();
+    // end of debug
 
     $headerView = new HtmlHeaderView();
     foreach($props as $prop) {
@@ -42,6 +45,9 @@ class NewScaffoldListWidget extends BaseScaffoldWidget {
     $rowsView = new SimpleRowsView();
     $rowsView->pushHtmlHeader($headerView);
     foreach($rows as $row) {
+      // debug
+      // handle joined fk.
+      // end of debug
       $rowView = new ScaffoldTableRowView();
       foreach($row as $dbCol) {
        $rowView->push($dbCol);

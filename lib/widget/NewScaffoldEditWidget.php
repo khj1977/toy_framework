@@ -60,13 +60,20 @@ class NewScaffoldEditWidget extends BaseScaffoldWidget {
       foreach($postData as $name => $val) {
         // debug
         // quick hack. better solution?
+        $key = "";
         if (KString::isEqual($name, "id")) {
           $type = "int";
+        }
+        // else if (preg_match("/.*_id/", $name) === 1) {
+        else if (KString::sregex($name, "/.*_id/") === true) {
+          $type = "int";
+          $key = "mul";
         }
         else {
           $type = "varchar";
         }
         // end of debug
+
         $col = new DBCol();
         $col->setName($name)->setVal($val)->setType($type)->setKey($key);
 

@@ -54,6 +54,11 @@ class KString extends KSequential {
     return $matches;
   }
 
+  static public function sregex($str, $pattern, $matches = null) {
+    $string = KString::new()->append($str);
+    return $string->regex($pattern, $matches);
+  }
+
   public function generator() {
     $len = strlen($this->internalString);
     for($i = 0; $i < $len; ++$i) {
