@@ -9,8 +9,8 @@ class BaseErrorHandler {
   }
 
   public function handleError($exception) {
-    printf("RSSErrorHandler::handleError(): message: " . $exception->getMessage() . "\n");
-    printf("RSSErrorHandler::handleError(): stack trace: " . $exception->getTraceAsString() . "\n");
+    printf("BaseErrorHandler::handleError(): message: " . $exception->getMessage() . "\n");
+    printf("BaseErrorHandler::handleError(): stack trace: " . $exception->getTraceAsString() . "\n");
 
     return $this;
   }
