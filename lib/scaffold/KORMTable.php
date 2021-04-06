@@ -8,6 +8,8 @@ require_once("lib/scaffold/BaseTable.php");
 require_once("lib/scaffold/DBCol.php");
 require_once("lib/KException.php");
 require_once("lib/TheWorld.php");
+require_once("lib/data_struct/KArray.php");
+require_once("lib/data_struct/KHash.php");
 
 class KORMTable extends BaseTable {
 
@@ -46,11 +48,30 @@ class KORMTable extends BaseTable {
   }
 
   // where = array(arrray("col" => $col, "cond" => $cond)). where cond = num
-  public function getDBCols($limit = null, $where = null) {
+  public function getDBCols($limit = null, $where = null, $belongWiths = null) {
     // $baseOrm = new KORM($this->tableName);
     $modelName = $this->modelName;
     // $baseOrm = new $modelName();
     // $orms = $baseOrm->fetch($where, null, $limit);
+
+    /*
+    KORM::addBelongWith(array("belong_to" => "PrefectureModel", "from_key" => "prefecture_id", "to_key" => "id"));
+
+    KORM::addBelongWith(array("belong_to" => "CompanyKindModel", "from_key" => "kind_id", "to_key" => "id"));
+
+    KORM::fetch()->each(function($orm) {
+      Util::println("cname: " . $orm->name . " pname: " . $orm->PrefectureModel->name . " : kind: " . $orm->CompanyKindModel->name);
+    });
+    */
+
+    // debug
+    // make ORM, get col names. If .*_id, make model name and set belongWith
+    // end of debug
+    if ($belongWiths != null) {
+      foreach($belongWiths->generator() as $belongWith) {
+        $modelName::addBelongWith($belongWith);
+      }
+    }
     $orms = $modelName::fetch($where, null, $limit);
 
     // $this->ds->vd($orms);
@@ -73,13 +94,31 @@ class KORMTable extends BaseTable {
         $dbCols[] = $dbCol;
       }
 
+      // debug
+      // handle situation of join.
+      // KORM::addBelongWith(array("belong_to" => "CompanyKindModel", "from_key" => "kind_id", "to_key" => "id"));
+      if ($belongWiths != null) {
+        foreach($belongWiths->generator() as $belongWith) {
+          $joinedModelName = $belongWith["belong_to"];
+          $id = $orm->$joinedModelName->id;
+          $name = $orm->$joinedModelName->name;
+
+          $dbCol = DBCol::new()->setTypeNameValTriple($belongWith["from_key"], "int", $id)->setKey("");
+          $dbCols[] = $dbCol;
+
+          $dbCol = DBCol::new()->setTypeNameValTriple($belongWith["from_key"] . "_name", "varchar", $name)->setKey("");
+          $dbCols[] = $dbCol;
+        }
+      }
+      // end of debug
+
       $rows[] = $dbCols;
     }
 
     return $rows;
   }
 
-  public function getDBPropsWithEmptyData() {
+  public function getDBPropsWithEmptyData($belongWiths = null) {
     $modelName = $this->modelName;
     // $baseOrm = new $modelName();
     // $orms = $baseOrm->fetch($where, null, $limit);
@@ -104,9 +143,25 @@ class KORMTable extends BaseTable {
       $dbCols[] = $dbCol;
     }
 
+    if ($belongWiths != null) {
+      foreach($belongWiths->generator() as $belongWith) {
+        $modelName = $belongWith["belongTo"];
+
+        $dbCol = DBCol::new()->setTypeNameValTriple($belongWith["from_key"], "int", "")->setKey("");
+        $dbCols[] = $dbCol;
+
+        $dbCol = DBCol::new()->setTypeNameValTriple($belongWith["from_key"] . "_name", "varchar", "")->setKey("");
+      
+        $dbCols[] = $dbCol;
+      }
+    }
+
     return $dbCols;
   }
 
+  // debug
+  // handle $belongWiths?
+  // end of debug
   public function getDBPropsWithWithEmptyDataByHash() {
     $modelName = $this->modelName;
     // $baseOrm = new $modelName();

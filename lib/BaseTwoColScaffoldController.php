@@ -28,6 +28,11 @@ require_once("lib/widget/ScaffoldFinishWodget.php");
 require_once("lib/widget/ScaffoldAddWidget.php");
 require_once("lib/view/TwoColView.php");
 require_once("lib/view/VNavView.php");
+require_once("lib/widget/NewScaffoldAddWidget.php");
+require_once("lib/widget/NewScaffoldConfirmWidget.php");
+require_once("lib/widget/NewScaffoldEditWidget.php");
+require_once("lib/widget/NewScaffoldFinishWodget.php");
+require_once("lib/widget/NewScaffoldListWidget.php");
 
 class BaseTwoCOlScaffoldController extends BaseAuthController {
 
@@ -92,7 +97,7 @@ class BaseTwoCOlScaffoldController extends BaseAuthController {
   }
 
   public function klist() {
-    $widget = new ScaffoldListWidget();
+    $widget = new NewScaffoldListWidget();
     // return $widget->setModelName($this->modelName)->setParentView($this->simpleView)->run();
 
     $widget->setModelName($this->modelName)->setParentView($this->twoColView->getRightColView())->setBreadCrumbView($this->breadCrumbView)->run();
@@ -101,14 +106,14 @@ class BaseTwoCOlScaffoldController extends BaseAuthController {
   }
 
   public function edit() {
-    $widget = new ScaffoldEditWidget();
+    $widget = new NewScaffoldEditWidget();
     $widget->setModelName($this->modelName)->setParentView($this->twoColView->getRightColView())->setBreadCrumbView($this->breadCrumbView)->run();
 
     return $this->simpleView;
   }
 
   public function add() {
-    $widget = new ScaffoldAddWidget();
+    $widget = new NewScaffoldAddWidget();
     $widget->setModelName($this->modelName)->setParentView($this->twoColView->getRightColView())->setBreadCrumbView($this->breadCrumbView)->run();
 
     return $this->simpleView;
@@ -122,7 +127,7 @@ class BaseTwoCOlScaffoldController extends BaseAuthController {
   }
 
   public function update() {
-    $widget = new ScaffoldFinishWidget();
+    $widget = new NewScaffoldFinishWidget();
     $widget->setModelName($this->modelName)->setParentView($this->twoColView->getRightColView())->setBreadCrumbView($this->breadCrumbView)->run();
 
     return $this->simpleView;

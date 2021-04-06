@@ -13,6 +13,7 @@ require_once("lib/view/BreadCrumbView.php");
 require_once("lib/view/LinkButtonView.php");
 require_once("lib/util/SimpleSession.php");
 require_once("lib/view/HtmlHeaderView.php");
+require_once("lib/data_struct/KString.php");
 
 class NewScaffoldListWidget extends BaseScaffoldWidget {
 
@@ -50,7 +51,10 @@ class NewScaffoldListWidget extends BaseScaffoldWidget {
       // end of debug
       $rowView = new ScaffoldTableRowView();
       foreach($row as $dbCol) {
-       $rowView->push($dbCol);
+        if (KString::sregex($dbCol->getName(), "/.*_id/")) {
+          continue;
+        }
+        $rowView->push($dbCol);
       }
       // notice
       // row's' not row
