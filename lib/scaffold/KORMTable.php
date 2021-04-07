@@ -67,6 +67,8 @@ class KORMTable extends BaseTable {
     // debug
     // make ORM, get col names. If .*_id, make model name and set belongWith
     // end of debug
+    $modelLoader = new ModelLoader();
+    $modelLoader->load($modelName);
     if ($belongWiths != null) {
       foreach($belongWiths->generator() as $belongWith) {
         $modelName::addBelongWith($belongWith);
@@ -103,8 +105,10 @@ class KORMTable extends BaseTable {
           $id = $orm->$joinedModelName->id;
           $name = $orm->$joinedModelName->name;
 
-          $dbCol = DBCol::new()->setTypeNameValTriple($belongWith["from_key"], "int", $id)->setKey("");
-          $dbCols[] = $dbCol;
+          // debug
+          // $dbCol = DBCol::new()->setTypeNameValTriple($belongWith["from_key"], "int", $id)->setKey("");
+          // $dbCols[] = $dbCol;
+          // end of debug
 
           $dbCol = DBCol::new()->setTypeNameValTriple($belongWith["from_key"] . "_name", "varchar", $name)->setKey("");
           $dbCols[] = $dbCol;

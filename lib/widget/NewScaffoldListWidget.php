@@ -14,6 +14,7 @@ require_once("lib/view/LinkButtonView.php");
 require_once("lib/util/SimpleSession.php");
 require_once("lib/view/HtmlHeaderView.php");
 require_once("lib/data_struct/KString.php");
+require_once("lib/util/ModelLoader.php");
 
 class NewScaffoldListWidget extends BaseScaffoldWidget {
 
@@ -31,15 +32,48 @@ class NewScaffoldListWidget extends BaseScaffoldWidget {
     $tableFactory = new TableFactory();
     $table = $tableFactory->make("KORM", $this->modelName);
 
+    // debug
+    // KORM::addBelongWith(array("belong_to" => "PrefectureModel", "from_key" => "prefecture_id", "to_key" => "id"));
+    // end of debug
+
     // note that filter for KORM can be applied inside getDBCols() because __get() is called.
     // debug
     // make join inside of method?
-    $rows = $table->getDBCols();
+    // public function getDBCols($limit = null, $where = null, $belongWiths = null) 
+    $props = $table->getDBPropsWithEmptyData();
+    $belongWiths = new KArray();
+    $hasJoin = false;
+    foreach($props as $prop) {
+      $matched = array();
+      if (preg_match("/(.*)_id/", $prop->getName(), $matched) === 1) {
+        $hasJoin = true;
+        $referName = $matched[1];
+        $joinModelName = Util::underscoreToUpperCamel($referName) . "Model";
+
+        $fromKey = $prop->getName();
+        $toKey = "id";
+
+        $belongWith = array("belong_to" => $joinModelName, "from_key" => $fromKey, "to_key" => $toKey);
+
+        $belongWiths->push($belongWith);
+      }
+    }
+
+    $rows = $table->getDBCols(null, null, $belongWiths);
     $props = $table->getDBPropsWithEmptyData();
     // end of debug
 
     $headerView = new HtmlHeaderView();
     foreach($props as $prop) {
+      $matched = array();
+      if (preg_match("/(.*)_id/", $prop->getName(), $matched) === 1) {
+        // if prop is xxx_Id, col name will be xxx.
+        // debug
+        // $newName = $matched[1];
+        $newName = $matched[1] . "_join";
+        // end of debug
+        $prop->setName($newName);
+      }
       $headerView->push($prop);
     }
 
@@ -51,8 +85,13 @@ class NewScaffoldListWidget extends BaseScaffoldWidget {
       // end of debug
       $rowView = new ScaffoldTableRowView();
       foreach($row as $dbCol) {
-        if (KString::sregex($dbCol->getName(), "/.*_id/")) {
-          continue;
+        $matched = array();
+        if (preg_match("/(.*)_id/", $dbCol->getName(), $matched) == 1) {
+          // debug
+          // determine how to obtain db col val with joined data.
+          $referName = $matched[1];
+          $joinModelName = Util::underscoreToUpperCamel($referName) . "Model";
+          // end of debug
         }
         $rowView->push($dbCol);
       }

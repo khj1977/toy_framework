@@ -9,6 +9,7 @@ require_once("lib/util/Util.php");;
 require_once("lib/KException.php");
 require_once("lib/data_struct/KHash.php");
 require_once("lib/data_struct/KArray.php");
+require_once("lib/util/ModelLoader.php");
 
 class KORM {
   static protected $superInitialized = false;
@@ -717,7 +718,11 @@ class KORM {
 
     $tableName = Util::omitSuffix(Util::upperCamelToLowerCase($belongTo), "_model");
     $belongToTableName = $tableName;
-
+    // debug
+    // require_once("apps/sample_app/models/DivisionModel.php");
+    $modelLoader = new ModelLoader();
+    $modelLoader->load($belongTo);
+    // end of debug
     $belongTo::initialize();
 
     /*
