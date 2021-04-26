@@ -45,7 +45,7 @@ class NewScaffoldListWidget extends BaseScaffoldWidget {
     $hasJoin = false;
     foreach($props as $prop) {
       $matched = array();
-      if (preg_match("/(.*)_id/", $prop->getName(), $matched) === 1) {
+      if (preg_match("/(.*)_id$/", $prop->getName(), $matched) === 1) {
         $hasJoin = true;
         $referName = $matched[1];
         $joinModelName = Util::underscoreToUpperCamel($referName) . "Model";
@@ -66,7 +66,7 @@ class NewScaffoldListWidget extends BaseScaffoldWidget {
     $headerView = new HtmlHeaderView();
     foreach($props as $prop) {
       $matched = array();
-      if (preg_match("/(.*)_id/", $prop->getName(), $matched) === 1) {
+      if (preg_match("/(.*)_id$/", $prop->getName(), $matched) === 1) {
         // if prop is xxx_Id, col name will be xxx.
         // debug
         // $newName = $matched[1];
@@ -86,11 +86,12 @@ class NewScaffoldListWidget extends BaseScaffoldWidget {
       $rowView = new ScaffoldTableRowView();
       foreach($row as $dbCol) {
         $matched = array();
-        if (preg_match("/(.*)_id/", $dbCol->getName(), $matched) == 1) {
+        if (preg_match("/(.*)_id$/", $dbCol->getName(), $matched) == 1) {
           // debug
           // determine how to obtain db col val with joined data.
           $referName = $matched[1];
           $joinModelName = Util::underscoreToUpperCamel($referName) . "Model";
+          continue;
           // end of debug
         }
         $rowView->push($dbCol);
