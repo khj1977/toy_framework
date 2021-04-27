@@ -8,6 +8,7 @@ require_once("lib/TheWorld.php");
 require_once("lib/scaffold/factory/SimpleCol2HTMLFieldFactory.php");
 require_once("lib/scaffold/sub_view/ScaffoldFormView.php");
 require_once("lib/data_struct/KString.php");
+require_once("lib/util/ModelLoader.php");
 
 class NewScaffoldEditWidget extends BaseScaffoldWidget {
 
@@ -17,10 +18,32 @@ class NewScaffoldEditWidget extends BaseScaffoldWidget {
     $this->initializeBreadCrumb("edit");
 
     $tableName = Util::omitSuffix(Util::upperCamelToLowerCase($this->modelName), "_model");
-    
+   
     $tableFactory = new TableFactory();
     $sqlTable = $tableFactory->make("KORM", $this->modelName);
+
    
+    $props = $sqlTable->getDBPropsWithEmptyData();
+    $belongWiths = new KArray();
+    $hasJoin = false;
+    foreach($props as $prop) {
+      $matched = array();
+      if (preg_match("/(.*)_id$/", $prop->getName(), $matched) === 1) {
+        $hasJoin = true;
+        $referName = $matched[1];
+        $joinModelName = Util::underscoreToUpperCamel($referName) . "Model";
+
+        $fromKey = $prop->getName();
+        $toKey = "id";
+
+        $belongWith = array("belong_to" => $joinModelName, "from_key" => $fromKey, "to_key" => $toKey);
+
+        $belongWiths->push($belongWith);
+      }
+    }
+
+    // $rows = $sqlTable->getDBCols(null, null, $belongWiths);
+
     $args = TheWorld::instance()->arguments;
 
     $idKey = "scaffold_widget::edit::::xrun::id";
@@ -35,6 +58,7 @@ class NewScaffoldEditWidget extends BaseScaffoldWidget {
     }
     
     $factory = new SimpleCol2HTMLFieldFactory();
+    $factory->setORM($sqlTable->getORM());
 
     $formView = new ScaffoldFormView();
   
@@ -48,7 +72,10 @@ class NewScaffoldEditWidget extends BaseScaffoldWidget {
     $formView->setAction(sprintf("/index.php?m=%s&c=%s&a=confirm", $router->getModule(), $router->getController()))->setMethod("POST");
 
     if ($id != false) {
+      // debug
+      // do join and skip .*_id$
       $rows = $sqlTable->getDBCols(1, array("id" => $id));
+      // end of debug
       $row = $rows[0];
       foreach($row as $col) {
         $col->setHTMLFactory($factory);
@@ -67,7 +94,7 @@ class NewScaffoldEditWidget extends BaseScaffoldWidget {
         // else if (preg_match("/.*_id/", $name) === 1) {
         else if (KString::sregex($name, "/.*_id/") === true) {
           $type = "int";
-          $key = "mul";
+          $key = "MUL";
         }
         else {
           $type = "varchar";

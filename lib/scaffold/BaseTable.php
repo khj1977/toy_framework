@@ -11,6 +11,7 @@ abstract class BaseTable extends BaseClass {
 
   protected $tableName;
   protected $slave;
+  protected $orm;
 
   public function __construct($tableName) {
     parent::__construct();
@@ -23,6 +24,10 @@ abstract class BaseTable extends BaseClass {
     // var_dump($this->slave);
 
     return $this;
+  }
+
+  public function getORM() {
+    return $this->orm;
   }
 
   abstract protected function getRawColNames();

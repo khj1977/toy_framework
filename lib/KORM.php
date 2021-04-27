@@ -705,7 +705,7 @@ class KORM {
     return $sql;
   }
 
-  protected function getKlassName() {
+  public function getKlassName() {
     return get_class($this);
   }
 

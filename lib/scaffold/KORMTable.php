@@ -14,7 +14,6 @@ require_once("lib/data_struct/KHash.php");
 class KORMTable extends BaseTable {
 
   protected $modelName;
-  protected $orm;
 
   public function __construct($modelName) {
     $this->modelName = $modelName;
@@ -192,10 +191,6 @@ class KORMTable extends BaseTable {
     }
 
     return $dbCols;
-  }
-
-  public function getORM() {
-    return $this->orm;
   }
 
   protected function getRawColNames() {

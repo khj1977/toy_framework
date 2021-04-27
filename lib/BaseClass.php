@@ -261,7 +261,7 @@ class BaseClass {
     // end of debug
   }
 
-  protected function getKlassName() {
+  public function getKlassName() {
     return get_class($this);
   }
 
