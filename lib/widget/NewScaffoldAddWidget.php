@@ -44,7 +44,7 @@ class NewScaffoldAddWidget extends BaseScaffoldWidget {
     $formView->setAction(sprintf("/index.php?m=%s&c=%s&a=confirm", $router->getModule(), $router->getController()))->setMethod("POST");
 
     $factory = new SimpleCol2HTMLFieldFactory();
-    $factory->setORM($sqlTable->getORM());
+    $factory->setORM($sqlTable->setORM()->getORM());
 
     if (!$isPosted) {
       $row = $sqlTable->getDBPropsWithEmptyData();
@@ -64,11 +64,13 @@ class NewScaffoldAddWidget extends BaseScaffoldWidget {
         // end of debug
         // debug
         // quick hack. better solution?
+        $key = $col->getKey();
         if (KString::isEqual($name, "id")) {
           $type = "int";
         }
-        else if (preg_match("/.*_id/", $name) === 1) {
+        else if (KString::sregex($name, "/.*_id$/") === true) {
           $type = "int";
+          $key = "MUL";
         }
         else {
           $type = "varchar";
@@ -77,8 +79,7 @@ class NewScaffoldAddWidget extends BaseScaffoldWidget {
         // $col = new DBCol();
         // debug
         // position of loop?
-        // end of debug
-        $key = $col->getKey();
+        // end of debug    
         $col->setName($name)->setVal($val)->setType($type)->setKey($key);
 
         $col->setHTMLFactory($factory);

@@ -121,6 +121,14 @@ class KORMTable extends BaseTable {
     return $rows;
   }
 
+  public function setORM() {
+    $modelName = $this->modelName;
+    $modelName::initialize();
+    $this->orm = new $modelName();
+
+    return $this;
+  }
+
   public function getDBPropsWithEmptyData($belongWiths = null) {
     $modelName = $this->modelName;
     // $baseOrm = new $modelName();

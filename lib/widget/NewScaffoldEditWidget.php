@@ -92,7 +92,7 @@ class NewScaffoldEditWidget extends BaseScaffoldWidget {
           $type = "int";
         }
         // else if (preg_match("/.*_id/", $name) === 1) {
-        else if (KString::sregex($name, "/.*_id/") === true) {
+        else if (KString::sregex($name, "/.*_id$/") === true) {
           $type = "int";
           $key = "MUL";
         }

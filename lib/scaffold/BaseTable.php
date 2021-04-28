@@ -20,6 +20,8 @@ abstract class BaseTable extends BaseClass {
     $this->tableName = $tableName;
 
     $this->slave = TheWorld::instance()->slave;
+    
+    $this->orm = null;
 
     // var_dump($this->slave);
 
