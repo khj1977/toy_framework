@@ -68,7 +68,12 @@ class SimpleCol2HTMLFieldFactory extends BaseClass {
         // $html = $html . " " . sprintf("<option value='%s' class='form-control' type='text' name='%s' value='%s' selected>%s</option>", $model->id, $model->name, $model->name, $model->name);
         // debug
         // How to control selected?
-        $html = $html . " " . sprintf("<option value='%s' class='form-control' type='text' name='%s' value='%s'>%s</option>", $model->id, $model->name, $model->name, $model->name);
+        if (KString::isEqual($col->getVal(), $model->id)) {
+          $html = $html . " " . sprintf("<option value='%s' class='form-control' type='text' name='%s' value='%s' selected>%s</option>", $model->id, $model->name, $model->name, $model->name);
+        }
+        else {
+          $html = $html . " " . sprintf("<option value='%s' class='form-control' type='text' name='%s' value='%s'>%s</option>", $model->id, $model->name, $model->name, $model->name);
+        }
         // end of debug
       }
       $html = $html . " " . "</select>";
