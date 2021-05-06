@@ -50,6 +50,9 @@ class StringPair extends BaseClass {
     if ($this->key === "id") {
       return true;
     }
+    else if (preg_match("/.*_id$/", $this->key) === 1) {
+      return true;
+    }
 
     return false;
   }

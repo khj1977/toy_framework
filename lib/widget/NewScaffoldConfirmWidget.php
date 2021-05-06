@@ -8,6 +8,7 @@ require_once("lib/view/SimpleView.php");
 require_once("lib/scaffold/StringPair.php");
 require_once("lib/scaffold/sub_view/ScaffoldFormView.php");
 require_once("lib/util/KConst.php");
+require_once("lib/util/ModelLoader.php");
 
 class NewScaffoldConfirmWidget extends BaseScaffoldWidget {
 
@@ -45,8 +46,25 @@ class NewScaffoldConfirmWidget extends BaseScaffoldWidget {
       $pair = new StringPair();
       $pair->setTableName($tableName)->setPair($key, $val)->setHTMLFactory($factory);
       $rowsView->push($pair);
-
       $session->set($key, $val);
+
+      $xmatched = array();
+      if (preg_match("/(.*)_id$/", $key, $xmatched) === 1) {
+        $joinedKlassName = $xmatched[1];
+        $joinedModelName = Util::underscoreToUpperCamel($joinedKlassName . "Model");
+
+        $modelLoader = new ModelLoader();
+        $modelLoader->load($joinedModelName);
+        $joinedModelName::initialize();
+
+        $joinedModel = $joinedModelName::fetchOne(array("id" => $val));
+
+        $xid = $joinedModel->id;
+        $xname = $joinedModel->name;
+        $rowsView->push(StringPair::new()->setPair($joinedKlassName, $xname)->setHTMLFactory($factory));
+
+        $session->set($joinedKlassName, $xname);
+      }
     }
 
     $formView = new ScaffoldFormView();

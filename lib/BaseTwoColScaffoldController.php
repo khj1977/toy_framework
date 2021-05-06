@@ -120,7 +120,7 @@ class BaseTwoCOlScaffoldController extends BaseAuthController {
   }
 
   public function confirm() {
-    $widget = new ScaffoldConfirmWidget();
+    $widget = new NewScaffoldConfirmWidget();
     $widget->setModelName($this->modelName)->setParentView($this->twoColView->getRightColView())->setBreadCrumbView($this->breadCrumbView)->run();
 
     return $this->simpleView;
