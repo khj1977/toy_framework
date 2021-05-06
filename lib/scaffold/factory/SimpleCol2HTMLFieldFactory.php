@@ -61,7 +61,7 @@ class SimpleCol2HTMLFieldFactory extends BaseClass {
       $joinedModelName::initialize();
 
       $joinedModels = $joinedModelName::fetch();
-      $html = sprintf("<br/><select name='%s' class='form-select'>", $this->orm->getKlassName());
+      $html = sprintf("<br/><select name='%s' class='form-select'>", Util::omitSuffix(Util::upperCamelToLowerCase($joinedModelName), "_model") . "_id");
 
       foreach($joinedModels->generator() as $model) {
         // id and name prop are ConC.
