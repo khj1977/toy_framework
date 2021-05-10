@@ -79,7 +79,10 @@ class BaseTwoCOlScaffoldController extends BaseAuthController {
     $this->twoColView->setRightColView(new SimpleView());
     $this->twoColView->setLeftColView(new SimpleView());
 
+    // debug
+    // impl nav to handle dynamic data appropriately.
     $this->twoColView->getLeftColView()->addSubView(new VNavView());
+    // end of debug
     // end of debug
 
     /*
