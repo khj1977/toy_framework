@@ -17,6 +17,7 @@ require_once("lib/BaseAuthController.php");
 require_once("lib/util/ModelLoader.php");
 require_once("lib/view/BreadCrumbView.php");
 require_once("lib/data_struct/KArray.php");
+require_once("lib/data_struct/KHash.php");
 require_once("lib/data_struct/KString.php");
 require_once("lib/util/Util.php");
 require_once("lib/view/HeaderView.php");
@@ -47,6 +48,7 @@ class BaseTwoCOlScaffoldController extends BaseAuthController {
   // debug
   protected $twoColView;
   // end of debug
+  protected $navViewElements;
 
   public function __construct() {
     $this->modelName = null;
@@ -81,7 +83,7 @@ class BaseTwoCOlScaffoldController extends BaseAuthController {
 
     // debug
     // impl nav to handle dynamic data appropriately.
-    $this->twoColView->getLeftColView()->addSubView(new VNavView());
+    $this->navViewElements = KArray::new();
     // end of debug
     // end of debug
 
@@ -91,6 +93,24 @@ class BaseTwoCOlScaffoldController extends BaseAuthController {
       $this->breadCrumbView->push($crumb);
     }
     */
+
+    return $this;
+  }
+
+  public function setNavViewElements($elements) {
+    foreach($elements->generator() as $element) {
+      $this->navViewElements->push($element);
+    }
+
+    return $this;
+  }
+
+  public function setNavView() {
+    $navView = VNavView::new();
+    foreach($this->navViewElements->generator() as $element) {
+      $navView->push($element->get("href"), $element->get("desc"), $element->get("is_active"));
+    }
+    $this->twoColView->getLeftColView()->addSubView($navView);
 
     return $this;
   }
