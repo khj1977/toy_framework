@@ -9,12 +9,14 @@ modification, are permitted provided that the following conditions are met:
 2. Redistributions in binary form must reproduce the above copyright notice,
    this list of conditions and the following disclaimer in the documentation
    and/or other materials provided with the distribution. 
-3. Even if server side program, these statements are applied;i.e. if this code is used for server side web application, this copyright notice and realted statments should be generated.
+3. Even if server side program, these statements are applied;i.e. if this code 
+   is used for server side web application, this copyright notice and realted 
+   statments should be generated.
 4. If top-line of a user of this framework, regardless of who is individual or
- some kind of organization, is higher than 10,000,000 yen / year, a user should 
- pay for this framework as license fee. License fee is yearly subscription 
- bases. Fee will be negotiated with license owner but it would be around 1,000,
- 000 to 10,000,000 yen / year for small to middle size company.
+   some kind of organization, is higher than 10,000,000 yen / year, a user 
+   should pay for this framework as license fee. License fee is yearly 
+   subscription bases. Fee will be negotiated with license owner but it would
+   be around 1,000,000 to 10,000,000 yen / year for small to middle size company.
 
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
 ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
