@@ -17,9 +17,9 @@ modification, are permitted provided that the following conditions are met:
    should pay for this framework as license fee. License fee is yearly 
    subscription bases. Fee will be negotiated with license owner but it would
    be around 300,000 to 10,000,000 yen / year for small to middle size company.
-   If a user is big size, a fee should be higher than 10,000,000 yen / year
-   and the rest is negotiation bases based on their top-line and operetaion
-   profit.
+   If a user is a big size company, a fee should be higher than 10,000,000 
+   yen / year and the rest is negotiation bases based on their top-line and 
+   operetaion profit.
 
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
 ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
