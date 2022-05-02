@@ -1,7 +1,5 @@
 <?php
 
-<?php
-
 require_once("lib/BaseClass.php");
 
 // This class expresses state of something such as purchased book.
@@ -9,7 +7,5 @@ require_once("lib/BaseClass.php");
 class KBaseObjectState extends BaseClass {
 
 }
-
-?>
 
 ?>
