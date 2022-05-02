@@ -23,7 +23,7 @@ class BaseClass {
 
   // Not that using prototype pattern is experimental issue. Thus, it could be deleted in
   // a future.
-  // Checking Self, author thought it is very interesting technique of design and impl,
+  // Checking Self, author thinks it is very interesting technique of design and impl,
   // though author knows JavaScript. If it were live computing environment,
   // dynmical change of behviour of class library would be better choise. However,
   // if it were biz system, class base or prototype base, which is better?
