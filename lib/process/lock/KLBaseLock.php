@@ -2,7 +2,7 @@
 
 require_once("lib/BaseClass.php");
 
-class KLock extends BaseClass {
+class KBaseLock extends BaseClass {
 
     public function getLock($state) {
         // debug
