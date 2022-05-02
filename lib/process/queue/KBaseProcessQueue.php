@@ -2,7 +2,7 @@
 
 require_once("lib/BaseClass.php");
 
-class KBaseProcessQueue extends BaseClass }
+class KBaseProcessQueue extends BaseClass {
 
     public function push($process) {
         // debug
@@ -15,5 +15,7 @@ class KBaseProcessQueue extends BaseClass }
         // implement this method.
         // end of debug
     }
+
+}
 
 ?>
