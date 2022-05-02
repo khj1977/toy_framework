@@ -1,8 +1,8 @@
 <?php
 
-require_once("lib/BaseClass.php");
+require_once("lib/process/object/KBaseInformation.php");
 
-class KStock extends BaseClass {
+class KStock extends KBaseInformation {
 
 }
 
