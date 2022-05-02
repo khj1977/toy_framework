@@ -21,6 +21,14 @@ class BaseClass {
   protected $delegate;
   protected $magicObject;
 
+  // Not that using prototype pattern is experimental issue. Thus, it could be deleted in
+  // a future.
+  // Checking Self, author thought it is very interesting technique of design and impl,
+  // though author knows JavaScript. If it were live computing environment,
+  // dynmical change of behviour of class library would be better choise. However,
+  // if it were biz system, class base or prototype base, which is better?
+  protected $prototype;
+
   protected $debugStream;
   // yet another name of $debugStream;
   protected $ds;
@@ -268,6 +276,22 @@ class BaseClass {
   public function getPropsAsHash() {
     return $this->retainer;
   }
+
+  // debug
+  // implement the following method
+  public function clone() {
+    throw new KException("BaseClass::clone(): this method has not been implemented yet.");
+  }
+  // end of debug
+
+  // Impl of prototype may similar to delegate.
+  // However, those are slightly different idea
+  // debug
+  // implement the following method
+  public function setPrototype($prototype) {
+    throw new KException("BaseClass::setPrototype(): this method has not been implemented yet.");
+  }
+  // end of debug
 
 }
 
