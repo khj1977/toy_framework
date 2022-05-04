@@ -1,4 +1,4 @@
-- Name: Hwi Jun KIM (@pcaffeine)
+- Author: Hwi Jun KIM (@pcaffeine)
 - Address: euler.bonjour@gmail.com / github.com/khj1977/
 
 # Introduction
