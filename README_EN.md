@@ -32,7 +32,7 @@ Micro service. That is trend word in recent year in IT industry. Actually, in th
 
 If you want to connect code by this framework with your system which made by Java or C#, you can do that easily. It is dangeroud to replace whole system at once. You can replace your old system by agile way.
 
-## Highly abstract class library for business modelling
+## Abstract class library for business modelling
 
 There are much more interesting class libray for this framework to make productivity of developer or business analyst higher. Author does not write document but since source is opened, you can check that by youself.
 
