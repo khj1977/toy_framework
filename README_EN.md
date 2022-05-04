@@ -1,5 +1,5 @@
-Name: Hwi Jun KIM (@pcaffeine)
-Address: euler.bonjour@gmail.com / github.com/khj1977/
+- Name: Hwi Jun KIM (@pcaffeine)
+- Address: euler.bonjour@gmail.com / github.com/khj1977/
 
 # Introduction
 If you talk about department or division of your company, which division do you come up? Marketing? Product Planning? System? Accounting? Human Resource? Author supposes that these divisions could be known even one is university or high school student.

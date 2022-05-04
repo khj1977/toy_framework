@@ -1,9 +1,11 @@
 // @Auther Hwi Jun KIM. euler.bonjour@gmail.com
 // See License.txt for license of this code.
 
-氏名：金 輝俊 / Hwi Jun KIM
-Email: euler.bonjour@gmail.com
-作成日付: 2017/5/15（2017/7/14追記）（2018/11 - 追記）
+- English ver: https://github.com/khj1977/toy_framework/blob/master/README_EN.md
+
+- 氏名：金 輝俊 / Hwi Jun KIM
+- Email: euler.bonjour@gmail.com
+- 作成日付: 2017/5/15（2017/7/14追記）（2018/11 - 追記）
 
 ## 序説及び、注釈
 
