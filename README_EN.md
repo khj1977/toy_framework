@@ -20,17 +20,19 @@ We suposed that optimizing business process, it is possible to reduce load or ti
 There is always business process behind real business and system for them. That is a start point of this framwork.
 
 # What is this framework?
-MVC? MVVM? Play? Rails? They are all about view. Not logic or backend. Actually, in this framework, there codes for view which deploys composite view pattern. But that is for reducing load to make view and concentrate to development of business process.
+MVC? MVVM? Play? Rails? They are all about view. Not logic or backend. Actually, in this framework, there are codes for view which deploys composite view pattern. But that is for reducing load to make view and concentrate to development of business process.
 
-Business process express actual procedure of business. It is close to Model of ordinary MVC application. But different idea. Actuall, there are 3 or 5 pages as A4 document with block diagram in a company which express business of their department. Each block express process and each process related to eacch other. Connect, if-then-else block and much more. Before to implement their system application, it is required to optimize their business. In real business situation, business process changes dynamically. So a developer make system fastly and by agile. Thus, low load to make view is required. Also, there are code to make view automatically with scaffold and OR/Mapper. The important thing of this scaffold is there is no template or skelton code but everything is done dynamically with meta data.
+Business process express actual procedure of business. It is close to Model of ordinary MVC application. But different idea. Actually, there are 3 or 5 pages as A4 document with block diagram in a company which express business of their department. Each block express process and each process related to each other. Connect, if-then-else block and much more. Before to implement their system application, it is required to optimize their business.
 
-Since every code or classes are made pluggable, a developmer may get high productivity onece one got familar with.
+In real business situation, business process changes dynamically. So a developer required to make system fastly and by agile. Thus, low load to make view is required. Also, there are code to make view automatically with scaffold and OR/Mapper. The important thing of this scaffold is there is no template or skelton code but everything is done dynamically with meta data.
+
+Since every code or classes are made pluggable, a developmer may get high productivity onece one got familar with this framework.
 
 ## Restful Objects
 
-Micro service. That is trend word in recent years in IT industry. Actually, in this framework, system is assumed to be connected with REST. API? That is fine. But more important thing is it is possible to transfer method call of a class to another machine. It is magic of meta programming. You can check my framework for this magic. Actually, implementation of this code is not difficult. But as I know, most person seems not to deploy that idea.
+Micro service. That is trend word in recent years in IT industry. Actually, in this framework, system is assumed to be connected with REST. API? That is fine. But more important thing is, it is possible to transfer method call of a class to another machine. It is magic of meta programming. You can check my framework for this magic. Actually, implementation of this code is not difficult. But as I know, most person seems not to deploy that idea.
 
-If you want to connect code by this framework with your system which made by Java or C#, you can do that easily. It is dangeroud to replace whole system at once. You can replace your old system by agile way.
+If you want to connect code by this framework with your system which made by Scala, Java or C#, you can do that easily. It is dangerous to replace whole system at once. You can replace your old system by agile way.
 
 ## Abstract class library for business modelling
 
