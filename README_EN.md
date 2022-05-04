@@ -20,7 +20,7 @@ We suposed that optimizing business process, it is possible to reduce load or ti
 There is always business process behind real business and system for them. That is a start point of this framwork.
 
 # What is this framework?
-MVC? MVVC? Play? Rails? They are all about view. Not logic or backend. Actually, in this framework, there codes for view which deploys composite view pattern. But that is for reducing load to make view and concentrate to development of business process.
+MVC? MVVM? Play? Rails? They are all about view. Not logic or backend. Actually, in this framework, there codes for view which deploys composite view pattern. But that is for reducing load to make view and concentrate to development of business process.
 
 Business process express actual procedure of business. It is close to Model of ordinary MVC application. But different idea. Actuall, there are 3 or 5 pages as A4 document with block diagram in a company which express business of their department. Each block express process and each process related to eacch other. Connect, if-then-else block and much more. Before to implement their system application, it is required to optimize their business. In real business situation, business process changes dynamically. So a developer make system fastly and by agile. Thus, low load to make view is required. Also, there are code to make view automatically with scaffold and OR/Mapper. The important thing of this scaffold is there is no template or skelton code but everything is done dynamically with meta data.
 
