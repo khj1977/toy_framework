@@ -1,5 +1,5 @@
 - Author: Hwi Jun KIM (@pcaffeine)
-- Address: euler.bonjour@gmail.com / github.com/khj1977/
+- Address: euler.bonjour@gmail.com / https://github.com/khj1977/
 
 # Introduction
 If you talk about department or division of your company, which division do you come up? Marketing? Product Planning? System? Accounting? Human Resource? Author supposes that these divisions could be known even one is university or high school student.
@@ -8,19 +8,19 @@ Marketing? You may use Excel, BI, Power Point and much more. It seems gorgeous f
 
 In this repositotry framework for operation named ToyFramework is introduced. You can check every source code, comment and log since they all writen by English. There is only 1 Japanese document which is README.md. Why Japanese? Because this framework is primary, for Japanese working evironment. But it could be used for US, UK, France and other countries.
 
-Here is author's brief description of this framework.
+Here is author's brief introduction of this framework.
 
 # Business, working environment and Japan
 Oh, it is 7 o'clock. I have to wake up. There is business! Every person gets up early time and go to office. Although after COVID, remote work gets ordinary thing, office work is still required.
 
-Too packed. Too touched. Tired. That is a word of train at Japan or Tokyo. Once we got into office, there is many time to work. "Zangyo" in Japanese which is overtime work. In a company author joined, there is one member who works until 23 o'clock every day. Author was in Systems department. Moreover, it would impossible to work with a job if topline gets higher. After sensibity analysis of PL and some small thought of operation, author talked with general manager (GM) of system and executive officer. Hey, we stop system development with marketing. But we use much time for optimization of operation for our employee and business. We are venture!
+Too packed. Too touched. Tired. That is a word of train at Japan or Tokyo. Once we got into office, there is many time to work. "Zangyo" in Japanese which is overtime work. In a company author joined, there is one member who works until 23 o'clock every day. Moreover, it would impossible to work with a job if topline gets higher. Author was in Systems department. After small sensibity analysis of PL and some small thought of operation, author talked with general manager (GM) of system and executive officer. Hey, we stop system development with marketing. But we use much time for optimization of operation for our employee and business. We are venture!
 
 We suposed that optimizing business process, it is possible to reduce load or time to work who are in operations department. Actually, we did it. In that time, no system but Excel prototyping which express and emulate primitive system or business.
 
 There is always business process behind real business and system for them. That is a start point of this framwork.
 
 # What is this framework?
-MVC? MVVM? Play? Rails? They are all about view. Not logic or backend. Actually, in this framework, there are codes for view which deploys composite view pattern. But that is for reducing load to make view and concentrate to development of business process.
+MVC? MVVM? Play? Rails? They are all about view. Little logic but not backend. Actually, in this framework, there are codes for view which deploys composite view pattern. But that is for reducing load to make view and concentrate to development of business process.
 
 Business process express actual procedure of business. It is close to Model of ordinary MVC application. But different idea. Actually, there are 3 or 5 pages as A4 document with block diagram in a company which express business of their department. Each block express process and each process related to each other. Connect, if-then-else block and much more. Before to implement their system application, it is required to optimize their business.
 
