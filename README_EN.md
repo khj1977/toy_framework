@@ -24,7 +24,7 @@ MVC? MVVM? Play? Rails? They are all about view. Little logic but not backend. A
 
 Business process express actual procedure of business. It is close to Model of ordinary MVC application. But different idea. Actually, there are 3 or 5 pages as A4 document with block diagram in a company which express business of their department. Each block express process and each process related to each other. Connect, if-then-else block and much more. Before to implement their system application, it is required to optimize their business.
 
-In real business situation, business process changes dynamically. So a developer required to make system fastly and by agile. Thus, low load to make view is required. Also, there are code to make view automatically with scaffold and OR/Mapper. The important thing of this scaffold is there is no template or skelton code but everything is done dynamically with meta data.
+In real business situation, business process is changed dynamically. So a developer required to make system fastly and by agile. Thus, low load to make view is required. Also, there are code to make view automatically with scaffold and OR/Mapper. The important thing of this scaffold is there is no template or skelton code but everything is done dynamically with meta data.
 
 Since every code or classes are made pluggable, a developmer may get high productivity onece one got familar with this framework.
 
