@@ -15,7 +15,7 @@ Oh, it is 7 o'clock. I have to wake up. There is business! Every person gets up 
 
 Too packed. Too touched. Tired. That is a word of train at Japan or Tokyo. Once we got into office, there is many time to work. "Zangyo" in Japanese which is overtime work. In a company author joined, there is one member who works until 23 o'clock every day. Moreover, it would impossible to work with a job if topline gets higher. Author was in Systems department. After small sensibity analysis of PL and some small thought of operation, author talked with general manager (GM) of system and executive officer. Hey, we stop system development with marketing. But we use much time for optimization of operation for our employee and business. We are venture!
 
-We suposed that optimizing business process, it is possible to reduce load or time to work who are in operations department. Actually, we did it. In that time, no system but Excel prototyping which express and emulate primitive system or business.
+We suposed that by optimizing business process, it would be possible to reduce load or time to work who are in operations department. Also, it would be possible to work with high topline with few number of person in operations division. Actually, we did it. In that time, no system but Excel prototyping which express and emulate primitive system or business.
 
 There is always business process behind real business and system for them. That is a start point of this framwork.
 
