@@ -6,7 +6,7 @@ If you talk about department or division of your company, which division do you 
 
 Marketing? You may use Excel, BI, Power Point and much more. It seems gorgeous from ordinary person. However, there is not gorgeous, but importatnt job. That is operation. Actually, without markteting and strategy, company loose where they want to go. Without Product Planning, no one can make their product to sell. Without System, it is not possible to run company since there are many IT in a company. Hey, in that time, System makes what? EC? That is fine. It is about web. DX? What is it? It is business application. Operation has much tight connection with system.
 
-In this repositotry framework for operation named ToyFramework is introduced. You can check every source code, comment and log since they all writen by English. There is only 1 Japanese document which is README.md. Why Japanese? Because this framework is primary, for Japanese working evironment. But it could be used for US, UK, France and other countries.
+In this repositotry framework for operation named ToyFramework is introduced. You can check every source code, comment and log since they all are writen by English. There is only 1 Japanese document which is README.md. Why Japanese? Because this framework is primary, for Japanese working evironment. But it could be used for US, UK, France and other countries.
 
 Here is author's brief introduction of this framework.
 
