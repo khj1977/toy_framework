@@ -30,13 +30,13 @@ In real business situation, business process is changed dynamically. So a develo
 
 Since every code or classes are made pluggable, a developmer may get high productivity onece one got familar with this framework.
 
-## Restful Objects
+# Restful Objects
 
 Micro service. That is trend word in recent years in IT industry. Actually, in this framework, system is assumed to be connected with REST. API? That is fine. But more important thing is, it is possible to transfer method call of a class to another machine. It is magic of meta programming. You can check my framework for this magic. Actually, implementation of this code is not difficult. But as I know, most person seems not to deploy that idea.
 
 If you want to connect code by this framework with your system which made by Scala, Java or C#, you can do that easily. It is dangerous to replace whole system at once. You can replace your old system by agile way.
 
-## Abstract class library for business modelling
+# Abstract class library for business modelling
 
 There are much more interesting class libray for this framework to make productivity of developer or business analyst higher. Author does not write document but since source is opened, you can check that by youself.
 
