@@ -24,7 +24,7 @@ Impact to topline, operation profit, better cash flow and work life balance of m
 
 Less but enough number of member. Easy to take paid vacation. That could be realized by better operation and system.
 
-Paid vacation? In Japan, generally speaking, in ordinary company, it is difficult to take paid vacation. Why? That is because of design or their business or operation. That is a problem especially for working women. Because of a child, one need paid vacation. It could be said child gets easy to cold. Then, one should take paid vacation and take care of their child. Go to travel with paid vacation? That's fine. Member gets refreshed, and it would be good for their performance to work. But it could not be. If operation is designed appropriately, paid vacation could be taken. 
+Paid vacation? In Japan, generally speaking, in ordinary company, it is difficult to take paid vacation. Why? That is because of design of their business or operation. That is a problem especially for working women. Because of a child, one need paid vacation. It could be said child gets easy to cold. Then, one should take paid vacation and take care of their child. Go to travel with paid vacation? That's fine. Member gets refreshed, and it would be good for their performance to work. But it could not be. If operation is designed appropriately, paid vacation could be taken. 
 
 One thing which should be memtion is if working time gets lesser, one go to shopping or easting something to outside after their work. It would be good effect to GDP of a country. Working time is matter for a member but also for top exec and it is for a country or government as well.
 
