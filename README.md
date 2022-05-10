@@ -17,6 +17,12 @@ Too packed. Too touched. Tired. That is a word of train at Japan or Tokyo. Once 
 
 Impact to topline, operation profit, better cash flow and work life balance of member. That is our purpose.
 
+Less but enough number of member. Easy to take paid vacation. That could be realized by better operation and system.
+
+Paid vacation? In Japan, generally speaking, in ordinary company, it is difficult to take paid vacation. That is a problem especially for working women. That is because of a child. It could be said child gets easy to cold. Then, one should take paid vacation and take care of their child. Go to travel with paid vacation? That's fine. Member gets refreshed, and it would be good for their performance to work. But it could not be. If operation is designed appropriately, paid vacation could be taken. 
+
+One thing which should be memtion is if working time gets lesser, one go to shopping or easting something to outside after their work. It would be good effect to GDP of a country. Working time is matter for a member but for also top exec and it is for a country or government as well.
+
 We suposed that by optimizing business process, it would be possible to reduce load or time to work who are in operations department. Also, it would be possible to work with high topline with few number of person in operations division. It results high operation profit. Actually, we did it. In that time, no system but Excel prototyping which express and emulate primitive system or business.
 
 There is always business process behind real business and system for them. That is a start point of this framwork.
