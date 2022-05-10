@@ -2,6 +2,10 @@
 - Address: euler.bonjour@gmail.com / https://github.com/khj1977/
 - Japanese version of readme: https://github.com/khj1977/toy_framework/blob/master/README_JP.md
 
+# Preliminary
+- Aim: To make better working envinronment both for members and top execs especially for Japan
+- Objective: To make business application framework for operation
+
 # Introduction
 If you talk about department or division of your company, which division do you come up? Marketing? Product Planning? System? Accounting? Human Resource? Author supposes that these divisions could be known even one is university or high school student.
 
