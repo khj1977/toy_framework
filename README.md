@@ -28,7 +28,7 @@ Paid vacation? In Japan, generally speaking, in ordinary company, it is difficul
 
 One thing which should be memtion is if working time gets lesser, one go to shopping or easting something to outside after their work. It would be good effect to GDP of a country. Working time is matter for a member but also for top exec and it is for a country or government as well.
 
-We suposed that by optimizing business process, it would be possible to reduce load or time to work who are in operations department. Also, it would be possible to work with high topline with few number of person in operations division. It results high operation profit. Actually, we did it. In that time, no system but Excel prototyping which express and emulate primitive system or business.
+We suposed that by optimizing business process, it would be possible to reduce load or time to work who are in operations department. Also, it would be possible to work with high topline with few number of person in operations division. It results high operation profit. Actually, we did it. In that time, no system but Excel prototyping which express and emulate primitive system or business had been used.
 
 There is always business process behind real business and system for them. That is a start point of this framwork.
 
