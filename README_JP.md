@@ -1,5 +1,5 @@
-// @Auther Hwi Jun KIM. euler.bonjour@gmail.com
-// See License.txt for license of this code.
+- @Auther Hwi Jun KIM. euler.bonjour@gmail.com
+- See License.txt for license of this code.
 
 - English ver: https://github.com/khj1977/toy_framework/blob/master/README_EN.md
 
