@@ -5,6 +5,7 @@
 # Preliminary
 - Aim: To make better working envinronment both for members and top execs especially for Japan
 - Objective: To make business application framework for operation
+- Methodology: 1. Analysis of business and 2. design, implementation and investigation of design pattern
 
 # Introduction
 If you talk about department or division of your company, which division do you come up? Marketing? Product Planning? System? Accounting? Human Resource? Author supposes that these divisions could be known even one is university or high school student.
