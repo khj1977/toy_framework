@@ -19,7 +19,8 @@ class KBaseInspector extends BaseClass {
     }
 
     // $f could be function object but it is supposed that anon function is
-    // better choice.
+    // better choice. There would be some set of template functions passed to 
+    // this method.
     public function talk($f) {
         return $f($this->internalObject);
     }
