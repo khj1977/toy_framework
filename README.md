@@ -8,7 +8,7 @@
 - Methodology: 1. Analysis of business and 2. design, implementation and investigation of design pattern.
 
 # Introduction
-Less working time. Small size of team of operation. Better sales profit. These seems conflicted. How does it is archived parallely? Is it possible to archive parallely? This framework is an answer.
+Less working time. Small size of team of operation. Better sales profit. These seem conflicted. How is it archived parallely? This framework is an answer.
 
 If you talk about department or division of your company, which division do you come up? Marketing? Product Planning? System? Accounting? Human Resource? Author supposes that these divisions could be known even one is university or high school student.
 
