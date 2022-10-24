@@ -3,8 +3,8 @@
 - Japanese version of readme: https://github.com/khj1977/toy_framework/blob/master/README_JP.md
 
 # Preliminary
-- Aim: To make better working envinronment both for members and top execs especially for Japan
-- Objective: To make business application framework for operation
+- Aim: To make better working envinronment both for members and top execs especially for Japan;
+- Objective: To make business application framework for operation;
 - Methodology: 1. Analysis of business and 2. design, implementation and investigation of design pattern
 
 # Introduction
