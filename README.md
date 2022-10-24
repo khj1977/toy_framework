@@ -5,7 +5,7 @@
 # Preliminary
 - Aim: To make better working envinronment both for members and top execs especially for Japan;
 - Objective: To make business application framework for operation;
-- Methodology: 1. Analysis of business and 2. design, implementation and investigation of design pattern
+- Methodology: 1. Analysis of business and 2. design, implementation and investigation of design pattern.
 
 # Introduction
 Less working time. Small size of team of operation. Better sales profit. These seems conflicted. How does it is archived parallely? Is it possible to archive parallely? This framework is an answer.
