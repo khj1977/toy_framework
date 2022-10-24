@@ -8,6 +8,8 @@
 - Methodology: 1. Analysis of business and 2. design, implementation and investigation of design pattern
 
 # Introduction
+Less working time. Small size of team of operation. Better sales profit. These seems conflicted. How does it is archived parallely? Is it possible to archive parallely? This framework is an answer.
+
 If you talk about department or division of your company, which division do you come up? Marketing? Product Planning? System? Accounting? Human Resource? Author supposes that these divisions could be known even one is university or high school student.
 
 Marketing? You may use Excel, BI, Power Point and much more. It seems gorgeous from ordinary person. However, there is not gorgeous, but importatnt job. That is operation. Actually, without markteting and strategy, company loose where they want to go. Without Product Planning, no one can make their product to sell. Without System, it is not possible to run company since there are many IT in a company. Hey, in that time, System makes what? EC? That is fine. It is about web. DX? What is it? It is business application. Operation has much tight connection with system.
