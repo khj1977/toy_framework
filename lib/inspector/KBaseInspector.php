@@ -22,8 +22,29 @@ class KBaseInspector extends BaseClass {
     // better choice. There would be some set of template functions passed to 
     // this method.
     public function talk($f) {
-        return $f($this->internalObject);
+        $this->preTalk();
+        $result = $f($this->internalObject);
+        $this->postTalk();
+
+        return $result;
     }
+
+    protected function preTalk() {
+        // debug
+        // implement this method.
+        // end of debug
+
+        return $this;
+    }
+
+    protected function postTalk() {
+        // debug
+        // implement this method.
+        // end of debug
+
+        return $this;
+    }
+
 }
 
 ?>
