@@ -24,6 +24,26 @@ class KBaseInspector extends BaseClass {
 
     public function setObject($object) {
         $this->internalObject = $object;
+
+        return $this;
+    }
+
+    public function setTalkFunction($f) {
+        $this->defaultTalkFunction = $f;
+
+        return $this;
+    }
+
+    public function setPreTalkFunction($f) {
+        $this->defaultPreTalkFunction = $f;
+
+        return $this;
+    }
+
+    public function setPostTalkFunction($f) {
+        $this->defaultPostTalkFunction = $f;
+
+        return $this;
     }
 
     // $f could be function object but it is supposed that anon function is
@@ -41,20 +61,24 @@ class KBaseInspector extends BaseClass {
         return $result;
     }
 
-    protected function preTalk() {
-        // debug
-        // implement this method.
-        // end of debug
+    protected function preTalk($f = null) {
+        if ($f == null) {
+            $f = $this->defaultPreTalkFunction;
+        }
+        
+        $result = $f($this->internalObject);
 
-        return $this;
+        return $result;
     }
 
-    protected function postTalk() {
-        // debug
-        // implement this method.
-        // end of debug
+    protected function postTalk($f = null) {
+        if ($f == null) {
+            $f = $this->defaultPostTalkFunction;
+        }
+        
+        $result = $f($this->internalObject);
 
-        return $this;
+        return $result;
     }
 
 }
