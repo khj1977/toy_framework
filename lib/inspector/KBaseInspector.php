@@ -15,9 +15,9 @@ class KBaseInspector extends BaseClass {
 
         $this->internalObject = null;
 
-        $this->defaultTalkFunction = function($obj) {return;};
-        $this->defaultPreTalkFunction = function($obj) {return;};
-        $this->defaultPostTalkFunction = function($obj) {return;};
+        $this->defaultTalkFunction = function($that, $obj) {return $obj;};
+        $this->defaultPreTalkFunction = function($that, $obj) {return $obj;};
+        $this->defaultPostTalkFunction = function($that, $obj) {return $obj;};
 
         return $this;
     }
@@ -55,7 +55,7 @@ class KBaseInspector extends BaseClass {
         }
         
         $this->preTalk();
-        $result = $f($this->internalObject);
+        $result = $f($this, $this->internalObject);
         $this->postTalk();
 
         return $result;
@@ -66,7 +66,7 @@ class KBaseInspector extends BaseClass {
             $f = $this->defaultPreTalkFunction;
         }
         
-        $result = $f($this->internalObject);
+        $result = $f($this, $this->internalObject);
 
         return $result;
     }
@@ -76,7 +76,7 @@ class KBaseInspector extends BaseClass {
             $f = $this->defaultPostTalkFunction;
         }
         
-        $result = $f($this->internalObject);
+        $result = $f($this, $this->internalObject);
 
         return $result;
     }
