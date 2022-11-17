@@ -21,6 +21,8 @@ class BaseClass {
   protected $delegate;
   protected $magicObject;
 
+  protected $observes;
+
   // Not that using prototype pattern is experimental issue. Thus, it could be deleted in
   // a future.
   // Checking Self, author thinks it is very interesting technique of design and impl,
@@ -58,6 +60,8 @@ class BaseClass {
 
     $this->delegate = null;
     $this->magicObject = $this;
+
+    $this->observes = array();
 
     // determine delegate by Factory
     // the following is the default code without factory.
@@ -292,6 +296,24 @@ class BaseClass {
     throw new KException("BaseClass::setPrototype(): this method has not been implemented yet.");
   }
   // end of debug
+
+  public function addObserve($obj) {
+    $this->observes[] = $obj;
+
+    return $this;
+  }
+
+  protected function changed() {
+    foreach($this->observes as $obj) {
+      $obj->changed();
+    }
+
+    return $this;
+  }
+
+  protected function fire() {
+    return $this->changed();
+  }
 
 }
 
