@@ -23,6 +23,7 @@ class KBaseLock extends BaseClass {
 
     public function lock($process) {
         $this->process = $process;
+        $this->process->setSuperVisor($process);
         return $this->getLock($this->process);
     }
 
