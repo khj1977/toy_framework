@@ -305,7 +305,7 @@ class BaseClass {
 
   protected function changed() {
     foreach($this->observes as $obj) {
-      $obj->changed();
+      $obj->fire();
     }
 
     return $this;
