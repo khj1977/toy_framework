@@ -12,6 +12,7 @@ class KBaseLock extends BaseClass {
 
     // KBaseProcessState
     protected $state;
+    protected $process;
 
     public function initialize()
     {
@@ -21,11 +22,12 @@ class KBaseLock extends BaseClass {
     }
 
     public function lock($process) {
-        return $this->getLock($process);
+        $this->process = $process;
+        return $this->getLock($this->process);
     }
 
     // return state?
-    public function getLock($process) {
+    public function getLock() {
         // debug
         // implement this method.
         // end of debug
