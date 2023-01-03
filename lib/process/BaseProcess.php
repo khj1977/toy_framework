@@ -27,6 +27,10 @@ abstract class BaseProcess extends BaseClass {
     return $this;
   }
 
+  abstract protected function preExec();
+  abstract protected function xexec();
+  abstract protected function postExec();
+
 }
 
 ?>
