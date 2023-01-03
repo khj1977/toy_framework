@@ -14,11 +14,12 @@ class KBaseObjectState extends BaseClass {
     }
 
     public function getState() {
-        return  $this->internalState;
+        return  $this->delegate;
     }
 
-    public function setState($state) {
-        $this->internalState = $state;
+    public function setInternalStateAsDelegate($state) {
+        // $this->internalState = $state;
+        $this->setDelegate($state);
 
         return $this;
     }
