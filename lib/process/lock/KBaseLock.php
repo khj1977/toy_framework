@@ -13,31 +13,39 @@ class KBaseLock extends BaseClass {
     // KBaseProcessState
     protected $state;
     protected $process;
+    protected $superVisor;
 
     public function initialize()
     {
         parent::initialize();
 
         $this->state = new KBaseObjectState();
+
+        return $this;
     }
 
     public function lock($process) {
         $this->process = $process;
-        $this->process->setSuperVisor($process);
+        $this->setSuperVisor($this->process);
+        $this->setLock($this->process);
         return $this->getLock($this->process);
+    }
+
+    public function setLock() {
+        $this->state->lock();
+
+        return $this;
     }
 
     // return state?
     public function getLock() {
-        // debug
-        // implement this method.
-        // end of debug
+        return $this->state->setLock();
     }
 
     public function freeLock() {
-        // debug
-        // implement this method.
-        // end of debug
+        $this->state->freeLock();
+
+        return $this;
     }
 
     public function isLocked() {
@@ -45,11 +53,14 @@ class KBaseLock extends BaseClass {
     }
 
     public function isFree() {
-        // debug
-        // implement this method.
-        // end of debug
 
         return !$this->state->getState();
+    }
+
+    public function setSuperVisor($superProcess) {
+        $this->superVisor = $superProcess;
+
+        return $this;
     }
 
 }
