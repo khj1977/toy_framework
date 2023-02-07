@@ -60,6 +60,7 @@ If it were biz framework, why not Java, Scala or C#? If it were LL, why not Ruby
 
 - Meta-programming can be done with flexible LL langage.
 - Type hint could be applied as well as dynamic typing of LL.
+- I have to admit Ruby is good language. But not-well designed Ruby code is hard to maintain. However, well-designed PHP code is easy to maintain. Server side biz code is used for long term. So maintenance of code is important.
 - Since a power of meta-programming used, even C# is used, there would be dynamic type, then, it would be close to a code of PHP version.
 - OO is based on Java and enough.
 - JIT exists and it would be fast (no performance test by myself yet)
