@@ -39,7 +39,7 @@ class KBaseLock extends BaseClass {
 
     // return state?
     public function getLock() {
-        return $this->state->setLock();
+        return $this->state->getLock();
     }
 
     public function freeLock() {
