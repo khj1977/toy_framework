@@ -65,5 +65,6 @@ If it were biz framework, why not Java, Scala or C#? If it were LL, why not Ruby
 - fast-cgi or cache may be used, and since it is precompiled, it would be fast enough even it were LL.
 - phar is exist and it is easy to deploy and manage.
 - build tool? Although it is NOT PHP native, rake or gradle may be candidate of build tool
+- Self maintenance or customize of a company which introduce this framework may be done. Since PHP itself is easy to understand some simple customize or maintenance of a user company could be done withough SIer which makes application based on this framework. I think this is a win-win relation me, a SIer and a user company.
 
 Enjoy with this framework!
