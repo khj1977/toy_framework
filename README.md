@@ -62,7 +62,7 @@ If it were biz framework, why not Java, Scala or C#? If it were LL, why not Ruby
 - Type hint could be applied as well as dynamic typing of LL.
 - Since a power of meta-programming used, even C# is used, there would be dynamic type, then, it would be close to a code of PHP version.
 - OO is based on Java and enough.
-- JIT is exist and it would be fase (no performance test by myself yet)
+- JIT exists and it would be fast (no performance test by myself yet)
 - fast-cgi or cache may be used, and since it is precompiled, it would be fast enough even it were LL.
 - phar is exist and it is easy to deploy and manage.
 - build tool? Although it is NOT PHP native, rake or gradle may be candidate of build tool
