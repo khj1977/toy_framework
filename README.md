@@ -54,4 +54,16 @@ If you want to connect code by this framework with your system which made by Sca
 
 There are much more interesting class libray for this framework to make productivity of developer or business analyst higher. Author does not write document but since source is opened, you can check that by youself.
 
+# Why PHP?
+
+If it were biz framework, why not Java, Scala or C#? If it were LL, why not Ruby? That is because of the fact that PHP is well balanced langage and there are many supporting tool to develop for production use. For instance,
+
+- Meta-programming can be done with flexible LL langage.
+- Type hint could be applied as well as dynamic typing of LL.
+- OO is based on Java and enough.
+- JIT is exist and it would be fase (no performance test by myself yet)
+- fast-cgi or cache may be used, and since it is precompiled, it would be fast enough even it were LL.
+- phar is exist and it is easy to deploy and manage.
+- build tool? Although it is NOT PHP native, rake or gradle may be candidate of build tool
+
 Enjoy with this framework!
