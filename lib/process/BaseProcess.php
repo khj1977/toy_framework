@@ -9,7 +9,7 @@ require_once("lib/TheWorld.php");
 abstract class BaseProcess extends BaseClass {
   protected $supervisor;
 
-  public function exec() {
+  final public function exec() {
     if (!$this->supervisor->canExec()) {
       return $this;
     }

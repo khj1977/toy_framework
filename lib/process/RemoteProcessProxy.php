@@ -2,6 +2,8 @@
 
 require_once("lib/process/BaseProcess.php");
 require_once("lib/KException.php");
+require_once("lib/RESTApi.php");
+require_once("lib/data_struct/KHash.php");
 
 // Exec actual process at remote server.
 // Therefore, this class is proxy of that actual
@@ -12,11 +14,20 @@ class RemoetProcessProxy extends BaseProcess {
     return $this;
   }
 
-  public function exec() {
-    // debug
-    // not implemented yet.
-    throw new KException("RemoteProcessProxy::exec(): this method has not been implemented yet.");
-    // end of debug
+  protected function preExec() {
+
+    return $this;
+  }
+
+  protected function xexec() {
+    $klassName = $this->getKlassName();
+    $url = $this->makeUrl($klassName);
+    $api = new RESTApi();
+    $api->setBaseUrl($url)->call(new KHash());
+  }
+  protected function postExec() {
+
+    return $this;
   }
 
 }
