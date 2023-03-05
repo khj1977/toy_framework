@@ -4,6 +4,7 @@
 // See License.txt for license of this code.
 
 require_once("BaseClass.php");
+require_once("lib/TheWorld.php");
 
 abstract class BaseProcess extends BaseClass {
   protected $supervisor;
@@ -13,9 +14,21 @@ abstract class BaseProcess extends BaseClass {
       return $this;
     }
 
-    $this->preExec();
-    $this->xexec();
-    $this->postExec();
+    try {
+      $this->preExec();
+      $this->xexec();
+      $this->postExec();
+
+      $this->supervisor->askPostExec();
+    }
+    catch(KException $ex) {
+      $theWorld = TheWorld::instance();
+      $loggerMessage = "BaseProcess::exec()". $ex->getMessage();
+      $theWorld->logger->log($theWorld->const->logger_warn, $loggerMessage);
+
+      // Finally, exception is handled by top layer of this framework.
+      throw new KException($loggerMessage);
+    }
 
     return $this;
   }

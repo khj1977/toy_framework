@@ -4,7 +4,7 @@
 // See License.txt for license of this code.
 
 require_once("lib/TheWorld.php");
-require_once("lib/UException.php");
+require_once("lib/KException.php");
 
 // This is Factory class for general purpose. This generalization will be realized by
 // using config file which define class to make including class name, path, and possibly 
@@ -41,12 +41,12 @@ class Factory {
       // $configOfKind is an array.
       $configOfKind = $this->config[$context];
     }
-    catch(UException $e) {
+    catch(KException $e) {
       $theWorld = TheWorld::instance();
       $loggerMessage = "Factory::make()". $e->getMessage();
       $theWorld->logger->log($theWorld->const->logger_warn, $loggerMessage);
 
-      throw new UException($loggerMessage);
+      throw new KException($loggerMessage);
     }
 
     $subClass = $configOfKind[0];
