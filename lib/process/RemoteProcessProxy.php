@@ -4,6 +4,9 @@ require_once("lib/process/BaseProcess.php");
 require_once("lib/KException.php");
 require_once("lib/RESTApi.php");
 require_once("lib/data_struct/KHash.php");
+require_once("lib/util/KLogger.php");
+require_once("lib/TheWorld.php");
+require_once("lib/KException.php");
 
 // Exec actual process at remote server.
 // Therefore, this class is proxy of that actual
@@ -12,6 +15,8 @@ class RemoetProcessProxy extends BaseProcess {
   protected $func;
 
   public function __construct() {
+    $this->func = function($that) {return $that;};
+
     return $this;
   }
 
