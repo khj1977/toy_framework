@@ -8,9 +8,14 @@ require_once("lib/TheWorld.php");
 
 abstract class BaseProcess extends BaseClass {
   protected $supervisor;
+  protected $lock;
 
   final public function exec() {
     if (!$this->supervisor->canExec()) {
+      return $this;
+    }
+
+    if ($this->lock->isLocked($this)) {
       return $this;
     }
 
@@ -36,6 +41,12 @@ abstract class BaseProcess extends BaseClass {
   public function setSuperVisor($superVisor) {
     $this->supervisor = $superVisor;
     $this->supervisor->setStudent($this);
+
+    return $this;
+  }
+
+  public function setLock($lock) {
+    $this->lock = $lock;
 
     return $this;
   }
