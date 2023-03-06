@@ -9,6 +9,7 @@ require_once("lib/data_struct/KHash.php");
 // Therefore, this class is proxy of that actual
 // process.
 class RemoetProcessProxy extends BaseProcess {
+  protected $func;
 
   public function __construct() {
     return $this;
@@ -19,11 +20,31 @@ class RemoetProcessProxy extends BaseProcess {
     return $this;
   }
 
+  public function setInternalFunction($f) {
+    $this->func = $f;
+  }
+
   protected function xexec() {
+    $f = $this->func;
+
     $klassName = $this->getKlassName();
     $url = $this->makeUrl($klassName);
     $api = new RESTApi();
-    $api->setBaseUrl($url)->call(new KHash());
+    $arg = new KHash();
+    $arg->set("func", $f);
+    try {
+      $api->setBaseUrl($url)->call($arg);
+    }
+    catch(KException $ex) {
+      $msg = "RemoteProcessProxy::xexec(): " . $ex->getMessage();
+
+      $theWorld = TheWorld::instance();
+      $theWorld->logger->log(KLogger::WARN, $msg);
+
+      throw new KException($msg);
+    }
+
+    return $this;
   }
   protected function postExec() {
 
