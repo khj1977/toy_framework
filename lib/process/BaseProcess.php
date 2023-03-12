@@ -5,10 +5,21 @@
 
 require_once("BaseClass.php");
 require_once("lib/TheWorld.php");
+require_once("lib/process/lock/KBaseLock.php");
 
 abstract class BaseProcess extends BaseClass {
   protected $supervisor;
   protected $lock;
+
+  protected function initialize()
+  {
+    parent::initialize();
+
+    $this->supervisor = null;
+    $this->lock = new KBaseLock();
+
+    return $this;
+  }
 
   final public function exec() {
     if (!$this->supervisor->canExec()) {
@@ -20,6 +31,8 @@ abstract class BaseProcess extends BaseClass {
     }
 
     try {
+      $this->supervisor->askPreExec();
+
       $this->preExec();
       $this->xexec();
       $this->postExec();
@@ -47,6 +60,13 @@ abstract class BaseProcess extends BaseClass {
 
   public function setLock($lock) {
     $this->lock = $lock;
+
+    return $this;
+  }
+
+  public function lock() {
+    $lock = new KBaseLock();
+    $this->lock($this, null);
 
     return $this;
   }

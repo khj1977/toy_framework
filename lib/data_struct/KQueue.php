@@ -40,7 +40,10 @@ class KQueue extends BaseClass {
     $firstNode = $this->internalList->removeFirstNode();
     $this->internalList->add($element);
 
+    // debug
+    // Should it be fixed length queue?
     return $firstNode->getContent();
+    // end of debug
   }
 
 }
