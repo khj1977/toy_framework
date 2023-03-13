@@ -23,6 +23,10 @@ class KBaseProcessPool extends BaseClass {
         return $this;
     }
 
+    public function pop() {
+        return $this->q->pop();
+    }
+
 }
 
 ?>

@@ -2,11 +2,17 @@
 
 require_once("lib/BaseClass.php");
 
-class KBaseLockObserver extends BaseClass {
+abstract class KBaseLockObserver extends BaseClass {
 
-    public function onChanged($lock) {
+    protected $toObserve;
 
+    public function setToObserve($lock) {
+        $this->toObserve = $lock;
+
+        return $this;
     }
+
+    abstract public function onChanged($lock);
 
 }
 

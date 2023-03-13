@@ -2,7 +2,12 @@
 
 require_once("lib/BaseClass.php");
 
-class KBaseLockSuperVisor extends BaseClass {
+abstract class KBaseLockSuperVisor extends BaseClass {
+
+    abstract public function askPreExec();
+
+    abstract public function askPostExec();
+
 
 }
 
