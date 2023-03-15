@@ -14,12 +14,14 @@ class KBaseLock extends BaseClass {
     protected $state;
     protected $process;
     protected $superVisor;
+    protected $observer;
 
     public function initialize()
     {
         parent::initialize();
 
         $this->state = new KBaseObjectState();
+        $this->observer = null;
 
         return $this;
     }
@@ -50,6 +52,8 @@ class KBaseLock extends BaseClass {
     public function freeLock() {
         $this->state->freeLock();
 
+        $this->observer->onChanged();
+
         return $this;
     }
 
@@ -64,6 +68,13 @@ class KBaseLock extends BaseClass {
 
     public function setSuperVisor($superProcess) {
         $this->superVisor = $superProcess;
+
+        return $this;
+    }
+
+    public function setObserver($observer) {
+        $this->observer = $observer;
+        $this->observer->setToObserve($this);
 
         return $this;
     }

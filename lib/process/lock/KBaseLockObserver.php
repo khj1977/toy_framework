@@ -12,7 +12,7 @@ abstract class KBaseLockObserver extends BaseClass {
         return $this;
     }
 
-    abstract public function onChanged($lock);
+    abstract public function onChanged();
 
 }
 
