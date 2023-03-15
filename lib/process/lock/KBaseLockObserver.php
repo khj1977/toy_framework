@@ -12,6 +12,8 @@ abstract class KBaseLockObserver extends BaseClass {
         return $this;
     }
 
+    // For instance, notify to object of manager class such that target process
+    // is unclocked, therefore it is possible to send email to somewhere/someone.
     abstract public function onChanged();
 
 }
