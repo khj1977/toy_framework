@@ -1,7 +1,7 @@
 <?php
 
 require_once("lib/process/person/KBasePerson.php");
-require_once("lib/data_struct/KArray.php");
+require_once("lib/data_struct/KHash.php");
 
 class KManagerPerson extends KBasePerson {
 
@@ -9,7 +9,7 @@ class KManagerPerson extends KBasePerson {
 
     protected function initialize()
     {
-        $this->members = new KArray();
+        $this->members = new KHash();
 
         return $this;
     }
@@ -18,23 +18,23 @@ class KManagerPerson extends KBasePerson {
 
     }
 
-    public function askJob($member, $job) {
+    public function askJob($memberId, $job) {
 
     }
 
-    public function ask($member, $something) {
+    public function ask($memberId, $something) {
 
     }
 
-    public function sendMail($member, $contentOfMail) {
+    public function sendMail($memberId, $contentOfMail) {
 
     }
 
-    public function sendMessage($member, $contentOfMessage) {
+    public function sendMessage($memberId, $contentOfMessage) {
 
     }
 
-    public function sendMemo($member, $contentOfMemo) {
+    public function sendMemo($memberId, $contentOfMemo) {
 
     }
 
