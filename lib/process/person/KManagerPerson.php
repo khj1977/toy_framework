@@ -7,7 +7,7 @@ class KManagerPerson extends KBasePerson {
 
     protected $members;
     protected $mailer;
-    protected $messageSystem;
+    protected $messagingSystem;
     protected $memoDispacher;
 
     protected function initialize()
