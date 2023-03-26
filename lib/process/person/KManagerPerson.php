@@ -6,6 +6,9 @@ require_once("lib/data_struct/KHash.php");
 class KManagerPerson extends KBasePerson {
 
     protected $members;
+    protected $mailer;
+    protected $messageSystem;
+    protected $memoDispacher;
 
     protected function initialize()
     {
