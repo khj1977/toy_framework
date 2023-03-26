@@ -18,7 +18,7 @@ class KManagerPerson extends KBasePerson {
 
     }
 
-    public function askJob($job, $member) {
+    public function askJob($member, $job) {
 
     }
 
