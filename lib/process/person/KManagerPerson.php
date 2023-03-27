@@ -107,7 +107,7 @@ class KManagerPerson extends KBasePerson {
     }
 
     public function setMemoDispatcher($memoDispatcher) {
-        $this->memoDispacher = $memoDispacher;
+        $this->memoDispacher = $memoDispatcher;
 
         return $this;
     }
