@@ -3,6 +3,7 @@
 require_once("lib/process/person/KBasePerson.php");
 require_once("lib/data_struct/KHash.php");
 require_once("lib/util/KLogger.php");
+require_once("lib/KException.php");
 
 class KManagerPerson extends KBasePerson {
 
