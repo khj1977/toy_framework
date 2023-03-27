@@ -19,13 +19,19 @@ class KManagerPerson extends KBasePerson {
     }
 
     public function addMember($member) {
+        // debug
+        // Check whether there is member with that ID.
         $this->members->set($member->getId(), $member);
+        // end of debug
 
         return $this;
     }
 
     public function askJob($memberId, $job) {
+        // debug
+        // Check whether there is member with that ID.
         $member = $this->members->askJob($memberId);
+        // end of debug
 
         $member->askJob($job);
 
