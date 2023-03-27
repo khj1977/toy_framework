@@ -51,7 +51,7 @@ class KHash extends KSequential {
 
   public function generator() {
     foreach($this->internalArray as $key => $val) {
-      yield $key => $val;
+      yield $key;
     }
 
     return $this;

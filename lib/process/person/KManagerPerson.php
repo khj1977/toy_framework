@@ -81,7 +81,7 @@ class KManagerPerson extends KBasePerson {
     public function broadCastMessage($contentOfMessage) {
         // debug
         // KHash and KSeq has not been properly impled and tested yet.
-        $this->members->each(function($memberId, $member) {
+        $this->members->each(function($memberId) {
             $this->sendMessage($this->members->get($memberId), $contentOfMessage);
         });
         // end of debug
