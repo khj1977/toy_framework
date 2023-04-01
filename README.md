@@ -54,6 +54,11 @@ If you want to connect code by this framework with your system which made by Sca
 
 There are much more interesting class libray for this framework to make productivity of developer or business analyst higher. Author does not write document but since source is opened, you can check that by youself.
 
+# How to run?
+Set environment variable for shell as follows:
+- export K_STAGE=Dev
+The above is sample for bash. Note that if it were apache, let use appropriate setting directive. Then, DevConfigImpl.php is used under lib dir. And set content of that file appropriately.
+
 # Why PHP?
 
 If it were biz framework, why not Java, Scala or C#? If it were LL, why not Ruby? That is because of the fact that PHP is well balanced langage and there are many supporting tool to develop for production use. For instance,
