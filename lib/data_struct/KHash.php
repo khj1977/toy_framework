@@ -53,8 +53,8 @@ class KHash extends KSequential {
     foreach($this->internalArray as $key => $val) {
       // not yield $val to adapt to the spec of kseq.
       // get($key) will be used to obtain $val. It will be slow even it were O(1).
-      // since there is calc of hash code and sometimes, search of binary tree since
-      // it is not perfect hash.
+      // since there is calc of hash code and sometimes, search of binary tree
+      // would be done. Since it is not perfect hash.
       yield $key;
     }
 
