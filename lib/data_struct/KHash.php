@@ -55,8 +55,9 @@ class KHash extends KSequential {
       // get($key) will be used to obtain $val. It will be slow even it were O(1).
       // Since there is calc of hash code and sometimes, search of binary tree
       // would be done. Since it is not perfect hash.
-      // So, why this impl? Simpleness and hard performance would not be required 
-      // for biz app. If it were web game, custom kseq would be required.
+      // So, why this impl? The answer is simpleness and hard performance would
+      // not be required for biz app. If it were web game, custom kseq would be 
+      // required.
       yield $key;
     }
 
