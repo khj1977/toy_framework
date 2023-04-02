@@ -80,6 +80,7 @@ class KManagerPerson extends KBasePerson {
 
     public function broadCastMessage($contentOfMessage) {
         $this->members->each(function($memberId) use ($contentOfMessage) {
+            // if member is required, $this->members->get($memberId) will be used.
             $this->sendMessage($memberId, $contentOfMessage);
         });
 
