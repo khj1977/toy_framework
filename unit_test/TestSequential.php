@@ -179,12 +179,10 @@ class TestSequential extends BaseUnitTest {
     $str = "Hello: ";
 
     $arr = KArray::new()->bulkPush(array(5, 4, 3, 2, 1));
-    // debug
-    // debug point of closure.
+
     $arr->each(function($val) use ($str) {
       Util::println($str . " " . $val);
     });
-    // end of debug
   }
 
 }
