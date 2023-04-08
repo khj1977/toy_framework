@@ -14,7 +14,7 @@ require_once("lib/util/ModelLoader.php");
 // Design of this OR Mapper is inspired by Active Record of Ruby on Rails.
 // Code is 100% original.
 
-// a credit for Ruby on Rails has been added for KORM.
+// A credit for Ruby on Rails has been added for KORM.
 // It is very special thanks to Ruby on Rails for design around view. Now hereby
 // declair that although there is affect of Rails, code is 100% original.
 // Some idea such as collection of ORMs is returned by KORM::fetch() is
