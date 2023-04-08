@@ -11,6 +11,8 @@ require_once("lib/data_struct/KHash.php");
 require_once("lib/data_struct/KArray.php");
 require_once("lib/util/ModelLoader.php");
 
+// Design of this OR Mapper is inspired by Active Record of Ruby on Rails.
+// Code is 100% original.
 class KORM {
   static protected $superInitialized = false;
 
