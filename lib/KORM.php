@@ -22,7 +22,7 @@ require_once("lib/util/ModelLoader.php");
 // design of KSeq such as each() block for generator pattern.
 
 // Also, author admit that there is affect of NeXTStep/MacOSX and Cocoa framework
-// not code and design but the way of thinking.
+// not code and design but the way of thinking of this framework.
 
 // However, this framework is for backend and front end side of serverside
 // is option. Thank you very much for Ruby and Ruby on Rails!
