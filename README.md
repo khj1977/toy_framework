@@ -59,6 +59,22 @@ Set environment variable for shell as follows:
 - export K_STAGE=Dev
 The above is sample for bash. Note that if it were apache, let use appropriate setting directive. Then, DevConfigImpl.php is used under lib dir. And set content of that file appropriately.
 
+Write down setttings to the following config file and copy to cocnfig dif.
+- lib/config/impl/DevConfigImpl.php
+- config/DevConfigImpl.php
+- config/StagingConfigImpl.php
+- config/ProductionConfigImpl.php
+
+## Comment for how to run
+In BaseConfig.php, there are part to determine config file name. See the following:
+- $configFileName = sprintf("%sConfigImpl.php", $this->stage);
+
+In TheWorld.php, there are the following codes to determine stage of the running process.
+- $this->serverEnv = new ServerEnv();
+- $this->stage = $this->serverEnv->get("K_STAGE");
+
+Thus, K_Stage would ve Dev, Staging or Production. According to that, file name of config will be determined. Note that $stage could be arbitrary words but the previous three strings would be appropriate.
+
 # Why PHP?
 
 If it were biz framework, why not Java, Scala or C#? If it were LL, why not Ruby? That is because of the fact that PHP is well balanced langage and there are many supporting tool to develop for production use. For instance,

@@ -23,7 +23,7 @@ class BaseConfig extends BaseDelegatable {
   // Basically, determine stage by env val.
   protected function determineStage() {
     // debug
-    throw new UException("BaseConfig::determineStage(): this method has not been implemented yet.");
+    throw new KException("BaseConfig::determineStage(): this method has not been implemented yet.");
     // end of debug
 
     $this->loadImpl();
