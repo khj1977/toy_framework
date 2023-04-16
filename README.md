@@ -1,3 +1,4 @@
+# Readme of Toy Framework
 - Author: Hwi Jun KIM (@pcaffeine)
 - Address: euler.bonjour@gmail.com / https://github.com/khj1977/
 - Japanese version of readme: https://github.com/khj1977/toy_framework/blob/master/README_JP.md
@@ -53,6 +54,33 @@ If you want to connect code by this framework with your system which made by Sca
 # Abstract class library for business modelling
 
 There are much more interesting class libray for this framework to make productivity of developer or business analyst higher. Author does not write document but since source is opened, you can check that by youself.
+
+# How to run?
+Set environment variable for shell as follows:
+- export K_STAGE=Dev
+The above is sample for bash. Note that if it were apache, let use appropriate setting directive. Then, DevConfigImpl.php is used under lib dir. And set content of that file appropriately.
+
+Write down setttings to the following config file and copy to cocfig dir.
+- lib/config/impl/DevConfigImpl.php
+- config/DevConfigImpl.php
+- config/StagingConfigImpl.php
+- config/ProductionConfigImpl.php
+
+## Comment for how to run
+In BaseConfig.php, there are part to determine config file name. See the following:
+- $configFileName = sprintf("%sConfigImpl.php", $this->stage);
+
+The following code determine dir of config file.
+- protected function getConfigDirPath() {
+-     // return "lib/config/impl/";
+-     return "config/";
+- }
+
+In TheWorld.php, there are the following codes to determine stage of the running process.
+- $this->serverEnv = new ServerEnv();
+- $this->stage = $this->serverEnv->get("K_STAGE");
+
+Thus, K_Stage would be Dev, Staging or Production. According to that, file name of config will be determined. Note that $stage could be arbitrary words but the previous three strings would be appropriate. Note the above two $this->stage are used in the different context.
 
 # Why PHP?
 

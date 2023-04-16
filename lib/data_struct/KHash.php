@@ -2,8 +2,9 @@
 
 require_once("lib/BaseClass.php");
 require_once("lib/KException.php");
+require_once("lib/data_struct/KSequential.php");
 
-class KHash extends BaseClass {
+class KHash extends KSequential {
 
   protected $internalArray;
 
@@ -50,7 +51,14 @@ class KHash extends BaseClass {
 
   public function generator() {
     foreach($this->internalArray as $key => $val) {
-      yield $key => $val;
+      // not yield $val to adapt to the spec of kseq.
+      // get($key) will be used to obtain $val. It will be slow even it were O(1).
+      // Since there is calc of hash code and sometimes, search of binary tree
+      // would be done. Since it is not perfect hash.
+      // So, why this impl? The answer is simpleness and hard performance would
+      // not be required for biz app. If it were web game, custom kseq would be 
+      // required.
+      yield $key;
     }
 
     return $this;

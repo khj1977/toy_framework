@@ -175,5 +175,15 @@ class TestSequential extends BaseUnitTest {
     return true;
   }
 
+  public function test_closure() {
+    $str = "Hello: ";
+
+    $arr = KArray::new()->bulkPush(array(5, 4, 3, 2, 1));
+
+    $arr->each(function($val) use ($str) {
+      Util::println($str . " " . $val);
+    });
+  }
+
 }
 ?>
