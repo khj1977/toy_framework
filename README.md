@@ -73,7 +73,7 @@ In TheWorld.php, there are the following codes to determine stage of the running
 - $this->serverEnv = new ServerEnv();
 - $this->stage = $this->serverEnv->get("K_STAGE");
 
-Thus, K_Stage would ve Dev, Staging or Production. According to that, file name of config will be determined. Note that $stage could be arbitrary words but the previous three strings would be appropriate. Note the above two $this->stage are used in the different context.
+Thus, K_Stage would be Dev, Staging or Production. According to that, file name of config will be determined. Note that $stage could be arbitrary words but the previous three strings would be appropriate. Note the above two $this->stage are used in the different context.
 
 # Why PHP?
 
