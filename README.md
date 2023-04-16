@@ -70,6 +70,12 @@ Write down setttings to the following config file and copy to cocfig dir.
 In BaseConfig.php, there are part to determine config file name. See the following:
 - $configFileName = sprintf("%sConfigImpl.php", $this->stage);
 
+The following code determine dir of config file.
+- protected function getConfigDirPath() {
+-     // return "lib/config/impl/";
+-     return "config/";
+- }
+
 In TheWorld.php, there are the following codes to determine stage of the running process.
 - $this->serverEnv = new ServerEnv();
 - $this->stage = $this->serverEnv->get("K_STAGE");
