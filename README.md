@@ -59,7 +59,7 @@ Set environment variable for shell as follows:
 - export K_STAGE=Dev
 The above is sample for bash. Note that if it were apache, let use appropriate setting directive. Then, DevConfigImpl.php is used under lib dir. And set content of that file appropriately.
 
-Write down setttings to the following config file and copy to cocnfig dif.
+Write down setttings to the following config file and copy to cocfig dir.
 - lib/config/impl/DevConfigImpl.php
 - config/DevConfigImpl.php
 - config/StagingConfigImpl.php
