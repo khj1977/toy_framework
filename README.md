@@ -82,6 +82,14 @@ In TheWorld.php, there are the following codes to determine stage of the running
 
 Thus, K_Stage would be Dev, Staging or Production. According to that, file name of config will be determined. Note that $stage could be arbitrary words but the previous three strings would be appropriate. Note the above two $this->stage are used in the different context.
 
+## How to run unit test?
+
+In this framework, there is unit test framework. Yes, actually, it is original framework and you do not need to install PHPUnit. The following is the how to run unit test:
+
+- php bin/UnitTestBatch.php Sequential
+
+There is no file named unit_test/Sequential but there is unit_test/TestSequential.php. Other elements of string is automatically determined. See test code how to define each unit tests. There is ConC naming rule of methods for unit test.
+
 # Why PHP?
 
 If it were biz framework, why not Java, Scala or C#? If it were LL, why not Ruby? That is because of the fact that PHP is well balanced langage and there are many supporting tool to develop for production use. For instance,
