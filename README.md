@@ -88,7 +88,7 @@ In this framework, there is unit test framework. Yes, actually, it is original f
 
 - php bin/UnitTestBatch.php Sequential
 
-There is no file named unit_test/Sequential but there is unit_test/TestSequential.php. Other elements of string is automatically determined. See test code how to define each unit tests. There is ConC naming rule of methods for unit test.
+There is no file named unit_test/Sequential but there is unit_test/TestSequential.php. Other elements of strings are automatically determined. See test code how to define each unit tests. There is ConC naming rule of methods for unit test.
 
 # Why PHP?
 
