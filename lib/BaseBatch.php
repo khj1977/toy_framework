@@ -35,7 +35,7 @@ abstract class BaseBatch {
   }
 
 
-  public function run($args) {
+  final public function run($args) {
     $baseErrorHandler = new BaseErrorHandler();
     try {
       $this->xmain($args);
