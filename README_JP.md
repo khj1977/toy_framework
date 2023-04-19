@@ -2,6 +2,7 @@
 - @Auther Hwi Jun KIM. euler.bonjour@gmail.com
 - See License.txt for license of this code.
 
+- Code: https://github.com/khj1977/toy_framework/
 - English ver: https://github.com/khj1977/toy_framework/blob/master/README_EN.md
 
 - 氏名：金 輝俊 / Hwi Jun KIM
