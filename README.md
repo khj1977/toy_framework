@@ -2,6 +2,7 @@
 - Author: Hwi Jun KIM (@pcaffeine)
 - Address: euler.bonjour@gmail.com / https://github.com/khj1977/
 - Japanese version of readme: https://github.com/khj1977/toy_framework/blob/master/README_JP.md
+- Code: https://github.com/khj1977/toy_framework/
 
 # Preliminary
 - Aim: To make better working envinronment both for members and top execs especially for Japan;
