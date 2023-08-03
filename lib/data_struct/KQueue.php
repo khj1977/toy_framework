@@ -37,13 +37,26 @@ class KQueue extends BaseClass {
 
   // push an element and pop first element if necessary.
   public function push($element) {
-    $firstNode = $this->internalList->removeFirstNode();
+    // $firstNode = $this->internalList->removeFirstNode();
+    $firstNode = $this->pop();
     $this->internalList->add($element);
 
     // debug
     // Should it be fixed length queue?
     return $firstNode->getContent();
     // end of debug
+  }
+
+  public function pushOnly($element) {
+    $this->internalList->add($element);
+
+    return $this;
+  }
+
+  public function pop() {
+    $firstNode = $this->internalList->removeFirstNode();
+
+    return $firstNode;
   }
 
 }
