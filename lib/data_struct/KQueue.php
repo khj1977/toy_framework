@@ -3,9 +3,11 @@
 require_once("lib/BaseClass.php");
 require_once("lib/data_struct/KDoubleLinkedList.php");
 require_once("lib/data_struct/KDoubleLinkedListNode.php");
+require_once("lib/data_struct/KQueue.php");
+require_once("lib/data_struct/KSequential.php");
 
 // FIFO queue.
-class KQueue extends BaseClass {
+class KQueue extends KSequential {
   protected $internalList;
 
 
@@ -57,6 +59,14 @@ class KQueue extends BaseClass {
     $firstNode = $this->internalList->removeFirstNode();
 
     return $firstNode;
+  }
+
+  public function generator() {
+    foreach($this->internalList as $content) {
+      yield $content; 
+    }
+
+    return true;
   }
 
 }
