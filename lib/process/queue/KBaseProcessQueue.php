@@ -3,9 +3,6 @@
 require_once("lib/BaseClass.php");
 require_once("lib/data_struct/KQueue.php");
 
-// debug
-// possibly this class could be child of KSeq.
-// end of debug
 class KBaseProcessQueue extends BaseClass {
 
     protected $internalQueue;
