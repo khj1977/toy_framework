@@ -40,6 +40,10 @@ class KBaseProcessQueue extends BaseClass {
         );
     }
 
+    public function runFunction($f) {
+        return $this->apply($f);
+    }
+
 }
 
 ?>
