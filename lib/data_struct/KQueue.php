@@ -62,7 +62,7 @@ class KQueue extends KSequential {
   }
 
   public function generator() {
-    foreach($this->internalList as $content) {
+    foreach($this->internalList->generator() as $content) {
       yield $content; 
     }
 
