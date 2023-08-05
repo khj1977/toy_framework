@@ -22,10 +22,22 @@ class KBaseProcessQueue extends BaseClass {
         return $this;
     }
 
-    public function pop() {
+    public function pop($hookF = null) {
         $process = $this->internalQueue->pop();
 
-        return $this;
+        if ($hookF != null) {
+            $hookF($process);
+        }
+
+        return $process;
+    }
+
+    public function apply($f) {
+        $this->internalQueue->each(function($element) use($f)  
+            {
+                $f($element);
+            }
+        );
     }
 
 }
