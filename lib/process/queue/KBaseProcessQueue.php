@@ -9,14 +9,21 @@ require_once("lib/data_struct/KQueue.php");
 class KBaseProcessQueue extends BaseClass {
 
     protected $internalQueue;
+    protected $monitor;
 
     public function initilize() {
         $this->internalQueue = new KQueue();
+        $this->monitor = null;
 
         return $this;
     }
 
     public function push($process) {
+        if ($this->monitor != null) {
+            $f = $this->monitor;
+            
+            $f($process);
+        }
         $this->internalQueue->pushOnly($process);
 
         return $this;
@@ -42,6 +49,12 @@ class KBaseProcessQueue extends BaseClass {
 
     public function runFunction($f) {
         return $this->apply($f);
+    }
+
+    public function setMonitor($f) {
+        $this->monitor = $f;
+
+        return $this;
     }
 
 }
