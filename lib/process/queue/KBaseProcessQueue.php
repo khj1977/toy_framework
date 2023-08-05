@@ -21,7 +21,7 @@ class KBaseProcessQueue extends BaseClass {
     public function push($process) {
         if ($this->monitor != null) {
             $f = $this->monitor;
-            
+
             $f($process);
         }
         $this->internalQueue->pushOnly($process);
@@ -45,6 +45,8 @@ class KBaseProcessQueue extends BaseClass {
                 $f($element);
             }
         );
+
+        return $this;
     }
 
     public function runFunction($f) {
