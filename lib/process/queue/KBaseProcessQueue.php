@@ -19,7 +19,7 @@ class KBaseProcessQueue extends BaseClass {
         if ($this->monitor != null) {
             $f = $this->monitor;
 
-            $f($process);
+            yield $f($process);
         }
         $this->internalQueue->pushOnly($process);
 
