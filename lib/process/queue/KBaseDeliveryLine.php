@@ -3,6 +3,7 @@
 require_once("lib/BaseClass.php");
 
 // Kind of facade.
+// Linear deliverly line.
 class KBaseDeliveryLine extends KBaseInformation {
 
     protected $monitor;
@@ -15,7 +16,11 @@ class KBaseDeliveryLine extends KBaseInformation {
 
     }
 
-    public function addItem($item) {
+    public function addPerson($person) {
+
+    }
+
+    public function pushItem($item) {
 
     }
 

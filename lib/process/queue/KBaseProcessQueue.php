@@ -50,6 +50,10 @@ class KBaseProcessQueue extends BaseClass {
         return $this->apply($f);
     }
 
+    public function map($f) {
+        return $this->apply($f);
+    }
+
     public function setMonitor($f) {
         $this->monitor = $f;
 
