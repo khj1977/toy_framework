@@ -18,6 +18,9 @@ class KBaseDeliveryLine extends KBaseInformation {
 
     }
 
+    // debug
+    // parallel or serial? using strategy pattern or other class?
+    // end of debug
     public function addPerson($person) {
 
     }
