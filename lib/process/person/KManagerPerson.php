@@ -8,7 +8,6 @@ require_once("lib/KException.php");
 class KManagerPerson extends KBasePerson {
 
     protected $members;
-    protected $mailer;
     protected $messagingSystem;
     protected $memoDispacher;
 
@@ -22,13 +21,17 @@ class KManagerPerson extends KBasePerson {
     public function addMember($member) {
         // debug
         // Check whether there is member with that ID.
+        if ($this->members->check($member->getId())) {
+            throw new KException("KManagerPerson::addMember(): this member is already in members.");
+        }
+
         $this->members->set($member->getId(), $member);
         // end of debug
 
         return $this;
     }
 
-    public function askJob($memberId, $job) {
+    public function askJobToMember($memberId, $job) {
         // debug
         // Check whether there is member with that ID.
         $member = $this->members->askJob($memberId);
@@ -39,7 +42,7 @@ class KManagerPerson extends KBasePerson {
         return $this;
     }
 
-    public function ask($memberId, $something) {
+    public function askToMember($memberId, $something) {
         $member = $this->members->get($memberId);
 
         $member->ask($something);
@@ -70,11 +73,11 @@ class KManagerPerson extends KBasePerson {
         return $this;
     }
 
-    public function sendMessage($memberId, $contentOfMessage) {
+    public function sendMessageToMember($memberId, $contentOfMessage) {
 
     }
 
-    public function sendMemo($memberId, $contentOfMemo) {
+    public function sendMemoToMember($memberId, $contentOfMemo) {
 
     }
 
@@ -99,23 +102,7 @@ class KManagerPerson extends KBasePerson {
 
     }
 
-    public function setMailer($mailer) {
-        $this->mailer = $mailer;
-
-        return $this;
-    }
-
-    public function setMessagingSystem($msgSys) {
-        $this->messagingSystem = $msgSys;
-
-        return $this;
-    }
-
-    public function setMemoDispatcher($memoDispatcher) {
-        $this->memoDispacher = $memoDispatcher;
-
-        return $this;
-    }
+    
 
 }
 
