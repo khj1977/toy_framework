@@ -19,14 +19,11 @@ class KManagerPerson extends KBasePerson {
     }
 
     public function addMember($member) {
-        // debug
-        // Check whether there is member with that ID.
         if ($this->members->check($member->getId())) {
             throw new KException("KManagerPerson::addMember(): this member is already in members.");
         }
 
         $this->members->set($member->getId(), $member);
-        // end of debug
 
         return $this;
     }
