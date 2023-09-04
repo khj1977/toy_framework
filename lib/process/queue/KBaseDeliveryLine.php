@@ -51,7 +51,7 @@ class KBaseDeliveryLine extends KBaseInformation {
     }
 
     public function setMonitorOfEnd($f) {
-        $this->monitorOfEnd = $f
+        $this->monitorOfEnd = $f;
 
         return $this;
     }
