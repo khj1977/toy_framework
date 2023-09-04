@@ -47,6 +47,24 @@ class KManagerPerson extends KBasePerson {
         return $this;
     }
 
+    public function askJobToEachMember($job) {
+        $this->members->each(function($member) use ($job) {
+            $result = $member->askJob($job);
+            yield $result;
+        });
+
+        return $this;
+    }
+
+    public function askToEachMember($something) {
+        $this->members->each(function($member) use ($something) {
+            $result = $member->ask($something);
+            yield $result;
+        });
+
+        return $this;
+    }
+
     public function sendMail($memberId, $contentOfMail) {
         try {
             $member = $this->members->get($memberId);
