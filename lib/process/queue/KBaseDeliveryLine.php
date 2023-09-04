@@ -7,26 +7,33 @@ require_once("lib/data_struct/KQueue.php");
 // Linear deliverly line.
 class KBaseDeliveryLine extends KBaseInformation {
 
-    protected $monitor;
-    protected $q;
+    protected $monitorOfStart;
+    protected $monitorOfEnd;
+
+    protected $qOfItems;
+    protected $qOfPersons;
 
     public function initialize() {
-        $this->q = new KQueue();
+        $this->qOfItems = new KQueue();
+        $this->qOfPersons = new KQueue();
     }
 
+    // process queue of items by persons.
     public function exec() {
 
     }
 
-    // debug
-    // parallel or serial? using strategy pattern or other class?
-    // end of debug
+    // serial process queue.
     public function addPerson($person) {
+        $this->qOfPersons->push($person);
 
+        return $this;
     }
 
     public function pushItem($item) {
+        $this->qOfItems->push($item);
 
+        return $this;
     }
 
     public function addFactor($deliverlyProcess, $dependencyProcess) {
@@ -37,8 +44,16 @@ class KBaseDeliveryLine extends KBaseInformation {
 
     }
 
-    public function setMonitor($f) {
+    public function setMonitorOfStart($f) {
+        $this->monitorOfStart = $f;
 
+        return $this;
+    }
+
+    public function setMonitorOfEnd($f) {
+        $this->monitorOfEnd = $f
+
+        return $this;
     }
 
 }
