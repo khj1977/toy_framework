@@ -2,6 +2,7 @@
 
 require_once("lib/BaseClass.php");
 require_once("lib/data_struct/KQueue.php");
+require_once("lib/process/special/ProessRelater.php");
 
 // Kind of facade.
 // Linear deliverly line.
@@ -13,9 +14,15 @@ class KBaseDeliveryLine extends KBaseInformation {
     protected $qOfItems;
     protected $qOfPersons;
 
+    protected $pRelater;
+
     public function initialize() {
         $this->qOfItems = new KQueue();
         $this->qOfPersons = new KQueue();
+
+        $this->pRelater = new KProcessRelater();
+
+        return $this;
     }
 
     // process queue of items by persons.
@@ -41,7 +48,10 @@ class KBaseDeliveryLine extends KBaseInformation {
     }
 
     public function relateProcess($process, $relatedProcess) {
+        $this->pRelater->setOriginalProess($process);
+        $this->pRelater->setDestinationProcess($relatedProcess);
 
+        return $this;
     }
 
     public function setMonitorOfStart($f) {

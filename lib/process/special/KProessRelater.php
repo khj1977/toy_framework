@@ -2,7 +2,7 @@
 
 require_once("lib/BaseClass.php");
 
-class ProcessRelater extends BaseClass {
+class KProcessRelater extends BaseClass {
 
     protected $originalProcess;
     protected $destinationProcess;
