@@ -2,7 +2,7 @@
 
 require_once("lib/BaseClass.php");
 require_once("lib/data_struct/KQueue.php");
-require_once("lib/process/special/ProessRelater.php");
+require_once("lib/process/util/ProessRelater.php");
 
 // Kind of facade.
 // Linear deliverly line.
