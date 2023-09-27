@@ -15,6 +15,8 @@ class GraphProcessFacade extends KFacadeGraphNode {
     return $this;
   }
 
+  // debug
+  // This methodology of iteration could be changed.
   public function exec() {
     $iterator = $this->rootNode->getIterator();
     while($node = $iterator->getNextNode()) {
@@ -24,6 +26,7 @@ class GraphProcessFacade extends KFacadeGraphNode {
 
     return $this;
   }
+  // end of debug
 
   // visitor determines what to do and traversal strategy.
   // As pointed by someone, it is interesting to split visitor and traversal
