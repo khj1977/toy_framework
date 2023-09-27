@@ -34,7 +34,7 @@ abstract class BaseGraphNode extends BaseClass{
     return $this->content;
   }
 
-  abstract public function getIterator();
+  // abstract public function getIterator();
 
 }
 
