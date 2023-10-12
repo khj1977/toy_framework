@@ -3,6 +3,7 @@
 require_once("lib/graph/BaseGraphNode.php");
 require_once("lib/process/graph/KFacadeGraphNode.php");
 require_once("lib/process/facade/BaseFacade.php");
+require_once("lib/process/visitor/KDefaultGraphVisitor.php");
 
 require_once("lib/data_struct/KHash.php");
 
@@ -36,6 +37,11 @@ class GraphProcessFacade extends BaseFacade {
   // think carefully about algo of traverse.
   public function exec($f, $visitor = null) {
     $edgeMemory = new KHash();
+    if ($visitor ==- null) {
+      $visitor = new KDefaultGraphVisitor();
+    }
+
+    $visitor->setExecBodyFunc($f);
 
     $traverseFunc = function($node, $edge) use($f, $edgeMemory, $visitor, &$traverseFunc) {
       if (!$visitor->isAccept($edge)) {
@@ -51,12 +57,15 @@ class GraphProcessFacade extends BaseFacade {
 
       $node = $edge->getNextNode();
 
+      /*
       if ($visitor === null) {
         $f($node);
       }
       else {
         $visitor->exec($node);
       }
+      */
+      $visitor->exec($node);
 
       return $traverseFunc($f, $node->getFirstEdge());
     };

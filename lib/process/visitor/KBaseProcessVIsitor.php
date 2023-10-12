@@ -2,12 +2,14 @@
 
 require_once("lib/BaseClass.php");
 
-class KProcessVisitor extends BaseClass {
+class KBaseProcessVisitor extends BaseClass {
 
     protected $currentProcess;
+    protected $f;
 
     protected function initialize() {
         $this->currentProcess = null;
+        $this->f = null;
 
         return $this;
     }
@@ -26,6 +28,12 @@ class KProcessVisitor extends BaseClass {
 
     public function setCurrentProcess($process) {
         $this->currentProcess = $process;
+
+        return $this;
+    }
+
+    public function setExecBodyFunc($f) {
+        $this->f = $f;
 
         return $this;
     }
