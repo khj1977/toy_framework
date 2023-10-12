@@ -41,6 +41,10 @@ abstract class BaseGraphNode extends BaseClass {
     });
   }
 
+  public function getFirstEdge() {
+    return $this->edges->index(0);
+  }
+
 }
 
 ?>

@@ -36,7 +36,7 @@ class GraphProcessFacade extends BaseFacade {
   // think carefully about algo of traverse.
   public function exec($f, $visitor = null) {
     $edgeMemory = new KHash();
-    $this->node->mapToEdges(function($edge) use($f, $edgeMemory, $visitor) {
+    $traverseFunc = function($node, $edge) use($f, $edgeMemory, $visitor, &$traverseFunc) {
       if (!$visitor->isAccept($edge)) {
         return $this;
       }
@@ -56,7 +56,11 @@ class GraphProcessFacade extends BaseFacade {
       else {
         $visitor->exec($node);
       }
-    });
+
+      $traverseFunc($f, $node->getFirstEdge());
+    };
+
+    $this->node->mapToEdges($traverseFunc);
 
     return $this;
   }
