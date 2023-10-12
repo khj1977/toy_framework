@@ -35,7 +35,7 @@ class GraphProcessFacade extends KFacadeGraphNode {
     $nodeMemory = new KHash();
     $this->node->mapToEdges(function($edge) use($f, $nodeMemory) {
       $key = $edge->getName();
-      if ($nodeMemory->check*($key)) {
+      if ($nodeMemory->check($key)) {
         return;
       }
 
