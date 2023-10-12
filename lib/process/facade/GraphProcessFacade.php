@@ -38,12 +38,12 @@ class GraphProcessFacade extends BaseFacade {
     $edgeMemory = new KHash();
     $this->node->mapToEdges(function($edge) use($f, $edgeMemory, $visitor) {
       if (!$visitor->isAccept($edge)) {
-        return;
+        return $this;
       }
 
       $key = $edge->getName();
       if ($edgeMemory->check($key)) {
-        return;
+        return $this;
       }
 
       $edgeMemory->set($key, true);
@@ -57,6 +57,8 @@ class GraphProcessFacade extends BaseFacade {
         $visitor->exec($node);
       }
     });
+
+    return $this;
   }
   // end of debug
 
@@ -68,6 +70,8 @@ class GraphProcessFacade extends BaseFacade {
   // There is possibility this determination could be changed.
   public function traverseByVisitor($visitor) {
     $this->exec(null, $visitor);
+
+    return $this;
   }
 
 }
