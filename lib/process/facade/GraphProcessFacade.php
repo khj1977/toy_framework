@@ -2,11 +2,12 @@
 
 require_once("lib/graph/BaseGraphNode.php");
 require_once("lib/process/graph/KFacadeGraphNode.php");
+require_once("lib/process/facade/BaseFacade.php");
 
 require_once("lib/data_struct/KHash.php");
 
 // The basic idea of GraphProcessFacade is come from the Apache nifi.
-class GraphProcessFacade extends KFacadeGraphNode {
+class GraphProcessFacade extends BaseFacade {
   protected $rootNode;
 
   public function __construct() {
@@ -31,19 +32,30 @@ class GraphProcessFacade extends KFacadeGraphNode {
   }
   */
 
-  public function exec($f) {
-    $nodeMemory = new KHash();
-    $this->node->mapToEdges(function($edge) use($f, $nodeMemory) {
-      $key = $edge->getName();
-      if ($nodeMemory->check($key)) {
+  // debug
+  // think carefully about algo of traverse.
+  public function exec($f, $visitor = null) {
+    $edgeMemory = new KHash();
+    $this->node->mapToEdges(function($edge) use($f, $edgeMemory, $visitor) {
+      if (!$visitor->isAccept($edge)) {
         return;
       }
 
-      $nodeMemory->set($key, true);
+      $key = $edge->getName();
+      if ($edgeMemory->check($key)) {
+        return;
+      }
+
+      $edgeMemory->set($key, true);
 
       $node = $edge->getNextNode();
 
-      $f($node);
+      if ($visitor === null) {
+        $f($node);
+      }
+      else {
+        $visitor->exec($node);
+      }
     });
   }
   // end of debug
@@ -55,7 +67,7 @@ class GraphProcessFacade extends KFacadeGraphNode {
   // be determined by content of node.
   // There is possibility this determination could be changed.
   public function traverseByVisitor($visitor) {
-
+    $this->exec(null, $visitor);
   }
 
 }

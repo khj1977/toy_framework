@@ -16,6 +16,10 @@ class KProcessVisitor extends BaseClass {
 
     }
 
+    public function isAccept($edge) {
+
+    }
+
     public function getCurrentProcess() {
         return $this->currentProcess;
     }

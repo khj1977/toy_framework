@@ -12,7 +12,7 @@ abstract class BaseFacade extends BaseClass {
 
   // Type 2 facade can express graph of process.
 
-  abstract public function exec();
+  abstract public function exec($f);
 
 }
 
