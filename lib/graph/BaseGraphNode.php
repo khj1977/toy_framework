@@ -1,8 +1,9 @@
 <?php
 
 require_once("lib/BaseClass.php");
+require_once("lib/data_struct/KArray.php");
 
-abstract class BaseGraphNode extends BaseClass{
+abstract class BaseGraphNode extends BaseClass {
 
   protected $edges;
   protected $content;
@@ -10,16 +11,16 @@ abstract class BaseGraphNode extends BaseClass{
   public function __construct() {
     parent::__construct();
 
-    $this->edges = array();
+    $this->edges = new KArray();
 
     return $this;
   }
 
-  public function addEdge($anEdge, $nextNode) {
-    $anEdge->setPrevNode($this);
-    $anEdge->setNextNode($nextNode);
+  public function addEdge($anEdge) {
+    $this->edges->push($anEdge);
 
-    $this->edges[] = $anEdge;
+    $anEdge->setPrevNode($this);
+    $anEdge->setNextNode(null);
 
     return $this;
   }
@@ -34,7 +35,11 @@ abstract class BaseGraphNode extends BaseClass{
     return $this->content;
   }
 
-  // abstract public function getIterator();
+  public function mapToEdges($f) {
+    $this->edges->each(function ($element) use($f) {
+      $f($element);
+    });
+  }
 
 }
 
