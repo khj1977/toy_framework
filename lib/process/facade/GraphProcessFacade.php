@@ -48,24 +48,22 @@ class GraphProcessFacade extends BaseFacade {
         return $this;
       }
 
+      /*
       $key = $edge->getName();
       if ($edgeMemory->check($key)) {
         return $this;
       }
-
       $edgeMemory->set($key, true);
+      */
+
+      $err = $visitor->isMemory($edge);
+      if ($err) {
+        return $this;
+      }
+
+      $visitor->exec($node);
 
       $node = $edge->getNextNode();
-
-      /*
-      if ($visitor === null) {
-        $f($node);
-      }
-      else {
-        $visitor->exec($node);
-      }
-      */
-      $visitor->exec($node);
 
       return $traverseFunc($f, $node->getFirstEdge());
     };
