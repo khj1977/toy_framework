@@ -36,7 +36,7 @@ class GraphProcessFacade extends BaseFacade {
   // debug
   // think carefully about algo of traverse.
   public function exec($f, $visitor = null) {
-    $edgeMemory = new KHash();
+    // $edgeMemory = new KHash();
     if ($visitor === null) {
       $visitor = new KDefaultGraphVisitor();
     }
