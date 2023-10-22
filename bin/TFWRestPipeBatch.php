@@ -1,0 +1,43 @@
+<?php
+
+set_include_path(get_include_path() . "" . PATH_SEPARATOR . realpath(dirname(__FILE__) . "/../"));
+
+require_once("lib/BaseBatch.php");
+require_once("lib/TheWorld.php");
+
+class TFWRestPipeBatch extends BaseBatch {
+
+  public function __construct() {
+    parent::__construct();
+
+    $this->initialize();
+
+    return $this;
+  }
+
+  protected function initialize() {
+    parent::initialize();
+
+    return $this;
+  }
+
+  protected function xmain($args) {
+  }
+
+}
+
+if (count($argv) != 2) {
+  Util::println("usage: cat foo.csv | tft.sh TFWRestPipe http://xxx.yyy > bar.csv");
+  exit(-1);
+}
+
+$obj = new TFWRestPipeBatch();
+try {
+  $obj->run($argv);
+}
+catch(Exception $e) {
+}
+
+return 1;
+
+?>
