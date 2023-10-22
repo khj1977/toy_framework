@@ -27,7 +27,7 @@ class TFWRestPipeBatch extends BaseBatch {
 }
 
 if (count($argv) != 2) {
-  Util::println("usage: cat foo.csv | tft.sh TFWRestPipe http://xxx.yyy | sort > bar.csv");
+  Util::println("usage: cat foo.csv | tfw.sh TFWRestPipe http://xxx.yyy | sort > bar.csv");
   exit(-1);
 }
 
