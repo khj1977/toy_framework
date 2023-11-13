@@ -9,7 +9,7 @@ class KSignal extends BaseClass {
 
     protected $signalHandler;
 
-    public function intialize() {
+    public function initialize() {
         $this->signalHandler = new KHash();
 
         return $this;
