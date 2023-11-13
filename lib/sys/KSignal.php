@@ -16,16 +16,23 @@ class KSignal extends BaseClass {
     }
 
     public function addHandler($sigNo, $f) {
-        $this->signalHandler->set($sigNo, $f);
+        $this->signalHandler->set($this->getSigNoHashKey($sigNo), $f);
         $that = $this;
 
         $callback = function() use($that, $sigNo) {$that->fireSignal($sigNo);};
 
         pcntl_signal($sigNo, $callback);
+
+        return $this;
     }
 
     public function fireSignal($sigNo) {
-        $f = $this->signalHandler->get($this->getSigNoHashKey($sigNo));
+        $key = $this->getSigNoHashKey($sigNo);
+        if ($this->signalHandler->check($key)) {
+            return $this;
+        }
+
+        $f = $this->signalHandler->get($key);
         $f();
 
         return $this;
