@@ -17,8 +17,11 @@ class KSignal extends BaseClass {
 
     public function addHandler($sigNo, $f) {
         $this->signalHandler->set($sigNo, $f);
+        $that = $this;
 
-        pcntl_signal($sigNo, "fireSignal");
+        $callback = function() use($that, $sigNo) {$that->fireSignal($sigNo);};
+
+        pcntl_signal($sigNo, $callback);
     }
 
     public function fireSignal($sigNo) {
