@@ -19,7 +19,7 @@ class KSignal extends BaseClass {
         $this->signalHandler->set($this->getSigNoHashKey($sigNo), $f);
         $that = $this;
 
-        $callback = function() use($that, $sigNo) {$that->fireSignal($sigNo);};
+        $callback = function($x, $y) use($that, $sigNo) {$that->fireSignal($sigNo);};
 
         pcntl_signal($sigNo, $callback);
 
