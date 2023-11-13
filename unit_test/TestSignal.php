@@ -31,7 +31,6 @@ class TestSignal extends BaseUnitTest {
     $signal->addHandler(2, function(){print("Hello from sig");});
 
     while(true) {
-
     }
 
     return;
