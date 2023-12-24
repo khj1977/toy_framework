@@ -28,7 +28,7 @@ class KSignal extends BaseClass {
 
     public function fireSignal($sigNo) {
         $key = $this->getSigNoHashKey($sigNo);
-        if ($this->signalHandler->check($key)) {
+        if (!$this->signalHandler->check($key)) {
             return $this;
         }
 
