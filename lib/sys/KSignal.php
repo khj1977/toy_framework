@@ -1,5 +1,7 @@
 <?php
 
+declare(ticks = 1);
+
 require_once("lib/BaseClass.php");
 require_once("lib/data_struct/KHash.php");
 
