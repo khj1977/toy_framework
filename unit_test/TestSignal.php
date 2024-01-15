@@ -32,20 +32,24 @@ class TestSignal extends BaseUnitTest {
     $this->debugStream->setFlag(true);
   }
 
+  /*
   public function test_elementary() {
     $signal = new KSignal();
 
     $signal->addHandler(SIGHUP, function(){print("\nHello from sig\n");});
 
-    posix_kill(posix_getpid(), SIGHUP);
+    $pid = posix_getpid();
+    // posix_kill($pid, SIGHUP);
+
+    print($pid . "\n");
 
     return;
   }
-
-  /*
+  */
+  
   public function test_coreSignal() {
-    print(SIGHUP . "\n");
-    var_dump(pcntl_signal_get_handler(SIGHUP));
+    print("SIG 1" . "\n");
+    # var_dump(pcntl_signal_get_handler(1));
 
     $f = function() {print("Hello Anon Func!!\n"); exit;};
     $err = pcntl_signal(SIGHUP, $f);
@@ -54,11 +58,17 @@ class TestSignal extends BaseUnitTest {
       print("OK\n");
     }
 
-    print("end\n");
+    $pid = posix_getpid();
+    print("pid: ". $pid);
 
-    posix_kill(posix_getpid(), SIGHUP);
+    // $status = null;
+    $info = array();
+    pcntl_sigwaitinfo(array(SIGHUP), $info);
+
+    print("end wait\n");
+
+    // posix_kill(posix_getpid(), SIGHUP);
   }
-  */
 
 }
 
