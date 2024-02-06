@@ -17,7 +17,7 @@ class MyPdo extends BaseDelegatable {
 
     $this->pdo = new PDO(
       "mysql:dbname=" . $dbProps["name"] . 
-      ";host=" . $dbProps["host"], 
+      ";host=" . $dbProps["host"] . ";port=" . $dbProps["port"], 
       $dbProps["user"], 
       $dbProps["pass"]
     );
