@@ -25,7 +25,7 @@ class Config extends BaseConfig {
     */
     
     $dbProps = array("host" => $this->db_host, "name" => $this->db_name,
-      "user" => $this->db_user, "pass" => $this->db_pass);
+      "user" => $this->db_user, "port" => $this->db_port, "pass" => $this->db_pass);
 
     return $dbProps;
   }
