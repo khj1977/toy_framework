@@ -1,5 +1,6 @@
 lib/config/impl/DevConfigImpl.php
 webroot/phpinfo.php
+webroot/ui-test.php
 log/
 config/DevConfigImpl.php
 config/StagingConfigImpl.php
