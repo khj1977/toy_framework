@@ -76,10 +76,12 @@ class HTMLDebugStream {
     // <div class="alert alert-primary" role="alert">
     // A simple primary alert—check it out!
     // </div>
+    // var_dump($this->buffers->generator());
 
     $html = "";
     $generator = $this->buffers->generator();
-    foreach($generator as $kind => $buffer) {
+    foreach($generator as $key) {
+      $buffer = $this->buffers->get($key);
       $bufferGenerator = $buffer->generator();
       foreach($bufferGenerator as $rawMessage) {
         $element = sprintf('<div class="alert alert-primary" role="alert">%s</div>', Util::htmlspecialchars($rawMessage));

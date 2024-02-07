@@ -1,4 +1,5 @@
 lib/config/impl/DevConfigImpl.php
+webroot/phpinfo.php
 log/
 config/DevConfigImpl.php
 config/StagingConfigImpl.php
