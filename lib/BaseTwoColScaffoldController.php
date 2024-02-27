@@ -34,6 +34,7 @@ require_once("lib/widget/NewScaffoldConfirmWidget.php");
 require_once("lib/widget/NewScaffoldEditWidget.php");
 require_once("lib/widget/NewScaffoldFinishWodget.php");
 require_once("lib/widget/NewScaffoldListWidget.php");
+require_once("lib/view/KCalenderView.php");
 
 class BaseTwoCOlScaffoldController extends BaseAuthController {
 
@@ -111,6 +112,8 @@ class BaseTwoCOlScaffoldController extends BaseAuthController {
       $navView->push($element->get("href"), $element->get("desc"), $element->get("is_active"));
     }
     $this->twoColView->getLeftColView()->addSubView($navView);
+
+    $this->twoColView->getLeftColView()->addSubView(new KCalendarView());
 
     return $this;
   }
