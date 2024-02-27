@@ -23,7 +23,7 @@ class KCalendarView extends BaseView {
         // be possible with view. Hence it would go to template of view.
         // Since they are general lib, it is OK to handle so.
 
-        $html = "<p>Date: <input type='text' id='datepicker'></p>";
+        $html = "<p>Date: <input type='text' id='datepicker' name='datepicker'></p>";
 
         return $html;
 
