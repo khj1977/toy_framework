@@ -6,9 +6,9 @@ CREATE TABLE company (
   CONSTRAINT fk_prefecture_id
     FOREIGN KEY (prefecture_id)
     REFERENCES prefecture (id)
-    ON DELETE RESTRICT ON UPDATE RESTRICT
+    ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT fk_company_kind_id
-    FOREIGN KEY (company_kind__id)
-    REFERENCES company_kind (company_kind_id)
+    FOREIGN KEY (company_kind_id)
+    REFERENCES company_kind (id)
     ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE = InnoDB;

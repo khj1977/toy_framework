@@ -7,6 +7,6 @@ CREATE TABLE employee_list (
   tel_num varchar(256) not null,
   CONSTRAINT fk_company_kind_id
     FOREIGN KEY (division_id)
-    REFERENCES division (division_id)
+    REFERENCES division (id)
     ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE = InnoDB;
