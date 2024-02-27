@@ -13,6 +13,7 @@ require_once("lib/view/BreadCrumbView.php");
 require_once("lib/view/LinkButtonView.php");
 require_once("lib/util/SimpleSession.php");
 require_once("lib/view/HtmlHeaderView.php");
+require_once("lib/view/KCalenderView.php");
 
 class ScaffoldListWidget extends BaseScaffoldWidget {
 
@@ -57,11 +58,18 @@ class ScaffoldListWidget extends BaseScaffoldWidget {
     $this->breadCrumbView->setIsActive("klist");
     // $this->parentView->addSubView($this->breadCrumbView);
 
+
+    # debug
+    # This is experimental use.
+    $this->parentView->addSubView(new KCalendarView());
+    # end of debug
+
     $buttonView = new LinkButtonView();
     $buttonView->setKind("btn-primary")->setText("Add data")->setLinkTo(Util::generateURLFromActionName("add"));
     $this->parentView->addSubView($buttonView);
 
     $this->parentView->addSubView($rowsView);
+
     // debug
     // $this->parentView->setTitle("List of table");
     // end of debug
