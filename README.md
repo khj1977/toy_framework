@@ -67,7 +67,13 @@ Write down setttings to the following config file and copy to config dir.
 - config/StagingConfigImpl.php
 - config/ProductionConfigImpl.php
 
-And then, make log dir at top level with appropriate permission with web application server.
+And then, make log dir at top level with appropriate permission with web application server. Finally, setup hosts file for test or DNS for production.
+
+Application can be run on a web browser with the following manner:
+
+- http://xxx.yyy/index.php?m=sample_app&c=ScaffoldTwoColTest&a=klist
+
+This indicates module is sample_app, controller is ScaffoldTwoColTest and action is klist. As reader understands, actually, this framework deploys HMVC. mod_rewrite for Apache could be used for cool URL. However, author thinks that this way of access to web application is more flexible and thus way is used. 
 
 ## Comment for how to run
 In BaseConfig.php, there are part to determine config file name. See the following:
