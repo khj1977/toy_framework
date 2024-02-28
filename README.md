@@ -73,7 +73,7 @@ Application can be run on a web browser with the following manner:
 
 - http://xxx.yyy/index.php?m=sample_app&c=ScaffoldTwoColTest&a=klist
 
-This indicates module is sample_app, controller is ScaffoldTwoColTest and action is klist. As reader understands, actually, this framework deploys HMVC. mod_rewrite for Apache could be used for cool URL. However, author thinks that this way of access to web application is more flexible and thus way is used. 
+This indicates module is sample_app, controller is ScaffoldTwoColTest and action is klist. As reader understands, actually, this framework deploys HMVC. mod_rewrite for Apache could be used for cool URL. However, author thinks that this way of access to web application is more flexible and thus this way is used. 
 
 ## Comment for how to run
 In BaseConfig.php, there are part to determine config file name. See the following:
