@@ -67,6 +67,8 @@ Write down setttings to the following config file and copy to config dir.
 - config/StagingConfigImpl.php
 - config/ProductionConfigImpl.php
 
+And then, make log dir at top level with appropriate permission with web application server.
+
 ## Comment for how to run
 In BaseConfig.php, there are part to determine config file name. See the following:
 - $configFileName = sprintf("%sConfigImpl.php", $this->stage);
