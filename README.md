@@ -59,7 +59,7 @@ There are much more interesting class libray for this framework to make producti
 # How to run?
 Set environment variable for shell as follows:
 - export K_STAGE=Dev
-The above is sample for bash. Note that if it were apache, let use appropriate setting directive. Then, DevConfigImpl.php is used under lib dir. And set content of that file appropriately.
+The above is sample for bash. Note that if it were apache, let use appropriate setting directive. There is sample of virtual host on reference dir of this framework. Then, DevConfigImpl.php is used under lib dir. And set content of that file appropriately.
 
 Write down setttings to the following config file and copy to config dir.
 - lib/config/impl/DevConfigImpl.php
