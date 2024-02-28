@@ -757,7 +757,24 @@ class KORM {
     return true;
   }
 
+  static public function hasTableName($modelName) {
+    $klassName = get_called_class();
+    $checkTableName = Util::omitSuffix(Util::upperCamelToLowerCase($modelName), "_model");
+
+    foreach(static::$belongToTableNames->get($klassName)->get($klassName)->generator() as $tableName) {
+      if (strcmp($tableName, $checkTableName) === 0) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
   static public function addBelongWith($belongWith) {
+    if (static::hasTableName($belongWith["belong_to"])) {
+      return;
+    }
+
     return static::setBelongWith($belongWith);
   }
 

@@ -62,7 +62,10 @@ class NewScaffoldListWidget extends BaseScaffoldWidget {
     }
 
     $rows = $table->getDBCols(null, null, $belongWiths);
+    // $realRows = $table->getDBColsAsHash(null, null, $belongWiths);
+    $realRows = $table->getDBColsAsHash(null, null, $belongWiths);
     $props = $table->getDBPropsWithEmptyData();
+    $colNames = new KArray();
     $realProps = new KArray();
     // end of debug
 
@@ -73,26 +76,30 @@ class NewScaffoldListWidget extends BaseScaffoldWidget {
         // if prop is xxx_Id, col name will be xxx.
         // debug
         // $newName = $matched[1];
-        $newName = $matched[1] . "_join";
+        $newName = $matched[1] . "_id_name";
         // end of debug
-        // $prop->setName($newName);
+        $prop->setName($newName);
       }
       $headerView->push($prop);
       $realProps->push($prop);
+      $colNames->push($prop->getName());
     }
 
     $rowsView = new SimpleRowsView();
     $rowsView->pushHtmlHeader($headerView);
-    $realPropsGenerator = $realProps->generator();
-    foreach($rows as $row) {
+    foreach($realRows->generator() as $rowsAsKHash) {
+      $rowView = new ScaffoldTableRowView();
+      // foreach($rowsAsKHash->generator() as $key) {
+      foreach($colNames->generator() as $key) {
+      // var_dump($key);
+      $row = $rowsAsKHash->get($key);
       // $dbCol = $rows->get($col->getName());
       // var_dump($col->getName());
-      // var_dump($row);
       // debug
       // handle joined fk.
       // end of debug
-      $rowView = new ScaffoldTableRowView();
-      foreach($row as $dbCol) {
+      // foreach($row as $dbCol) {
+      $dbCol = $row;
       // foreach() {
       // var_dump($row);
       // foreach($realPropsGenerator as $realProp) {
@@ -102,10 +109,10 @@ class NewScaffoldListWidget extends BaseScaffoldWidget {
           // debug
           // determine how to obtain db col val with joined data.
           $referName = $matched[1];
-          $newName = $matched[1] . "_join";
+          $newName = $matched[1] . "_id_name";
           $joinModelName = Util::underscoreToUpperCamel($referName) . "Model";
-          continue;
-          $dbCol->setName($newName);
+          // continue;
+          // $dbCol->setName($newName);
           // end of debug
         }
         $rowView->push($dbCol);

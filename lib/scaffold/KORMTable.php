@@ -49,14 +49,18 @@ class KORMTable extends BaseTable {
   public function getDBColsAsHash($limit = null, $where = null, $belongWiths = null) {
     $dbCols = $this->getDBCols($limit, $where, $belongWiths);
 
-    $rowsAsHash = new KHash();
-    foreach($dbCols as $dbCol) {
-      // debug
-      // $rowsAsHash->push($dbCol->getName(), $dbCol);
-      // end of debug
+    $rows = new KArray();
+    foreach($dbCols as $row) {
+      $rowAsHash = new KHash();
+      foreach($row as $dbCol) {
+        // debug
+        $rowAsHash->push($dbCol->getName(), $dbCol);
+        // end of debug
+      }
+      $rows->push($rowAsHash);
     }
 
-    return $rowsAsHash;
+    return $rows;
   }
 
   // where = array(arrray("col" => $col, "cond" => $cond)). where cond = num
