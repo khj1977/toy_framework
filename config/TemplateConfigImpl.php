@@ -22,6 +22,7 @@ class DevConfigImpl extends BaseConfigImpl {
     $this->retainer = array(
       "factory_config_path" => $this->baseDir . "/factory_config.csv",
       "db_host" => "127.0.0.1",
+      "db_port" => "3306",
       "db_name" => "dev_toy_fw",
       "db_user" => "",
       "db_pass" => ""
