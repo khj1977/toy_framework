@@ -46,6 +46,19 @@ class KORMTable extends BaseTable {
     return $this;
   }
 
+  public function getDBColsAsHash($limit = null, $where = null, $belongWiths = null) {
+    $dbCols = $this->getDBCols($limit, $where, $belongWiths);
+
+    $rowsAsHash = new KHash();
+    foreach($dbCols as $dbCol) {
+      // debug
+      // $rowsAsHash->push($dbCol->getName(), $dbCol);
+      // end of debug
+    }
+
+    return $rowsAsHash;
+  }
+
   // where = array(arrray("col" => $col, "cond" => $cond)). where cond = num
   public function getDBCols($limit = null, $where = null, $belongWiths = null) {
     // $baseOrm = new KORM($this->tableName);
@@ -116,6 +129,7 @@ class KORMTable extends BaseTable {
       // end of debug
 
       $rows[] = $dbCols;
+      // $rows = array_merge($rows, $dbCols);
     }
 
     return $rows;

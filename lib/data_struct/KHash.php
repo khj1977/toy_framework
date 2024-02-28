@@ -41,6 +41,10 @@ class KHash extends KSequential {
     return $this;
   }
 
+  public function push($key, $val) {
+    return $this->set($key, $val);
+  }
+
   public function bulkSet($rawHash) {
     foreach($rawHash as $key => $val) {
       $this->set($key, $val);

@@ -15,6 +15,7 @@ require_once("lib/util/SimpleSession.php");
 require_once("lib/view/HtmlHeaderView.php");
 require_once("lib/data_struct/KString.php");
 require_once("lib/util/ModelLoader.php");
+require_once("lib/data_struct/KArray.php");
 
 class NewScaffoldListWidget extends BaseScaffoldWidget {
 
@@ -41,6 +42,7 @@ class NewScaffoldListWidget extends BaseScaffoldWidget {
     // make join inside of method?
     // public function getDBCols($limit = null, $where = null, $belongWiths = null) 
     $props = $table->getDBPropsWithEmptyData();
+    $realProps = $table->getDBColsAsHash();
     $belongWiths = new KArray();
     $hasJoin = false;
     foreach($props as $prop) {
@@ -61,6 +63,7 @@ class NewScaffoldListWidget extends BaseScaffoldWidget {
 
     $rows = $table->getDBCols(null, null, $belongWiths);
     $props = $table->getDBPropsWithEmptyData();
+    $realProps = new KArray();
     // end of debug
 
     $headerView = new HtmlHeaderView();
@@ -72,26 +75,37 @@ class NewScaffoldListWidget extends BaseScaffoldWidget {
         // $newName = $matched[1];
         $newName = $matched[1] . "_join";
         // end of debug
-        $prop->setName($newName);
+        // $prop->setName($newName);
       }
       $headerView->push($prop);
+      $realProps->push($prop);
     }
 
     $rowsView = new SimpleRowsView();
     $rowsView->pushHtmlHeader($headerView);
+    $realPropsGenerator = $realProps->generator();
     foreach($rows as $row) {
+      // $dbCol = $rows->get($col->getName());
+      // var_dump($col->getName());
+      // var_dump($row);
       // debug
       // handle joined fk.
       // end of debug
       $rowView = new ScaffoldTableRowView();
       foreach($row as $dbCol) {
+      // foreach() {
+      // var_dump($row);
+      // foreach($realPropsGenerator as $realProp) {
+        // $dbCol = $row->get($realProp->getName());
         $matched = array();
         if (preg_match("/(.*)_id$/", $dbCol->getName(), $matched) == 1) {
           // debug
           // determine how to obtain db col val with joined data.
           $referName = $matched[1];
+          $newName = $matched[1] . "_join";
           $joinModelName = Util::underscoreToUpperCamel($referName) . "Model";
           continue;
+          $dbCol->setName($newName);
           // end of debug
         }
         $rowView->push($dbCol);
