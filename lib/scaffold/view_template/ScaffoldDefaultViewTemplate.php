@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="stylesheet" href="./bootstrap/css/bootstrap.min.css"> 
 
-<link href="./jquery-ui/jquery-ui.css" rel="stylesheet">
+<link href="/jquery-ui/jquery-ui.css" rel="stylesheet">
 
 <script>
 	$( function() {
@@ -33,7 +33,7 @@
 </div>
 
 <script src="/jquery/jquery.js"></script>
-<script src="./jquery-ui/jquery-ui.js"></script>
+<script src="/jquery-ui/jquery-ui.js"></script>
 <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 <script>
