@@ -10,3 +10,7 @@ CREATE TABLE employee_list (
     REFERENCES division (id)
     ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE = InnoDB;
+
+---
+
+alter table employee_list add column memo TEXT;
