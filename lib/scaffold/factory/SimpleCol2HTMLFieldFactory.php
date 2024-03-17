@@ -5,6 +5,7 @@
 
 require_once("lib/BaseClass.php");
 require_once("lib/KException.php");
+require_once("lib/view/KTextAreaView.php");
 
 class SimpleCol2HTMLFieldFactory extends BaseClass {
 
@@ -84,6 +85,10 @@ class SimpleCol2HTMLFieldFactory extends BaseClass {
     }
     else if ($type === "varchar") {
         $html = sprintf("<input class='form-control' type='text' name='%s' value='%s'>", $col->getName(), $col->getVal());
+    }
+    else if ($type === "text") {
+      $textView = new KTextAreaView();
+      $html = $textView->render();
     }
     else {
       throw new KException("Col2HTMLFactory::make(): no match of type to make HTML: " . $type);

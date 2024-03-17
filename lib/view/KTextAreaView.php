@@ -4,7 +4,7 @@ require_once("lib/view/BaseView.php");
 
 // This is view class of calendar. HTML part of calendar is actually impled by
 // jquery-ui.
-class KTextArea extends BaseView {
+class KTextAreaView extends BaseView {
 
     public function __construct() {
         parent::__construct();
@@ -19,7 +19,7 @@ class KTextArea extends BaseView {
     }
 
     public function render() {
-        $html = "<label> " . $this->name;
+        $html = "<label> " . $this->getMyName();
         $html = $html . sprintf("<textarea class='%s', name='%s'></textarea>",
             $this->getMyKlassName(), $this->getMyName());
         $html = $html . "</label>";

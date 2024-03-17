@@ -45,7 +45,7 @@ abstract class BaseView extends BaseClass {
   }
 
   public function getMyName() {
-    if ($this->getMyName() === null) {
+    if ($this->myName === null) {
       return "";
     }
 
