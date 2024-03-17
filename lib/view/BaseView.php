@@ -20,6 +20,9 @@ foreach($this->htmlRows as $htmlRow) {
 
 abstract class BaseView extends BaseClass {
 
+  protected $myName;
+  protected $myKlassName;
+
   public function __construct() {
     parent::__construct();
 
@@ -29,7 +32,38 @@ abstract class BaseView extends BaseClass {
   protected function initialize() {
     parent::initialize();
 
+    $this->myName = null;
+    $this->myKlassName = null;
+
     return $this;
+  }
+
+  public function setMyName($myName) {
+    $this->myName = $myName;
+
+    return $this;
+  }
+
+  public function getMyName() {
+    if ($this->getMyName() === null) {
+      return "";
+    }
+
+    return $this->myName;
+  }
+
+  public function setMyKlass($klassName) {
+    $this->myKlassName = $klassName;
+
+    return $this;
+  }
+
+  public function getMyKlassName() {
+    if ($this->myKlassName === null) {
+      return "";
+    }
+
+    return $this->myKlassName;
   }
 
   abstract public function render();

@@ -12,6 +12,7 @@ require_once("lib/util/KLogger.php");
 require_once("lib/util/SimpleSession.php");
 require_once("lib/util/ServerEnv.php");
 require_once("lib/view/RenderingArea.php");
+require_once("lib/WebArguments.php");
 
 class TheWorld {
 
@@ -92,6 +93,10 @@ class TheWorld {
     $this->config->setStage($this->stage);
     $this->debugStream = new DebugStream($this->stage);
     $this->htmlDebugStream = new HTMLDebugStream($this->stage);
+
+    if (!$this->isCli()) {
+      $this->webArguments = new WebArguments();
+    }
 
     $dbProps = $this->config->getDBProps();
 
