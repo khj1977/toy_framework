@@ -20,8 +20,8 @@ class KTextAreaView extends BaseView {
 
     public function render() {
         // $html = "<label> " . $this->getMyName();
-        $html = sprintf("<textarea class='%s', name='%s'></textarea>",
-            $this->getMyKlassName(), $this->getMyName());
+        $html = sprintf("<textarea class='form-control', name='%s'></textarea>",
+            $this->getMyName());
         // $html = $html . "</label>";
 
         return $html;
