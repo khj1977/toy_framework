@@ -24,7 +24,8 @@ modification, are permitted provided that the following conditions are met:
    fee for this software will be exempted. For example, price could be 
    10,000JPY/year to 1,000,000 JPY/year. Even no donation, for most cases,
    1 mil JPY / year depending on one's topline and operational profit. Or 
-   no donation is required if one's topline is less than 10mil JPY / year.
+   no donation is required if one's topline is less than 10mil JPY / year. Dobation will be used to cost of developmement. if my income is stable, development is also stable.
+   Not so huge money is requred. 5mil to 10mil. would be enough choice for base and 5mil for expense would be appropriate choice.
    Now, a user company can use this framework completly free of charge. Why
    This framework is the base for system. Let's do competition with the same base.
    Let's make a base by everyone regardless for workforce involvement or donation.
