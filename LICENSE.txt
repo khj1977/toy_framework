@@ -22,8 +22,8 @@ modification, are permitted provided that the following conditions are met:
    operation profit.
 5. If a company, person pr group donate money to NMD Soft for this software,
    fee for this soft ware will be exempted. Even no donation, for most cases,
-   fee will be exempted. Donation would be between 1 mil JPY to 30mil JPY
-   depending on one's topline and operational profit. Now, a user
+   fee will be exempted. Donation would be between 1 mil JPY / year to 30mil 
+   JPY / year depending on one's topline and operational profit. Now, a user
    company can use this framework completly free of charge. Why donation base
    free model? That is because I have IT industry communism hypothesis. This
    framework is the base for system. Let's do competition with the same base.
