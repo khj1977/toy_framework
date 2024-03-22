@@ -21,16 +21,16 @@ modification, are permitted provided that the following conditions are met:
    yen / year and the rest is negotiation bases based on their top-line and 
    operation profit.
 5. If a company, person pr group donate money to NMD Soft for this software,
-   fee for this software will be exempted. Even no donation, for most cases,
+   fee for this software will be exempted. For example, price could be 
+   10,000JPY/month to 1,000,000 JPY/month. Even no donation, for most cases,
    1 mil JPY / year depending on one's topline and operational profit. Or 
    no donation is required if one's topline is less than 10mil JPY / year.
    Now, a user company can use this framework completly free of charge. Why
-   donation base free model? That is because I have IT industry communism hypothesis.
    This framework is the base for system. Let's do competition with the same base.
    Let's make a base by everyone regardless for workforce involvement or donation.
    Base is made by everyone but moderate monetize or donation.
    See https://www.khj1977.net/profile/misc/web-and-econ.html for this argument
-   in Japanese.
+   in Japanese. This is a experiment old good communism wth modern IT industry.
 
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
 ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
