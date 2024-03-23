@@ -28,11 +28,11 @@ modification, are permitted provided that the following conditions are met:
    Money is important to spend life and continuous R&D is far more important. If my income
    is stable, development of this software is also stable. Not so huge money is requred.
    5mil to 10mil would be enough choice for base and expense. Now, a user company can
-   use this framework completly free of charge expect donation. This framework is the
-   base for system application. Although this is BSD license bases, as GNU manifest said,
-   let's do competition over the same software base. Let's make a base by everyone 
-   regardless for workforce involvement or donation. Base is made by everyone but
-   moderate monetize or donation are required.
+   use this framework completly free of charge expect donation. This framework is a
+   public base for system application. Although this is BSD license bases, as GNU
+   manifest said, let's do competition over the same software base. Let's make a base
+   by everyone regardless for workforce involvement or donation. Base is made by 
+   everyone but moderate monetize or donation are required.
    See https://www.khj1977.net/profile/misc/web-and-econ.html 
    for this argument in Japanese. This is a experiment of old good communism wth modern 
    IT industry.
