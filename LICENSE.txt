@@ -20,7 +20,22 @@ modification, are permitted provided that the following conditions are met:
    If a user is a big size company, a fee should be higher than 10,000,000 
    yen / year and the rest is negotiation bases based on their top-line and 
    operation profit.
-5. If a company, person pr group donate money to NMD Soft for this software, fee defined abovefor this software will be exempted. For example, amount of donation could be 10,000JPY/year to 1,000,000 JPY/year. Or no donation is required if one's topline is less than 10mil JPY / year. Dobation will be used to cost of developmement. We live in home, we use watar/gas, we eat something, we do some hobby. Money is important to spend life and continuous R&D is far more important. If my income is stable, development of this software is also stable. Not so huge money is requred. 5mil to 10mil enough would be enough choice for base and 5mil for expense would be appropriate choice. Now, a user company can use this framework completly free of charge expect donation. This framework is the base for system application. Let's do competition with the same software base. Let's make a base by everyone regardless for workforce involvement or donation. Base is made by everyone but moderate monetize or donation are required. See https://www.khj1977.net/profile/misc/web-and-econ.html for this argument in Japanese. This is a experiment of old good communism wth modern IT industry.
+5. If a company, person pr group donate money to NMD Soft for this software, 
+   fee defined abovefor this software will be exempted. For example, amount of 
+   donation could be 10,000JPY/year to 1,000,000 JPY/year. Or no donation is required 
+   if one's topline is less than 10mil JPY / year. Dobation will be used to cost of 
+   developmement. We live in home, we use watar/gas, we eat something, we do some hobby. 
+   Money is important to spend life and continuous R&D is far more important. If my income
+   is stable, development of this software is also stable. Not so huge money is requred.
+   5mil to 10mil enough would be enough choice for base and 5mil for expense would be 
+   appropriate choice. Now, a user company can use this framework completly free of 
+   charge expect donation. This framework is the base for system application.
+   Although this is BSD license bases, as GNU manifest said, let's do competition with 
+   the same software base. Let's make a base by everyone regardless for workforce
+   involvement or donation. Base is made by everyone but moderate monetize
+   or donation are required. See https://www.khj1977.net/profile/misc/web-and-econ.html 
+   for this argument in Japanese. This is a experiment of old good communism wth modern 
+   IT industry.
 
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
 ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
