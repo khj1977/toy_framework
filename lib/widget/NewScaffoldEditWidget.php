@@ -99,6 +99,10 @@ class NewScaffoldEditWidget extends BaseScaffoldWidget {
         else {
           $type = "varchar";
         }
+        // debug
+        // impl type = text for textarea data which is corresponds to type of MySQL not
+        // naming rule. Retain type hint of MySQL on PostData?
+        // end of debug
         // end of debug
 
         $col = new DBCol();
