@@ -101,7 +101,7 @@ class NewScaffoldEditWidget extends BaseScaffoldWidget {
         }
         // debug
         // impl type = text for textarea data which is corresponds to type of MySQL not
-        // naming rule. Retain type hint of MySQL on PostData?
+        // naming rule. Retain type hint of MySQL on PostData or even in session?
         // end of debug
         // end of debug
 
