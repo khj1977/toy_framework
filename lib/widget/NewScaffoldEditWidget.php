@@ -7,7 +7,9 @@ require_once("lib/scaffold/factory/TableFactory.php");
 require_once("lib/TheWorld.php");
 require_once("lib/scaffold/factory/SimpleCol2HTMLFieldFactory.php");
 require_once("lib/scaffold/sub_view/ScaffoldFormView.php");
+require_once("lib/util/SimpleSession.php");
 require_once("lib/data_struct/KString.php");
+require_once("lib/data_struct/KArray.php");
 require_once("lib/util/ModelLoader.php");
 
 class NewScaffoldEditWidget extends BaseScaffoldWidget {
@@ -71,6 +73,8 @@ class NewScaffoldEditWidget extends BaseScaffoldWidget {
     $router = TheWorld::instance()->router;
     $formView->setAction(sprintf("/index.php?m=%s&c=%s&a=confirm", $router->getModule(), $router->getController()))->setMethod("POST");
 
+    $session = TheWorld::instance()->session;
+    $colsForSession = new KArray();
     if ($id != false) {
       // debug
       // do join and skip .*_id$
@@ -81,9 +85,23 @@ class NewScaffoldEditWidget extends BaseScaffoldWidget {
         $col->setHTMLFactory($factory);
         // $html = $col->render();
         $formView->pushInput($col);
+
+        $newCol = new DBCol();
+
+        $newCol->setName($col->getName())->setVal($col->getVal())->setType($col->getType())->setKey($col->getType());
+        $colsForSession->push($newCol);
       }
+
+      $session->set("NewScaffoldEditWidget::cols", $colsForSession);
     }
     else {
+      $cols = $session->get("NewScaffoldEditWidget::cols");
+      $cols = $cols["real_val"];
+      foreach($cols->generator() as $col) {
+        $col->setHTMLFactory($factory);
+        $formView->pushInput($col);
+      }
+      /*
       foreach($postData as $name => $val) {
         // debug
         // quick hack. better solution?
@@ -112,6 +130,7 @@ class NewScaffoldEditWidget extends BaseScaffoldWidget {
         // $html = $col->render();
         $formView->pushInput($col);
       }
+      */
     }
 
     return $this;
