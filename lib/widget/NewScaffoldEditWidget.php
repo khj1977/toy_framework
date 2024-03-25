@@ -113,6 +113,20 @@ class NewScaffoldEditWidget extends BaseScaffoldWidget {
         $pair = $pairs->get($col->getName());
         $val = $pair->getVal();
 
+        $key = "";
+        if (KString::isEqual($col->getName(), "id")) {
+          $type = "int";
+
+          $col->setType($type);
+        }
+        // else if (preg_match("/.*_id/", $name) === 1) {
+        else if (KString::sregex($col->getName(), "/.*_id$/") === true) {
+          $type = "int";
+          $key = "MUL";
+
+          $col->setType($type)->setKey($key);
+        }
+
         $col->setVal($val);
 
         $col->setHTMLFactory($factory);
