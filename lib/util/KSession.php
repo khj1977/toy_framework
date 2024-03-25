@@ -49,6 +49,11 @@ abstract class KSession extends BaseClass {
   }
 
   public function setSuffix($suffix = null) {
+    return $this;
+
+    // debug
+    // omit the following function
+    /*
     if ($suffix === null) {
       $this->suffix = $this->generateKeySuffix();
     }
@@ -57,6 +62,8 @@ abstract class KSession extends BaseClass {
     }
     
     return $this;
+    */
+    // end of debug
   }
 
   public function getSuffix() {

@@ -6,6 +6,8 @@ require_once("lib/view/BaseView.php");
 // jquery-ui.
 class KTextAreaView extends BaseView {
 
+    protected $val;
+
     public function __construct() {
         parent::__construct();
     
@@ -20,8 +22,8 @@ class KTextAreaView extends BaseView {
 
     public function render() {
         // $html = "<label> " . $this->getMyName();
-        $html = sprintf("<textarea class='form-control', name='%s'></textarea>",
-            $this->getMyName());
+        $html = sprintf("<textarea class='form-control', name='%s'>%s</textarea>",
+            $this->getMyName(), $this->val);
         // $html = $html . "</label>";
 
         return $html;
@@ -29,6 +31,12 @@ class KTextAreaView extends BaseView {
 
     public function isHidden() {
         return false;
+    }
+
+    public function setVal($val) {
+        $this->val = $val;
+
+        return $this;
     }
 
 }

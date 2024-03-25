@@ -102,9 +102,18 @@ class NewScaffoldEditWidget extends BaseScaffoldWidget {
     else {
       $cols = $session->get("NewScaffoldEditWidget::cols");
       $cols = $cols["real_val"];
+
+      $pairs = $session->get("NewScaffoldConfirmWidget::pairs");
+      $pairs = $pairs["real_val"];
+      // var_dump($pairs);
+      // var_dump($_SESSION);
+      // exit;
       
-      $cols->each(function($col) use ($formView, $factory, $postData) {
-        // $col->setVal($postData[$col->getName()]);
+      $cols->each(function($col) use ($formView, $factory, $pairs) {
+        $pair = $pairs->get($col->getName());
+        $val = $pair->getVal();
+
+        $col->setVal($val);
 
         $col->setHTMLFactory($factory);
         $formView->pushInput($col);

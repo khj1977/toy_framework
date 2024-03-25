@@ -88,7 +88,7 @@ class SimpleCol2HTMLFieldFactory extends BaseClass {
     }
     else if ($type === "text") {
       $textView = new KTextAreaView();
-      $textView->setMyName($col->getName())->setMyKlass("text_area_class");
+      $textView->setMyName($col->getName())->setMyKlass("text_area_class")->setVal($col->getVal());
       $html = $textView->render();
     }
     else {

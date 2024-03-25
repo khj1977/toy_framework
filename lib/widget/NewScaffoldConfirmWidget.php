@@ -42,11 +42,14 @@ class NewScaffoldConfirmWidget extends BaseScaffoldWidget {
     $actionName = TheWorld::instance()->actionName;
     $session->setSuffix($controllerName . "::" . $actionName . "::");
     // $this->ds->vd("CTR: " . $controllerName);
+
+    $pairs = new KHash();
     foreach($postData as $key => $val) {
       $pair = new StringPair();
       $pair->setTableName($tableName)->setPair($key, $val)->setHTMLFactory($factory);
       $rowsView->push($pair);
       $session->set($key, $val);
+      $pairs->set($key, $pair);
 
       $xmatched = array();
       if (preg_match("/(.*)_id$/", $key, $xmatched) === 1) {
@@ -66,6 +69,8 @@ class NewScaffoldConfirmWidget extends BaseScaffoldWidget {
         $session->set($joinedKlassName, $xname);
       }
     }
+
+    $session->set("NewScaffoldConfirmWidget::pairs", $pairs);
 
     $formView = new ScaffoldFormView();
 

@@ -61,6 +61,14 @@ class StringPair extends BaseClass {
     return array($this->key => $this->val);
   }
 
+  public function getKey() {
+    return $this->key;
+  }
+
+  public function getVal() {
+    return $this->val;
+  }
+
   public function renderHeader() {
     return "";
   }
