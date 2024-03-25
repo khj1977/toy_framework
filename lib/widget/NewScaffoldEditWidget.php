@@ -88,19 +88,30 @@ class NewScaffoldEditWidget extends BaseScaffoldWidget {
 
         $newCol = new DBCol();
 
-        $newCol->setName($col->getName())->setVal($col->getVal())->setType($col->getType())->setKey($col->getType());
+        // debug
+        // Associate setName, setVal to postData?
+        // $newCol->setName($col->getName())->setVal($postData[$col->getName()])->setType($col->getType())->setKey($col->getType());
+        $newCol->setName($col->getName())->setVal($col->getName())->setType($col->getType())->setKey($col->getType());
+        // end of debug
+
         $colsForSession->push($newCol);
       }
 
       $session->set("NewScaffoldEditWidget::cols", $colsForSession);
     }
     else {
+      // print("foo");
+      // exit;
       $cols = $session->get("NewScaffoldEditWidget::cols");
       $cols = $cols["real_val"];
-      foreach($cols->generator() as $col) {
+      
+      $cols->each(function($col) use ($formView, $factory, $postData) {
+        // $col->setVal($postData[$col->getName()]);
+
         $col->setHTMLFactory($factory);
         $formView->pushInput($col);
-      }
+      });
+     
       /*
       foreach($postData as $name => $val) {
         // debug
