@@ -100,8 +100,6 @@ class NewScaffoldEditWidget extends BaseScaffoldWidget {
       $session->set("NewScaffoldEditWidget::cols", $colsForSession);
     }
     else {
-      // print("foo");
-      // exit;
       $cols = $session->get("NewScaffoldEditWidget::cols");
       $cols = $cols["real_val"];
       
