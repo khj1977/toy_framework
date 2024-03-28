@@ -22,7 +22,7 @@ modification, are permitted provided that the following conditions are met:
    operation profit.
 5. If a company, person or group donate money to NMD Soft for this software, 
    fee defined above for this software will be exempted. For example, amount of 
-   donation could be 10,000JPY/year to 1,000,000 JPY/year. Or no donation is required 
+   donation could be 10,000JPY/year to 10,000,000 JPY/year. Or no donation is required 
    if one's topline is less than 10mil JPY / year. Donation will be used to cost of 
    developmement. We live in home, we use watar/gas/elec, we eat something,
    we do some hobby. Money is important to spend life and continuous R&D is far
