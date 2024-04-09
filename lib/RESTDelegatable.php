@@ -5,7 +5,8 @@
 
 require_once("lib/BaseDelegatable.php");
 require_once("lib/util/HttpClient.php");
-require_onec("lib/Util.php");
+require_once("lib/Util.php");
+require_once("KException.php");
 require_once("lib/TheWorld.php");
 require_once("lib/util/KLogger.php");
 
@@ -23,7 +24,7 @@ class RESTDelegatable extends BaseDelegatable {
 
   public function __call($methodName, $args) {
     if ($this->httpClient === null) {
-      throw new UException("RESTDelegatable::__call(): httpClient has not been specified yet.");
+      throw new KException("RESTDelegatable::__call(): httpClient has not been specified yet.");
     }
 
     $result = $this->callMethod($methodName, $args);
