@@ -33,7 +33,8 @@ class VNavView extends BaseView {
     '</ul>';
     */
 
-    $html = '<ul class="nav nav-pills flex-column">';
+    // $html = '<ul class="nav nav-pills flex-column">';
+    $html = '<ul class="nav nav-tabs">';
     foreach($this->elements->generator() as $element) {
       $html = $html . '<li class="nav-item">';
       // debug

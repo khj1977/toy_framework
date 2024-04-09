@@ -111,7 +111,7 @@ class BaseTwoCOlScaffoldController extends BaseAuthController {
     foreach($this->navViewElements->generator() as $element) {
       $navView->push($element->get("href"), $element->get("desc"), $element->get("is_active"));
     }
-    $this->twoColView->getLeftColView()->addSubView($navView);
+    $this->twoColView->getRightColView()->addSubView($navView);
 
     $this->twoColView->getLeftColView()->addSubView(new KCalendarView());
 
