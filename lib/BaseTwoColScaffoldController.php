@@ -108,8 +108,7 @@ class BaseTwoCOlScaffoldController extends BaseAuthController {
   }
 
   public function setNavView() {
-    // $navView = HNavView::new();
-    $navView = new VNavView();
+    $navView = HNavView::new();
     foreach($this->navViewElements->generator() as $element) {
       $navView->push($element->get("href"), $element->get("desc"), $element->get("is_active"));
     }
