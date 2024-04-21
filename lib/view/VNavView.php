@@ -9,8 +9,8 @@ class VNavView extends KBaseNavView {
   protected function initialize() {
     parent::initialize();
     // $this->elements = KArray::new();
-
-    $this->styleOfElements = '<ul class="nav nav-tabs">';
+    
+    $this->styleOfNav = '<ul class="nav nav-tabs">';
 
     return $this;
   }
