@@ -7,7 +7,8 @@ require_once("lib/data_struct/KHash.php");
 class VNavView extends KBaseNavView {
 
   protected function initialize() {
-    $this->elements = KArray::new();
+    parent::initialize();
+    // $this->elements = KArray::new();
 
     $this->styleOfElements = '<ul class="nav nav-tabs">';
 
