@@ -1,40 +1,23 @@
 <?php
 
-require_once("lib/view/KBaseNavView.php");
+require_once("lib/view/BaseView.php");
 require_once("lib/data_struct/KArray.php");
 require_once("lib/data_struct/KHash.php");
 
-class VNavView extends KBaseNavView {
+class KBaseNavView extends BaseView {
 
   protected $elements;
+  protected $styleOfNav;
 
   protected function initialize() {
     $this->elements = KArray::new();
 
-    $this->styleOfElements = '<ul class="nav nav-tabs">';
+    $this->styleOfNav = '<ul class="nav nav-tabs">';
 
     return $this;
   }
 
   public function render() {
-    // The following is dummy data from bootstrap document.
-  /*
-  $html = '<ul class="nav nav-pills flex-column">' . 
-    '<li class="nav-item">' .
-    '<a class="nav-link" href="#">Supermarket</a>' .
-    '</li>' .
-    '<li class="nav-item">' .
-    '<a class="nav-link active" aria-current="page" href="#">Supermarche</a>' .
-    '</li>' .
-    '<li class="nav-item">' .
-    '<a class="nav-link" href="#">Grocery</a>' .
-    '</li>' .
-    '<li class="nav-item">' .
-    '<a class="nav-link" href="#" tabindex="-1">Epicerie</a>' .
-    '</li>' .
-    '</ul>';
-    */
-
     // $html = '<ul class="nav nav-pills flex-column">';
     $html = $this->styleOfNav;
     foreach($this->elements->generator() as $element) {

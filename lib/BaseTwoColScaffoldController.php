@@ -28,7 +28,7 @@ require_once("lib/widget/ScaffoldConfirmWidget.php");
 require_once("lib/widget/ScaffoldFinishWodget.php");
 require_once("lib/widget/ScaffoldAddWidget.php");
 require_once("lib/view/TwoColView.php");
-require_once("lib/view/VNavView.php");
+require_once("lib/view/HNavView.php");
 require_once("lib/widget/NewScaffoldAddWidget.php");
 require_once("lib/widget/NewScaffoldConfirmWidget.php");
 require_once("lib/widget/NewScaffoldEditWidget.php");
@@ -107,7 +107,7 @@ class BaseTwoCOlScaffoldController extends BaseAuthController {
   }
 
   public function setNavView() {
-    $navView = VNavView::new();
+    $navView = HNavView::new();
     foreach($this->navViewElements->generator() as $element) {
       $navView->push($element->get("href"), $element->get("desc"), $element->get("is_active"));
     }
