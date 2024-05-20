@@ -5,6 +5,10 @@
 
 // call some local program or another object which has the same interface
 
+// debug
+// implement this class
+// end of debug
+
 class BaseLocalFilter {
 }
 
