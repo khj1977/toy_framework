@@ -5,6 +5,10 @@
 
 // apply filter via REST
 
+// debug
+// implement this class
+// end of debug
+
 class BaseRemoteFilter {
 
 }

@@ -15,4 +15,8 @@
 // int/PRI KEY,varchar(128),varchar(128),varchar(128),varchar(256)
 // id, up/down, commmand, col_name, structure
 
+// debug
+// implement this class
+// end of debug
+
 ?>

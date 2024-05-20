@@ -5,6 +5,10 @@
 
 require_once("lib/BaseController.php");
 
+// debug
+// implement this class
+// end of debug
+
 class BaseAuthController extends BaseController {
 
 }

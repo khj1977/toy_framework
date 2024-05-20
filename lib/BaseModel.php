@@ -10,7 +10,7 @@ abstract class BaseModel {
   abstract public function __construct();
 
   public function injectFilter($aFilter) {
-    $this->afilter = $aFilter;
+    $this->filter = $aFilter;
 
     return $this;
   }

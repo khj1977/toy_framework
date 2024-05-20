@@ -5,6 +5,10 @@
 
 require_once("lib/BaseDelegate.php");
 
+// debug
+// implement this class
+// end of debug
+
 class RESTDelegate extends BaseDelegate {
 
   protected function callMethod($methodName, $args) {

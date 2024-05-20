@@ -22,6 +22,9 @@ class TFWRestPipeBatch extends BaseBatch {
   }
 
   protected function xmain($args) {
+    // debug
+    // implement this method.
+    // end of debug
   }
 
 }

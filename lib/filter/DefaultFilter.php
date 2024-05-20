@@ -5,6 +5,10 @@
 
 require_once("lib/BaseClass.php");
 
+// debug
+// implement this class
+// end of debug
+
 class DefaultFilter extends BaseClass {
 
   public function __construct() {

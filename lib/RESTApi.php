@@ -2,6 +2,10 @@
 
 require_once("lib/BaseApi.php");
 
+// debug
+// implement this class
+// end of debug
+
 class RESTApi extends BaseApi {
     protected $baseUrl;
 
