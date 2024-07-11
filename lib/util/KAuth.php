@@ -7,7 +7,7 @@
 require_once("lib/BaseClass.php");
 require_once("lib/TheWorld.php");
 
-class Auth extends BaseClass {
+class KAuth extends BaseClass {
 
     protected $isAuthed;
 
@@ -18,6 +18,13 @@ class Auth extends BaseClass {
         parent::initialize();
 
         $this->isAuthed = false;
+
+        return $this;
+    }
+
+    public function doAuth($id, $rawPassword) {
+        $this->setUserID($id, $rawPassword);
+        $this->askAuth();
 
         return $this;
     }
@@ -50,11 +57,22 @@ class Auth extends BaseClass {
             return false;
         }
 
+        $this->isAuthed = true;
+        $this->syncWithSession();
+
         return true;
     }
 
     public function doExpire() {
         $this->isAuthed = false;
+
+        return $this;
+    }
+
+    protected function syncWithSession() {
+        $session = TheWorld::instance()->session;
+
+        $session->set("Auth::is_authed", $this->isAuthed);
 
         return $this;
     }
