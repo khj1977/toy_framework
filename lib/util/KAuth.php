@@ -40,14 +40,11 @@ class KAuth extends BaseClass {
         return $this->isAuthed;
     }
 
-    // debug
-    // Don't take log on MyPDO.
-    // end of debug
     public function askAuth() {
         $sql = "SELECT count(id) as cnt FROM auth WHERE user_name = ? and hashed_password = ?";
 
         $pdo = TheWorld::instance()->slave;
-        $statement = $pdo->prepare($sql);
+        $statement = $pdo->prepare($sql, false);
 
         $statement->execute(array($this->userName, $this->hashedPassword));
         $rows = $statement->fetch();
