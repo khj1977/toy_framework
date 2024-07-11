@@ -47,9 +47,9 @@ class KAuth extends BaseClass {
         $statement = $pdo->prepare($sql, false);
 
         $statement->execute(array($this->userName, $this->hashedPassword));
-        $rows = $statement->fetch();
+        $row = $statement->fetch();
 
-        $cnt = $rows["cnt"];
+        $cnt = $row["cnt"];
         if ($cnt != "1") {
             return false;
         }
