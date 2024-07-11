@@ -23,6 +23,10 @@ class Auth extends BaseClass {
 
     }
 
+    protected function getHash($rawPassword) {
+
+    }
+
 }
 
 
