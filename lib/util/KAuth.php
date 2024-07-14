@@ -17,7 +17,14 @@ class KAuth extends BaseClass {
     protected function initialize() {
         parent::initialize();
 
-        $this->isAuthed = false;
+        $session = TheWorld::instance()->session;
+        $authed = $session->get("Auth::is_authed");
+
+        if (!empty($authed)) {
+            if ($authed === true) {
+                $this->isAuthed = true;
+            }
+        }
 
         return $this;
     }
