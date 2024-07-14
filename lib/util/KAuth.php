@@ -24,6 +24,9 @@ class KAuth extends BaseClass {
             if ($authed === true) {
                 $this->isAuthed = true;
             }
+            else {
+                $this->isAuthed = false;
+            }
         }
 
         return $this;
