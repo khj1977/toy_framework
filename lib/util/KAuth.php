@@ -73,6 +73,10 @@ class KAuth extends BaseClass {
     public function doExpire() {
         $this->isAuthed = false;
 
+        // debug
+        // add handling of session.
+        // end of debug
+
         return $this;
     }
 
