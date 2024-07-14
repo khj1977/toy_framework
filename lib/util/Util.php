@@ -222,6 +222,10 @@ class Util {
       return false;
     }
 
+    static public function jumpTo($url) {
+      header("Location: " . $url);
+    }
+
   }
 
 ?>
