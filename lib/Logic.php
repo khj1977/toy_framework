@@ -5,11 +5,18 @@
 
 require_once("lib/BaseClass.php");
 
-// debug
-// implement this class
-// end of debug
+abstract class Logic extends BaseClass {
 
-class Logic extends BaseClass {
+    // This class enclose a logic basically within action of controlller. Since it is injected to outside of controller, impl of controller or MVC would be more flexible.
+    abstract public function do();
+
+    protected function preDo() {
+
+    }
+
+    protected function postDo() {
+
+    }
 
 }
 
