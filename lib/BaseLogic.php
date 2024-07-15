@@ -6,7 +6,7 @@
 require_once("lib/BaseClass.php");
 
 // This class enclose a logic basically within action of controlller. Since it will be injected to outside of controller, impl of controller or MVC would be more flexible.
-abstract class Logic extends BaseClass {
+abstract class BaseLogic extends BaseClass {
 
     abstract protected function xdo();
 
