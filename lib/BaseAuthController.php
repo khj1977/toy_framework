@@ -15,10 +15,11 @@ class BaseAuthController extends BaseController {
 
     public function preAction() {
         $auth = new KAuth();
-
         if (!$auth->isAuthed()) {
             Util::jumpTo("/");
         }
+
+        return $this;
     }
 
 }
