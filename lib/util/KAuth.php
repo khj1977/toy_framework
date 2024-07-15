@@ -1,9 +1,5 @@
 <?php
 
-// debug
-// implement this class.
-// end of debug
-
 require_once("lib/BaseClass.php");
 require_once("lib/TheWorld.php");
 

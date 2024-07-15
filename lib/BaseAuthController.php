@@ -7,10 +7,6 @@ require_once("lib/Util.php");
 require_once("lib/BaseController.php");
 require_once("lib/util/KAuth.php");
 
-// debug
-// implement this class
-// end of debug
-
 class BaseAuthController extends BaseController {
 
     public function preAction() {
