@@ -114,4 +114,10 @@ If it were biz framework, why not Java, Scala or C#? If it were LL, why not Ruby
 - build tool? Although it is NOT PHP native, rake or gradle may be candidate of build tool
 - Self maintenance or customize by a company which utilize this framework may be easy to be done. Since PHP itself is easy to understand some simple customize or maintenance by a user company could be done without SIer which makes application based on this framework. I think this is a win-win relation to me, a SIer and a user company.
 
+# Reference and Inspired by
+
+- Ruby on Rails by Basecamp
+- Cocoa Framework by Apple, NeXTSTEP and Xerox Palo Arlo
+- Nifi by Apache
+
 Enjoy with this framework!
