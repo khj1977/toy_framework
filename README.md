@@ -117,7 +117,7 @@ If it were biz framework, why not Java, Scala or C#? If it were LL, why not Ruby
 # Reference and Inspired by
 
 - Ruby on Rails by Basecamp
-- Cocoa Framework by Apple, NeXTSTEP and Xerox Palo Arlo
+- Cocoa Framework by Apple, NeXTSTEP and Xerox Palo Alto
 - Nifi by Apache
 
 Enjoy with this framework!
