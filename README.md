@@ -67,7 +67,7 @@ Write down setttings to the following config file and copy to config dir.
 - config/StagingConfigImpl.php
 - config/ProductionConfigImpl.php
 
-And then, make log dir at top level with appropriate permission with web application server. Finally, setup hosts file for test or DNS for production.
+And then, make log dir at top level with appropriate permission with web application server. Symbolic links for some $ROOT/vendor dir from webroot are required. Finally, setup hosts file for test or DNS for production.
 
 Application can be run on a web browser with the following manner:
 
