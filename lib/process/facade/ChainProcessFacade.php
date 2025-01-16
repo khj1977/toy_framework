@@ -21,7 +21,7 @@ class ChainProcessFacade extends BaseFacade {
     $this->processes->push($process);
   }
 
-  public function exec() {
+  public function exec($f) {
     $this->processes->each(function($process) {
       $process->exec();
     });
