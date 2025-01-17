@@ -80,6 +80,10 @@ class KString extends KSequential {
   // implement other methods corresponding to demand of other code.
   // end of debug
 
+  public function data() {
+    return $this->internalString;
+  }
+
 }
 
 ?>
