@@ -5,7 +5,7 @@
 
 require_once("lib/BaseDelegatable.php");
 require_once("lib/util/HttpClient.php");
-require_once("lib/Util.php");
+require_once("lib/util/Util.php");
 require_once("KException.php");
 require_once("lib/TheWorld.php");
 require_once("lib/util/KLogger.php");
