@@ -11,6 +11,6 @@ CREATE TABLE employee_list (
     ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE = InnoDB;
 
----
+
 
 alter table employee_list add column memo TEXT;
