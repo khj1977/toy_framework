@@ -20,7 +20,14 @@ class ScaffoldAddWidget extends BaseScaffoldWidget {
     $idKey = KConst::SCAFFOLD_EDIT_ID_KEY;
     $session = new SimpleSession();
     $isPosted = $session->get(KConst::SCAFFOLD_EDIT_IS_POSTED_KEY);
-    $isPosted = $isPosted["real_val"];
+
+    if ($isPosted === false) {
+      $isPosted = false;
+    }
+    else {
+      $isPosted = $isPosted["real_val"];
+    }
+
     if ($isPosted) {
       $postData = TheWorld::instance()->session->get(KConst::SCAFFOLD_CONFIRM_POST_KEY);
       $postData = $postData["real_val"];
